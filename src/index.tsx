@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import './index.css';
 import Landing from './pages/Landing/Landing';
+import SignUp from './pages/Landing/SignUp';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 
@@ -15,6 +16,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Landing />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>

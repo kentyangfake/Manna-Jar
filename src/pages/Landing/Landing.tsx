@@ -1,12 +1,12 @@
 import Home from './Home';
 import Login from './Login';
-import React from 'react';
 import { useAppSelector } from '../../app/hooks';
-import { selectIsLogin } from './loginSlice';
+import { selectProfile } from './loginSlice';
 
 const Landing = () => {
-  const profile = useAppSelector(selectIsLogin);
+  const profile = useAppSelector(selectProfile);
   return <div>{profile.isLogin ? <Home /> : <Login />}</div>;
 };
 
 export default Landing;
+//

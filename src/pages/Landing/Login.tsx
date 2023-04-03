@@ -1,32 +1,20 @@
 import { useRef } from 'react';
 import { useAppDispatch } from '../../app/hooks';
-import { setLogin } from './loginSlice';
+// import { } from './loginSlice';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useAppDispatch();
-  const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const handleLogin = () => {
-    const nameValue = nameRef.current ? nameRef.current.value : '';
     const emailValue = emailRef.current ? emailRef.current.value : '';
-    dispatch(
-      setLogin({
-        name: nameValue,
-        email: emailValue,
-      })
-    );
+    const passwordValue = passwordRef.current ? passwordRef.current.value : '';
+    // dispatch();
   };
+
   return (
     <div>
-      <label htmlFor="name">Name:</label>
-      <input
-        type="text"
-        placeholder="name"
-        name="name"
-        id="name"
-        ref={nameRef}
-      />
-      <br />
       <label htmlFor="email">Email:</label>
       <input
         type="text"
@@ -36,7 +24,18 @@ const Login = () => {
         ref={emailRef}
       />
       <br />
+      <label htmlFor="password">Password:</label>
+      <input
+        type="text"
+        placeholder="password"
+        name="password"
+        id="password"
+        ref={passwordRef}
+      />
+      <br />
       <button onClick={handleLogin}>login</button>
+      <br />
+      <Link to="/signup">Sign Up</Link>
     </div>
   );
 };
