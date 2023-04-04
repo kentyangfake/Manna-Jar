@@ -50,7 +50,6 @@ const BibleReference = async (book: string, chapter: string, verse: string) => {
 
 function CommentBox() {
   const [value, setValue] = React.useState('');
-  console.log(value);
   const handleChange = (content: string) => {
     setValue(content);
   };
@@ -84,13 +83,16 @@ function CommentBox() {
   };
 
   return (
-    <ReactQuill
-      theme="snow"
-      value={value}
-      onChange={handleChange}
-      onKeyDown={handleKeyDown}
-      modules={modules}
-    />
+    <>
+      <ReactQuill
+        theme="snow"
+        value={value}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        modules={modules}
+      />
+      <div dangerouslySetInnerHTML={{ __html: value }}></div>
+    </>
   );
 }
 
