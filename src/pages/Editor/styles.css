@@ -38,7 +38,7 @@
 
 /* 这里设置最大高度 */
 .ql-editor {
-  max-height: 60px;
+  max-height: 1200px;
   overflow: hidden;
   overflow-y: scroll;
 }

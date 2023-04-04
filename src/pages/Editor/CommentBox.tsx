@@ -31,18 +31,64 @@ const modules = {
   mention: mentionModuleConfig,
 };
 
+const BibleReference = async (book: string, chapter: string, verse: string) => {
+  try {
+    const response = await fetch(
+      `https://bible.fhl.net/json/qb.php?chineses=${book}&chap=${chapter}&sec=${verse}`
+    );
+    const data = await response.json();
+    let verses = `${book} ${chapter}:${verse} <br>`;
+    data.record.map(
+      (sec: { sec: string; bible_text: string }) =>
+        (verses += `[${sec.sec}]${sec.bible_text}`)
+    );
+    return verses;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 function CommentBox() {
   const [value, setValue] = React.useState('');
   console.log(value);
   const handleChange = (content: string) => {
     setValue(content);
-    // onChange(content); // should useDebounce
   };
+
+  const handleKeyDown = async (event: KeyboardEvent) => {
+    if (event.key === ' ') {
+      const cursorPosition = (event.target as HTMLInputElement).selectionStart!;
+      const beforeCursor = value.slice(0, cursorPosition);
+      const afterCursor = value.slice(cursorPosition);
+      const lastReference = beforeCursor.match(
+        /([\u4E00-\u9FFF]{1,2})(\d+):([\d,-]+)/
+      );
+
+      if (lastReference) {
+        const referenceStart = beforeCursor.lastIndexOf(lastReference[0]);
+        const referenceEnd = referenceStart + lastReference[0].length;
+
+        const book = lastReference[1];
+        const chapter = lastReference[2];
+        const verse = lastReference[3];
+        await BibleReference(book, chapter, verse).then((text) => {
+          setValue(
+            beforeCursor.slice(0, referenceStart) +
+              text +
+              afterCursor.slice(referenceEnd)
+          );
+        });
+        event.preventDefault();
+      }
+    }
+  };
+
   return (
     <ReactQuill
       theme="snow"
       value={value}
       onChange={handleChange}
+      onKeyDown={handleKeyDown}
       modules={modules}
     />
   );
