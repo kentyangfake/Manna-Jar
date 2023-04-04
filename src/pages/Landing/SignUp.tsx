@@ -2,7 +2,6 @@ import { useRef, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Link, useNavigate } from 'react-router-dom';
 import { signUpAsync, selectProfile } from './loginSlice';
-import { profileEnd } from 'console';
 
 const SignUp = () => {
   const dispatch = useAppDispatch();

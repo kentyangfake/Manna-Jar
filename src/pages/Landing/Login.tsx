@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 // import { } from './loginSlice';
 import { Link } from 'react-router-dom';
+import { loginAsync } from './loginSlice';
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -10,7 +11,12 @@ const Login = () => {
   const handleLogin = () => {
     const emailValue = emailRef.current ? emailRef.current.value : '';
     const passwordValue = passwordRef.current ? passwordRef.current.value : '';
-    // dispatch();
+    dispatch(
+      loginAsync({
+        email: emailValue,
+        password: passwordValue,
+      })
+    );
   };
 
   return (

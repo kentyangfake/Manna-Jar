@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore ,setDoc, doc} from "firebase/firestore";
+import { getFirestore, setDoc, getDoc, doc} from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -22,9 +22,18 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const firestore = {
-  async addUser(id) {
+  async addUser(id,name,email) {
     const db = getFirestore();
-    await setDoc(doc(db,'users',id),{notes:[]})
+    await setDoc(doc(db, 'users', id),{
+      name,
+      email,
+      notes:[],
+    });
+  },
+  async getUser(id) {
+    const db = getFirestore();
+    const docSnap = await getDoc(doc(db, 'users', id));
+    return docSnap.data();
   }
 };
 
