@@ -18,7 +18,7 @@ const mentionModuleConfig = {
     if (searchTerm.length === 0) {
       renderList(values, searchTerm);
     } else {
-      const matches = [];
+      const matches: { id: number; value: string; link: string }[] = [];
       for (let i = 0; i < values.length; i++)
         if (~values[i].value.toLowerCase().indexOf(searchTerm.toLowerCase()))
           matches.push(values[i]);
