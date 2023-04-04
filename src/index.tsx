@@ -5,6 +5,7 @@ import './index.css';
 import Landing from './pages/Landing/Landing';
 import SignUp from './pages/Landing/SignUp';
 import GraphView from './pages/GraphView/GraphView';
+import Editor from './pages/Editor/Editor';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 
@@ -19,6 +20,7 @@ root.render(
           <Route index element={<Landing />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/graph" element={<GraphView />} />
+          <Route path="/editor" element={<Editor />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
