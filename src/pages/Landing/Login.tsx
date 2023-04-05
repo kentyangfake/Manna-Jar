@@ -1,7 +1,7 @@
-import { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { Link } from 'react-router-dom';
-import { loginAsync, loginViaLocalAsync } from './loginSlice';
+import { loginAsync, loginViaLocalAsync } from '../../app/loginSlice';
 
 const Login = () => {
   const dispatch = useAppDispatch();

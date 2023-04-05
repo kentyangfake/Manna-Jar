@@ -1,7 +1,8 @@
+import React from 'react';
 import Home from './Home';
 import Login from './Login';
 import { useAppSelector } from '../../app/hooks';
-import { selectProfile } from './loginSlice';
+import { selectProfile } from '../../app/loginSlice';
 
 const Landing = () => {
   const profile = useAppSelector(selectProfile);

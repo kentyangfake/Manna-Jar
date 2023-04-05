@@ -1,6 +1,6 @@
-import logo from '../../logo.svg';
+import React from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { logoutAsync, selectProfile } from './loginSlice';
+import { logoutAsync, selectProfile } from '../../app/loginSlice';
 import { Counter } from '../../features/counter/Counter';
 
 const Home = () => {
@@ -12,7 +12,6 @@ const Home = () => {
       <p>welcom!{profile.name}</p>
       <button onClick={() => dispatch(logoutAsync())}>logout</button>
       <br />
-      <img src={logo} className="App-logo" alt="logo" />
       <Counter />
     </div>
   );
