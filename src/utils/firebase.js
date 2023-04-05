@@ -34,6 +34,10 @@ export const firestore = {
     const db = getFirestore();
     const docSnap = await getDoc(doc(db, 'users', id));
     return docSnap.data();
+  },
+  async updateUser(id, data) {
+    const db = getFirestore();
+    await setDoc(doc(db, 'users', id), data);
   }
 };
 

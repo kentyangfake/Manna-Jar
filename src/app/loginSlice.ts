@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { auth, firestore } from '../utils/firebase';
 
@@ -7,12 +7,30 @@ interface CustomUser {
   accessToken: string;
 }
 
+interface Profile {
+  email: string;
+  name: string;
+  id: string;
+  notes: Note[];
+  isLogin: boolean;
+}
+
+interface Note {
+  id: string,
+  title: string,
+  content: string,
+  category: string,
+  link_notes: any[] | [],
+  create_time: string,
+  edit_time: string,
+}
+
 const initialState = {
   profile : {
     email: '',
     name: '',
     id: '',
-    notes: [],
+    notes: [] as Note[],
     isLogin: false,
   }
 }
@@ -82,7 +100,18 @@ export const logoutAsync = createAsyncThunk(
 const loginSlice = createSlice({
   name : 'user',
   initialState : initialState,
-  reducers:{},
+  reducers:{
+    addNote: (state, action: PayloadAction<Note>) => {
+      state.profile.notes.push(action.payload as Note);
+      const id = state.profile.id
+      const data = {
+        email: state.profile.email,
+        name: state.profile.name,
+        notes: state.profile.notes,
+      }
+      firestore.updateUser(id, data);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(signUpAsync.fulfilled, (state, action) => {
@@ -127,5 +156,5 @@ const loginSlice = createSlice({
   },
 })
 export const selectProfile = (state: RootState) => state.login.profile;
-// export const {} = loginSlice.actions
+export const { addNote } = loginSlice.actions
 export default loginSlice.reducer;

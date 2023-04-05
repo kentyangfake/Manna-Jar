@@ -48,10 +48,15 @@ const BibleReference = async (book: string, chapter: string, verse: string) => {
   }
 };
 
-function CommentBox() {
-  const [value, setValue] = React.useState('');
+function CommentBox({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+}) {
   const handleChange = (content: string) => {
-    setValue(content);
+    onChange(content);
   };
 
   const handleKeyDown = async (event: KeyboardEvent) => {
@@ -71,7 +76,7 @@ function CommentBox() {
         const chapter = lastReference[2];
         const verse = lastReference[3];
         await BibleReference(book, chapter, verse).then((text) => {
-          setValue(
+          onChange(
             beforeCursor.slice(0, referenceStart) +
               text +
               afterCursor.slice(referenceEnd)

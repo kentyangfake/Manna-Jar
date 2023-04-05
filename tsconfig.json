@@ -21,6 +21,6 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src/pages/Editor/react-quill.d.ts"
+    "src"
   ]
 }
