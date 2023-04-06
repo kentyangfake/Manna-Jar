@@ -45,8 +45,8 @@ const CommentBox = ({
   onChange: (value: string) => void;
 }) => {
   const [hashValues, setHashValues] = useState<hashValue[]>([]);
-
   const profile = useAppSelector(selectProfile);
+
   useEffect(() => {
     const newHashValue = profile.notes.map((note) => ({
       id: note.id,
@@ -64,10 +64,6 @@ const CommentBox = ({
   if (hashValues.length === 0) {
     return null;
   }
-
-  const handleChange = (content: string) => {
-    onChange(content);
-  };
 
   const handleKeyDown = async (event: KeyboardEvent) => {
     if (event.key === ' ') {
@@ -102,7 +98,9 @@ const CommentBox = ({
       <ReactQuill
         theme="snow"
         value={value}
-        onChange={handleChange}
+        onChange={(content: string) => {
+          onChange(content);
+        }}
         onKeyDown={handleKeyDown}
         modules={modules}
       />

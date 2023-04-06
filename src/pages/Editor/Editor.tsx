@@ -28,9 +28,6 @@ const Editor = () => {
     create_time: '',
     edit_time: '',
   });
-  const handleContentChange = (newContent: string) => {
-    setNote({ ...note, content: newContent });
-  };
   const navigate = useNavigate();
 
   return (
@@ -61,7 +58,12 @@ const Editor = () => {
           </div>
         ))}
       </div>
-      <CommentBox value={note.content} onChange={handleContentChange} />
+      <CommentBox
+        value={note.content}
+        onChange={(newContent: string) => {
+          setNote({ ...note, content: newContent });
+        }}
+      />
       <button
         onClick={() => {
           dispatch(addNote(note));
