@@ -1,24 +1,32 @@
 import React from 'react';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { logoutAsync, selectProfile } from '../../app/loginSlice';
+import { useAppSelector } from '../../app/hooks';
+import { selectProfile } from '../../app/loginSlice';
 import { Counter } from '../../features/counter/Counter';
 import { Link } from 'react-router-dom';
+import Navigate from '../../components/Navigate';
 
 const Home = () => {
-  const dispatch = useAppDispatch();
   const profile = useAppSelector(selectProfile);
 
   return (
     <div>
-      <p>welcom!{profile.name}</p>
-      <button onClick={() => dispatch(logoutAsync())}>logout</button>
+      <Navigate />
       <br />
       <Link to="/editor">新增筆記</Link>
       {profile.notes.map((note) => (
-        <>
-          <p>{note.id}</p>
+        <div
+          key={note.id}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            fontSize: '12px',
+            textAlign: 'start',
+            border: '1px solid red',
+          }}
+        >
+          <p>{note.title}</p>
           <div dangerouslySetInnerHTML={{ __html: note.content }}></div>
-        </>
+        </div>
       ))}
       <Counter />
     </div>

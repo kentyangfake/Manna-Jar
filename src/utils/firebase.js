@@ -52,13 +52,6 @@ export const auth = {
     const res = await signInWithEmailAndPassword(auth, email, password);
     return res.user;
   },
-  async loginViaLocal(token){
-    const provider = new GoogleAuthProvider();
-    const credential = provider.credential(null, token);
-    const auth = getAuth();
-    const res = await signInWithCredential(auth,credential);
-    return res.user;
-  },
   async logout() {
     const auth = getAuth();
     await signOut(auth);

@@ -3,6 +3,7 @@ import CommentBox from './CommentBox';
 import { useAppDispatch } from '../../app/hooks';
 import { addNote } from '../../app/loginSlice';
 import './styles.css';
+import Navigate from '../../components/Navigate';
 
 const category = [
   {
@@ -26,13 +27,13 @@ const Editor = () => {
     create_time: '',
     edit_time: '',
   });
-  console.log(note);
   const handleContentChange = (newContent: string) => {
     setNote({ ...note, content: newContent });
   };
 
   return (
     <div>
+      <Navigate />
       <h1>筆記編輯器</h1>
       <div>
         <label>筆記標題</label>

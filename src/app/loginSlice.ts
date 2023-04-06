@@ -41,6 +41,7 @@ export const signUpAsync = createAsyncThunk(
     try {
       const user = await auth.signUp(email, password);
       const id = user.uid;
+      localStorage.setItem('id',JSON.stringify(id));
       await firestore.addUser(id,name,email);
       return {email, name, id};
     } catch (error:any) {
@@ -54,8 +55,8 @@ export const loginAsync = createAsyncThunk(
   async ({ email, password }:{email:string;password:string}) => {
     try {
       const user = await auth.login(email, password);
-      const { uid, accessToken } = user as unknown as CustomUser;
-      console.log(accessToken);
+      const { uid } = user as unknown as CustomUser;
+      localStorage.setItem('id',JSON.stringify(uid));
       const doc = await firestore.getUser(uid);
       if (!doc) {
         throw new Error('User document not found');
@@ -70,16 +71,14 @@ export const loginAsync = createAsyncThunk(
 
 export const loginViaLocalAsync = createAsyncThunk(
   'user/loginViaLocal',
-  async ({ token }:{token:string;}) => {
+  async ({ id }:{id:string}) => {
     try {
-      const user = await auth.loginViaLocal(token);
-      const id = user.uid;
       const doc = await firestore.getUser(id);
       if (!doc) {
         throw new Error('User document not found');
       }
-      const {email, name, notes} = doc ?? {email:'',name:'',notes:[]};
-      return {email, id, name, notes};
+      const {name, notes, email} = doc;
+      return {email, id , name, notes};
     } catch (error:any) {
       throw new Error(error.message);
     }
@@ -90,6 +89,7 @@ export const logoutAsync = createAsyncThunk(
   'user/logout',
   async () => {
     try {
+      localStorage.removeItem('id');
       await auth.logout();
     } catch (error:any) {
       throw new Error(error.message);
@@ -121,7 +121,7 @@ const loginSlice = createSlice({
         state.profile.isLogin = true;
       })
       .addCase(signUpAsync.rejected, (state, action) => {
-        
+        console.log("rejected!");
       })
       .addCase(loginAsync.fulfilled, (state, action) => {
         state.profile.email = action.payload?.email ??"";
@@ -131,7 +131,7 @@ const loginSlice = createSlice({
         state.profile.isLogin = true;
       })
       .addCase(loginAsync.rejected, (state, action) => {
-        
+        console.log("rejected!");
       })
       .addCase(loginViaLocalAsync.fulfilled, (state, action) => {
         state.profile.email = action.payload?.email ??"";
@@ -141,7 +141,7 @@ const loginSlice = createSlice({
         state.profile.isLogin = true;
       })
       .addCase(loginViaLocalAsync.rejected, (state, action) => {
-        
+        console.log("rejected!");
       })
       .addCase(logoutAsync.fulfilled, (state, action) => {
         state.profile.email = "";
@@ -151,7 +151,7 @@ const loginSlice = createSlice({
         state.profile.isLogin = false;
       })
       .addCase(logoutAsync.rejected, (state, action) => {
-        
+        console.log("rejected!");
       })
   },
 })
