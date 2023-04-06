@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { addNote } from '../../app/loginSlice';
 import './styles.css';
 import Navigate from '../../components/Navigate';
+import { useNavigate } from 'react-router-dom';
 
 const category = [
   {
@@ -30,6 +31,7 @@ const Editor = () => {
   const handleContentChange = (newContent: string) => {
     setNote({ ...note, content: newContent });
   };
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -60,7 +62,15 @@ const Editor = () => {
         ))}
       </div>
       <CommentBox value={note.content} onChange={handleContentChange} />
-      <button onClick={() => dispatch(addNote(note))}>新增筆記</button>
+      <button
+        onClick={() => {
+          dispatch(addNote(note));
+          window.alert('新增文章成功!');
+          navigate('/');
+        }}
+      >
+        新增筆記
+      </button>
     </div>
   );
 };

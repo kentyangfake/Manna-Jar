@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import ReactQuill from 'react-quill';
 import 'quill-mention';
 import 'react-quill/dist/quill.snow.css';
@@ -6,14 +6,19 @@ import { useAppSelector } from '../../app/hooks';
 import { selectProfile } from '../../app/loginSlice';
 import { BibleReference } from '../../utils/api';
 
-// const profile = useAppSelector(selectProfile);
+interface hashValue {
+  id: string;
+  value: string;
+  link: string;
+}
 
-const hashValues = [
-  { id: 3, value: '第一篇筆記', link: '/note?id=1' },
-  { id: 4, value: '某個讀經進度', link: '/note?id=1' },
-];
-
-const mentionModuleConfig = {
+const mentionModuleConfig = (
+  hashValues: {
+    id: string;
+    value: string;
+    link: string;
+  }[]
+) => ({
   allowedChars: /^[\u4e00-\u9fa5A-Za-z\s]*$/,
   mentionDenotationChars: ['#'],
   linkTarget: '_self',
@@ -23,18 +28,14 @@ const mentionModuleConfig = {
     if (searchTerm.length === 0) {
       renderList(values, searchTerm);
     } else {
-      const matches: { id: number; value: string; link: string }[] = [];
+      const matches: { id: string; value: string; link: string }[] = [];
       for (let i = 0; i < values.length; i++)
         if (~values[i].value.toLowerCase().indexOf(searchTerm.toLowerCase()))
           matches.push(values[i]);
       renderList(matches, searchTerm);
     }
   },
-};
-
-const modules = {
-  mention: mentionModuleConfig,
-};
+});
 
 const CommentBox = ({
   value,
@@ -43,6 +44,27 @@ const CommentBox = ({
   value: string;
   onChange: (value: string) => void;
 }) => {
+  const [hashValues, setHashValues] = useState<hashValue[]>([]);
+
+  const profile = useAppSelector(selectProfile);
+  useEffect(() => {
+    const newHashValue = profile.notes.map((note) => ({
+      id: note.id,
+      value: note.title,
+      link: `/note?id=${note.id}`,
+    }));
+    setHashValues(newHashValue);
+  }, [profile.isLogin]);
+
+  const modules = useMemo(
+    () => ({ mention: mentionModuleConfig(hashValues) }),
+    [hashValues]
+  );
+
+  if (hashValues.length === 0) {
+    return null;
+  }
+
   const handleChange = (content: string) => {
     onChange(content);
   };
