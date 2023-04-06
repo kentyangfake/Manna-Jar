@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
+import loginReducer from './loginSlice';
 
 export const store = configureStore({
-  reducer: {
+  reducer:{
     counter: counterReducer,
-  },
+    login: loginReducer
+  }
 });
 
 export type AppDispatch = typeof store.dispatch;
