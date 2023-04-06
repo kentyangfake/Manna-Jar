@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { auth, firestore } from '../utils/firebase';
+import { v4 as uuidv4 } from 'uuid';
 
 interface CustomUser {
   uid: string;
@@ -15,12 +16,17 @@ interface Profile {
   isLogin: boolean;
 }
 
+interface linkObj {
+  id: string;
+  title: string;
+}
+
 interface Note {
   id: string,
   title: string,
   content: string,
   category: string,
-  link_notes: any[] | [],
+  link_notes: linkObj[] | [],
   create_time: string,
   edit_time: string,
 }

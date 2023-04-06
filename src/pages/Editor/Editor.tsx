@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CommentBox from './CommentBox';
 import { useAppDispatch } from '../../app/hooks';
 import { addNote } from '../../app/loginSlice';
 import './styles.css';
 import Navigate from '../../components/Navigate';
 import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 const category = [
   {
@@ -17,10 +18,25 @@ const category = [
   },
 ];
 
+interface linkObj {
+  id: string;
+  title: string;
+}
+
+interface Note {
+  id: string;
+  title: string;
+  content: string;
+  category: string;
+  link_notes: linkObj[] | [];
+  create_time: string;
+  edit_time: string;
+}
+
 const Editor = () => {
   const dispatch = useAppDispatch();
-  const [note, setNote] = useState({
-    id: '',
+  const [note, setNote] = useState<Note>({
+    id: uuidv4(),
     title: '',
     content: '',
     category: '',
@@ -29,6 +45,23 @@ const Editor = () => {
     edit_time: '',
   });
   const navigate = useNavigate();
+
+  const createLink = () => {
+    const linkArray = [];
+    const regex =
+      /<a href=&quot;\/note\?id=([a-zA-Z0-9-]+)&quot;[^>]*>(.*?)<\/a>/g;
+    let match;
+    while ((match = regex.exec(note.content)) !== null) {
+      const id = match[1];
+      const title = match[2]?.match(/^(.*?)\s/)?.[1].replace(/\"$/, '') || '';
+      linkArray.push({ id, title });
+    }
+    setNote({ ...note, link_notes: linkArray });
+  };
+
+  useEffect(() => {
+    createLink();
+  }, [note.content]);
 
   return (
     <div>
@@ -67,7 +100,7 @@ const Editor = () => {
       <button
         onClick={() => {
           dispatch(addNote(note));
-          window.alert('新增文章成功!');
+          window.alert('新增筆記成功!');
           navigate('/');
         }}
       >
