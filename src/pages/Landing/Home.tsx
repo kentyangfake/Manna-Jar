@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { selectProfile } from '../../app/loginSlice';
-import { Counter } from '../../features/counter/Counter';
 import { Link } from 'react-router-dom';
 import Navigate from '../../components/Navigate';
 
@@ -28,7 +27,6 @@ const Home = () => {
           <div dangerouslySetInnerHTML={{ __html: note.content }}></div>
         </div>
       ))}
-      <Counter />
     </div>
   );
 };

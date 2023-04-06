@@ -29,7 +29,7 @@ const Navigate = () => {
   }, [profile.isLogin]);
 
   return (
-    <div>
+    <div style={{ backgroundColor: 'lightgray' }}>
       <p>welcom!{profile.name}</p>
       <button onClick={() => dispatch(logoutAsync())}>logout</button>
     </div>

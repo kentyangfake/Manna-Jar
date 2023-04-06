@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'quill-mention';
 import 'react-quill/dist/quill.snow.css';
+import { useAppSelector } from '../../app/hooks';
+import { selectProfile } from '../../app/loginSlice';
+import { BibleReference } from '../../utils/api';
+
+// const profile = useAppSelector(selectProfile);
 
 const hashValues = [
   { id: 3, value: '第一篇筆記', link: '/note?id=1' },
@@ -31,30 +36,13 @@ const modules = {
   mention: mentionModuleConfig,
 };
 
-const BibleReference = async (book: string, chapter: string, verse: string) => {
-  try {
-    const response = await fetch(
-      `https://bible.fhl.net/json/qb.php?chineses=${book}&chap=${chapter}&sec=${verse}`
-    );
-    const data = await response.json();
-    let verses = `${book} ${chapter}:${verse} <br>`;
-    data.record.map(
-      (sec: { sec: string; bible_text: string }) =>
-        (verses += `[${sec.sec}]${sec.bible_text}`)
-    );
-    return verses;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-function CommentBox({
+const CommentBox = ({
   value,
   onChange,
 }: {
   value: string;
   onChange: (value: string) => void;
-}) {
+}) => {
   const handleChange = (content: string) => {
     onChange(content);
   };
@@ -88,7 +76,7 @@ function CommentBox({
   };
 
   return (
-    <>
+    <div>
       <ReactQuill
         theme="snow"
         value={value}
@@ -96,9 +84,8 @@ function CommentBox({
         onKeyDown={handleKeyDown}
         modules={modules}
       />
-      <div dangerouslySetInnerHTML={{ __html: value }}></div>
-    </>
+    </div>
   );
-}
+};
 
 export default CommentBox;
