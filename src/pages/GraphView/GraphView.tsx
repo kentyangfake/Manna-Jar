@@ -2,6 +2,7 @@ import Graph from 'react-graph-vis';
 import React, { useState, useEffect } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { selectProfile } from '../../app/loginSlice';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import Navigate from '../../components/Navigate';
 
@@ -68,16 +69,10 @@ const GraphView = () => {
       nodes: [],
       edges: [],
     },
-    events: {
-      selectNode: ({ nodes }: { nodes: [] }) => {
-        console.log('Selected nodes:');
-        console.log(nodes);
-        alert('Selected node: ' + nodes);
-      },
-    },
   });
-
+  const navigate = useNavigate();
   const profile = useAppSelector(selectProfile);
+
   useEffect(() => {
     if (!profile.isLogin) {
       return;
@@ -106,10 +101,9 @@ const GraphView = () => {
       counter: 5,
       graph: { nodes: newNodes, edges: newEdges },
       events: {
-        selectNode: ({ nodes }: { nodes: [] }) => {
-          console.log('Selected nodes:');
-          console.log(nodes);
-          alert('Selected node: ' + nodes);
+        selectNode: ({ nodes }: { nodes: string[] }) => {
+          const noteId = nodes[0];
+          navigate(`/note/${noteId}`);
         },
       },
     };
