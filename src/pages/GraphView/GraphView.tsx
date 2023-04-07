@@ -1,6 +1,9 @@
 import Graph from 'react-graph-vis';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAppSelector } from '../../app/hooks';
+import { selectProfile } from '../../app/loginSlice';
 import styled from 'styled-components/macro';
+import Navigate from '../../components/Navigate';
 
 const Wrapper = styled.div`
   background-color: darkslategray;
@@ -11,6 +14,33 @@ const GraphWrapper = styled.div`
   border: 1px solid pink;
 `;
 
+interface GraphType {
+  counter: number;
+  graph: {
+    nodes: Node[];
+    edges: Edge[];
+  };
+  events?: {};
+}
+interface Node {
+  id: string;
+  label: string;
+  color: {
+    background: string;
+    hover: string;
+    border: string;
+  };
+  font: { color: string };
+}
+
+interface Edge {
+  from: string;
+  to: string;
+}
+
+const THEME_COLOR = 'beige';
+const HOVER_COLOR = 'pink';
+
 const options = {
   layout: {
     hierarchical: false,
@@ -20,73 +50,76 @@ const options = {
     size: 10,
   },
   edges: {
-    color: 'beige',
+    color: { color: THEME_COLOR, hover: HOVER_COLOR },
     arrows: { to: { enabled: false } },
   },
   interaction: {
     hover: true,
     zoomSpeed: 0.2,
+    navigationButtons: true,
+    tooltipDelay: 1000000,
   },
 };
 
 const GraphView = () => {
-  const [state, setState] = useState({
+  const [state, setState] = useState<any>({
     counter: 5,
     graph: {
-      //一篇note一個node
-      nodes: [
-        {
-          id: 1,
-          label: '第一篇title',
-          color: 'beige',
-          font: { color: 'beige' },
-        },
-        {
-          id: 2,
-          label: '第二篇title',
-          color: 'beige',
-          font: { color: 'beige' },
-        },
-        {
-          id: 3,
-          label: '第三篇title',
-          color: 'beige',
-          font: { color: 'beige' },
-        },
-        {
-          id: 4,
-          label: '第四篇title',
-          color: 'beige',
-          font: { color: 'beige' },
-          size: 17,
-        },
-        { id: 5, label: '第五篇title', color: 'pink', font: { color: 'pink' } },
-      ],
-      //用linked_notes生成
-      edges: [
-        { from: 1, to: 2 },
-        { from: 2, to: 1 },
-        { from: 2, to: 3 },
-        { from: 2, to: 4 },
-        { from: 3, to: 1 },
-        { from: 3, to: 4 },
-        { from: 3, to: 5 },
-      ],
+      nodes: [],
+      edges: [],
     },
     events: {
-      select: ({ nodes }: { nodes: [] }) => {
+      selectNode: ({ nodes }: { nodes: [] }) => {
         console.log('Selected nodes:');
         console.log(nodes);
         alert('Selected node: ' + nodes);
       },
-      // hoverNode: ({ nodes }) => {
-      //   console.log('hover!');
-      // },
     },
   });
+
+  const profile = useAppSelector(selectProfile);
+  useEffect(() => {
+    if (!profile.isLogin) {
+      return;
+    }
+
+    const newNodes: Node[] = [];
+    const newEdges: Edge[] = [];
+
+    profile.notes.map((note) => {
+      newNodes.push({
+        id: note.id,
+        label: note.title,
+        color: {
+          background: THEME_COLOR,
+          hover: HOVER_COLOR,
+          border: 'none',
+        },
+        font: { color: THEME_COLOR },
+      });
+      note.link_notes?.map((link) => {
+        newEdges.push({ from: note.id, to: link.id });
+      });
+    });
+
+    const newGraph: GraphType = {
+      counter: 5,
+      graph: { nodes: newNodes, edges: newEdges },
+      events: {
+        selectNode: ({ nodes }: { nodes: [] }) => {
+          console.log('Selected nodes:');
+          console.log(nodes);
+          alert('Selected node: ' + nodes);
+        },
+      },
+    };
+    setState(newGraph);
+  }, [profile.notes]);
+
   const { graph, events } = state;
   return (
     <Wrapper>
+      <Navigate />
       <GraphWrapper>
         <Graph graph={graph} options={options} events={events} />
       </GraphWrapper>
