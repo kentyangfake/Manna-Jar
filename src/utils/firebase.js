@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAizA6LfYHyWib7-7cZb0LVZmpu0pa2qAo",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "manna-jar.firebaseapp.com",
   projectId: "manna-jar",
   storageBucket: "manna-jar.appspot.com",

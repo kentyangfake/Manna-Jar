@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { auth, firestore } from '../utils/firebase';
-import { v4 as uuidv4 } from 'uuid';
 
 interface CustomUser {
   uid: string;
