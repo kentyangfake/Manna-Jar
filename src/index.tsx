@@ -20,7 +20,7 @@ root.render(
         <Route path="/" element={<App />}>
           <Route index element={<Landing />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="graph" element={<GraphView />} />
+          <Route path="graphview" element={<GraphView />} />
           <Route path="editor" element={<Editor />} />
           <Route path="note/:id" element={<Note />} />
           <Route path="*" element={<Navigate to="/" replace />} />

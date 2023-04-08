@@ -6,6 +6,7 @@ import './styles.css';
 import Navigate from '../../components/Navigate';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { NoteType } from '../../app/types';
 
 const category = [
   {
@@ -18,24 +19,9 @@ const category = [
   },
 ];
 
-interface linkObj {
-  id: string;
-  title: string;
-}
-
-interface Note {
-  id: string;
-  title: string;
-  content: string;
-  category: string;
-  link_notes: linkObj[] | [];
-  create_time: string;
-  edit_time: string;
-}
-
 const Editor = () => {
   const dispatch = useAppDispatch();
-  const [note, setNote] = useState<Note>({
+  const [note, setNote] = useState<NoteType>({
     id: uuidv4(),
     title: '',
     content: '',
@@ -49,7 +35,7 @@ const Editor = () => {
   const createLink = () => {
     const linkArray = [];
     const regex =
-      /<a href=&quot;\/note\?id=([a-zA-Z0-9-]+)&quot;[^>]*>(.*?)<\/a>/g;
+      /<a href=&quot;\/note\/([a-zA-Z0-9-]+)&quot;[^>]*>(.*?)<\/a>/g;
     let match;
     while ((match = regex.exec(note.content)) !== null) {
       const id = match[1];

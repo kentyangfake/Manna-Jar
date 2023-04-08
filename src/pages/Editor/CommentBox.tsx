@@ -51,7 +51,7 @@ const CommentBox = ({
     const newHashValue = profile.notes.map((note) => ({
       id: note.id,
       value: note.title || '',
-      link: `/note?id=${note.id}`,
+      link: `/note/${note.id}`,
     }));
     setHashValues(newHashValue);
   }, [profile.isLogin]);

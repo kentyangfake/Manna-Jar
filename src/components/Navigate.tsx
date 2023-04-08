@@ -31,6 +31,10 @@ const Navigate = () => {
   return (
     <div style={{ backgroundColor: 'lightgray' }}>
       <p>welcom!{profile.name}</p>
+      <Link to="/">Home</Link>
+      <br />
+      <Link to="/graphview">Graph View</Link>
+      <br />
       <button onClick={() => dispatch(logoutAsync())}>logout</button>
     </div>
   );
