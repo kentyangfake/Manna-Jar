@@ -3,7 +3,6 @@ import CommentBox from './CommentBox';
 import { useAppDispatch } from '../../app/hooks';
 import { addNote } from '../../app/loginSlice';
 import './styles.css';
-import Navigate from '../../components/Navigate';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { NoteType } from '../../app/types';
@@ -51,7 +50,6 @@ const Editor = () => {
 
   return (
     <div>
-      <Navigate />
       <h1>筆記編輯器</h1>
       <div>
         <label>筆記標題</label>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navigate from '../../components/Navigate';
 import { useAppSelector } from '../../app/hooks';
 import { selectProfile } from '../../app/loginSlice';
 import { useParams } from 'react-router-dom';
@@ -7,6 +6,7 @@ import { NoteType } from '../../app/types';
 
 const Note = () => {
   const profile = useAppSelector(selectProfile);
+  //TODO:用id找到對應筆記
   const { id } = useParams();
   const [currentNote, setCurrentNote] = useState<NoteType>({
     id: '',
@@ -21,7 +21,6 @@ const Note = () => {
 
   return (
     <>
-      <Navigate />
       <div>Hi I'm Note</div>
     </>
   );

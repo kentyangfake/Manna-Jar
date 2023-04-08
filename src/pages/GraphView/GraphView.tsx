@@ -1,5 +1,4 @@
 import styled from 'styled-components/macro';
-import Navigate from '../../components/Navigate';
 import NetworkGraph from '../../components/NetworkGraph';
 
 const Wrapper = styled.div`
@@ -14,7 +13,6 @@ const GraphWrapper = styled.div`
 const GraphView = () => {
   return (
     <>
-      <Navigate />
       <Wrapper>
         <GraphWrapper>
           <NetworkGraph />

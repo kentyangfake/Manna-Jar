@@ -1,16 +1,16 @@
 import React from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { selectProfile } from '../../app/loginSlice';
-import { Link } from 'react-router-dom';
-import Navigate from '../../components/Navigate';
+import { Link, useSearchParams } from 'react-router-dom';
 
 const Home = () => {
   const profile = useAppSelector(selectProfile);
+  //TODO:展示分類
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get('category') || '';
 
   return (
     <div>
-      <Navigate />
-      <br />
       <Link to="/editor">新增筆記</Link>
       {profile.notes.map((note) => (
         <div
