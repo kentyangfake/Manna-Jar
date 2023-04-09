@@ -1,9 +1,6 @@
 import styled from 'styled-components/macro';
 import NetworkGraph from '../../components/NetworkGraph';
 
-const Wrapper = styled.div`
-  background-color: darkslategray;
-`;
 const GraphWrapper = styled.div`
   width: 1280px;
   height: 800px;
@@ -13,11 +10,9 @@ const GraphWrapper = styled.div`
 const GraphView = () => {
   return (
     <>
-      <Wrapper>
-        <GraphWrapper>
-          <NetworkGraph />
-        </GraphWrapper>
-      </Wrapper>
+      <GraphWrapper>
+        <NetworkGraph />
+      </GraphWrapper>
     </>
   );
 };

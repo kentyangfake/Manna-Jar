@@ -13,19 +13,19 @@ const Home = () => {
     <div>
       <Link to="/editor">新增筆記</Link>
       {profile.notes.map((note) => (
-        <div
-          key={note.id}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            fontSize: '12px',
-            textAlign: 'start',
-            border: '1px solid red',
-          }}
-        >
-          <p>{note.title}</p>
-          <div dangerouslySetInnerHTML={{ __html: note.content }}></div>
-        </div>
+        <Link key={note.id} to={`/note/${note.id}`}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              fontSize: '12px',
+              textAlign: 'start',
+              border: '1px solid red',
+            }}
+          >
+            <p>{note.title}</p>
+          </div>
+        </Link>
       ))}
     </div>
   );
