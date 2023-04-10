@@ -17,8 +17,6 @@ interface Node {
   label: string;
   color: {
     background: string;
-    hover: string;
-    border: string;
   };
   font: { color: string };
   size?: number;
@@ -40,6 +38,11 @@ const options = {
   nodes: {
     shape: 'dot',
     size: BASE_SIZE,
+    color: {
+      hover: HOVER_COLOR,
+      border: 'none',
+      highlight: { border: HOVER_COLOR, background: HOVER_COLOR },
+    },
   },
   edges: {
     color: { color: THEME_COLOR, hover: HOVER_COLOR },
@@ -105,8 +108,6 @@ const NetworkGraph = () => {
         label: note.title,
         color: {
           background: THEME_COLOR,
-          hover: HOVER_COLOR,
-          border: 'none',
         },
         font: { color: THEME_COLOR },
       });
