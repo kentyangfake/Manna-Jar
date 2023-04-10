@@ -11,7 +11,7 @@ const Home = () => {
 
   return (
     <div>
-      <Link to="/editor">新增筆記</Link>
+      <Link to="/editor/newNote">新增筆記</Link>
       {profile.notes.map((note) => (
         <Link key={note.id} to={`/note/${note.id}`}>
           <div

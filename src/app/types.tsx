@@ -6,6 +6,7 @@ export interface NoteType {
   link_notes: LinkObj[] | [];
   create_time: string;
   edit_time: string;
+  sharedBy?: string;
 }
 
 export interface LinkObj {

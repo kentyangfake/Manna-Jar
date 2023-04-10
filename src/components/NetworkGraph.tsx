@@ -116,7 +116,7 @@ const NetworkGraph = () => {
       });
     });
 
-    //calc node size base on referenced
+    //calc node size base on referenced count
     const sizeCollection = calcNodeSize(newEdges);
     newNodes.forEach((itemA) => {
       const matchedItemB = sizeCollection.find(
@@ -126,7 +126,7 @@ const NetworkGraph = () => {
         itemA.size = matchedItemB.size;
       }
     });
-    //filter unrelated nodes
+    //filter unrelated nodes while in note page
     if (isNoteGraph) {
       const relatedNode: string[] = [id!];
       //get link to
