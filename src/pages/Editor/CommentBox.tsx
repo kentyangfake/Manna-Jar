@@ -50,8 +50,8 @@ const CommentBox = ({
   useEffect(() => {
     const newHashValue = profile.notes.map((note) => ({
       id: note.id,
-      value: note.title,
-      link: `/note?id=${note.id}`,
+      value: note.title || '',
+      link: `/note/${note.id}`,
     }));
     setHashValues(newHashValue);
   }, [profile.isLogin]);

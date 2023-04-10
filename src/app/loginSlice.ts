@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { auth, firestore } from '../utils/firebase';
-import { v4 as uuidv4 } from 'uuid';
+import { NoteType } from './types';
 
 interface CustomUser {
   uid: string;
@@ -12,23 +12,8 @@ interface Profile {
   email: string;
   name: string;
   id: string;
-  notes: Note[];
+  notes: NoteType[];
   isLogin: boolean;
-}
-
-interface linkObj {
-  id: string;
-  title: string;
-}
-
-interface Note {
-  id: string,
-  title: string,
-  content: string,
-  category: string,
-  link_notes: linkObj[] | [],
-  create_time: string,
-  edit_time: string,
 }
 
 const initialState = {
@@ -36,7 +21,7 @@ const initialState = {
     email: '',
     name: '',
     id: '',
-    notes: [] as Note[],
+    notes: [] as NoteType[],
     isLogin: false,
   }
 }
@@ -107,8 +92,8 @@ const loginSlice = createSlice({
   name : 'user',
   initialState : initialState,
   reducers:{
-    addNote: (state, action: PayloadAction<Note>) => {
-      state.profile.notes.push(action.payload as Note);
+    addNote: (state, action: PayloadAction<NoteType>) => {
+      state.profile.notes.push(action.payload as NoteType);
       const id = state.profile.id
       const data = {
         email: state.profile.email,
