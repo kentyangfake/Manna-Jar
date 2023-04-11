@@ -50,6 +50,13 @@ const Navigate = () => {
         個人靈修
       </Link>
       <br />
+      <Link
+        to="/?category=shared"
+        style={category === 'shared' ? { backgroundColor: 'pink' } : {}}
+      >
+        分享收藏
+      </Link>
+      <br />
       <Link to="/graphview">Graph View</Link>
       <br />
       <button onClick={() => dispatch(logoutAsync())}>logout</button>
