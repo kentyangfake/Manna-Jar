@@ -3,15 +3,18 @@ import { useAppSelector } from '../../app/hooks';
 import { selectProfile } from '../../app/loginSlice';
 import { Link, useSearchParams } from 'react-router-dom';
 import { parseTime, parseWeek } from '../../utils/utils';
+import Header from './Header';
 
 const Home = () => {
   const profile = useAppSelector(selectProfile);
   //TODO:展示分類
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category') || '';
+  console.log(category);
 
   return (
     <div>
+      <Header />
       <Link to="/editor/newNote">新增筆記</Link>
       {profile.notes.map((note) => (
         <Link key={note.id} to={`/note/${note.id}`}>

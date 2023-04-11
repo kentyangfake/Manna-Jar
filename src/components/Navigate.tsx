@@ -34,7 +34,11 @@ const Navigate = () => {
   return (
     <div style={{ backgroundColor: 'lightgray' }}>
       <p>welcom!{profile.name}</p>
-      <Link to="/">Home</Link>
+      <Link to="/">所有筆記</Link>
+      <br />
+      <Link to="/?category=sermon">聚會崇拜</Link>
+      <br />
+      <Link to="/?category=devotion">個人靈修</Link>
       <br />
       <Link to="/graphview">Graph View</Link>
       <br />
