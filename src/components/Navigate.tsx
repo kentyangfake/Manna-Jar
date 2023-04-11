@@ -36,9 +36,19 @@ const Navigate = () => {
       <p>welcom!{profile.name}</p>
       <Link to="/">所有筆記</Link>
       <br />
-      <Link to="/?category=sermon">聚會崇拜</Link>
+      <Link
+        to="/?category=sermon"
+        style={category === 'sermon' ? { backgroundColor: 'pink' } : {}}
+      >
+        聚會崇拜
+      </Link>
       <br />
-      <Link to="/?category=devotion">個人靈修</Link>
+      <Link
+        to="/?category=devotion"
+        style={category === 'devotion' ? { backgroundColor: 'pink' } : {}}
+      >
+        個人靈修
+      </Link>
       <br />
       <Link to="/graphview">Graph View</Link>
       <br />
