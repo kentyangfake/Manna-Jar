@@ -28,9 +28,16 @@ const Home = () => {
             }}
           >
             <p>{note.title}</p>
-            <p>周{parseWeek(note.create_time)}</p>
-            <p>建立時間: {parseTime(note.create_time)}</p>
-            <p>編輯時間: {parseTime(note.edit_time)}</p>
+            {profile.orderBy.record === 'edit' ? (
+              <p>周{parseWeek(note.edit_time)}</p>
+            ) : (
+              <p>周{parseWeek(note.create_time)}</p>
+            )}
+            {profile.orderBy.record === 'edit' ? (
+              <p>編輯時間: {parseTime(note.edit_time)}</p>
+            ) : (
+              <p>建立時間: {parseTime(note.create_time)}</p>
+            )}
           </div>
         </Link>
       ))}
