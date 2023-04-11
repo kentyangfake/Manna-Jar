@@ -23,6 +23,7 @@ const initialState = {
     id: '',
     notes: [] as NoteType[],
     isLogin: false,
+    orderBy:{time:'newest',record:'edit'},
   }
 }
 
@@ -52,8 +53,9 @@ export const loginAsync = createAsyncThunk(
       if (!doc) {
         throw new Error('User document not found');
       }
-      const {name, notes} = doc;
-      return {email, id:uid , name, notes};
+      let {name, notes} = doc;
+      const reOrderNotes = notes.sort((a:NoteType,b:NoteType)=>b.edit_time - a.edit_time);
+      return {email, id:uid , name, notes:reOrderNotes};
     } catch (error:any) {
       throw new Error(error.message);
     }
@@ -69,7 +71,8 @@ export const loginViaLocalAsync = createAsyncThunk(
         throw new Error('User document not found');
       }
       const {name, notes, email} = doc;
-      return {email, id , name, notes};
+      const reOrderNotes = notes.sort((a:NoteType,b:NoteType)=>b.edit_time - a.edit_time);
+      return {email, id , name, notes:reOrderNotes};
     } catch (error:any) {
       throw new Error(error.message);
     }
@@ -93,7 +96,8 @@ const loginSlice = createSlice({
   initialState : initialState,
   reducers:{
     addNote: (state, action: PayloadAction<NoteType>) => {
-      state.profile.notes.push(action.payload as NoteType);
+      const order = state.profile.orderBy.time
+      order === 'newest'? state.profile.notes.unshift(action.payload as NoteType): state.profile.notes.push(action.payload as NoteType);
       const id = state.profile.id
       const data = {
         email: state.profile.email,
@@ -127,6 +131,58 @@ const loginSlice = createSlice({
         notes: state.profile.notes,
       }
       firestore.updateUser(id, data);
+    },
+    changeOrderByTime:(state)=>{
+      state.profile.orderBy.time === 'newest'? state.profile.orderBy.time = 'oldest' : state.profile.orderBy.time = 'newest';
+      if(state.profile.orderBy.record === 'create'){
+        switch(state.profile.orderBy.time){
+          case 'newest':
+            state.profile.notes.sort((a,b)=>b.create_time - a.create_time);
+            break;
+          case 'oldest':
+            state.profile.notes.sort((a,b)=>a.create_time - b.create_time);
+            break;
+          default:
+            state.profile.notes.sort((a,b)=>b.create_time - a.create_time);
+        }
+      } else {
+        switch(state.profile.orderBy.time){
+          case 'newest':
+            state.profile.notes.sort((a,b)=>b.edit_time - a.edit_time);
+            break;
+          case 'oldest':
+            state.profile.notes.sort((a,b)=>a.edit_time - b.edit_time);
+            break;
+          default:
+            state.profile.notes.sort((a,b)=>b.edit_time - a.edit_time);
+        }
+      }
+    },
+    changeOrderByRecord:(state)=>{
+      state.profile.orderBy.record === 'create'? state.profile.orderBy.record = 'edit' : state.profile.orderBy.record = 'create';
+      if(state.profile.orderBy.record === 'create'){
+        switch(state.profile.orderBy.time){
+          case 'newest':
+            state.profile.notes.sort((a,b)=>b.create_time - a.create_time);
+            break;
+          case 'oldest':
+            state.profile.notes.sort((a,b)=>a.create_time - b.create_time);
+            break;
+          default:
+            state.profile.notes.sort((a,b)=>b.create_time - a.create_time);
+        }
+      } else {
+        switch(state.profile.orderBy.time){
+          case 'newest':
+            state.profile.notes.sort((a,b)=>b.edit_time - a.edit_time);
+            break;
+          case 'oldest':
+            state.profile.notes.sort((a,b)=>a.edit_time - b.edit_time);
+            break;
+          default:
+            state.profile.notes.sort((a,b)=>b.edit_time - a.edit_time);
+        }
+      }
     }
   },
   extraReducers: (builder) => {
@@ -173,5 +229,5 @@ const loginSlice = createSlice({
   },
 })
 export const selectProfile = (state: RootState) => state.login.profile;
-export const { addNote, deleteNote, editNote } = loginSlice.actions
+export const { addNote, deleteNote, editNote, changeOrderByTime, changeOrderByRecord } = loginSlice.actions
 export default loginSlice.reducer;
