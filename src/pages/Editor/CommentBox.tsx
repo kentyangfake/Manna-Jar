@@ -4,7 +4,7 @@ import 'quill-mention';
 import 'react-quill/dist/quill.snow.css';
 import { useAppSelector } from '../../app/hooks';
 import { selectProfile } from '../../app/loginSlice';
-import { BibleReference } from '../../utils/api';
+import { BibleReference } from '../../utils/utils';
 
 interface hashValue {
   id: string;

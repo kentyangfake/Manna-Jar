@@ -21,7 +21,7 @@ root.render(
           <Route index element={<Landing />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="graphview" element={<GraphView />} />
-          <Route path="editor" element={<Editor />} />
+          <Route path="editor/:id" element={<Editor />} />
           <Route path="note/:id" element={<Note />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>

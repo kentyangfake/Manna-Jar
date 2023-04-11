@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useAppSelector } from '../../app/hooks';
-import { selectProfile } from '../../app/loginSlice';
-import { useParams } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { selectProfile, deleteNote } from '../../app/loginSlice';
+import { useNavigate, useParams } from 'react-router-dom';
 import { NoteType } from '../../app/types';
 import { Link } from 'react-router-dom';
 import NetworkGraph from '../../components/NetworkGraph';
+import { parseTime } from '../../utils/utils';
 
 interface Referenced {
   linkTitle: string;
@@ -13,15 +14,17 @@ interface Referenced {
 
 const Note = () => {
   const profile = useAppSelector(selectProfile);
+  const dispatch = useAppDispatch();
   const { id } = useParams();
+  const navigate = useNavigate();
   const [currentNote, setCurrentNote] = useState<NoteType>({
     id: '',
     title: '',
     content: '',
     category: '',
     link_notes: [],
-    create_time: '',
-    edit_time: '',
+    create_time: 0,
+    edit_time: 0,
   });
   const [referenced, setReferenced] = useState<Referenced[]>([]);
 
@@ -55,6 +58,11 @@ const Note = () => {
       }}
     >
       <div>{currentNote.title}</div>
+      <p>建立時間:{parseTime(currentNote.create_time)}</p>
+      <p>編輯時間:{parseTime(currentNote.edit_time)}</p>
+      <Link to={`/editor/${id}`} style={{ border: '1px solid gray' }}>
+        編輯筆記
+      </Link>
       <div dangerouslySetInnerHTML={{ __html: currentNote.content }}></div>
       <div>Referenced by:</div>
       {referenced?.map((note) => (
@@ -66,6 +74,19 @@ const Note = () => {
         style={{ width: '300px', height: '300px', border: '1px solid black' }}
       >
         <NetworkGraph />
+      </div>
+      <div
+        style={{ border: '1px solid gray', cursor: 'pointer' }}
+        onClick={() => {
+          const isDelete = window.confirm('確認要刪除嗎?');
+          if (isDelete) {
+            dispatch(deleteNote(id!));
+            window.alert(`已刪除筆記:${currentNote.title}`);
+            navigate('/');
+          }
+        }}
+      >
+        刪除筆記
       </div>
     </div>
   );

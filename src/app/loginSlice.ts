@@ -102,6 +102,32 @@ const loginSlice = createSlice({
       }
       firestore.updateUser(id, data);
     },
+    deleteNote:(state,action:PayloadAction<string>) => {
+      if(state.profile.notes.length === 1){
+        window.alert('請保留至少一篇筆記!');
+        return
+      }
+      state.profile.notes = state.profile.notes.filter(note => note.id !== action.payload);
+      const id = state.profile.id
+      const data = {
+        email: state.profile.email,
+        name: state.profile.name,
+        notes: state.profile.notes,
+      }
+      firestore.updateUser(id, data);
+    },
+    editNote:(state, action: PayloadAction<NoteType>)=>{
+      const editId = action.payload.id;
+      const noteIndex = state.profile.notes.findIndex(note => note.id === editId);
+      state.profile.notes[noteIndex] = action.payload;
+      const id = state.profile.id
+      const data = {
+        email: state.profile.email,
+        name: state.profile.name,
+        notes: state.profile.notes,
+      }
+      firestore.updateUser(id, data);
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -147,5 +173,5 @@ const loginSlice = createSlice({
   },
 })
 export const selectProfile = (state: RootState) => state.login.profile;
-export const { addNote } = loginSlice.actions
+export const { addNote, deleteNote, editNote } = loginSlice.actions
 export default loginSlice.reducer;
