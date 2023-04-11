@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { NoteType } from '../../app/types';
 import { Link } from 'react-router-dom';
 import NetworkGraph from '../../components/NetworkGraph';
+import { parseTime } from '../../utils/utils';
 
 interface Referenced {
   linkTitle: string;
@@ -22,8 +23,8 @@ const Note = () => {
     content: '',
     category: '',
     link_notes: [],
-    create_time: '',
-    edit_time: '',
+    create_time: 0,
+    edit_time: 0,
   });
   const [referenced, setReferenced] = useState<Referenced[]>([]);
 
@@ -57,6 +58,8 @@ const Note = () => {
       }}
     >
       <div>{currentNote.title}</div>
+      <p>建立時間:{parseTime(currentNote.create_time)}</p>
+      <p>編輯時間:{parseTime(currentNote.edit_time)}</p>
       <Link to={`/editor/${id}`} style={{ border: '1px solid gray' }}>
         編輯筆記
       </Link>

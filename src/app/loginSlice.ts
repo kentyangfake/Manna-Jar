@@ -118,7 +118,6 @@ const loginSlice = createSlice({
     },
     editNote:(state, action: PayloadAction<NoteType>)=>{
       const editId = action.payload.id;
-      //indexOf找到state.profile.notes:[]裡那篇的index
       const noteIndex = state.profile.notes.findIndex(note => note.id === editId);
       state.profile.notes[noteIndex] = action.payload;
       const id = state.profile.id

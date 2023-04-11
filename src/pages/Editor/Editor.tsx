@@ -27,8 +27,9 @@ const Editor = () => {
     content: '',
     category: '',
     link_notes: [],
-    create_time: '',
-    edit_time: '',
+    //使用Unix Timestamp
+    create_time: new Date().getTime(),
+    edit_time: 0,
   });
   const navigate = useNavigate();
   //TODO:用網址id判斷是edit || newNote
@@ -62,6 +63,7 @@ const Editor = () => {
 
   useEffect(() => {
     createLink();
+    setNote({ ...note, edit_time: new Date().getTime() });
   }, [note.content]);
 
   const handleAddNote = () => {
@@ -115,6 +117,13 @@ const Editor = () => {
         }}
       >
         {isEdit ? '儲存修改' : '新增筆記'}
+      </button>
+      <button
+        onClick={() => {
+          isEdit ? navigate(`/note/${id}`) : navigate('/');
+        }}
+      >
+        取消
       </button>
     </div>
   );

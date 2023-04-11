@@ -4,8 +4,9 @@ export interface NoteType {
   content: string;
   category: string;
   link_notes: LinkObj[] | [];
-  create_time: string;
-  edit_time: string;
+  //使用Unix Timestamp
+  create_time: number;
+  edit_time: number;
   sharedBy?: string;
 }
 
