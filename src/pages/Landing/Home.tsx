@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { selectProfile } from '../../app/loginSlice';
 import { Link, useSearchParams } from 'react-router-dom';
-import { parseTime, parseWeek } from '../../utils/utils';
+import { parseTime, parseWeekday } from '../../utils/utils';
 import Header from './Header';
 
 const Home = () => {
@@ -31,9 +31,9 @@ const Home = () => {
             <p>{note.title}</p>
             <p>{note.category}</p>
             {profile.orderBy.record === 'edit' ? (
-              <p>周{parseWeek(note.edit_time)}</p>
+              <p>周{parseWeekday(note.edit_time)}</p>
             ) : (
-              <p>周{parseWeek(note.create_time)}</p>
+              <p>周{parseWeekday(note.create_time)}</p>
             )}
             {profile.orderBy.record === 'edit' ? (
               <p>編輯時間: {parseTime(note.edit_time)}</p>
