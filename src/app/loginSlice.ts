@@ -136,6 +136,7 @@ const loginSlice = createSlice({
         notes: state.profile.notes,
       }
       firestore.updateUser(id, data);
+      window.alert('修改筆記成功!');
     },
     changeOrderByTime:(state)=>{
       state.profile.orderBy.time === 'newest'? state.profile.orderBy.time = 'oldest' : state.profile.orderBy.time = 'newest';

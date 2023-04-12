@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { selectProfile, deleteNote } from '../../app/loginSlice';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { NoteType } from '../../app/types';
-import { Link } from 'react-router-dom';
 import NetworkGraph from '../../components/NetworkGraph';
 import { parseTime } from '../../utils/utils';
 
