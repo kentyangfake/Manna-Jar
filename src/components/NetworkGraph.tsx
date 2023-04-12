@@ -5,7 +5,6 @@ import { selectProfile } from '../app/loginSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 
 interface GraphType {
-  counter: number;
   graph: {
     nodes: Node[];
     edges: Edge[];
@@ -80,8 +79,7 @@ const calcNodeSize = (arr: Edge[]) => {
 
 const NetworkGraph = () => {
   const [isNoteGraph, setIsNoteGraph] = useState(false);
-  const [state, setState] = useState<any>({
-    counter: 5,
+  const [state, setState] = useState<GraphType>({
     graph: {
       nodes: [],
       edges: [],
@@ -150,7 +148,6 @@ const NetworkGraph = () => {
     }
 
     const newGraph: GraphType = {
-      counter: 5,
       graph: { nodes: newNodes, edges: newEdges },
       events: {
         selectNode: ({ nodes }: { nodes: string[] }) => {

@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 import NetworkGraph from '../../components/NetworkGraph';
+import { openAI } from '../../utils/openAI';
 
 const GraphWrapper = styled.div`
   width: 1280px;
@@ -10,6 +11,7 @@ const GraphWrapper = styled.div`
 const GraphView = () => {
   return (
     <>
+      <button onClick={() => openAI.summerize()}>ai測試</button>
       <GraphWrapper>
         <NetworkGraph />
       </GraphWrapper>

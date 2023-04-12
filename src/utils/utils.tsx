@@ -1,5 +1,3 @@
-import { OPEN_AI_KEY } from '../../config.js';
-
 export const BibleReference = async (
   book: string,
   chapter: string,
