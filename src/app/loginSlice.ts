@@ -97,6 +97,10 @@ const loginSlice = createSlice({
   reducers:{
     addNote: (state, action: PayloadAction<NoteType>) => {
       const order = state.profile.orderBy.time
+      if (state.profile.notes.findIndex(note => note.id === action.payload.id ) >= 0){
+        alert('您已收藏此筆記!');
+        return
+      }
       order === 'newest'? state.profile.notes.unshift(action.payload as NoteType): state.profile.notes.push(action.payload as NoteType);
       const id = state.profile.id
       const data = {
@@ -105,6 +109,7 @@ const loginSlice = createSlice({
         notes: state.profile.notes,
       }
       firestore.updateUser(id, data);
+      action.payload.category === 'shared'? window.alert(`您已收藏${action.payload.sharedBy}的筆記`): window.alert(`新增筆記:${action.payload.title}`)
     },
     deleteNote:(state,action:PayloadAction<string>) => {
       if(state.profile.notes.length === 1){
@@ -131,6 +136,7 @@ const loginSlice = createSlice({
         notes: state.profile.notes,
       }
       firestore.updateUser(id, data);
+      window.alert('修改筆記成功!');
     },
     changeOrderByTime:(state)=>{
       state.profile.orderBy.time === 'newest'? state.profile.orderBy.time = 'oldest' : state.profile.orderBy.time = 'newest';

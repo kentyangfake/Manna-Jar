@@ -70,33 +70,33 @@ export const parseTime = (timestamp: number) => {
   return `${day} ${month} ${year}, ${hours}:${minutes}`;
 };
 
-export const parseWeek = (timestamp: number) => {
+export const parseWeekday = (timestamp: number) => {
   const date = new Date(timestamp);
-  let week: string;
+  let weekday: string;
   switch (date.getDay()) {
     case 0:
-      week = '日';
+      weekday = '日';
       break;
     case 1:
-      week = '一';
+      weekday = '一';
       break;
     case 2:
-      week = '二';
+      weekday = '二';
       break;
     case 3:
-      week = '三';
+      weekday = '三';
       break;
     case 4:
-      week = '四';
+      weekday = '四';
       break;
     case 5:
-      week = '五';
+      weekday = '五';
       break;
     case 6:
-      week = '六';
+      weekday = '六';
       break;
     default:
-      week = '';
+      weekday = '';
   }
-  return `${week}`;
+  return `${weekday}`;
 };

@@ -27,12 +27,10 @@ const Editor = () => {
     content: '',
     category: '',
     link_notes: [],
-    //使用Unix Timestamp
     create_time: new Date().getTime(),
-    edit_time: 0,
+    edit_time: new Date().getTime(),
   });
   const navigate = useNavigate();
-  //TODO:用網址id判斷是edit || newNote
   const profile = useAppSelector(selectProfile);
   const { id } = useParams();
 
@@ -68,12 +66,10 @@ const Editor = () => {
 
   const handleAddNote = () => {
     dispatch(addNote(note));
-    window.alert('新增筆記成功!');
     navigate('/');
   };
   const handleEditNote = () => {
     dispatch(editNote(note));
-    window.alert('修改筆記成功!');
     navigate(`/note/${id}`);
   };
 
@@ -112,7 +108,6 @@ const Editor = () => {
       />
       <button
         onClick={() => {
-          //用id判斷要addNote || editNote和要navigate到哪
           isEdit ? handleEditNote() : handleAddNote();
         }}
       >
