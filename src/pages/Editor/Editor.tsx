@@ -29,7 +29,7 @@ const Editor = () => {
     link_notes: [],
     //使用Unix Timestamp
     create_time: new Date().getTime(),
-    edit_time: 0,
+    edit_time: 1,
   });
   const navigate = useNavigate();
   //TODO:用網址id判斷是edit || newNote

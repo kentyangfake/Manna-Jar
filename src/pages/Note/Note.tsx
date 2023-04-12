@@ -23,8 +23,8 @@ const Note = () => {
     content: '',
     category: '',
     link_notes: [],
-    create_time: 0,
-    edit_time: 0,
+    create_time: 1,
+    edit_time: 1,
   });
   const [referenced, setReferenced] = useState<Referenced[]>([]);
 
@@ -58,11 +58,19 @@ const Note = () => {
       }}
     >
       <div>{currentNote.title}</div>
+      {currentNote.sharedBy ? <div>{currentNote.sharedBy}分享</div> : ''}
       <p>建立時間:{parseTime(currentNote.create_time)}</p>
-      <p>編輯時間:{parseTime(currentNote.edit_time)}</p>
-      <Link to={`/editor/${id}`} style={{ border: '1px solid gray' }}>
-        編輯筆記
-      </Link>
+      <p>
+        {currentNote.category === 'shared' ? '收藏時間' : '編輯時間'}:
+        {parseTime(currentNote.edit_time)}
+      </p>
+      {currentNote.category === 'shared' ? (
+        ''
+      ) : (
+        <Link to={`/editor/${id}`} style={{ border: '1px solid gray' }}>
+          編輯筆記
+        </Link>
+      )}
       <div dangerouslySetInnerHTML={{ __html: currentNote.content }}></div>
       <div>Referenced by:</div>
       {referenced?.map((note) => (
@@ -75,6 +83,15 @@ const Note = () => {
       >
         <NetworkGraph />
       </div>
+      {currentNote.category === 'shared' ? (
+        ''
+      ) : (
+        <div>
+          分享連結: http://localhost:3000/?category=shared&shareBy=
+          {profile.id}&shareNote=
+          {currentNote.id}
+        </div>
+      )}
       <div
         style={{ border: '1px solid gray', cursor: 'pointer' }}
         onClick={() => {

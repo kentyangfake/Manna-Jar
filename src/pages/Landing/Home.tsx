@@ -1,14 +1,32 @@
-import React from 'react';
-import { useAppSelector } from '../../app/hooks';
-import { selectProfile } from '../../app/loginSlice';
+import React, { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { selectProfile, addNote } from '../../app/loginSlice';
 import { Link, useSearchParams } from 'react-router-dom';
 import { parseTime, parseWeekday } from '../../utils/utils';
+import { firestore } from '../../utils/firebase';
 import Header from './Header';
 
 const Home = () => {
+  const dispatch = useAppDispatch();
   const profile = useAppSelector(selectProfile);
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category');
+  const shareBy = searchParams.get('shareBy');
+  const shareNoteId = searchParams.get('shareNote');
+
+  useEffect(() => {
+    if (!shareBy || !shareNoteId || shareBy === profile.id) {
+      return;
+    }
+    const getShareNoteViaLink = async () => {
+      const shareNote = await firestore.getShareNote(shareBy, shareNoteId);
+      dispatch(addNote(shareNote));
+      window.alert('成功收藏筆記!');
+    };
+
+    getShareNoteViaLink();
+  }, []);
+
   const notes = category
     ? [...profile.notes.filter((note) => note.category === category)]
     : profile.notes;
