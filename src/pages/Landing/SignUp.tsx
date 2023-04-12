@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Link, useNavigate } from 'react-router-dom';
 import { signUpAsync, selectProfile } from '../../app/loginSlice';
@@ -10,6 +10,7 @@ const SignUp = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const profile = useAppSelector(selectProfile);
   const navigate = useNavigate();
+  const [hidePassword, setHidePassword] = useState(true);
 
   useEffect(() => {
     if (profile.isLogin) {
@@ -52,12 +53,15 @@ const SignUp = () => {
       <br />
       <label htmlFor="password">Password:</label>
       <input
-        type="text"
+        type={hidePassword ? 'password' : 'text'}
         placeholder="password"
         name="password"
         id="password"
         ref={passwordRef}
       />
+      <span onClick={() => setHidePassword((prev) => !prev)}>
+        {hidePassword ? '藏' : '顯'}
+      </span>
       <br />
       <button onClick={handleSingUp}>SingUp</button>
       <br />

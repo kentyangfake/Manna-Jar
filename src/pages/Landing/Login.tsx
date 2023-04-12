@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -13,6 +13,7 @@ const Login = () => {
   const navigate = useNavigate();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const [hidePassword, setHidePassword] = useState(true);
 
   useEffect(() => {
     const id = localStorage.getItem('id');
@@ -52,12 +53,15 @@ const Login = () => {
       <br />
       <label htmlFor="password">Password:</label>
       <input
-        type="text"
+        type={hidePassword ? 'password' : 'text'}
         placeholder="password"
         name="password"
         id="password"
         ref={passwordRef}
       />
+      <span onClick={() => setHidePassword((prev) => !prev)}>
+        {hidePassword ? '藏' : '顯'}
+      </span>
       <br />
       <button onClick={handleLogin}>login</button>
       <br />

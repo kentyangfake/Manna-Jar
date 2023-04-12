@@ -87,7 +87,7 @@ const Note = () => {
         ''
       ) : (
         <div>
-          分享連結: http://localhost:3000/?category=shared&shareBy=
+          分享連結: https://manna-jar.web.app/?category=shared&shareBy=
           {profile.id}&shareNote=
           {currentNote.id}
         </div>
