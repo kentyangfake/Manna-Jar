@@ -71,7 +71,7 @@ const Note = () => {
         </Link>
       )}
       <div dangerouslySetInnerHTML={{ __html: currentNote.content }}></div>
-      <div>Referenced by:</div>
+      {referenced.length > 0 ? <div>Referenced by:</div> : ''}
       {referenced?.map((note) => (
         <Link to={`/note/${note.linkId}`} key={note.linkId}>
           {note.linkTitle}
