@@ -68,7 +68,6 @@ const Editor = () => {
 
   const handleAddNote = () => {
     dispatch(addNote(note));
-    window.alert('新增筆記成功!');
     navigate('/');
   };
   const handleEditNote = () => {

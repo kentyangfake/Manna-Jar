@@ -21,7 +21,6 @@ const Home = () => {
     const getShareNoteViaLink = async () => {
       const shareNote = await firestore.getShareNote(shareBy, shareNoteId);
       dispatch(addNote(shareNote));
-      window.alert('成功收藏筆記!');
     };
 
     getShareNoteViaLink();
@@ -54,9 +53,12 @@ const Home = () => {
               <p>周{parseWeekday(note.create_time)}</p>
             )}
             {profile.orderBy.record === 'edit' ? (
-              <p>編輯時間: {parseTime(note.edit_time)}</p>
+              <p>
+                {note.category === 'shared' ? '收藏時間' : '編輯時間'}:
+                {parseTime(note.edit_time)}
+              </p>
             ) : (
-              <p>建立時間: {parseTime(note.create_time)}</p>
+              <p>建立時間:{parseTime(note.create_time)}</p>
             )}
           </div>
         </Link>
