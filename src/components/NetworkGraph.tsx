@@ -5,7 +5,6 @@ import { selectProfile } from '../app/loginSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 
 interface GraphType {
-  counter: number;
   graph: {
     nodes: Node[];
     edges: Edge[];
@@ -16,6 +15,7 @@ interface Node {
   id: string;
   label: string;
   color: {
+    border: string;
     background: string;
   };
   font: { color: string };
@@ -28,6 +28,7 @@ interface Edge {
 }
 
 const THEME_COLOR = 'gray';
+const SHARED_COLOR = 'pink';
 const HOVER_COLOR = 'purple';
 const BASE_SIZE = 5;
 
@@ -39,14 +40,15 @@ const options = {
     shape: 'dot',
     size: BASE_SIZE,
     color: {
-      hover: HOVER_COLOR,
-      border: 'none',
+      hover: { border: 'none', background: HOVER_COLOR },
       highlight: { border: HOVER_COLOR, background: HOVER_COLOR },
     },
   },
   edges: {
     color: { color: THEME_COLOR, hover: HOVER_COLOR },
     arrows: { to: { enabled: false } },
+    hoverWidth: 0.2,
+    selectionWidth: 0.2,
   },
   interaction: {
     hover: true,
@@ -77,8 +79,7 @@ const calcNodeSize = (arr: Edge[]) => {
 
 const NetworkGraph = () => {
   const [isNoteGraph, setIsNoteGraph] = useState(false);
-  const [state, setState] = useState<any>({
-    counter: 5,
+  const [state, setState] = useState<GraphType>({
     graph: {
       nodes: [],
       edges: [],
@@ -107,9 +108,12 @@ const NetworkGraph = () => {
         id: note.id,
         label: note.title,
         color: {
-          background: THEME_COLOR,
+          border: note.category === 'shared' ? SHARED_COLOR : THEME_COLOR,
+          background: note.category === 'shared' ? SHARED_COLOR : THEME_COLOR,
         },
-        font: { color: THEME_COLOR },
+        font: {
+          color: note.category === 'shared' ? SHARED_COLOR : THEME_COLOR,
+        },
       });
       note.link_notes?.map((link) => {
         newEdges.push({ from: note.id, to: link.id });
@@ -144,7 +148,6 @@ const NetworkGraph = () => {
     }
 
     const newGraph: GraphType = {
-      counter: 5,
       graph: { nodes: newNodes, edges: newEdges },
       events: {
         selectNode: ({ nodes }: { nodes: string[] }) => {

@@ -32,7 +32,7 @@ const Header = () => {
         style={{ cursor: 'pointer' }}
         onClick={() => dispatch(changeOrderByRecord())}
       >
-        {byRecord === 'create' ? '創建時間' : '編輯時間'}
+        {byRecord === 'create' ? '創建時間' : '更新時間'}
       </div>
       <div
         style={{ cursor: 'pointer' }}

@@ -33,6 +33,7 @@ const SignUp = () => {
 
   return (
     <div>
+      <p>歡迎使用嗎哪罐子!</p>
       <label htmlFor="email">Email:</label>
       <input
         type="text"

@@ -200,7 +200,7 @@ const loginSlice = createSlice({
         state.profile.isLogin = true;
       })
       .addCase(signUpAsync.rejected, (state, action) => {
-        console.log("rejected!");
+        window.alert("註冊失敗!");
       })
       .addCase(loginAsync.fulfilled, (state, action) => {
         state.profile.email = action.payload?.email ??"";
@@ -210,7 +210,7 @@ const loginSlice = createSlice({
         state.profile.isLogin = true;
       })
       .addCase(loginAsync.rejected, (state, action) => {
-        console.log("rejected!");
+        window.alert("登入失敗!");
       })
       .addCase(loginViaLocalAsync.fulfilled, (state, action) => {
         state.profile.email = action.payload?.email ??"";

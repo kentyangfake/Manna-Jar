@@ -15,7 +15,7 @@ export const BibleReference = async (
     );
     return verses;
   } catch (error) {
-    console.error(error);
+    return '查無此經節,請參考教學內容';
   }
 };
 

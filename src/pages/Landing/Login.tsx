@@ -42,6 +42,11 @@ const Login = () => {
 
   return (
     <div>
+      <p>嗎哪罐子</p>
+      <p>基督徒的筆記本</p>
+      <p>特色:可以自動輸入經文</p>
+      <p>特色:筆記跟筆記可以建立關聯,方便查找</p>
+      <p>特色:像星空一樣的筆記累積成果</p>
       <label htmlFor="email">Email:</label>
       <input
         type="text"
