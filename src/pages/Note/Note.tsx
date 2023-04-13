@@ -63,7 +63,7 @@ const Note = () => {
         {currentNote.category === 'shared' ? '收藏時間' : '編輯時間'}:
         {parseTime(currentNote.edit_time)}
       </p>
-      {currentNote.category === 'shared' ? (
+      {currentNote.category === 'shared' || currentNote.category === 'admin' ? (
         ''
       ) : (
         <Link to={`/editor/${id}`} style={{ border: '1px solid gray' }}>
@@ -82,7 +82,7 @@ const Note = () => {
       >
         <NetworkGraph />
       </div>
-      {currentNote.category === 'shared' ? (
+      {currentNote.category === 'shared' || currentNote.category === 'admin' ? (
         ''
       ) : (
         <div>
@@ -91,19 +91,23 @@ const Note = () => {
           {currentNote.id}
         </div>
       )}
-      <div
-        style={{ border: '1px solid gray', cursor: 'pointer' }}
-        onClick={() => {
-          const isDelete = window.confirm('確認要刪除嗎?');
-          if (isDelete) {
-            dispatch(deleteNote(id!));
-            window.alert(`已刪除筆記:${currentNote.title}`);
-            navigate('/');
-          }
-        }}
-      >
-        刪除筆記
-      </div>
+      {currentNote.category === 'admin' ? (
+        ''
+      ) : (
+        <div
+          style={{ border: '1px solid gray', cursor: 'pointer' }}
+          onClick={() => {
+            const isDelete = window.confirm('確認要刪除嗎?');
+            if (isDelete) {
+              dispatch(deleteNote(id!));
+              window.alert(`已刪除筆記:${currentNote.title}`);
+              navigate('/');
+            }
+          }}
+        >
+          刪除筆記
+        </div>
+      )}
     </div>
   );
 };
