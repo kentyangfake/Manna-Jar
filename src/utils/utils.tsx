@@ -24,7 +24,7 @@ export const parseTime = (timestamp: number) => {
   const year = date.getFullYear();
   const day = date.getDate();
   const hours = date.getHours();
-  const minutes = date.getMinutes();
+  const minutes = String(date.getMinutes()).padStart(2, '0');
   let month: string;
   switch (date.getMonth()) {
     case 0:
