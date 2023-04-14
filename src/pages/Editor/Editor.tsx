@@ -56,12 +56,15 @@ const Editor = () => {
       const title = match[2]?.match(/^(.*?)\s/)?.[1].replace(/\"$/, '') || '';
       linkArray.push({ id, title });
     }
-    setNote({ ...note, link_notes: linkArray });
+    setNote({
+      ...note,
+      link_notes: linkArray,
+      edit_time: new Date().getTime(),
+    });
   };
 
   useEffect(() => {
     createLink();
-    setNote({ ...note, edit_time: new Date().getTime() });
   }, [note.content]);
 
   const handleAddNote = () => {

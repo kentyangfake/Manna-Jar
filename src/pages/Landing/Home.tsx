@@ -48,17 +48,29 @@ const Home = () => {
             <p>{note.title}</p>
             <p>{note.category}</p>
             {profile.orderBy.record === 'edit' ? (
-              <p>周{parseWeekday(note.edit_time)}</p>
-            ) : (
+              note.edit_time > 1 ? (
+                <p>周{parseWeekday(note.edit_time)}</p>
+              ) : (
+                ''
+              )
+            ) : note.create_time > 1 ? (
               <p>周{parseWeekday(note.create_time)}</p>
+            ) : (
+              ''
             )}
             {profile.orderBy.record === 'edit' ? (
-              <p>
-                {note.category === 'shared' ? '收藏時間' : '編輯時間'}:
-                {parseTime(note.edit_time)}
-              </p>
-            ) : (
+              note.edit_time > 1 ? (
+                <p>
+                  {note.category === 'shared' ? '收藏時間' : '編輯時間'}:
+                  {parseTime(note.edit_time)}
+                </p>
+              ) : (
+                ''
+              )
+            ) : note.create_time > 1 ? (
               <p>建立時間:{parseTime(note.create_time)}</p>
+            ) : (
+              ''
             )}
           </div>
         </Link>

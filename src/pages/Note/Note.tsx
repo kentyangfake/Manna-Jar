@@ -35,6 +35,16 @@ const Note = () => {
     const matchNote = profile.notes.find((note) => note.id === id);
     if (matchNote) {
       setCurrentNote(matchNote);
+    } else {
+      setCurrentNote({
+        id: '',
+        title: '找不到這篇筆記',
+        content: '筆記可能被刪除,或向分享者索取該筆記',
+        category: 'admin',
+        link_notes: [],
+        create_time: 1,
+        edit_time: 1,
+      });
     }
 
     const referencedBy: Referenced[] = [];
@@ -57,13 +67,21 @@ const Note = () => {
       }}
     >
       <div>{currentNote.title}</div>
-      {currentNote.sharedBy ? <div>{currentNote.sharedBy}分享</div> : ''}
-      <p>建立時間:{parseTime(currentNote.create_time)}</p>
-      <p>
-        {currentNote.category === 'shared' ? '收藏時間' : '編輯時間'}:
-        {parseTime(currentNote.edit_time)}
-      </p>
-      {currentNote.category === 'shared' ? (
+      {currentNote.sharedBy ? <div>由 {currentNote.sharedBy} 分享</div> : ''}
+      {currentNote.create_time > 1 ? (
+        <p>建立時間:{parseTime(currentNote.create_time)}</p>
+      ) : (
+        ''
+      )}
+      {currentNote.edit_time > 1 ? (
+        <p>
+          {currentNote.category === 'shared' ? '收藏時間' : '編輯時間'}:
+          {parseTime(currentNote.edit_time)}
+        </p>
+      ) : (
+        ''
+      )}
+      {currentNote.category === 'shared' || currentNote.category === 'admin' ? (
         ''
       ) : (
         <Link to={`/editor/${id}`} style={{ border: '1px solid gray' }}>
@@ -82,7 +100,7 @@ const Note = () => {
       >
         <NetworkGraph />
       </div>
-      {currentNote.category === 'shared' ? (
+      {currentNote.category === 'shared' || currentNote.category === 'admin' ? (
         ''
       ) : (
         <div>
@@ -91,19 +109,23 @@ const Note = () => {
           {currentNote.id}
         </div>
       )}
-      <div
-        style={{ border: '1px solid gray', cursor: 'pointer' }}
-        onClick={() => {
-          const isDelete = window.confirm('確認要刪除嗎?');
-          if (isDelete) {
-            dispatch(deleteNote(id!));
-            window.alert(`已刪除筆記:${currentNote.title}`);
-            navigate('/');
-          }
-        }}
-      >
-        刪除筆記
-      </div>
+      {currentNote.category === 'admin' ? (
+        ''
+      ) : (
+        <div
+          style={{ border: '1px solid gray', cursor: 'pointer' }}
+          onClick={() => {
+            const isDelete = window.confirm('確認要刪除嗎?');
+            if (isDelete) {
+              dispatch(deleteNote(id!));
+              window.alert(`已刪除筆記:${currentNote.title}`);
+              navigate('/');
+            }
+          }}
+        >
+          刪除筆記
+        </div>
+      )}
     </div>
   );
 };

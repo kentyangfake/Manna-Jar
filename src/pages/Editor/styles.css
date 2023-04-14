@@ -32,8 +32,9 @@
 
 .mention {
   border-radius: 6px;
-  background-color: #d3e1eb;
+  background-color: lightgray;
   padding: 4px;
+  color: gray;
 }
 
 .ql-editor {
@@ -41,4 +42,5 @@
   width: 1280px;
   overflow: hidden;
   overflow-y: scroll;
+  font-size: 25px;
 }
