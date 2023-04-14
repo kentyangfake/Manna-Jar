@@ -8,14 +8,6 @@ interface CustomUser {
   accessToken: string;
 }
 
-interface Profile {
-  email: string;
-  name: string;
-  id: string;
-  notes: NoteType[];
-  isLogin: boolean;
-}
-
 const initialState = {
   profile : {
     email: '',
@@ -24,6 +16,7 @@ const initialState = {
     notes: [] as NoteType[],
     isLogin: false,
     orderBy:{time:'newest',record:'edit'},
+    fontSize:'small',
   }
 }
 
