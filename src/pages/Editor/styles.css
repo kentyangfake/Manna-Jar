@@ -1,3 +1,12 @@
+.ql-container.ql-snow {
+  border: none;
+}
+.ql-toolbar.ql-snow {
+  border-radius: 53px;
+  border: none;
+  background-color: beige;
+}
+
 .ql-mention-list {
   list-style: none;
   margin: 0;
@@ -26,19 +35,21 @@
 }
 
 .ql-mention-list-item.selected {
-  background-color: #d3e1eb;
+  background-color: orange;
   text-decoration: none;
 }
 
 .mention {
-  border-radius: 6px;
-  background-color: lightgray;
-  padding: 4px;
-  color: gray;
+  padding-left: 4px;
+  color: lightgray;
+}
+.mention a {
+  color: orange;
+  text-decoration: none;
 }
 
 .ql-editor {
-  min-height: 800px;
+  min-height: 500px;
   width: 1280px;
   overflow: hidden;
   overflow-y: scroll;
