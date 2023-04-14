@@ -8,19 +8,19 @@ const SizePicker = () => {
   return (
     <div style={{ display: 'flex', gap: '10px' }}>
       <div
-        style={{ cursor: 'pointer', border: '1px solid pink', padding: '5px' }}
+        style={profile.fontSize === 'small' ? { backgroundColor: 'pink' } : {}}
         onClick={() => dispatch(changeDisplayFontSize('small'))}
       >
         small
       </div>
       <div
-        style={{ cursor: 'pointer', border: '1px solid pink', padding: '5px' }}
+        style={profile.fontSize === 'medium' ? { backgroundColor: 'pink' } : {}}
         onClick={() => dispatch(changeDisplayFontSize('medium'))}
       >
         medium
       </div>
       <div
-        style={{ cursor: 'pointer', border: '1px solid pink', padding: '5px' }}
+        style={profile.fontSize === 'large' ? { backgroundColor: 'pink' } : {}}
         onClick={() => dispatch(changeDisplayFontSize('large'))}
       >
         large

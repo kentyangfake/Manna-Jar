@@ -108,10 +108,10 @@ const NetworkGraph = () => {
         fontSize = 14;
         break;
       case 'medium':
-        fontSize = 20;
+        fontSize = 17;
         break;
       case 'large':
-        fontSize = 26;
+        fontSize = 20;
         break;
       default:
         fontSize = 14;
