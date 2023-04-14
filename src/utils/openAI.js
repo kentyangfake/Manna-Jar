@@ -9,8 +9,8 @@ export const openAI = {
   async summarize(titles, recentNotes) {
     const openai = new OpenAIApi(configuration);
     const prompt = `請根據我最近的筆記,以兩句話對我簡短做信仰狀況回顧,
-並根據我的筆記列表,推薦可複習的3篇筆記:
-我的筆記列表:${titles},
+並根據我的筆記標題列表,推薦可複習的幾篇(2-3篇)筆記:
+我的筆記標題列表:${titles},
 我最近的筆記:${recentNotes},
 `;
 

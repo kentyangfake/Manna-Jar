@@ -4,7 +4,7 @@ import { selectProfile, addNote } from '../../app/loginSlice';
 import { Link, useSearchParams } from 'react-router-dom';
 import { parseTime, parseWeekday } from '../../utils/utils';
 import { firestore } from '../../utils/firebase';
-import Header from './Header';
+import OrderPicker from './OrderPicker';
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -32,7 +32,7 @@ const Home = () => {
 
   return (
     <div>
-      <Header />
+      <OrderPicker />
       <Link to="/editor/newNote">新增筆記</Link>
       {notes.map((note) => (
         <Link key={note.id} to={`/note/${note.id}`}>

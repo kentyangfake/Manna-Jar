@@ -4,6 +4,7 @@ import NetworkGraph from '../../components/NetworkGraph';
 import { openAI } from '../../utils/openAI';
 import { useAppSelector } from '../../app/hooks';
 import { selectProfile } from '../../app/loginSlice';
+import SizePicker from '../../components/SizePicker';
 
 const GraphWrapper = styled.div`
   width: 1280px;
@@ -49,6 +50,7 @@ const GraphView = () => {
   return (
     <>
       <div>
+        <SizePicker />
         <GraphWrapper>
           <NetworkGraph />
         </GraphWrapper>

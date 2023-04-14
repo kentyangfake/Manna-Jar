@@ -6,7 +6,7 @@ import {
   changeOrderByTime,
 } from '../../app/loginSlice';
 
-const Header = () => {
+const OrderPicker = () => {
   const dispatch = useAppDispatch();
   const profile = useAppSelector(selectProfile);
 
@@ -19,7 +19,6 @@ const Header = () => {
         gap: '20px',
       }}
     >
-      <h1>I'm Header</h1>
       <div
         style={{ cursor: 'pointer' }}
         onClick={() => dispatch(changeOrderByRecord())}
@@ -36,4 +35,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default OrderPicker;
