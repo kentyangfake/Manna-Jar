@@ -4,7 +4,7 @@ import 'quill-mention';
 import 'react-quill/dist/quill.snow.css';
 import { useAppSelector } from '../../app/hooks';
 import { selectProfile } from '../../app/loginSlice';
-import { BibleReference } from '../../utils/utils';
+import { getBibleReference } from '../../utils/utils';
 
 interface hashValue {
   id: string;
@@ -71,7 +71,7 @@ const CommentBox = ({
       const beforeCursor = value.slice(0, cursorPosition);
       const afterCursor = value.slice(cursorPosition);
       const lastReference = beforeCursor.match(
-        /([\u4E00-\u9FFF]{1,2})(\d+):([\d,-]+)/
+        /([\u4E00-\u9FFF]{1,7})(\d+):([\d,-]+)/
       );
 
       if (lastReference) {
@@ -81,7 +81,7 @@ const CommentBox = ({
         const book = lastReference[1];
         const chapter = lastReference[2];
         const verse = lastReference[3];
-        await BibleReference(book, chapter, verse).then((text) => {
+        await getBibleReference(book, chapter, verse).then((text) => {
           onChange(
             beforeCursor.slice(0, referenceStart) +
               text +
