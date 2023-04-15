@@ -5,6 +5,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { NoteType } from '../../app/types';
 import NetworkGraph from '../../components/NetworkGraph';
 import { parseTime } from '../../utils/utils';
+import SizePicker from '../../components/SizePicker';
 
 interface Referenced {
   linkTitle: string;
@@ -26,6 +27,21 @@ const Note = () => {
     edit_time: 1,
   });
   const [referenced, setReferenced] = useState<Referenced[]>([]);
+
+  let fontSize = 20;
+  switch (profile.fontSize) {
+    case 'small':
+      fontSize = 20;
+      break;
+    case 'medium':
+      fontSize = 24;
+      break;
+    case 'large':
+      fontSize = 28;
+      break;
+    default:
+      fontSize = 20;
+  }
 
   useEffect(() => {
     if (profile.notes.length === 0) {
@@ -66,6 +82,7 @@ const Note = () => {
         justifyContent: 'center',
       }}
     >
+      <SizePicker />
       <div>{currentNote.title}</div>
       {currentNote.sharedBy ? <div>由 {currentNote.sharedBy} 分享</div> : ''}
       {currentNote.create_time > 1 ? (
@@ -88,7 +105,10 @@ const Note = () => {
           編輯筆記
         </Link>
       )}
-      <div dangerouslySetInnerHTML={{ __html: currentNote.content }}></div>
+      <div
+        style={{ fontSize }}
+        dangerouslySetInnerHTML={{ __html: currentNote.content }}
+      ></div>
       {referenced.length > 0 ? <div>Referenced by:</div> : ''}
       {referenced?.map((note) => (
         <Link to={`/note/${note.linkId}`} key={note.linkId}>

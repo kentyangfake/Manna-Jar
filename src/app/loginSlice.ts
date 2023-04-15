@@ -8,14 +8,6 @@ interface CustomUser {
   accessToken: string;
 }
 
-interface Profile {
-  email: string;
-  name: string;
-  id: string;
-  notes: NoteType[];
-  isLogin: boolean;
-}
-
 const initialState = {
   profile : {
     email: '',
@@ -24,6 +16,7 @@ const initialState = {
     notes: [] as NoteType[],
     isLogin: false,
     orderBy:{time:'newest',record:'edit'},
+    fontSize:'small',
   }
 }
 
@@ -189,7 +182,10 @@ const loginSlice = createSlice({
             state.profile.notes.sort((a,b)=>b.edit_time - a.edit_time);
         }
       }
-    }
+    },
+    changeDisplayFontSize:(state,action:PayloadAction<string>)=>{
+      state.profile.fontSize = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -235,5 +231,5 @@ const loginSlice = createSlice({
   },
 })
 export const selectProfile = (state: RootState) => state.login.profile;
-export const { addNote, deleteNote, editNote, changeOrderByTime, changeOrderByRecord } = loginSlice.actions
+export const { addNote, deleteNote, editNote, changeOrderByTime, changeOrderByRecord, changeDisplayFontSize } = loginSlice.actions
 export default loginSlice.reducer;

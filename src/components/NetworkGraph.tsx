@@ -18,7 +18,7 @@ interface Node {
     border: string;
     background: string;
   };
-  font: { color: string };
+  font: { size: number; color: string };
   size?: number;
 }
 
@@ -40,7 +40,7 @@ const options = {
     shape: 'dot',
     size: BASE_SIZE,
     color: {
-      hover: { border: 'none', background: HOVER_COLOR },
+      hover: { border: HOVER_COLOR, background: HOVER_COLOR },
       highlight: { border: HOVER_COLOR, background: HOVER_COLOR },
     },
   },
@@ -102,17 +102,41 @@ const NetworkGraph = () => {
 
     let newNodes: Node[] = [];
     const newEdges: Edge[] = [];
+    let fontSize = 14;
+    switch (profile.fontSize) {
+      case 'small':
+        fontSize = 14;
+        break;
+      case 'medium':
+        fontSize = 17;
+        break;
+      case 'large':
+        fontSize = 20;
+        break;
+      default:
+        fontSize = 14;
+    }
 
     profile.notes.map((note) => {
       newNodes.push({
         id: note.id,
         label: note.title,
         color: {
-          border: note.category === 'shared' ? SHARED_COLOR : THEME_COLOR,
-          background: note.category === 'shared' ? SHARED_COLOR : THEME_COLOR,
+          border:
+            note.category === 'shared' || note.category === 'admin'
+              ? SHARED_COLOR
+              : THEME_COLOR,
+          background:
+            note.category === 'shared' || note.category === 'admin'
+              ? SHARED_COLOR
+              : THEME_COLOR,
         },
         font: {
-          color: note.category === 'shared' ? SHARED_COLOR : THEME_COLOR,
+          size: fontSize,
+          color:
+            note.category === 'shared' || note.category === 'admin'
+              ? SHARED_COLOR
+              : THEME_COLOR,
         },
       });
       note.link_notes?.map((link) => {
@@ -157,7 +181,7 @@ const NetworkGraph = () => {
       },
     };
     setState(newGraph);
-  }, [profile.isLogin, id, isNoteGraph]);
+  }, [profile.isLogin, id, isNoteGraph, profile.fontSize]);
 
   const { graph, events } = state;
   return (
