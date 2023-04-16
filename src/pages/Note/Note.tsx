@@ -118,7 +118,7 @@ const Note = () => {
       <div
         style={{ width: '300px', height: '300px', border: '1px solid black' }}
       >
-        <NetworkGraph />
+        <NetworkGraph filtBy={'all'} />
       </div>
       {currentNote.category === 'shared' || currentNote.category === 'admin' ? (
         ''

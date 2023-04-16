@@ -13,7 +13,7 @@
     "@types/react-dom": "^18.0.11",
     "@types/styled-components": "^5.1.26",
     "firebase": "^9.19.0",
-    "firebase-tools": "^11.26.0",
+    "firebase-tools": "^11.27.0",
     "i": "^0.3.7",
     "npm": "^9.6.3",
     "openai": "^3.2.1",

@@ -7,9 +7,19 @@ import { selectProfile } from '../../app/loginSlice';
 import SizePicker from '../../components/SizePicker';
 
 const GraphWrapper = styled.div`
-  width: 1280px;
-  height: 800px;
+  position: relative;
+  width: 1000px;
+  height: 600px;
   border: 1px solid pink;
+`;
+const FilterDiv = styled.div`
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  background-color: beige;
 `;
 
 const GraphView = () => {
@@ -18,6 +28,7 @@ const GraphView = () => {
   const [recentNotes, setRecentNotes] = useState<string[]>([]);
   const [isAiTyping, setIsAiTyping] = useState(false);
   const [summeries, setSummeries] = useState('');
+  const [filtBy, setFiltBy] = useState('all');
 
   useEffect(() => {
     if (!profile.isLogin) {
@@ -52,7 +63,13 @@ const GraphView = () => {
       <div>
         <SizePicker />
         <GraphWrapper>
-          <NetworkGraph />
+          <FilterDiv>
+            <div onClick={() => setFiltBy('all')}>全部筆記</div>
+            <div onClick={() => setFiltBy('sermon')}>聚會崇拜</div>
+            <div onClick={() => setFiltBy('devotion')}>個人靈修</div>
+            <div onClick={() => setFiltBy('shared')}>分享收藏</div>
+          </FilterDiv>
+          <NetworkGraph filtBy={filtBy} />
         </GraphWrapper>
         {isAiTyping ? (
           ''
