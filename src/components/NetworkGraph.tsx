@@ -22,6 +22,10 @@ interface Node {
   size?: number;
 }
 
+interface Prop {
+  filtBy: string;
+}
+
 interface Edge {
   from: string;
   to: string;
@@ -77,7 +81,7 @@ const calcNodeSize = (arr: Edge[]) => {
   return newArray;
 };
 
-const NetworkGraph = () => {
+const NetworkGraph = ({ filtBy }: Prop) => {
   const [isNoteGraph, setIsNoteGraph] = useState(false);
   const [state, setState] = useState<GraphType>({
     graph: {
@@ -88,6 +92,8 @@ const NetworkGraph = () => {
   const navigate = useNavigate();
   const profile = useAppSelector(selectProfile);
   const { id } = useParams();
+
+  console.log(filtBy);
 
   useEffect(() => {
     if (id) {
