@@ -93,8 +93,6 @@ const NetworkGraph = ({ filtBy }: Prop) => {
   const profile = useAppSelector(selectProfile);
   const { id } = useParams();
 
-  console.log(filtBy);
-
   useEffect(() => {
     if (id) {
       setIsNoteGraph(true);
@@ -106,8 +104,6 @@ const NetworkGraph = ({ filtBy }: Prop) => {
       return;
     }
 
-    let newNodes: Node[] = [];
-    const newEdges: Edge[] = [];
     let fontSize = 14;
     switch (profile.fontSize) {
       case 'small':
@@ -123,28 +119,34 @@ const NetworkGraph = ({ filtBy }: Prop) => {
         fontSize = 14;
     }
 
+    let newNodes: Node[] = [];
+    let newEdges: Edge[] = [];
+
     profile.notes.map((note) => {
-      newNodes.push({
-        id: note.id,
-        label: note.title,
-        color: {
-          border:
-            note.category === 'shared' || note.category === 'admin'
-              ? SHARED_COLOR
-              : THEME_COLOR,
-          background:
-            note.category === 'shared' || note.category === 'admin'
-              ? SHARED_COLOR
-              : THEME_COLOR,
-        },
-        font: {
-          size: fontSize,
-          color:
-            note.category === 'shared' || note.category === 'admin'
-              ? SHARED_COLOR
-              : THEME_COLOR,
-        },
-      });
+      if (note.category === filtBy || filtBy === 'all') {
+        newNodes.push({
+          id: note.id,
+          label: note.title,
+          color: {
+            border:
+              note.category === 'shared' || note.category === 'admin'
+                ? SHARED_COLOR
+                : THEME_COLOR,
+            background:
+              note.category === 'shared' || note.category === 'admin'
+                ? SHARED_COLOR
+                : THEME_COLOR,
+          },
+          font: {
+            size: fontSize,
+            color:
+              note.category === 'shared' || note.category === 'admin'
+                ? SHARED_COLOR
+                : THEME_COLOR,
+          },
+        });
+      }
+
       note.link_notes?.map((link) => {
         newEdges.push({ from: note.id, to: link.id });
       });
@@ -187,7 +189,7 @@ const NetworkGraph = ({ filtBy }: Prop) => {
       },
     };
     setState(newGraph);
-  }, [profile.isLogin, id, isNoteGraph, profile.fontSize]);
+  }, [profile.isLogin, id, isNoteGraph, profile.fontSize, filtBy]);
 
   const { graph, events } = state;
   return (
