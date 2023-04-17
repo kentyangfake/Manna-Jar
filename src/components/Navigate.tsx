@@ -31,7 +31,7 @@ const Navigate = () => {
   }, [profile.isLogin]);
 
   return (
-    <div className="flex-col h-screen w-48 pl-8 pt-8 bg-zinc-100">
+    <div className="border flex-col h-screen w-64 pl-8 pt-8 bg-neutral-800 text-amber-50">
       <div className="font-bold tracking-widest text-2xl">
         <Link to="/">嗎哪罐子</Link>
       </div>

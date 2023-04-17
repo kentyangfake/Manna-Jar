@@ -31,18 +31,21 @@ const Home = () => {
     : profile.notes;
 
   return (
-    <div className="w-full p-8">
+    <div className="w-full h-full bg-stone-300 text-stone-500">
+      <div className="font-thin text-5xl tracking-widest p-4">
+        <p>我的筆記</p>
+      </div>
+      <hr className="my-4" />
       <OrderPicker />
-      <div className="grid grid-cols-auto-fit auto-rows-[minmax(100px,auto)] gap-4">
+      <div className="grid grid-cols-auto-fit auto-rows-[minmax(100px,auto)]">
         <Link to="/editor/newNote">
-          <div className="flex justify-center items-center text-7xl bg-gray-100 rounded-3xl h-32">
+          <div className="flex justify-center items-center text-7xl font-thin text-zinc-500 bg-stone-700 h-48">
             +
           </div>
         </Link>
         {notes.map((note) => (
           <Link key={note.id} to={`/note/${note.id}`}>
-            <div className="flex-col bg-amber-100 rounded-3xl h-32">
-              <p>{note.title}</p>
+            <div className="flex-col text-stone-500 h-48 p-4 border">
               <p>{note.category}</p>
               {profile.orderBy.record === 'edit' ? (
                 note.edit_time > 1 ? (
@@ -69,6 +72,9 @@ const Home = () => {
               ) : (
                 ''
               )}
+              <p className="font-bold font-serif text-4xl w-52 tracking-widest text-stone-800">
+                {note.title}
+              </p>
             </div>
           </Link>
         ))}

@@ -11,24 +11,14 @@ const OrderPicker = () => {
   const profile = useAppSelector(selectProfile);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        backgroundColor: 'lightcyan',
-        gap: '20px',
-      }}
-    >
+    <div className="flex border justify-center text-stone-100 bg-stone-400">
       <div
-        style={{ cursor: 'pointer' }}
+        className="border-r p-4"
         onClick={() => dispatch(changeOrderByRecord())}
       >
         {profile.orderBy.record === 'create' ? '創建時間' : '更新時間'}
       </div>
-      <div
-        style={{ cursor: 'pointer' }}
-        onClick={() => dispatch(changeOrderByTime())}
-      >
+      <div className="p-4" onClick={() => dispatch(changeOrderByTime())}>
         {profile.orderBy.time === 'newest' ? '新到舊' : '舊到新'}
       </div>
     </div>
