@@ -6,7 +6,7 @@ import { selectProfile } from '../../app/loginSlice';
 
 const Landing = () => {
   const profile = useAppSelector(selectProfile);
-  return <div>{profile.isLogin ? <Home /> : <Login />}</div>;
+  return <div className="w-full">{profile.isLogin ? <Home /> : <Login />}</div>;
 };
 
 export default Landing;
