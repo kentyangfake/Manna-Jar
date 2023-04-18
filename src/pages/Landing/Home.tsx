@@ -31,50 +31,54 @@ const Home = () => {
     : profile.notes;
 
   return (
-    <div>
+    <div className="w-full h-full bg-stone-300 text-stone-500">
+      <div className="font-thin text-5xl tracking-widest p-4">
+        <p>我的筆記</p>
+      </div>
+      <hr className="my-4" />
       <OrderPicker />
-      <Link to="/editor/newNote">新增筆記</Link>
-      {notes.map((note) => (
-        <Link key={note.id} to={`/note/${note.id}`}>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              fontSize: '12px',
-              textAlign: 'start',
-              border: '1px solid red',
-            }}
-          >
-            <p>{note.title}</p>
-            <p>{note.category}</p>
-            {profile.orderBy.record === 'edit' ? (
-              note.edit_time > 1 ? (
-                <p>周{parseWeekday(note.edit_time)}</p>
-              ) : (
-                ''
-              )
-            ) : note.create_time > 1 ? (
-              <p>周{parseWeekday(note.create_time)}</p>
-            ) : (
-              ''
-            )}
-            {profile.orderBy.record === 'edit' ? (
-              note.edit_time > 1 ? (
-                <p>
-                  {note.category === 'shared' ? '收藏時間' : '編輯時間'}:
-                  {parseTime(note.edit_time)}
-                </p>
-              ) : (
-                ''
-              )
-            ) : note.create_time > 1 ? (
-              <p>建立時間:{parseTime(note.create_time)}</p>
-            ) : (
-              ''
-            )}
+      <div className="grid grid-cols-auto-fit auto-rows-[minmax(100px,auto)]">
+        <Link to="/editor/newNote">
+          <div className="flex justify-center items-center text-7xl font-thin text-zinc-500 bg-stone-700 h-48">
+            +
           </div>
         </Link>
-      ))}
+        {notes.map((note) => (
+          <Link key={note.id} to={`/note/${note.id}`}>
+            <div className="flex-col text-stone-500 h-48 p-4 border">
+              <p>{note.category}</p>
+              {profile.orderBy.record === 'edit' ? (
+                note.edit_time > 1 ? (
+                  <p>周{parseWeekday(note.edit_time)}</p>
+                ) : (
+                  ''
+                )
+              ) : note.create_time > 1 ? (
+                <p>周{parseWeekday(note.create_time)}</p>
+              ) : (
+                ''
+              )}
+              {profile.orderBy.record === 'edit' ? (
+                note.edit_time > 1 ? (
+                  <p>
+                    {note.category === 'shared' ? '收藏時間' : '編輯時間'}:
+                    {parseTime(note.edit_time)}
+                  </p>
+                ) : (
+                  ''
+                )
+              ) : note.create_time > 1 ? (
+                <p>建立時間:{parseTime(note.create_time)}</p>
+              ) : (
+                ''
+              )}
+              <p className="font-bold font-serif text-4xl w-52 tracking-widest text-stone-800">
+                {note.title}
+              </p>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };
