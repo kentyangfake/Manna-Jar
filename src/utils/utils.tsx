@@ -298,12 +298,10 @@ const getBookRef = (book: string) => {
   return bookRef;
 };
 
-export const parseTime = (timestamp: number) => {
+export const parseDate = (timestamp: number) => {
   const date = new Date(timestamp);
   const year = date.getFullYear();
   const day = date.getDate();
-  const hours = date.getHours();
-  const minutes = String(date.getMinutes()).padStart(2, '0');
   let month: string;
   switch (date.getMonth()) {
     case 0:
@@ -346,7 +344,15 @@ export const parseTime = (timestamp: number) => {
       month = '';
   }
 
-  return `${day} ${month} ${year}, ${hours}:${minutes}`;
+  return `${day} ${month} ${year}`;
+};
+
+export const parseTime = (timestamp: number) => {
+  const date = new Date(timestamp);
+  const hours = date.getHours();
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+
+  return `${hours}:${minutes}`;
 };
 
 export const parseWeekday = (timestamp: number) => {

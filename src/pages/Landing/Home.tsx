@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { selectProfile, addNote } from '../../app/loginSlice';
 import { Link, useSearchParams } from 'react-router-dom';
-import { parseTime, parseWeekday } from '../../utils/utils';
+import { parseDate, parseWeekday } from '../../utils/utils';
 import { firestore } from '../../utils/firebase';
 import OrderPicker from './OrderPicker';
 
@@ -31,54 +31,81 @@ const Home = () => {
     : profile.notes;
 
   return (
-    <div className="w-full h-full bg-stone-300 text-stone-500">
-      <div className="font-thin text-5xl tracking-widest p-4">
+    <div className="flex flex-col w-full h-full min-h-screen tracking-widest bg-stone-500 text-stone-500">
+      <div className="flex items-center font-thin text-xl tracking-widest h-20 p-4 bg-stone-300 border border-stone-500">
         <p>我的筆記</p>
       </div>
-      <hr className="my-4" />
       <OrderPicker />
       <div className="grid grid-cols-auto-fit auto-rows-[minmax(100px,auto)]">
-        <Link to="/editor/newNote">
-          <div className="flex justify-center items-center text-7xl font-thin text-zinc-500 bg-stone-700 h-48">
-            +
-          </div>
-        </Link>
+        {category === 'shared' ? (
+          ''
+        ) : (
+          <Link to="/editor/newNote">
+            <div className="flex justify-center items-center text-7xl font-thin text-stone-400 bg-stone-200 h-52 rounded-3xl border border-stone-500 hover:bg-stone-100">
+              +
+            </div>
+          </Link>
+        )}
         {notes.map((note) => (
           <Link key={note.id} to={`/note/${note.id}`}>
-            <div className="flex-col text-stone-500 h-48 p-4 border">
-              <p>{note.category}</p>
-              {profile.orderBy.record === 'edit' ? (
-                note.edit_time > 1 ? (
-                  <p>周{parseWeekday(note.edit_time)}</p>
+            <div
+              className={`flex flex-col justify-between text-stone-500 bg-stone-200 h-52 p-2 border border-stone-500 rounded-3xl ${
+                note.category === 'shared'
+                  ? 'hover:bg-rose-100'
+                  : note.category === 'sermon'
+                  ? 'hover:bg-blue-100'
+                  : note.category === 'devotion'
+                  ? 'hover:bg-violet-100'
+                  : 'hover:bg-stone-100'
+              }`}
+            >
+              <div className="flex justify-between px-2 h-6">
+                <div>- -</div>
+                {profile.orderBy.record === 'edit' ? (
+                  note.edit_time > 1 ? (
+                    <>
+                      <p className="font-medium">
+                        {note.category === 'shared' ? '收藏於 ' : ''}
+                        {parseDate(note.edit_time)}
+                      </p>
+                    </>
+                  ) : (
+                    ''
+                  )
+                ) : note.create_time > 1 ? (
+                  <>
+                    <p className="font-medium">{parseDate(note.create_time)}</p>
+                  </>
                 ) : (
                   ''
-                )
-              ) : note.create_time > 1 ? (
-                <p>周{parseWeekday(note.create_time)}</p>
-              ) : (
-                ''
-              )}
-              {profile.orderBy.record === 'edit' ? (
-                note.edit_time > 1 ? (
+                )}
+                {profile.orderBy.record === 'edit' ? (
+                  note.edit_time > 1 ? (
+                    <p>
+                      周<br />
+                      {parseWeekday(note.edit_time)}
+                    </p>
+                  ) : (
+                    ''
+                  )
+                ) : note.create_time > 1 ? (
                   <p>
-                    {note.category === 'shared' ? '收藏時間' : '編輯時間'}:
-                    {parseTime(note.edit_time)}
+                    周<br />
+                    {parseWeekday(note.create_time)}
                   </p>
                 ) : (
                   ''
-                )
-              ) : note.create_time > 1 ? (
-                <p>建立時間:{parseTime(note.create_time)}</p>
-              ) : (
-                ''
-              )}
-              <p className="font-bold font-serif text-4xl w-52 tracking-widest text-stone-800">
+                )}
+              </div>
+              <hr className="self-center my-2 w-40 border-stone-500" />
+              <div className="mt-auto font-bold font-serif text-4xl w-64 pl-4 pb-6 tracking-widest text-stone-800">
                 {note.title}
-              </p>
+              </div>
             </div>
           </Link>
         ))}
       </div>
+      <div className="grow text-stone-500 bg-stone-300 border border-stone-500"></div>
     </div>
   );
 };

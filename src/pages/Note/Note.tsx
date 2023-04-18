@@ -4,7 +4,7 @@ import { selectProfile, deleteNote } from '../../app/loginSlice';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { NoteType } from '../../app/types';
 import NetworkGraph from '../../components/NetworkGraph';
-import { parseTime } from '../../utils/utils';
+import { parseDate } from '../../utils/utils';
 import SizePicker from '../../components/SizePicker';
 
 interface Referenced {
@@ -86,14 +86,14 @@ const Note = () => {
       <div>{currentNote.title}</div>
       {currentNote.sharedBy ? <div>由 {currentNote.sharedBy} 分享</div> : ''}
       {currentNote.create_time > 1 ? (
-        <p>建立時間:{parseTime(currentNote.create_time)}</p>
+        <p>建立時間:{parseDate(currentNote.create_time)}</p>
       ) : (
         ''
       )}
       {currentNote.edit_time > 1 ? (
         <p>
           {currentNote.category === 'shared' ? '收藏時間' : '編輯時間'}:
-          {parseTime(currentNote.edit_time)}
+          {parseDate(currentNote.edit_time)}
         </p>
       ) : (
         ''
