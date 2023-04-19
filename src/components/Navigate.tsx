@@ -6,6 +6,7 @@ import {
   loginViaLocalAsync,
 } from '../app/loginSlice';
 import { Link, NavLink, useNavigate, useSearchParams } from 'react-router-dom';
+import * as styles from '../utils/styles';
 import { ReactComponent as Sheep } from '../assets/sheep.svg';
 import { ReactComponent as Dove } from '../assets/dove.svg';
 import { ReactComponent as Candle } from '../assets/candle.svg';
@@ -45,15 +46,19 @@ const Navigate = ({ setToggled }: Prop) => {
   }, [profile.isLogin]);
 
   return (
-    <div className="flex flex-col justify-between min-h-screen w-48 border border-stone-500  bg-stone-200 text-stone-500">
+    <div
+      className={`${styles.theme} flex flex-col justify-between min-h-screen w-48 border`}
+    >
       <div className="flex border-b border-stone-500">
         <Link to="/">
-          <div className="flex justify-center items-center w-36 h-28 font-bold tracking-widest text-2xl border-r border-stone-500 hover:bg-stone-100">
+          <div
+            className={`${styles.themeButton} w-36 h-28 font-bold tracking-widest text-2xl border-r`}
+          >
             嗎哪罐子
           </div>
         </Link>
         <div
-          className="grow flex justify-center w-8 items-center hover:bg-stone-100"
+          className={`${styles.themeButton} grow w-8`}
           onClick={() => setToggled(false)}
         >
           關
@@ -63,7 +68,7 @@ const Navigate = ({ setToggled }: Prop) => {
         {navOptions.map((nav) => (
           <NavLink to={nav.link}>
             <div
-              className={`flex flex-col justify-between py-5 items-center tracking-widest h-16 border-b border-stone-500 hover:bg-stone-100 ${
+              className={`${styles.navButton} border-b ${
                 category === nav.id
                   ? `h-52 ${
                       nav.id === 'sermon'
@@ -74,7 +79,7 @@ const Navigate = ({ setToggled }: Prop) => {
                         ? 'bg-rose-100'
                         : 'bg-stone-100'
                     }`
-                  : ''
+                  : 'h-16'
               }`}
             >
               {nav.label}
@@ -95,12 +100,12 @@ const Navigate = ({ setToggled }: Prop) => {
         <NavLink to="/graphview">
           {({ isActive }) =>
             isActive ? (
-              <div className="flex flex-col justify-between py-5 items-center tracking-widest h-52 border-b border-stone-500 hover:bg-stone-100 bg-lime-100">
+              <div className={`${styles.navButton} h-52 border-b bg-lime-100`}>
                 我的罐子
                 <Jar className="w-28" />
               </div>
             ) : (
-              <div className="flex flex-col justify-between py-5 items-center tracking-widest h-16 border-b border-stone-500 hover:bg-stone-100">
+              <div className={`${styles.navButton} h-16 border-b`}>
                 我的罐子
               </div>
             )
@@ -108,11 +113,11 @@ const Navigate = ({ setToggled }: Prop) => {
         </NavLink>
       </div>
       <div className="flex justify-end mt-auto h-16 border-t border-stone-500">
-        <div className="grow flex justify-center items-center border-r border-stone-500 hover:bg-stone-100">
+        <div className={`${styles.themeButton} grow border-r`}>
           welcom! {profile.name}
         </div>
         <div
-          className="flex justify-center items-center hover:bg-stone-100"
+          className={styles.themeButton}
           onClick={() => dispatch(logoutAsync())}
         >
           logout
