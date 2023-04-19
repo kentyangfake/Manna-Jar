@@ -5,6 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { parseDate, parseWeekday } from '../../utils/utils';
 import { firestore } from '../../utils/firebase';
 import OrderPicker from './OrderPicker';
+import * as styles from '../../utils/styles';
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -32,7 +33,9 @@ const Home = () => {
 
   return (
     <div className="flex flex-col w-full h-full min-h-screen tracking-widest bg-stone-500 text-stone-500">
-      <div className="flex items-center font-thin text-xl tracking-widest h-20 p-4 bg-stone-300 border border-stone-500">
+      <div
+        className={`${styles.theme} flex items-center font-thin text-xl tracking-widest h-20 p-4 border`}
+      >
         <p>我的筆記</p>
       </div>
       <OrderPicker />
@@ -49,15 +52,15 @@ const Home = () => {
         {notes.map((note) => (
           <Link key={note.id} to={`/note/${note.id}`}>
             <div
-              className={`flex flex-col justify-between text-stone-500 bg-stone-200 h-52 p-2 border border-stone-500 rounded-3xl ${
-                note.category === 'shared'
-                  ? 'hover:bg-rose-100'
-                  : note.category === 'sermon'
-                  ? 'hover:bg-blue-100'
+              className={
+                note.category === 'sermon'
+                  ? styles.blueCard
                   : note.category === 'devotion'
-                  ? 'hover:bg-violet-100'
-                  : 'hover:bg-stone-100'
-              }`}
+                  ? styles.violetCard
+                  : note.category === 'shared'
+                  ? styles.roseCard
+                  : styles.whiteCard
+              }
             >
               <div className="flex justify-between px-2 h-6">
                 <div>- -</div>
@@ -105,7 +108,7 @@ const Home = () => {
           </Link>
         ))}
       </div>
-      <div className="grow text-stone-500 bg-stone-300 border border-stone-500"></div>
+      <div className={`${styles.theme} grow border`}></div>
     </div>
   );
 };
