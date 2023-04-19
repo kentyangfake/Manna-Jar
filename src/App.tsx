@@ -21,7 +21,9 @@ function App() {
         >
           開
         </div>
-        <div className={`w-full ${toggled ? 'ml-48' : 'ml-8'}`}>
+        <div
+          className={`w-full overflow-x-hidden ${toggled ? 'ml-48' : 'ml-8'}`}
+        >
           <Outlet />
         </div>
       </div>

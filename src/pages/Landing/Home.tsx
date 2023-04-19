@@ -5,6 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { parseDate, parseWeekday } from '../../utils/utils';
 import { firestore } from '../../utils/firebase';
 import OrderPicker from './OrderPicker';
+import Header from '../../components/header';
 import * as styles from '../../utils/styles';
 
 const Home = () => {
@@ -33,11 +34,7 @@ const Home = () => {
 
   return (
     <div className="flex flex-col w-full h-full min-h-screen tracking-widest bg-stone-500 text-stone-500">
-      <div
-        className={`${styles.theme} flex items-center font-thin text-xl tracking-widest h-20 p-4 border`}
-      >
-        <p>我的筆記</p>
-      </div>
+      <Header text={'我的筆記'} />
       <OrderPicker />
       <div className="grid grid-cols-auto-fit auto-rows-[minmax(100px,auto)]">
         {category === 'shared' ? (

@@ -6,6 +6,12 @@ export const theme = classnames(
   borders('border-stone-500')
 );
 
+export const themeActive = classnames(
+  typography('text-stone-500','tracking-widest'),
+  backgroundColor('bg-stone-200'),
+  borders('border-stone-500')
+);
+
 export const themeButton = classnames(
   theme,
   layout('flex'),
@@ -13,6 +19,15 @@ export const themeButton = classnames(
   cursor('cursor-pointer'),
   backgroundColor('hover:bg-stone-200'),
 )
+
+export const themeButtonActive = classnames(
+  themeActive,
+  layout('flex'),
+  flexBox('justify-center','items-center'),
+  cursor('cursor-pointer'),
+  backgroundColor('hover:bg-stone-200'),
+)
+
 
 export const navButton = classnames(
   typography('text-stone-500','tracking-widest'),
