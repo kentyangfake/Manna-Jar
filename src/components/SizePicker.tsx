@@ -53,14 +53,14 @@ const SizePicker = ({ edit, deleteInfo }: Props) => {
       {edit && (
         <Link
           to={`/editor/${edit}`}
-          className={`${styles.themeButton} w-12 border-l`}
+          className={`${styles.themeButton} w-20 border-l`}
         >
           編
         </Link>
       )}
       {deleteInfo && (
         <div
-          className={`${styles.themeButton} w-12 border-l`}
+          className={`${styles.themeButton} w-20 border-l`}
           onClick={() => {
             const isDelete = window.confirm('確認要刪除嗎?');
             if (isDelete) {

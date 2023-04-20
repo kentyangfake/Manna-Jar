@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppSelector } from '../../app/hooks';
 import { selectProfile } from '../../app/loginSlice';
 import { useParams, Link } from 'react-router-dom';
 import { NoteType } from '../../app/types';
@@ -27,19 +27,19 @@ const Note = () => {
   });
   const [referenced, setReferenced] = useState<Referenced[]>([]);
 
-  let fontSize = 20;
+  let fontSize = 'text-l';
   switch (profile.fontSize) {
     case 'small':
-      fontSize = 20;
+      fontSize = 'text-l';
       break;
     case 'medium':
-      fontSize = 24;
+      fontSize = 'text-xl';
       break;
     case 'large':
-      fontSize = 28;
+      fontSize = 'text-2xl';
       break;
     default:
-      fontSize = 20;
+      fontSize = 'text-l';
   }
 
   useEffect(() => {
@@ -74,48 +74,49 @@ const Note = () => {
   }, [profile, id]);
 
   return (
-    <div className="flex w-full h-full min-h-screen tracking-widest overflow-x-hidden bg-stone-300 text-stone-500">
-      <div
-        className={`${styles.theme} flex flex-col grow border border-r-0 mr-[350px]`}
-      >
-        <Header
-          text={currentNote.title}
-          underline
-          createTime={currentNote.create_time}
-          editTime={currentNote.edit_time}
-          sharedBy={currentNote.sharedBy}
+    <div className="flex flex-col w-full h-full pr-72 min-h-screen tracking-widest overflow-x-hidden bg-stone-300 text-stone-500">
+      <Header
+        text={currentNote.title}
+        underline
+        createTime={currentNote.create_time}
+        editTime={currentNote.edit_time}
+        sharedBy={currentNote.sharedBy}
+      />
+      {currentNote.category === 'admin' ? (
+        <SizePicker />
+      ) : currentNote.category === 'shared' ? (
+        <SizePicker
+          deleteInfo={{ id: currentNote.id, title: currentNote.title }}
         />
-        {currentNote.category === 'admin' ? (
-          <SizePicker />
-        ) : currentNote.category === 'shared' ? (
-          <SizePicker
-            deleteInfo={{ id: currentNote.id, title: currentNote.title }}
-          />
-        ) : (
-          <SizePicker
-            edit={currentNote.id}
-            deleteInfo={{ id: currentNote.id, title: currentNote.title }}
-          />
-        )}
+      ) : (
+        <SizePicker
+          edit={currentNote.id}
+          deleteInfo={{ id: currentNote.id, title: currentNote.title }}
+        />
+      )}
+      <div className={`flex flex-col grow px-12 tracking-wider bg-stone-100`}>
         <div
-          style={{ fontSize }}
-          className="flex flex-wrap w-full p-4"
+          className={`${fontSize} flex flex-col flex-wrap leading-loose text-stone-600 w-full py-6 mb-12`}
           dangerouslySetInnerHTML={{ __html: currentNote.content }}
         ></div>
-        <div className="flex flex-col p-4">
+        <div className="flex flex-col py-6 border-t border-stone-400">
           {referenced.length > 0 && <div>引用列表:</div>}
           {referenced?.map((note) => (
-            <Link to={`/note/${note.linkId}`} key={note.linkId}>
+            <Link
+              to={`/note/${note.linkId}`}
+              key={note.linkId}
+              className={'w-fit leading-8'}
+            >
               {note.linkTitle}
             </Link>
           ))}
         </div>
       </div>
       <div
-        className={`${styles.theme} fixed top-0 right-0 flex flex-col h-full w-[350px] border`}
+        className={`${styles.theme} fixed top-0 right-0 flex flex-col h-full w-72 border-l`}
       >
         <Header text={'連結圖'} />
-        <div className="w-full h-96 bg-white border-t border-stone-500">
+        <div className="w-full h-96 bg-stone-200 border-t border-stone-500">
           <NetworkGraph filtBy={'all'} />
         </div>
 

@@ -39,6 +39,11 @@ export const navButton = classnames(
   backgroundColor('hover:bg-stone-200'),
 )
 
+export const navButtonSmall = classnames(
+  borders('border-stone-500'),
+  cursor('cursor-pointer'),
+)
+
 export const noteCard = classnames(
   layout('flex'),
   flexBox('flex-col','justify-between'),
@@ -46,7 +51,7 @@ export const noteCard = classnames(
   padding('p-2'),
   typography('text-stone-500','tracking-widest'),
   backgroundColor('bg-stone-200'),
-  borders('border','border-stone-500','rounded-3xl'),
+  borders('rounded-3xl'),
 ); 
 
 export const limeCard = classnames(
