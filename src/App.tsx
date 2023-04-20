@@ -19,15 +19,15 @@ function App() {
   const [toggled, setToggled] = useState(false);
   return (
     <div className="App">
-      <div className="flex w-screen h-full bg-stone-300">
-        <div className={toggled ? 'fixed' : 'hidden'}>
+      <div className="relative flex w-screen h-full bg-stone-300">
+        <div className={toggled ? 'fixed z-10' : 'hidden'}>
           <Navigate setToggled={setToggled} />
         </div>
         <div
           className={
             toggled
               ? 'hidden'
-              : `${styles.theme} fixed flex flex-col min-h-screen w-7 border-r`
+              : `${styles.theme} fixed z-10 flex flex-col min-h-screen w-7 border-r`
           }
         >
           <div
