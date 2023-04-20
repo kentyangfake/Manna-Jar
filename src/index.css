@@ -25,28 +25,28 @@ code {
   h1 {
     @apply text-3xl;
     @apply leading-loose;
-    @apply font-bold;
+    @apply font-semibold;
     @apply py-2;
   }
   h2 {
     @apply text-2xl;
     @apply leading-loose;
-    @apply font-bold;
+    @apply font-semibold;
     @apply py-2;
   }
   h3 {
     @apply text-xl;
     @apply leading-loose;
-    @apply font-bold;
+    @apply font-semibold;
     @apply py-2;
   }
   ol {
     @apply list-decimal;
-    @apply ml-8;
+    @apply ml-9;
   }
   ul {
     @apply list-disc;
-    @apply ml-8;
+    @apply ml-9;
   }
   a {
     @apply text-violet-400;

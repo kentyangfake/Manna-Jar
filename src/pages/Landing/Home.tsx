@@ -60,7 +60,7 @@ const Home = () => {
               }
             >
               <div className="flex justify-between px-2 h-6">
-                <div>- -</div>
+                <div className="text-stone-200">---</div>
                 {profile.orderBy.record === 'edit'
                   ? note.edit_time > 1 && (
                       <>
@@ -79,13 +79,13 @@ const Home = () => {
                     )}
                 {profile.orderBy.record === 'edit'
                   ? note.edit_time > 1 && (
-                      <p>
+                      <p className="mt-2 text-xl font-extralight">
                         周<br />
                         {parseWeekday(note.edit_time)}
                       </p>
                     )
                   : note.create_time > 1 && (
-                      <p>
+                      <p className="mt-2 text-xl font-extralight">
                         周<br />
                         {parseWeekday(note.create_time)}
                       </p>

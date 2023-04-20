@@ -1,4 +1,4 @@
-import {backgroundColor, borderColor, borders, classnames, cursor, flex, flexBox, layout, padding, sizing, space, spacing, textColor, typography} from 'tailwindcss-classnames';
+import {backgroundColor, borderColor, borders, classnames, cursor, flex, flexBox, layout, padding, sizing, space, spacing, textColor, textDecoration, textDecorationColor, textDecorationStyle, textDecorationThickness, textUnderlineOffset, typography} from 'tailwindcss-classnames';
 
 export const theme = classnames(
   typography('text-stone-500','tracking-widest'),
@@ -12,12 +12,18 @@ export const themeActive = classnames(
   borders('border-stone-500')
 );
 
-export const themeButton = classnames(
-  theme,
+export const themeButtonNoBg = classnames(
+  typography('text-stone-500','tracking-widest'),
+  borders('border-stone-500'),
   layout('flex'),
   flexBox('justify-center','items-center'),
   cursor('cursor-pointer'),
   backgroundColor('hover:bg-stone-200'),
+)
+
+export const themeButton = classnames(
+  themeButtonNoBg,
+  backgroundColor('bg-stone-300'),
 )
 
 export const themeButtonActive = classnames(
@@ -69,3 +75,10 @@ export const violetCard = classnames(
 export const whiteCard = classnames(
   noteCard,backgroundColor('hover:bg-stone-100')
 ); 
+
+export const underline = classnames(
+  textDecoration('underline'),
+  textUnderlineOffset('underline-offset-4'),
+  textDecorationStyle('decoration-wavy'),
+  textDecorationThickness('decoration-4')
+);
