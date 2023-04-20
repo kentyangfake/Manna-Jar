@@ -51,11 +51,11 @@ const Home = () => {
             <div
               className={
                 note.category === 'sermon'
-                  ? styles.blueCard
+                  ? styles.limeCard
                   : note.category === 'devotion'
                   ? styles.violetCard
                   : note.category === 'shared'
-                  ? styles.roseCard
+                  ? styles.amberCard
                   : styles.whiteCard
               }
             >

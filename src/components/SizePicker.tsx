@@ -1,11 +1,22 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { selectProfile, changeDisplayFontSize } from '../app/loginSlice';
+import {
+  selectProfile,
+  changeDisplayFontSize,
+  deleteNote,
+} from '../app/loginSlice';
+import { useNavigate, Link } from 'react-router-dom';
 import * as styles from '../utils/styles';
 
-const SizePicker = () => {
+interface Props {
+  edit?: string;
+  deleteInfo?: { id: string; title: string };
+}
+
+const SizePicker = ({ edit, deleteInfo }: Props) => {
   const dispatch = useAppDispatch();
   const profile = useAppSelector(selectProfile);
+  const navigate = useNavigate();
   return (
     <div className="flex h-8 border-y bg-stone-500 border-stone-500">
       <div
@@ -16,7 +27,7 @@ const SizePicker = () => {
         }`}
         onClick={() => dispatch(changeDisplayFontSize('small'))}
       >
-        A
+        Aa
       </div>
       <div
         className={`w-32 border-x text-lg font-serif font-bold rounded-full ${
@@ -26,7 +37,7 @@ const SizePicker = () => {
         }`}
         onClick={() => dispatch(changeDisplayFontSize('medium'))}
       >
-        A
+        Aa
       </div>
       <div
         className={`w-32 border-x text-2xl font-serif font-bold rounded-full ${
@@ -36,9 +47,32 @@ const SizePicker = () => {
         }`}
         onClick={() => dispatch(changeDisplayFontSize('large'))}
       >
-        A
+        Aa
       </div>
       <div className={`${styles.theme} grow border-l rounded-s-full`}></div>
+      {edit && (
+        <Link
+          to={`/editor/${edit}`}
+          className={`${styles.themeButton} w-12 border-l`}
+        >
+          編
+        </Link>
+      )}
+      {deleteInfo && (
+        <div
+          className={`${styles.themeButton} w-12 border-l`}
+          onClick={() => {
+            const isDelete = window.confirm('確認要刪除嗎?');
+            if (isDelete) {
+              dispatch(deleteNote(deleteInfo.id!));
+              window.alert(`已刪除筆記:${deleteInfo.title}`);
+              navigate('/');
+            }
+          }}
+        >
+          刪
+        </div>
+      )}
     </div>
   );
 };

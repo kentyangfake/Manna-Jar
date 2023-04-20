@@ -33,7 +33,7 @@ export const navButton = classnames(
   typography('text-stone-500','tracking-widest'),
   borders('border-stone-500'),
   layout('flex'),
-  spacing('py-5'),
+  spacing('pt-5'),
   flexBox('justify-between','items-center','flex-col'),
   cursor('cursor-pointer'),
   backgroundColor('hover:bg-stone-200'),
@@ -49,12 +49,12 @@ export const noteCard = classnames(
   borders('border','border-stone-500','rounded-3xl'),
 ); 
 
-export const blueCard = classnames(
-  noteCard,backgroundColor('hover:bg-blue-100')
+export const limeCard = classnames(
+  noteCard,backgroundColor('hover:bg-lime-100')
 ); 
 
-export const roseCard = classnames(
-  noteCard,backgroundColor('hover:bg-rose-100')
+export const amberCard = classnames(
+  noteCard,backgroundColor('hover:bg-amber-100')
 ); 
 
 export const violetCard = classnames(

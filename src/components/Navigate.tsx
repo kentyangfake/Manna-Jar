@@ -72,11 +72,11 @@ const Navigate = ({ setToggled }: Prop) => {
                 category === nav.id
                   ? `h-52 ${
                       nav.id === 'sermon'
-                        ? 'bg-blue-100'
+                        ? 'bg-lime-100'
                         : nav.id === 'devotion'
                         ? 'bg-violet-100'
                         : nav.id === 'shared'
-                        ? 'bg-rose-100'
+                        ? 'bg-amber-100'
                         : 'bg-stone-100'
                     }`
                   : 'h-16'
@@ -100,7 +100,7 @@ const Navigate = ({ setToggled }: Prop) => {
         <NavLink to="/graphview">
           {({ isActive }) =>
             isActive ? (
-              <div className={`${styles.navButton} h-52 border-b bg-lime-100`}>
+              <div className={`${styles.navButton} h-52 border-b bg-blue-100`}>
                 我的罐子
                 <Jar className="w-28" />
               </div>
