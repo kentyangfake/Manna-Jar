@@ -11,25 +11,29 @@ interface Props {
 
 const Header = ({ text, underline, createTime, editTime, sharedBy }: Props) => {
   return (
-    <div
-      className={`${styles.theme} ${
-        underline &&
-        'underline underline-offset-4 decoration-wavy decoration-3 decoration-stone-200'
-      } flex justify-between items-center text-4xl tracking-[.3em] italic font h-20 px-4`}
-    >
-      <p>{text}</p>
-      {sharedBy && <div className="text-xs">{sharedBy} 分享的</div>}
-      <div className="flex flex-col text-xs">
+    <div className={`${styles.theme} flex justify-between items-end h-20 p-5`}>
+      <p
+        className={`${
+          underline &&
+          'underline underline-offset-4 decoration-wavy decoration-3 decoration-stone-200'
+        } text-4xl tracking-[.3em] italic`}
+      >
+        {text}
+      </p>
+      {sharedBy && (
+        <div className="ml-4 mr-auto text-sm">{`作者-${sharedBy}`}</div>
+      )}
+      <div className="flex flex-col text-sm">
         {createTime && createTime > 1 && (
           <p>
-            建立時間:
-            {`${parseDate(createTime)}, ${parseTime(createTime)}`}
+            建立於/
+            {` ${parseDate(createTime)}, ${parseTime(createTime)}`}
           </p>
         )}
         {editTime && editTime > 1 && (
           <p>
-            {sharedBy ? '收藏時間' : '編輯時間'}:
-            {`${parseDate(editTime)}, ${parseTime(editTime)}`}
+            {sharedBy ? '收藏於/' : '編輯於/'}
+            {` ${parseDate(editTime)}, ${parseTime(editTime)}`}
           </p>
         )}
       </div>

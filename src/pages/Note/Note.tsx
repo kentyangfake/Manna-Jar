@@ -27,19 +27,19 @@ const Note = () => {
   });
   const [referenced, setReferenced] = useState<Referenced[]>([]);
 
-  let fontSize = 'text-l';
+  let fontSize = 'text-base';
   switch (profile.fontSize) {
     case 'small':
-      fontSize = 'text-l';
+      fontSize = 'text-base';
       break;
     case 'medium':
-      fontSize = 'text-xl';
+      fontSize = 'text-lg';
       break;
     case 'large':
-      fontSize = 'text-2xl';
+      fontSize = 'text-xl';
       break;
     default:
-      fontSize = 'text-l';
+      fontSize = 'text-base';
   }
 
   useEffect(() => {
@@ -74,33 +74,52 @@ const Note = () => {
   }, [profile, id]);
 
   return (
-    <div className="flex flex-col w-full h-full pr-72 min-h-screen tracking-widest overflow-x-hidden bg-stone-300 text-stone-500">
-      <Header
-        text={currentNote.title}
-        underline
-        createTime={currentNote.create_time}
-        editTime={currentNote.edit_time}
-        sharedBy={currentNote.sharedBy}
-      />
-      {currentNote.category === 'admin' ? (
-        <SizePicker />
-      ) : currentNote.category === 'shared' ? (
-        <SizePicker
-          deleteInfo={{ id: currentNote.id, title: currentNote.title }}
+    <div className="flex flex-col h-full">
+      <div className="flex flex-col w-full pr-72 tracking-widest bg-stone-300 text-stone-500">
+        <Header
+          text={currentNote.title}
+          underline
+          createTime={currentNote.create_time}
+          editTime={currentNote.edit_time}
+          sharedBy={currentNote.sharedBy}
         />
-      ) : (
-        <SizePicker
-          edit={currentNote.id}
-          deleteInfo={{ id: currentNote.id, title: currentNote.title }}
-        />
-      )}
-      <div className={`flex flex-col grow px-12 tracking-wider bg-stone-100`}>
+        {currentNote.category === 'admin' ? (
+          <SizePicker />
+        ) : currentNote.category === 'shared' ? (
+          <SizePicker
+            deleteInfo={{ id: currentNote.id, title: currentNote.title }}
+          />
+        ) : (
+          <SizePicker
+            edit={currentNote.id}
+            deleteInfo={{ id: currentNote.id, title: currentNote.title }}
+          />
+        )}
+      </div>
+      <div
+        className={`relative z-0 flex flex-col w-full grow pr-96 tracking-wider bg-stone-100`}
+      >
         <div
-          className={`${fontSize} flex flex-col flex-wrap leading-loose text-stone-600 w-full py-6 mb-12`}
+          className={`${
+            currentNote.category === 'sermon'
+              ? 'bg-lime-100'
+              : currentNote.category === 'devotion'
+              ? 'bg-violet-100'
+              : currentNote.category === 'shared'
+              ? 'bg-amber-100'
+              : 'bg-stone-100'
+          } sticky top-0 w-96 h-96`}
+        >
+          <div className="w-96 h-96 bg-stone-100 rounded-tl-full"></div>
+        </div>
+        <div
+          className={`${fontSize} z-10 flex flex-col flex-wrap leading-loose text-stone-600 w-full ml-12 mt-[-350px] pb-6 mb-12`}
           dangerouslySetInnerHTML={{ __html: currentNote.content }}
         ></div>
-        <div className="flex flex-col py-6 border-t border-stone-400">
-          {referenced.length > 0 && <div>引用列表:</div>}
+        <div className=" z-10 flex flex-col ml-12 py-6 border-t border-stone-400">
+          {referenced.length > 0 && (
+            <div className="text-stone-400">引用列表:</div>
+          )}
           {referenced?.map((note) => (
             <Link
               to={`/note/${note.linkId}`}

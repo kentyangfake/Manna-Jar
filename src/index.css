@@ -4,6 +4,12 @@ body {
   font-family: -apple-system, 'Noto Sans TC', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+}
+html,
+#root,
+.App {
+  height: 100%;
 }
 
 code {
@@ -14,6 +20,38 @@ code {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-3xl;
+    @apply leading-loose;
+    @apply font-bold;
+    @apply py-2;
+  }
+  h2 {
+    @apply text-2xl;
+    @apply leading-loose;
+    @apply font-bold;
+    @apply py-2;
+  }
+  h3 {
+    @apply text-xl;
+    @apply leading-loose;
+    @apply font-bold;
+    @apply py-2;
+  }
+  ol {
+    @apply list-decimal;
+    @apply ml-8;
+  }
+  ul {
+    @apply list-disc;
+    @apply ml-8;
+  }
+  a {
+    @apply text-violet-400;
+  }
+}
 
 .grid-cols-auto-fit {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

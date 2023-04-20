@@ -33,7 +33,7 @@ const Home = () => {
     : profile.notes;
 
   return (
-    <div className="flex flex-col w-full h-full min-h-screen tracking-widest bg-stone-500 text-stone-500">
+    <div className="flex flex-col w-full h-fit min-h-screen tracking-widest bg-stone-500 text-stone-500">
       <Header text={'我的筆記'} />
       <OrderPicker />
       <div className="grid grid-cols-auto-fit gap-[1px] auto-rows-[minmax(100px,auto)]">

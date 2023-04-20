@@ -19,7 +19,7 @@ function App() {
   const [toggled, setToggled] = useState(false);
   return (
     <div className="App">
-      <div className="flex w-screen bg-stone-300">
+      <div className="flex w-screen h-full bg-stone-300">
         <div className={toggled ? 'fixed' : 'hidden'}>
           <Navigate setToggled={setToggled} />
         </div>
@@ -79,9 +79,7 @@ function App() {
             出
           </div>
         </div>
-        <div
-          className={`w-full overflow-x-hidden ${toggled ? 'ml-48' : 'ml-7'}`}
-        >
+        <div className={`w-full ${toggled ? 'ml-48' : 'ml-7'}`}>
           <Outlet />
         </div>
       </div>
