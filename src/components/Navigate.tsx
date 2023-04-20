@@ -47,18 +47,17 @@ const Navigate = ({ setToggled }: Prop) => {
 
   return (
     <div
-      className={`${styles.theme} flex flex-col justify-between min-h-screen w-48 border`}
+      className={`${styles.theme} flex flex-col justify-between min-h-screen w-48 border-r`}
     >
-      <div className="flex border-b border-stone-500">
-        <Link to="/">
-          <div
-            className={`${styles.themeButton} w-36 h-28 font-bold tracking-widest text-2xl border-r`}
-          >
-            嗎哪罐子
-          </div>
+      <div className="flex w-full border-b border-stone-500">
+        <Link
+          to="/"
+          className={`${styles.themeButton} grow h-20 font-bold tracking-widest text-2xl border-r`}
+        >
+          <div>嗎哪罐子</div>
         </Link>
         <div
-          className={`${styles.themeButton} grow w-8`}
+          className={`${styles.themeButton} w-7`}
           onClick={() => setToggled(false)}
         >
           關
@@ -66,20 +65,20 @@ const Navigate = ({ setToggled }: Prop) => {
       </div>
       <div className="flex flex-col">
         {navOptions.map((nav) => (
-          <NavLink to={nav.link}>
+          <Link to={nav.link}>
             <div
               className={`${styles.navButton} border-b ${
                 category === nav.id
                   ? `h-52 ${
                       nav.id === 'sermon'
-                        ? 'bg-blue-100'
+                        ? 'bg-lime-100'
                         : nav.id === 'devotion'
                         ? 'bg-violet-100'
                         : nav.id === 'shared'
-                        ? 'bg-rose-100'
+                        ? 'bg-amber-100'
                         : 'bg-stone-100'
                     }`
-                  : 'h-16'
+                  : 'h-[60px]'
               }`}
             >
               {nav.label}
@@ -95,32 +94,32 @@ const Navigate = ({ setToggled }: Prop) => {
                 ''
               )}
             </div>
-          </NavLink>
+          </Link>
         ))}
         <NavLink to="/graphview">
           {({ isActive }) =>
             isActive ? (
-              <div className={`${styles.navButton} h-52 border-b bg-lime-100`}>
+              <div className={`${styles.navButton} h-52 border-b bg-blue-100`}>
                 我的罐子
                 <Jar className="w-28" />
               </div>
             ) : (
-              <div className={`${styles.navButton} h-16 border-b`}>
+              <div className={`${styles.navButton} h-[62px] border-b`}>
                 我的罐子
               </div>
             )
           }
         </NavLink>
       </div>
-      <div className="flex justify-end mt-auto h-16 border-t border-stone-500">
+      <div className="flex justify-end mt-auto h-10 border-t border-stone-500">
         <div className={`${styles.themeButton} grow border-r`}>
-          welcom! {profile.name}
+          {profile.name} 個人檔案
         </div>
         <div
-          className={styles.themeButton}
+          className={`${styles.themeButton} w-7`}
           onClick={() => dispatch(logoutAsync())}
         >
-          logout
+          出
         </div>
       </div>
     </div>

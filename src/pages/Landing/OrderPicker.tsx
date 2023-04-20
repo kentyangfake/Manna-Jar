@@ -12,7 +12,7 @@ const OrderPicker = () => {
   const profile = useAppSelector(selectProfile);
 
   return (
-    <div className={`flex bg-stone-500 border border-stone-500`}>
+    <div className={`flex bg-stone-500 border text-sm border-stone-500`}>
       <div
         className={`${styles.themeButton} border-r w-44 ${
           profile.orderBy.record === 'create'
@@ -21,7 +21,7 @@ const OrderPicker = () => {
         }`}
         onClick={() => dispatch(changeOrderByRecord())}
       >
-        {profile.orderBy.record === 'create' ? '創建時間' : '更新時間'}
+        {profile.orderBy.record === 'create' ? '建 立 時 間' : '更 新 時 間'}
       </div>
       <div
         className={`${styles.themeButton} border-r w-44 ${
@@ -31,7 +31,7 @@ const OrderPicker = () => {
         }`}
         onClick={() => dispatch(changeOrderByTime())}
       >
-        {profile.orderBy.time === 'newest' ? '新到舊' : '舊到新'}
+        {profile.orderBy.time === 'newest' ? '新 到 舊' : '舊 到 新'}
       </div>
       <div className="grow rounded-bl-full bg-stone-300 p-4"></div>
     </div>

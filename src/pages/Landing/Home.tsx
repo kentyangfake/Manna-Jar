@@ -5,6 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { parseDate, parseWeekday } from '../../utils/utils';
 import { firestore } from '../../utils/firebase';
 import OrderPicker from './OrderPicker';
+import Header from '../../components/header';
 import * as styles from '../../utils/styles';
 
 const Home = () => {
@@ -32,19 +33,15 @@ const Home = () => {
     : profile.notes;
 
   return (
-    <div className="flex flex-col w-full h-full min-h-screen tracking-widest bg-stone-500 text-stone-500">
-      <div
-        className={`${styles.theme} flex items-center font-thin text-xl tracking-widest h-20 p-4 border`}
-      >
-        <p>我的筆記</p>
-      </div>
+    <div className="flex flex-col w-full h-fit min-h-screen tracking-widest bg-stone-500 text-stone-500">
+      <Header text={'我的筆記'} />
       <OrderPicker />
-      <div className="grid grid-cols-auto-fit auto-rows-[minmax(100px,auto)]">
+      <div className="grid grid-cols-auto-fit gap-[1px] auto-rows-[minmax(100px,auto)]">
         {category === 'shared' ? (
           ''
         ) : (
           <Link to="/editor/newNote">
-            <div className="flex justify-center items-center text-7xl font-thin text-stone-400 bg-stone-200 h-52 rounded-3xl border border-stone-500 hover:bg-stone-100">
+            <div className="flex justify-center items-center text-7xl font-thin text-stone-400 bg-stone-200 h-52 rounded-3xl hover:bg-stone-100">
               +
             </div>
           </Link>
@@ -54,53 +51,47 @@ const Home = () => {
             <div
               className={
                 note.category === 'sermon'
-                  ? styles.blueCard
+                  ? styles.limeCard
                   : note.category === 'devotion'
                   ? styles.violetCard
                   : note.category === 'shared'
-                  ? styles.roseCard
+                  ? styles.amberCard
                   : styles.whiteCard
               }
             >
               <div className="flex justify-between px-2 h-6">
                 <div>- -</div>
-                {profile.orderBy.record === 'edit' ? (
-                  note.edit_time > 1 ? (
-                    <>
-                      <p className="font-medium">
-                        {note.category === 'shared' ? '收藏於 ' : ''}
-                        {parseDate(note.edit_time)}
+                {profile.orderBy.record === 'edit'
+                  ? note.edit_time > 1 && (
+                      <>
+                        <p className="font-medium">
+                          {note.category === 'shared' ? '收藏於 ' : ''}
+                          {parseDate(note.edit_time)}
+                        </p>
+                      </>
+                    )
+                  : note.create_time > 1 && (
+                      <>
+                        <p className="font-medium">
+                          {parseDate(note.create_time)}
+                        </p>
+                      </>
+                    )}
+                {profile.orderBy.record === 'edit'
+                  ? note.edit_time > 1 && (
+                      <p>
+                        周<br />
+                        {parseWeekday(note.edit_time)}
                       </p>
-                    </>
-                  ) : (
-                    ''
-                  )
-                ) : note.create_time > 1 ? (
-                  <>
-                    <p className="font-medium">{parseDate(note.create_time)}</p>
-                  </>
-                ) : (
-                  ''
-                )}
-                {profile.orderBy.record === 'edit' ? (
-                  note.edit_time > 1 ? (
-                    <p>
-                      周<br />
-                      {parseWeekday(note.edit_time)}
-                    </p>
-                  ) : (
-                    ''
-                  )
-                ) : note.create_time > 1 ? (
-                  <p>
-                    周<br />
-                    {parseWeekday(note.create_time)}
-                  </p>
-                ) : (
-                  ''
-                )}
+                    )
+                  : note.create_time > 1 && (
+                      <p>
+                        周<br />
+                        {parseWeekday(note.create_time)}
+                      </p>
+                    )}
               </div>
-              <hr className="self-center my-2 w-40 border-stone-500" />
+              <hr className="self-center my-2 w-24 border-stone-500" />
               <div className="mt-auto font-bold font-serif text-4xl w-64 pl-4 pb-6 tracking-widest text-stone-800">
                 {note.title}
               </div>
@@ -108,7 +99,7 @@ const Home = () => {
           </Link>
         ))}
       </div>
-      <div className={`${styles.theme} grow border`}></div>
+      <div className={`${styles.theme} grow border-t`}></div>
     </div>
   );
 };

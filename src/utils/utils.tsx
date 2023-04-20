@@ -305,40 +305,40 @@ export const parseDate = (timestamp: number) => {
   let month: string;
   switch (date.getMonth()) {
     case 0:
-      month = 'Jan';
+      month = '一月';
       break;
     case 1:
-      month = 'Feb';
+      month = '二月';
       break;
     case 2:
-      month = 'Mar';
+      month = '三月';
       break;
     case 3:
-      month = 'Apr';
+      month = '四月';
       break;
     case 4:
-      month = 'May';
+      month = '五月';
       break;
     case 5:
-      month = 'Jun';
+      month = '六月';
       break;
     case 6:
-      month = 'Jul';
+      month = '七月';
       break;
     case 7:
-      month = 'Aug';
+      month = '八月';
       break;
     case 8:
-      month = 'Sep';
+      month = '九月';
       break;
     case 9:
-      month = 'Oct';
+      month = '十月';
       break;
     case 10:
-      month = 'Nov';
+      month = '十一';
       break;
     case 11:
-      month = 'Dec';
+      month = '十二';
       break;
     default:
       month = '';

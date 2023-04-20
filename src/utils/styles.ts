@@ -6,6 +6,12 @@ export const theme = classnames(
   borders('border-stone-500')
 );
 
+export const themeActive = classnames(
+  typography('text-stone-500','tracking-widest'),
+  backgroundColor('bg-stone-200'),
+  borders('border-stone-500')
+);
+
 export const themeButton = classnames(
   theme,
   layout('flex'),
@@ -14,14 +20,28 @@ export const themeButton = classnames(
   backgroundColor('hover:bg-stone-200'),
 )
 
+export const themeButtonActive = classnames(
+  themeActive,
+  layout('flex'),
+  flexBox('justify-center','items-center'),
+  cursor('cursor-pointer'),
+  backgroundColor('hover:bg-stone-200'),
+)
+
+
 export const navButton = classnames(
   typography('text-stone-500','tracking-widest'),
   borders('border-stone-500'),
   layout('flex'),
-  spacing('py-5'),
+  spacing('pt-5'),
   flexBox('justify-between','items-center','flex-col'),
   cursor('cursor-pointer'),
   backgroundColor('hover:bg-stone-200'),
+)
+
+export const navButtonSmall = classnames(
+  borders('border-stone-500'),
+  cursor('cursor-pointer'),
 )
 
 export const noteCard = classnames(
@@ -31,15 +51,15 @@ export const noteCard = classnames(
   padding('p-2'),
   typography('text-stone-500','tracking-widest'),
   backgroundColor('bg-stone-200'),
-  borders('border','border-stone-500','rounded-3xl'),
+  borders('rounded-3xl'),
 ); 
 
-export const blueCard = classnames(
-  noteCard,backgroundColor('hover:bg-blue-100')
+export const limeCard = classnames(
+  noteCard,backgroundColor('hover:bg-lime-100')
 ); 
 
-export const roseCard = classnames(
-  noteCard,backgroundColor('hover:bg-rose-100')
+export const amberCard = classnames(
+  noteCard,backgroundColor('hover:bg-amber-100')
 ); 
 
 export const violetCard = classnames(

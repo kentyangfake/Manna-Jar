@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { selectProfile, deleteNote } from '../../app/loginSlice';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useAppSelector } from '../../app/hooks';
+import { selectProfile } from '../../app/loginSlice';
+import { useParams, Link } from 'react-router-dom';
 import { NoteType } from '../../app/types';
 import NetworkGraph from '../../components/NetworkGraph';
-import { parseDate } from '../../utils/utils';
+import Header from '../../components/header';
 import SizePicker from '../../components/SizePicker';
+import * as styles from '../../utils/styles';
 
 interface Referenced {
   linkTitle: string;
@@ -14,9 +15,7 @@ interface Referenced {
 
 const Note = () => {
   const profile = useAppSelector(selectProfile);
-  const dispatch = useAppDispatch();
   const { id } = useParams();
-  const navigate = useNavigate();
   const [currentNote, setCurrentNote] = useState<NoteType>({
     id: '',
     title: '',
@@ -28,19 +27,19 @@ const Note = () => {
   });
   const [referenced, setReferenced] = useState<Referenced[]>([]);
 
-  let fontSize = 20;
+  let fontSize = 'text-base';
   switch (profile.fontSize) {
     case 'small':
-      fontSize = 20;
+      fontSize = 'text-base';
       break;
     case 'medium':
-      fontSize = 24;
+      fontSize = 'text-lg';
       break;
     case 'large':
-      fontSize = 28;
+      fontSize = 'text-xl';
       break;
     default:
-      fontSize = 20;
+      fontSize = 'text-base';
   }
 
   useEffect(() => {
@@ -75,77 +74,82 @@ const Note = () => {
   }, [profile, id]);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-      }}
-    >
-      <SizePicker />
-      <div>{currentNote.title}</div>
-      {currentNote.sharedBy ? <div>由 {currentNote.sharedBy} 分享</div> : ''}
-      {currentNote.create_time > 1 ? (
-        <p>建立時間:{parseDate(currentNote.create_time)}</p>
-      ) : (
-        ''
-      )}
-      {currentNote.edit_time > 1 ? (
-        <p>
-          {currentNote.category === 'shared' ? '收藏時間' : '編輯時間'}:
-          {parseDate(currentNote.edit_time)}
-        </p>
-      ) : (
-        ''
-      )}
-      {currentNote.category === 'shared' || currentNote.category === 'admin' ? (
-        ''
-      ) : (
-        <Link to={`/editor/${id}`} style={{ border: '1px solid gray' }}>
-          編輯筆記
-        </Link>
-      )}
-      <div
-        style={{ fontSize }}
-        dangerouslySetInnerHTML={{ __html: currentNote.content }}
-      ></div>
-      {referenced.length > 0 ? <div>Referenced by:</div> : ''}
-      {referenced?.map((note) => (
-        <Link to={`/note/${note.linkId}`} key={note.linkId}>
-          {note.linkTitle}
-        </Link>
-      ))}
-      <div
-        style={{ width: '300px', height: '300px', border: '1px solid black' }}
-      >
-        <NetworkGraph filtBy={'all'} />
+    <div className="flex flex-col h-full">
+      <div className="flex flex-col w-full pr-72 tracking-widest bg-stone-300 text-stone-500">
+        <Header
+          text={currentNote.title}
+          underline
+          createTime={currentNote.create_time}
+          editTime={currentNote.edit_time}
+          sharedBy={currentNote.sharedBy}
+        />
+        {currentNote.category === 'admin' ? (
+          <SizePicker />
+        ) : currentNote.category === 'shared' ? (
+          <SizePicker
+            deleteInfo={{ id: currentNote.id, title: currentNote.title }}
+          />
+        ) : (
+          <SizePicker
+            edit={currentNote.id}
+            deleteInfo={{ id: currentNote.id, title: currentNote.title }}
+          />
+        )}
       </div>
-      {currentNote.category === 'shared' || currentNote.category === 'admin' ? (
-        ''
-      ) : (
-        <div>
-          分享連結: https://manna-jar.web.app/?category=shared&shareBy=
-          {profile.id}&shareNote=
-          {currentNote.id}
-        </div>
-      )}
-      {currentNote.category === 'admin' ? (
-        ''
-      ) : (
+      <div
+        className={`relative z-0 flex flex-col w-full grow pr-96 tracking-wider bg-stone-100`}
+      >
         <div
-          style={{ border: '1px solid gray', cursor: 'pointer' }}
-          onClick={() => {
-            const isDelete = window.confirm('確認要刪除嗎?');
-            if (isDelete) {
-              dispatch(deleteNote(id!));
-              window.alert(`已刪除筆記:${currentNote.title}`);
-              navigate('/');
-            }
-          }}
+          className={`${
+            currentNote.category === 'sermon'
+              ? 'bg-lime-100'
+              : currentNote.category === 'devotion'
+              ? 'bg-violet-100'
+              : currentNote.category === 'shared'
+              ? 'bg-amber-100'
+              : 'bg-stone-100'
+          } sticky top-0 w-96 h-96`}
         >
-          刪除筆記
+          <div className="w-96 h-96 bg-stone-100 rounded-tl-full"></div>
         </div>
-      )}
+        <div
+          className={`${fontSize} z-10 flex flex-col flex-wrap leading-loose text-stone-600 w-full ml-12 mt-[-350px] pb-6 mb-12`}
+          dangerouslySetInnerHTML={{ __html: currentNote.content }}
+        ></div>
+        <div className=" z-10 flex flex-col ml-12 py-6 border-t border-stone-400">
+          {referenced.length > 0 && (
+            <div className="text-stone-400">引用列表:</div>
+          )}
+          {referenced?.map((note) => (
+            <Link
+              to={`/note/${note.linkId}`}
+              key={note.linkId}
+              className={'w-fit leading-8'}
+            >
+              {note.linkTitle}
+            </Link>
+          ))}
+        </div>
+      </div>
+      <div
+        className={`${styles.theme} fixed top-0 right-0 flex flex-col h-full w-72 border-l`}
+      >
+        <Header text={'連結圖'} />
+        <div className="w-full h-96 bg-stone-200 border-t border-stone-500">
+          <NetworkGraph filtBy={'all'} />
+        </div>
+
+        {(currentNote.category === 'sermon' ||
+          currentNote.category === 'devotion') && (
+          <div className="flex p-4">
+            <label>分享連結:</label>
+            <input
+              className="grow"
+              value={`https://manna-jar.web.app/?category=shared&shareBy=${profile.id}&shareNote=${currentNote.id}`}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
