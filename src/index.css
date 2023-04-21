@@ -17,6 +17,80 @@ code {
     monospace;
 }
 
+.sky {
+  background: rgb(201, 213, 220);
+  background: radial-gradient(
+    circle,
+    rgba(201, 213, 220, 1) 0%,
+    rgba(185, 213, 228, 1) 25%,
+    rgba(143, 191, 215, 1) 69%,
+    rgba(231, 229, 228, 1) 100%
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.star1 {
+  animation: float1 6s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(-10px, -20px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+.star2 {
+  animation: float2 6s ease-in-out infinite;
+}
+
+@keyframes float2 {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(-20px, 10px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+.star3 {
+  animation: float3 6s ease-in-out infinite;
+}
+
+@keyframes float3 {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(15px, -20px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

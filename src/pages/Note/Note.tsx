@@ -140,7 +140,7 @@ const Note = () => {
         className={`${styles.theme} fixed top-0 right-0 flex flex-col justify-between h-full w-72 border-l`}
       >
         <Header text={'連結圖'} />
-        <div className="w-full h-96 bg-stone-400 border-t border-stone-500">
+        <div className="w-full h-96 bg-stone-200 border-y border-stone-500">
           <NetworkGraph filtBy={'all'} />
         </div>
         {(currentNote.category === 'sermon' ||
@@ -153,16 +153,16 @@ const Note = () => {
               value={shareLink}
             />
             <label
-              className={`flex justify-center text-2xl border border-stone-400 pb-2 hover:bg-stone-200 ${
+              className={`flex justify-center text-2xl border cursor-pointer border-stone-400 pb-2 hover:bg-stone-200 ${
                 isCopied ? 'bg-stone-200' : 'bg-stone-300'
               }`}
               onClick={() => {
                 navigator.clipboard.writeText(shareLink);
                 setIsCopied(true);
-                setTimeout(() => setIsCopied(false), 1000);
+                setTimeout(() => setIsCopied(false), 500);
               }}
             >
-              {isCopied ? '⋁' : '⟶'}
+              {isCopied ? '✓' : '⟶'}
             </label>
           </div>
         )}
