@@ -47,6 +47,8 @@ export const navButton = classnames(
 
 export const navButtonSmall = classnames(
   borders('border-stone-500'),
+  layout('flex'),
+  flexBox('justify-center','items-center'),
   cursor('cursor-pointer'),
 )
 

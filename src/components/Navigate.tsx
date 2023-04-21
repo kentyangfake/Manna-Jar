@@ -60,7 +60,7 @@ const Navigate = ({ setToggled }: Prop) => {
           className={`${styles.themeButton} w-7`}
           onClick={() => setToggled(false)}
         >
-          關
+          ⋮
         </div>
       </div>
       <div className="flex flex-col">
@@ -119,7 +119,7 @@ const Navigate = ({ setToggled }: Prop) => {
           className={`${styles.themeButton} w-7`}
           onClick={() => dispatch(logoutAsync())}
         >
-          出
+          ⎋
         </div>
       </div>
     </div>
