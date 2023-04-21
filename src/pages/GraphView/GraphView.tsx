@@ -49,7 +49,7 @@ const GraphView = () => {
         <SizePicker />
         <div className="flex justify-center items-center w-full h-full pl-5 pr-14 py-5 sky tracking-widest">
           <div
-            className={`relative h-full w-full rounded-[100%/100%] bg-stone-300 border border-stone-500`}
+            className={`relative h-full w-full rounded-[100%/100%] bg-stone-300 texture border border-stone-500`}
           >
             <div className={`absolute z-10 top-5 left-5 flex flex-col gap-2`}>
               <div

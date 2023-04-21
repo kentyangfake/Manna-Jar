@@ -91,6 +91,17 @@ code {
   }
 }
 
+.texture {
+  background-image: radial-gradient(#78716c 0.5px, transparent 0.5px),
+    radial-gradient(#78716c 0.5px, #d6d3d1 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+.texture2 {
+  background-image: radial-gradient(#a8a29e 0.5px, #e7e5e4 0.5px);
+  background-size: 10px 10px;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
