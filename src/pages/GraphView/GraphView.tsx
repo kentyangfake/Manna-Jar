@@ -43,28 +43,37 @@ const GraphView = () => {
   };
 
   return (
-    <div className="flex justify-between h-full w-full">
+    <div className="flex h-full w-full">
       <div className="flex flex-col grow justify-between h-full">
         <SizePicker />
-        <div className={`relative h-96 rounded-r-full bg-stone-400`}>
-          <div className={`absolute z-10 top-10 left-10 flex flex-col`}>
-            <div onClick={() => setFiltBy('all')}>全部筆記</div>
-            <div onClick={() => setFiltBy('sermon')}>聚會崇拜</div>
-            <div onClick={() => setFiltBy('devotion')}>個人靈修</div>
-            <div onClick={() => setFiltBy('shared')}>分享收藏</div>
+        <div className="flex justify-center items-center w-full h-full pl-5 pr-14 py-5">
+          <div
+            className={`relative h-full w-full rounded-[100%/100%] border border-stone-400`}
+          >
+            <div className={`absolute z-10 top-10 left-10 flex flex-col`}>
+              <div onClick={() => setFiltBy('all')}>全部筆記</div>
+              <div onClick={() => setFiltBy('sermon')}>聚會崇拜</div>
+              <div onClick={() => setFiltBy('devotion')}>個人靈修</div>
+              <div onClick={() => setFiltBy('shared')}>分享收藏</div>
+            </div>
+            <NetworkGraph filtBy={filtBy} />
           </div>
-          <NetworkGraph filtBy={filtBy} />
         </div>
       </div>
-      <div className="w-32 border-l border-stone-500">
+      <div
+        className={`${styles.theme} fixed top-0 right-0 h-full w-7 border-l border-stone-500`}
+      >
         <div className={`${styles.theme} border-y h-8`}></div>
         {isAiTyping ? (
-          ''
+          <div>回答...</div>
         ) : (
-          <button onClick={handleAiResponse}>ai信仰回顧</button>
+          <div className={styles.themeButton} onClick={handleAiResponse}>
+            ai
+          </div>
         )}
-        {isAiTyping ? <div>ai回答中...</div> : ''}
-        <p>{summeries}</p>
+        <div className="">
+          <div>{summeries}</div>
+        </div>
       </div>
     </div>
   );
