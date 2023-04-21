@@ -6,6 +6,7 @@ import './styles.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { NoteType } from '../../app/types';
+import * as styles from '../../utils/styles';
 
 const category = [
   {
@@ -25,7 +26,7 @@ const Editor = () => {
     id: uuidv4(),
     title: '',
     content: '',
-    category: '',
+    category: 'sermon',
     link_notes: [],
     create_time: new Date().getTime(),
     edit_time: new Date().getTime(),
@@ -78,28 +79,32 @@ const Editor = () => {
 
   return (
     <div>
-      <h1>{isEdit ? `編輯:${note.title}` : '新筆記'}</h1>
-      <div>
-        <label>筆記標題</label>
+      <div
+        className={`mt-[1px] flex items-end p-5 h-20 text-4xl tracking-[.3em] italic text-stone-500 bg-stone-100 border-b border-stone-500`}
+      >
+        <div className={`${styles.underline} decoration-orange-300`}>
+          {isEdit ? `編輯:` : '新筆記:'}
+        </div>
+
         <input
+          className="grow bg-stone-100 h-16 -mb-3 text-sky-500 overflow-hidden italic tracking-[.3em] focus:outline-none"
           value={note.title}
           type="text"
+          placeholder="請輸入標題"
           onChange={(e) => setNote({ ...note, title: e.target.value })}
         ></input>
       </div>
-      <div>
-        <label>筆記分類</label>
+      <div className="flex h-[26px]">
         {category.map((option) => (
-          <div key={option.value}>
-            <input
-              type="radio"
-              checked={note.category === option.value}
-              onChange={(e) => {
-                if (e.target.checked)
-                  setNote({ ...note, category: option.value });
-              }}
-            />
-            <label>{option.label}</label>
+          <div
+            key={option.value}
+            className={`${styles.themeButtonNoBg} grow border-r ${
+              note.category === option.value &&
+              (option.value === 'sermon' ? 'bg-lime-100' : 'bg-violet-100')
+            }`}
+            onClick={() => setNote({ ...note, category: option.value })}
+          >
+            {option.label}
           </div>
         ))}
       </div>
@@ -109,20 +114,25 @@ const Editor = () => {
           setNote({ ...note, content: newContent });
         }}
       />
-      <button
-        onClick={() => {
-          isEdit ? handleEditNote() : handleAddNote();
-        }}
-      >
-        {isEdit ? '儲存修改' : '新增筆記'}
-      </button>
-      <button
-        onClick={() => {
-          isEdit ? navigate(`/note/${id}`) : navigate('/');
-        }}
-      >
-        取消
-      </button>
+      <div className="flex h-10">
+        <div className={`${styles.theme} grow border-y`}></div>
+        <div
+          className={`${styles.themeButton} w-32 border-y border-l`}
+          onClick={() => {
+            isEdit ? handleEditNote() : handleAddNote();
+          }}
+        >
+          {isEdit ? '儲存修改' : '新增筆記'}
+        </div>
+        <div
+          className={`${styles.themeButton} w-32 border-y border-l`}
+          onClick={() => {
+            isEdit ? navigate(`/note/${id}`) : navigate('/');
+          }}
+        >
+          取消
+        </div>
+      </div>
     </div>
   );
 };

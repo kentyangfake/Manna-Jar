@@ -108,17 +108,17 @@ const Note = () => {
               : currentNote.category === 'shared'
               ? 'bg-amber-100'
               : 'bg-stone-100'
-          } sticky top-0 w-96 h-96`}
+          } sticky top-0 w-72 h-72`}
         >
-          <div className="w-96 h-96 bg-stone-100 rounded-tl-full"></div>
+          <div className="w-72 h-72 bg-stone-100 rounded-tl-full"></div>
         </div>
         <div
-          className={`${fontSize} z-10 flex flex-col flex-wrap leading-loose text-stone-600 w-full ml-12 mt-[-350px] pb-6 mb-12`}
+          className={`${fontSize} z-10 flex flex-col flex-wrap leading-loose text-stone-600 ml-12 mt-[-250px] pb-6 mb-12 selection:bg-fuchsia-300 selection:text-fuchsia-900`}
           dangerouslySetInnerHTML={{ __html: currentNote.content }}
         ></div>
         <div className=" z-10 flex flex-col ml-12 py-6 border-t border-stone-400">
           {referenced.length > 0 && (
-            <div className="text-stone-400">引用列表:</div>
+            <div className="text-stone-400">引用列表</div>
           )}
           {referenced?.map((note) => (
             <Link
@@ -142,9 +142,9 @@ const Note = () => {
         {(currentNote.category === 'sermon' ||
           currentNote.category === 'devotion') && (
           <div className="flex p-4">
-            <label>分享連結:</label>
+            <label>分享連結</label>
             <input
-              className="grow"
+              className="grow truncate bg-stone-200 focus:outline-none font-extralight"
               value={`https://manna-jar.web.app/?category=shared&shareBy=${profile.id}&shareNote=${currentNote.id}`}
             />
           </div>
