@@ -20,14 +20,14 @@ function App() {
   return (
     <div className="App">
       <div className="relative flex w-screen h-full bg-stone-300">
-        <div className={toggled ? 'fixed z-10' : 'hidden'}>
+        <div className={toggled ? 'fixed z-10 h-full' : 'hidden'}>
           <Navigate setToggled={setToggled} />
         </div>
         <div
           className={
             toggled
               ? 'hidden'
-              : `${styles.theme} fixed z-10 flex flex-col min-h-screen w-7 border-r`
+              : `${styles.theme} fixed z-10 flex flex-col h-full w-7 border-r`
           }
         >
           <div
@@ -81,7 +81,7 @@ function App() {
             ⎋
           </div>
         </div>
-        <div className={`w-full ${toggled ? 'ml-48' : 'ml-7'}`}>
+        <div className={`w-full h-full ${toggled ? 'ml-48' : 'ml-7'}`}>
           <Outlet />
         </div>
       </div>

@@ -31,9 +31,9 @@ interface Edge {
   to: string;
 }
 
-const THEME_COLOR = 'gray';
-const SHARED_COLOR = 'pink';
-const HOVER_COLOR = 'purple';
+const THEME_COLOR = '#ecfccb';
+const SHARED_COLOR = '#ffe4e6';
+const HOVER_COLOR = '#fef9c3';
 const BASE_SIZE = 5;
 
 const options = {

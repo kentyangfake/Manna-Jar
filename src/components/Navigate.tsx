@@ -47,7 +47,7 @@ const Navigate = ({ setToggled }: Prop) => {
 
   return (
     <div
-      className={`${styles.theme} flex flex-col justify-between min-h-screen w-48 border-r`}
+      className={`${styles.theme} flex flex-col justify-between h-full w-48 border-r`}
     >
       <div className="flex w-full border-b border-stone-500">
         <Link
