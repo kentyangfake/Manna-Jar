@@ -11,9 +11,10 @@ const GraphView = () => {
   const profile = useAppSelector(selectProfile);
   const [titles, setTitles] = useState<string[]>([]);
   const [recentNotes, setRecentNotes] = useState<string[]>([]);
-  const [isAiTyping, setIsAiTyping] = useState(false);
-  const [summeries, setSummeries] = useState('');
   const [filtBy, setFiltBy] = useState('all');
+  const [isAiTyping, setIsAiTyping] = useState(false);
+  const [summeries, setSummeries] = useState('讓ai幫你回顧最近的筆記吧!');
+  const [toggled, setToggled] = useState(false);
 
   useEffect(() => {
     if (!profile.isLogin) {
@@ -85,25 +86,39 @@ const GraphView = () => {
                 分享收藏
               </div>
             </div>
-            <Star className={`star1 fixed z-10 top-[10%] right-[20%] h-14`} />
-            <Star className={`star2 fixed z-10 bottom-[6%] right-[16%] h-24`} />
-            <Star className={`star3 fixed z-10 bottom-[4%] left-[20%] h-10`} />
+            <Star className={`star1 fixed top-[10%] right-[20%] h-14`} />
+            <Star className={`star2 fixed bottom-[6%] right-[16%] h-24`} />
+            <Star className={`star3 fixed bottom-[4%] left-[20%] h-10`} />
             <NetworkGraph filtBy={filtBy} />
           </div>
         </div>
       </div>
       <div
-        className={`${styles.theme} fixed top-0 right-0 h-full w-7 border-l border-stone-500`}
+        className={`${styles.theme} fixed flex flex-col z-20 top-0 right-0 h-full w-7 border-l border-stone-500`}
       >
         <div className={`${styles.theme} border-y h-8`}></div>
-        {isAiTyping ? (
-          <div>回答...</div>
-        ) : (
-          <div className={styles.themeButton} onClick={handleAiResponse}>
-            ai
-          </div>
-        )}
-        <div className="">
+        <div
+          className={`${styles.themeButton} grow`}
+          onClick={() => setToggled((prev) => !prev)}
+        >
+          {toggled ? '›' : '‹'}
+        </div>
+      </div>
+      <div
+        className={`${
+          toggled
+            ? 'fixed z-10 top-8 right-0 h-full w-96 border-r pl-3 pr-10 track-widest leading-relaxed border-stone-500 bg-[rgba(68,64,60,0.7)] backdrop-blur'
+            : 'hidden'
+        }`}
+      >
+        <div
+          className="cursor-pointer border-b py-3 text-white text-4xl italic tracking-widest"
+          onClick={handleAiResponse}
+        >
+          {isAiTyping ? '回答中...' : 'AI回顧'}
+        </div>
+
+        <div className="text-white pt-3">
           <div>{summeries}</div>
         </div>
       </div>
