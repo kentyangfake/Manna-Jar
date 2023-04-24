@@ -26,6 +26,8 @@ const Note = () => {
     edit_time: 1,
   });
   const [referenced, setReferenced] = useState<Referenced[]>([]);
+  const [shareLink, setShareLink] = useState('');
+  const [isCopied, setIsCopied] = useState(false);
 
   let fontSize = 'text-base';
   switch (profile.fontSize) {
@@ -50,6 +52,9 @@ const Note = () => {
     const matchNote = profile.notes.find((note) => note.id === id);
     if (matchNote) {
       setCurrentNote(matchNote);
+      setShareLink(
+        `https://manna-jar.web.app/?category=shared&shareBy=${profile.id}&shareNote=${matchNote.id}`
+      );
     } else {
       setCurrentNote({
         id: '',
@@ -132,23 +137,38 @@ const Note = () => {
         </div>
       </div>
       <div
-        className={`${styles.theme} fixed top-0 right-0 flex flex-col h-full w-72 border-l`}
+        className={`${styles.theme} fixed top-0 right-0 flex flex-col justify-between h-full w-72 border-l`}
       >
         <Header text={'連結圖'} />
-        <div className="w-full h-96 bg-stone-200 border-t border-stone-500">
+        <div className="w-full h-96 texture2 border-y border-stone-500">
           <NetworkGraph filtBy={'all'} />
         </div>
-
         {(currentNote.category === 'sermon' ||
           currentNote.category === 'devotion') && (
-          <div className="flex p-4">
-            <label>分享連結</label>
+          <div className="flex flex-col p-4 mt-1">
             <input
-              className="grow truncate bg-stone-200 focus:outline-none font-extralight"
-              value={`https://manna-jar.web.app/?category=shared&shareBy=${profile.id}&shareNote=${currentNote.id}`}
+              className={`grow truncate h-10 border-x border-t border-stone-400 focus:outline-none font-extralight ${
+                isCopied ? 'bg-stone-100' : 'bg-stone-200'
+              }`}
+              value={shareLink}
             />
+            <label
+              className={`flex justify-center text-2xl border cursor-pointer border-stone-400 pb-2 hover:bg-stone-200 ${
+                isCopied ? 'bg-stone-200' : 'bg-stone-300'
+              }`}
+              onClick={() => {
+                navigator.clipboard.writeText(shareLink);
+                setIsCopied(true);
+                setTimeout(() => setIsCopied(false), 500);
+              }}
+            >
+              {isCopied ? '✓' : '⟶'}
+            </label>
           </div>
         )}
+        <div className="mt-auto mb-4 flex w-full justify-center text-xs font-thin text-stone-900">
+          Powered by † MannaJar
+        </div>
       </div>
     </div>
   );

@@ -20,21 +20,21 @@ function App() {
   return (
     <div className="App">
       <div className="relative flex w-screen h-full bg-stone-300">
-        <div className={toggled ? 'fixed z-10' : 'hidden'}>
+        <div className={toggled ? 'fixed z-10 h-full' : 'hidden'}>
           <Navigate setToggled={setToggled} />
         </div>
         <div
           className={
             toggled
               ? 'hidden'
-              : `${styles.theme} fixed z-10 flex flex-col min-h-screen w-7 border-r`
+              : `${styles.theme} fixed z-10 flex flex-col h-full w-7 border-r`
           }
         >
           <div
             className={`${styles.themeButton} border-b w-full h-20 mt-[1px]`}
             onClick={() => setToggled(true)}
           >
-            開
+            ≡
           </div>
           {navOptions.map((nav) => (
             <Link to={nav.link}>
@@ -65,10 +65,12 @@ function App() {
           <NavLink to="/graphview">
             {({ isActive }) => (
               <div
-                className={`${styles.navButtonSmall} ${
+                className={`${styles.navButtonSmall} text-stone-500 ${
                   isActive && 'bg-blue-100'
                 } border-b w-full h-[62px] hover:bg-blue-100`}
-              ></div>
+              >
+                ✣
+              </div>
             )}
           </NavLink>
           <div className={`border-b border-stone-500 w-full grow`}></div>
@@ -76,10 +78,10 @@ function App() {
             className={`${styles.themeButton} border-b w-full h-10`}
             onClick={() => dispatch(logoutAsync())}
           >
-            出
+            ⎋
           </div>
         </div>
-        <div className={`w-full ${toggled ? 'ml-48' : 'ml-7'}`}>
+        <div className={`w-full h-full ${toggled ? 'ml-48' : 'ml-7'}`}>
           <Outlet />
         </div>
       </div>

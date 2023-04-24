@@ -31,9 +31,10 @@ interface Edge {
   to: string;
 }
 
-const THEME_COLOR = 'gray';
-const SHARED_COLOR = 'pink';
-const HOVER_COLOR = 'purple';
+const THEME_COLOR = 'white';
+const BORDER_COLOR = '#57534e';
+const SHARED_COLOR = '#fef3c7';
+const HOVER_COLOR = '#ecfccb';
 const BASE_SIZE = 5;
 
 const options = {
@@ -128,10 +129,7 @@ const NetworkGraph = ({ filtBy }: Prop) => {
           id: note.id,
           label: note.title,
           color: {
-            border:
-              note.category === 'shared' || note.category === 'admin'
-                ? SHARED_COLOR
-                : THEME_COLOR,
+            border: BORDER_COLOR,
             background:
               note.category === 'shared' || note.category === 'admin'
                 ? SHARED_COLOR
@@ -139,10 +137,7 @@ const NetworkGraph = ({ filtBy }: Prop) => {
           },
           font: {
             size: fontSize,
-            color:
-              note.category === 'shared' || note.category === 'admin'
-                ? SHARED_COLOR
-                : THEME_COLOR,
+            color: BORDER_COLOR,
           },
         });
       }

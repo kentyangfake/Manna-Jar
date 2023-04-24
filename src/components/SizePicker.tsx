@@ -55,7 +55,7 @@ const SizePicker = ({ edit, deleteInfo }: Props) => {
           to={`/editor/${edit}`}
           className={`${styles.themeButton} w-20 border-l`}
         >
-          編
+          ✎
         </Link>
       )}
       {deleteInfo && (
@@ -70,7 +70,7 @@ const SizePicker = ({ edit, deleteInfo }: Props) => {
             }
           }}
         >
-          刪
+          ✕
         </div>
       )}
     </div>

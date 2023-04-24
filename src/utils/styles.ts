@@ -1,4 +1,4 @@
-import {backgroundColor, borderColor, borders, classnames, cursor, flex, flexBox, layout, padding, sizing, space, spacing, textColor, textDecoration, textDecorationColor, textDecorationStyle, textDecorationThickness, textUnderlineOffset, typography} from 'tailwindcss-classnames';
+import {backgroundColor, borders, classnames, cursor, flexBox, layout, padding, sizing, spacing, textDecoration, textDecorationStyle, textDecorationThickness, textUnderlineOffset, typography} from 'tailwindcss-classnames';
 
 export const theme = classnames(
   typography('text-stone-500','tracking-widest'),
@@ -47,6 +47,8 @@ export const navButton = classnames(
 
 export const navButtonSmall = classnames(
   borders('border-stone-500'),
+  layout('flex'),
+  flexBox('justify-center','items-center'),
   cursor('cursor-pointer'),
 )
 
