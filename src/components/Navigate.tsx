@@ -11,6 +11,7 @@ import { ReactComponent as Sheep } from '../assets/sheep.svg';
 import { ReactComponent as Dove } from '../assets/dove.svg';
 import { ReactComponent as Candle } from '../assets/candle.svg';
 import { ReactComponent as Jar } from '../assets/jar.svg';
+import styled from 'styled-components';
 
 interface Prop {
   setToggled: React.Dispatch<React.SetStateAction<boolean>>;
@@ -63,65 +64,76 @@ const Navigate = ({ setToggled }: Prop) => {
           ⋮
         </div>
       </div>
-      <div className="flex flex-col">
-        {navOptions.map((nav) => (
-          <Link to={nav.link}>
-            <div
-              className={`${styles.navButton} border-b ${
-                category === nav.id
-                  ? `h-52 ${
-                      nav.id === 'sermon'
-                        ? 'bg-lime-100'
-                        : nav.id === 'devotion'
-                        ? 'bg-violet-100'
-                        : nav.id === 'shared'
-                        ? 'bg-amber-100'
-                        : 'bg-stone-100'
-                    }`
-                  : 'h-[60px]'
-              }`}
-            >
-              {nav.label}
-              {category === nav.id ? (
-                nav.id === 'sermon' ? (
-                  <Sheep className="w-28" />
-                ) : nav.id === 'devotion' ? (
-                  <Dove className="w-28" />
+      {profile.isLogin ? (
+        <>
+          <div className="flex flex-col">
+            {navOptions.map((nav) => (
+              <Link key={nav.id} to={nav.link}>
+                <div
+                  className={`${styles.navButton} border-b ${
+                    category === nav.id
+                      ? `h-52 ${
+                          nav.id === 'sermon'
+                            ? 'bg-lime-100'
+                            : nav.id === 'devotion'
+                            ? 'bg-violet-100'
+                            : nav.id === 'shared'
+                            ? 'bg-amber-100'
+                            : 'bg-stone-100'
+                        }`
+                      : 'h-[60px]'
+                  }`}
+                >
+                  {nav.label}
+                  {category === nav.id ? (
+                    nav.id === 'sermon' ? (
+                      <Sheep className="w-28" />
+                    ) : nav.id === 'devotion' ? (
+                      <Dove className="w-28" />
+                    ) : (
+                      <Candle className="w-16" />
+                    )
+                  ) : (
+                    ''
+                  )}
+                </div>
+              </Link>
+            ))}
+            <NavLink to="/graphview">
+              {({ isActive }) =>
+                isActive ? (
+                  <div
+                    className={`${styles.navButton} h-52 border-b bg-blue-100`}
+                  >
+                    我的罐子
+                    <Jar className="w-28" />
+                  </div>
                 ) : (
-                  <Candle className="w-16" />
+                  <div className={`${styles.navButton} h-[62px] border-b`}>
+                    我的罐子
+                  </div>
                 )
-              ) : (
-                ''
-              )}
+              }
+            </NavLink>
+          </div>
+          <div className="flex justify-end mt-auto h-10 border-t border-stone-500">
+            <div className={`${styles.themeButton} grow border-r`}>
+              歡迎回來,{profile.name}
             </div>
-          </Link>
-        ))}
-        <NavLink to="/graphview">
-          {({ isActive }) =>
-            isActive ? (
-              <div className={`${styles.navButton} h-52 border-b bg-blue-100`}>
-                我的罐子
-                <Jar className="w-28" />
-              </div>
-            ) : (
-              <div className={`${styles.navButton} h-[62px] border-b`}>
-                我的罐子
-              </div>
-            )
-          }
-        </NavLink>
-      </div>
-      <div className="flex justify-end mt-auto h-10 border-t border-stone-500">
-        <div className={`${styles.themeButton} grow border-r`}>
-          {profile.name} 個人檔案
-        </div>
-        <div
-          className={`${styles.themeButton} w-7`}
-          onClick={() => dispatch(logoutAsync())}
-        >
-          ⎋
-        </div>
-      </div>
+            <div
+              className={`${styles.themeButton} w-7`}
+              onClick={() => dispatch(logoutAsync())}
+            >
+              ⎋
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="flex justify-center">請先登入</div>
+          <div className={`${styles.themeButton} h-10 border-t`}>關於我們</div>
+        </>
+      )}
     </div>
   );
 };
