@@ -3,8 +3,8 @@ import { Outlet, useSearchParams, Link, NavLink } from 'react-router-dom';
 import './App.css';
 import Navigate from './components/Navigate';
 import * as styles from './utils/styles';
-import { useAppDispatch } from './app/hooks';
-import { logoutAsync } from './app/loginSlice';
+import { useAppDispatch, useAppSelector } from './app/hooks';
+import { logoutAsync, selectProfile } from './app/loginSlice';
 
 const navOptions = [
   { id: 'sermon', label: '聚會崇拜', link: '/?category=sermon' },
@@ -14,6 +14,7 @@ const navOptions = [
 
 function App() {
   const dispatch = useAppDispatch();
+  const profile = useAppSelector(selectProfile);
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category') || '';
   const [toggled, setToggled] = useState(false);
@@ -36,50 +37,59 @@ function App() {
           >
             ≡
           </div>
-          {navOptions.map((nav) => (
-            <Link key={nav.id} to={nav.link}>
+          {profile.isLogin ? (
+            <>
+              {navOptions.map((nav) => (
+                <Link key={nav.id} to={nav.link}>
+                  <div
+                    className={`${styles.navButtonSmall} h-[60px] border-b ${
+                      nav.id === 'sermon'
+                        ? 'hover:bg-lime-100'
+                        : nav.id === 'devotion'
+                        ? 'hover:bg-violet-100'
+                        : nav.id === 'shared'
+                        ? 'hover:bg-amber-100'
+                        : 'hover:bg-stone-100'
+                    } ${
+                      category === nav.id &&
+                      `${
+                        nav.id === 'sermon'
+                          ? 'bg-lime-100'
+                          : nav.id === 'devotion'
+                          ? 'bg-violet-100'
+                          : nav.id === 'shared'
+                          ? 'bg-amber-100'
+                          : 'bg-stone-100'
+                      }`
+                    }`}
+                  ></div>
+                </Link>
+              ))}
+              <NavLink to="/graphview">
+                {({ isActive }) => (
+                  <div
+                    className={`${styles.navButtonSmall} text-stone-500 ${
+                      isActive && 'bg-blue-100'
+                    } border-b w-full h-[62px] hover:bg-blue-100`}
+                  >
+                    ✣
+                  </div>
+                )}
+              </NavLink>
+              <div className={`border-b border-stone-500 w-full grow`}></div>
               <div
-                className={`${styles.navButtonSmall} h-[60px] border-b ${
-                  nav.id === 'sermon'
-                    ? 'hover:bg-lime-100'
-                    : nav.id === 'devotion'
-                    ? 'hover:bg-violet-100'
-                    : nav.id === 'shared'
-                    ? 'hover:bg-amber-100'
-                    : 'hover:bg-stone-100'
-                } ${
-                  category === nav.id &&
-                  `${
-                    nav.id === 'sermon'
-                      ? 'bg-lime-100'
-                      : nav.id === 'devotion'
-                      ? 'bg-violet-100'
-                      : nav.id === 'shared'
-                      ? 'bg-amber-100'
-                      : 'bg-stone-100'
-                  }`
-                }`}
-              ></div>
-            </Link>
-          ))}
-          <NavLink to="/graphview">
-            {({ isActive }) => (
-              <div
-                className={`${styles.navButtonSmall} text-stone-500 ${
-                  isActive && 'bg-blue-100'
-                } border-b w-full h-[62px] hover:bg-blue-100`}
+                className={`${styles.themeButton} border-b w-full h-10`}
+                onClick={() => dispatch(logoutAsync())}
               >
-                ✣
+                ⎋
               </div>
-            )}
-          </NavLink>
-          <div className={`border-b border-stone-500 w-full grow`}></div>
-          <div
-            className={`${styles.themeButton} border-b w-full h-10`}
-            onClick={() => dispatch(logoutAsync())}
-          >
-            ⎋
-          </div>
+            </>
+          ) : (
+            <>
+              <div className={`w-full grow`}></div>
+              <div className={`${styles.themeButton} h-10 border-t`}>?</div>
+            </>
+          )}
         </div>
         <div className={`w-full h-full ${toggled ? 'ml-48' : 'ml-7'}`}>
           <Outlet />

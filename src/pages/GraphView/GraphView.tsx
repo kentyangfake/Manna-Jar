@@ -15,8 +15,23 @@ const GraphView = () => {
   const [recentNotes, setRecentNotes] = useState<string[]>([]);
   const [filtBy, setFiltBy] = useState('all');
   const [isAiTyping, setIsAiTyping] = useState(false);
-  const [summeries, setSummeries] = useState('讓ai幫你回顧最近的筆記吧!');
+  const [summeries, setSummeries] = useState('讓AI幫你回顧最近的筆記吧!');
   const [toggled, setToggled] = useState(false);
+
+  let fontSize = 'text-base';
+  switch (profile.fontSize) {
+    case 'small':
+      fontSize = 'text-base';
+      break;
+    case 'medium':
+      fontSize = 'text-lg';
+      break;
+    case 'large':
+      fontSize = 'text-xl';
+      break;
+    default:
+      fontSize = 'text-base';
+  }
 
   useEffect(() => {
     if (!profile.isLogin) {
@@ -39,9 +54,7 @@ const GraphView = () => {
 
   const handleAiResponse = async () => {
     setIsAiTyping(true);
-    // const res = await openAI.summarize(titles, recentNotes);
-    const res =
-      '(排版用)根據你最近的筆記，你的信仰狀況是持續思考聖經中的信息，並試圖理解和應用這些信息到自己的生活和信仰中。 我推薦你複習的三篇筆記是「耶穌喜愛的家人」、「什麼是上好的福份？」和「教學筆記」，這些筆記涵蓋了關於信仰、家庭、個人成長和教學等方面的豐富內容，能夠加強你對基督信仰的理解和實踐。';
+    const res = await openAI.summarize(titles, recentNotes);
     setIsAiTyping(false);
     setSummeries(res);
   };
@@ -109,19 +122,23 @@ const GraphView = () => {
       <div
         className={`${
           toggled
-            ? 'fixed z-10 top-8 right-0 h-full w-96 border-r pl-3 pr-10 track-widest leading-relaxed border-stone-500 bg-[rgba(68,64,60,0.7)] backdrop-blur'
+            ? 'fixed flex flex-col z-10 top-8 right-0 h-full w-96 border-x pl-3 pr-10 text-stone-500 border-stone-500 bg-[rgba(214,211,208,0.7)] backdrop-blur'
             : 'hidden'
         }`}
       >
+        <div className="border-b border-stone-500 py-3 text-2xl italic tracking-widest">
+          信仰回顧
+        </div>
+        <div className={`${fontSize} pt-3 tracking-wider leading-relaxed`}>
+          {summeries}
+        </div>
         <div
-          className="cursor-pointer border-b py-3 text-white text-4xl italic tracking-widest"
+          className={`${styles.themeButtonNoBg} ${
+            isAiTyping && 'bg-stone-100'
+          } self-center mt-10 w-32 h-10 border`}
           onClick={handleAiResponse}
         >
           {isAiTyping ? '回答中...' : 'AI回顧'}
-        </div>
-
-        <div className="text-white pt-3">
-          <div>{summeries}</div>
         </div>
       </div>
     </div>
