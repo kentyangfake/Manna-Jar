@@ -37,7 +37,7 @@ function App() {
             ≡
           </div>
           {navOptions.map((nav) => (
-            <Link to={nav.link}>
+            <Link key={nav.id} to={nav.link}>
               <div
                 className={`${styles.navButtonSmall} h-[60px] border-b ${
                   nav.id === 'sermon'

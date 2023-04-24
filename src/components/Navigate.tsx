@@ -65,7 +65,7 @@ const Navigate = ({ setToggled }: Prop) => {
       </div>
       <div className="flex flex-col">
         {navOptions.map((nav) => (
-          <Link to={nav.link}>
+          <Link key={nav.id} to={nav.link}>
             <div
               className={`${styles.navButton} border-b ${
                 category === nav.id

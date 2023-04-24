@@ -3,12 +3,14 @@ import NetworkGraph from '../../components/NetworkGraph';
 import { openAI } from '../../utils/openAI';
 import { useAppSelector } from '../../app/hooks';
 import { selectProfile } from '../../app/loginSlice';
+import { useNavigate } from 'react-router-dom';
 import SizePicker from '../../components/SizePicker';
 import * as styles from '../../utils/styles';
 import { ReactComponent as Star } from '../../assets/star.svg';
 
 const GraphView = () => {
   const profile = useAppSelector(selectProfile);
+  const navigate = useNavigate();
   const [titles, setTitles] = useState<string[]>([]);
   const [recentNotes, setRecentNotes] = useState<string[]>([]);
   const [filtBy, setFiltBy] = useState('all');
@@ -18,7 +20,7 @@ const GraphView = () => {
 
   useEffect(() => {
     if (!profile.isLogin) {
-      return;
+      navigate('/');
     }
 
     const notesArr = [...profile.notes]
