@@ -152,14 +152,14 @@ const Login = () => {
               </div>
               {isSignUp ? (
                 <div
-                  className="w-16 flex justify-center pt-1 cursor-pointer border border-stone-500"
+                  className="w-16 flex justify-center self-center mt-4 items-center cursor-pointer border border-stone-500"
                   onClick={handleSingUp}
                 >
                   註冊
                 </div>
               ) : (
                 <div
-                  className="w-16 flex justify-center pt-1 cursor-pointer border border-stone-500"
+                  className="w-16 flex justify-center self-center mt-4 items-center cursor-pointer border border-stone-500"
                   onClick={handleLogin}
                 >
                   登入
