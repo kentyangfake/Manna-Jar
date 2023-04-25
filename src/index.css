@@ -141,3 +141,13 @@ code {
 .grid-cols-auto-fit {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+}
+
+.banner {
+  background-image: url('./assets/The_School.jpg');
+  background-size: cover;
+  background-position: 50% 60%;
+}
