@@ -8,8 +8,9 @@ import {
   selectProfile,
 } from '../../app/loginSlice';
 import * as styles from '../../utils/styles';
-import { ReactComponent as Star } from '../../assets/star.svg';
 import TypedString from '../../components/TypedString';
+import autoVerse from '../../assets/autoVerse.mp4';
+import backLinks from '../../assets/backLinks.mp4';
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -189,7 +190,16 @@ const Login = () => {
           </div>
         </div>
         <div className="w-[45vw] flex justify-center items-center border-l text-stone-700 border-stone-500 bg-gradient-to-b hover:bg-gradient-to-t from-stone-400 to-stone-300">
-          自動輸入經文
+          <video
+            className="rounded drop-shadow-lg border border-stone-500"
+            playsInline
+            autoPlay
+            muted
+            loop
+            width="600px"
+          >
+            <source src={autoVerse} type="video/mp4" />
+          </video>
         </div>
       </div>
       {/* section 2 */}
@@ -209,8 +219,19 @@ const Login = () => {
           </div>
         </div>
         <div className="flex grow border-t border-stone-500 mt-20">
-          <div className="grow bg-gradient-to-b from-stone-400 to-stone-300">
-            連結
+          <div className="grow flex justify-center bg-gradient-to-b from-stone-400 to-stone-300">
+            <div>
+              <video
+                className="rounded drop-shadow-lg border border-stone-500"
+                playsInline
+                autoPlay
+                muted
+                loop
+                width="600px"
+              >
+                <source src={backLinks} type="video/mp4" />
+              </video>
+            </div>
           </div>
           <div className="w-[45vw] flex flex-col border-l border-stone-500">
             <div className="h-80 bg-gradient-to-r hover:bg-gradient-to-l from-stone-400 to-stone-300 border-b border-stone-500">
