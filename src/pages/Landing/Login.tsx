@@ -181,7 +181,7 @@ const Login = () => {
                 <p className="w-96 text-xl">
                   只要簡單輸入經卷索引，例如：
                   <br />
-                  羅馬書2:11
+                  出埃及記16:4
                   <br />
                   然後按下空白鍵，經文就會自動出現！
                 </p>
@@ -189,7 +189,7 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <div className="w-[45vw] flex justify-center items-center border-l text-stone-700 border-stone-500 bg-gradient-to-b hover:bg-gradient-to-t from-stone-400 to-stone-300">
+        <div className="w-[45vw] flex flex-col justify-center items-center border-l text-stone-700 border-stone-500 bg-gradient-to-b hover:bg-gradient-to-t from-stone-400 to-stone-300">
           <video
             className="rounded drop-shadow-lg border border-stone-500"
             playsInline
@@ -222,7 +222,7 @@ const Login = () => {
           <div className="grow flex justify-center bg-gradient-to-b from-stone-400 to-stone-300">
             <div>
               <video
-                className="rounded drop-shadow-lg border border-stone-500"
+                className="mt-10 rounded drop-shadow-lg border border-stone-500"
                 playsInline
                 autoPlay
                 muted
@@ -231,13 +231,26 @@ const Login = () => {
               >
                 <source src={backLinks} type="video/mp4" />
               </video>
+              <div className="text-xl text-end mt-3">
+                輸入#
+                <br />
+                輕易建立筆記連結
+              </div>
             </div>
           </div>
           <div className="w-[45vw] flex flex-col border-l border-stone-500">
-            <div className="h-80 bg-gradient-to-r hover:bg-gradient-to-l from-stone-400 to-stone-300 border-b border-stone-500">
-              分類
+            <div className="flex justify-center gap-3 bg-gradient-to-l hover:bg-gradient-to-r from-stone-400 to-stone-300 border-b border-stone-500">
+              <div className="h-60 w-48 border drop-shadow-lg border-stone-500">
+                1
+              </div>
+              <div className="h-60 w-48 border drop-shadow-lg border-stone-500">
+                2
+              </div>
+              <div className="h-60 w-48 border drop-shadow-lg border-stone-500">
+                3
+              </div>
             </div>
-            <div className="h-60">分類的解說</div>
+            <div className="h-96">分類的解說</div>
           </div>
         </div>
       </div>
