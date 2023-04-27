@@ -29,8 +29,8 @@ const SizePicker = ({ edit, deleteInfo, previous }: Props) => {
         </div>
       )}
       <div
-        className={`border-r text-sm font-serif font-black ${
-          previous ? 'w-20 rounded-full' : 'w-32 rounded-e-full'
+        className={`w-20 border-r text-sm font-serif font-black ${
+          previous ? 'rounded-full' : 'rounded-e-full'
         } ${
           profile.fontSize === 'small'
             ? styles.themeButtonActive
