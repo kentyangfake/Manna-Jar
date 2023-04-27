@@ -89,13 +89,15 @@ const Note = () => {
           sharedBy={currentNote.sharedBy}
         />
         {currentNote.category === 'admin' ? (
-          <SizePicker />
+          <SizePicker previous />
         ) : currentNote.category === 'shared' ? (
           <SizePicker
+            previous
             deleteInfo={{ id: currentNote.id, title: currentNote.title }}
           />
         ) : (
           <SizePicker
+            previous
             edit={currentNote.id}
             deleteInfo={{ id: currentNote.id, title: currentNote.title }}
           />

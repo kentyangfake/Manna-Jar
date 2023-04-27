@@ -25,7 +25,7 @@ const TypedString = ({ context, typeSpeed, backSpeed }: Props) => {
     };
   }, []);
 
-  return <span ref={el} onMouseEnter={() => typed.current.reset()} />;
+  return <span ref={el} />;
 };
 
 export default TypedString;
