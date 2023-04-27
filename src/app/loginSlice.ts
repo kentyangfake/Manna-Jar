@@ -91,11 +91,17 @@ const loginSlice = createSlice({
   reducers:{
     addNote: (state, action: PayloadAction<NoteType>) => {
       const order = state.profile.orderBy.time
+      //handle already had note
       if (state.profile.notes.findIndex(note => note.id === action.payload.id ) >= 0){
         alert('您已收藏此筆記!');
         return
       }
-      order === 'newest'? state.profile.notes.unshift(action.payload as NoteType): state.profile.notes.push(action.payload as NoteType);
+      //handle added note without title
+      let addedNote = {...action.payload}
+      if(action.payload.title === ''){
+        addedNote.title='未命名標題';
+      }
+      order === 'newest'? state.profile.notes.unshift(addedNote): state.profile.notes.push(addedNote);
       const id = state.profile.id
       const data = {
         email: state.profile.email,
@@ -120,9 +126,14 @@ const loginSlice = createSlice({
       firestore.updateUser(id, data);
     },
     editNote:(state, action: PayloadAction<NoteType>)=>{
+      //handle added note without title
+      let editedNote = {...action.payload}
+      if(action.payload.title === ''){
+        editedNote.title='未命名標題';
+      }
       const editId = action.payload.id;
       const noteIndex = state.profile.notes.findIndex(note => note.id === editId);
-      state.profile.notes[noteIndex] = action.payload;
+      state.profile.notes[noteIndex] = editedNote;
       const id = state.profile.id
       const data = {
         email: state.profile.email,

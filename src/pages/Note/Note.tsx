@@ -154,7 +154,7 @@ const Note = () => {
           currentNote.category === 'devotion') && (
           <div className="flex flex-col p-4 mt-1">
             <input
-              className={`grow truncate h-10 border-x border-t border-stone-400 focus:outline-none font-extralight ${
+              className={`grow truncate h-10 border-x border-t border-stone-400 focus:outline-none font-extralight pl-2 ${
                 isCopied ? 'bg-stone-100' : 'bg-stone-200'
               }`}
               value={shareLink}

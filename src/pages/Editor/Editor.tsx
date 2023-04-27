@@ -100,7 +100,9 @@ const Editor = () => {
             key={option.value}
             className={`${styles.themeButtonNoBg} grow border-r ${
               note.category === option.value &&
-              (option.value === 'sermon' ? 'bg-lime-100' : 'bg-violet-100')
+              (option.value === 'sermon'
+                ? 'bg-lime-100 border-b-2'
+                : 'bg-violet-100 border-b-2')
             }`}
             onClick={() => setNote({ ...note, category: option.value })}
           >
@@ -117,7 +119,7 @@ const Editor = () => {
       <div className="flex h-10">
         <div className={`${styles.theme} grow border-y`}></div>
         <div
-          className={`${styles.themeButton} w-32 border-y border-l`}
+          className={`${styles.themeButton} w-32 border-y border-l hover:border-b-4 hover:border-l-2`}
           onClick={() => {
             isEdit ? handleEditNote() : handleAddNote();
           }}
@@ -125,7 +127,7 @@ const Editor = () => {
           {isEdit ? '儲存修改' : '新增筆記'}
         </div>
         <div
-          className={`${styles.themeButton} w-32 border-y border-l`}
+          className={`${styles.themeButton} w-32 border-y border-l hover:border-b-4 hover:border-l-2`}
           onClick={() => {
             isEdit ? navigate(`/note/${id}`) : navigate('/');
           }}
