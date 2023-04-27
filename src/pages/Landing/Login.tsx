@@ -6,6 +6,7 @@ import {
   signUpAsync,
   loginViaLocalAsync,
   selectProfile,
+  selectIsLoading,
 } from '../../app/loginSlice';
 import * as styles from '../../utils/styles';
 import TypedString from '../../components/TypedString';
@@ -16,6 +17,7 @@ import { NoteType } from '../../app/types';
 import { ReactComponent as Sheep } from '../../assets/sheep.svg';
 import { ReactComponent as Dove } from '../../assets/dove.svg';
 import { ReactComponent as Candle } from '../../assets/candle.svg';
+import loading from '../../assets/loading.gif';
 
 const demoNotesTitles = [
   '出人意外的平安',
@@ -57,6 +59,7 @@ const demoNotes: NoteType[] = demoNotesList;
 const Login = () => {
   const dispatch = useAppDispatch();
   const profile = useAppSelector(selectProfile);
+  const isLoading = useAppSelector(selectIsLoading);
   const navigate = useNavigate();
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -194,17 +197,17 @@ const Login = () => {
               </div>
               {isSignUp ? (
                 <div
-                  className={`${styles.themeButton} w-16 self-center mt-4 border`}
+                  className={`${styles.themeButton} self-center mt-4 border w-16 h-8`}
                   onClick={handleSingUp}
                 >
-                  註冊
+                  {isLoading ? <img src={loading} alt="loading..." /> : '註冊'}
                 </div>
               ) : (
                 <div
-                  className={`${styles.themeButton} w-16 self-center mt-4 border`}
+                  className={`${styles.themeButton} self-center mt-4 border w-16 h-8`}
                   onClick={handleLogin}
                 >
-                  登入
+                  {isLoading ? <img src={loading} alt="loading..." /> : '登入'}
                 </div>
               )}
             </div>

@@ -17,7 +17,8 @@ const initialState = {
     isLogin: false,
     orderBy:{time:'newest',record:'edit'},
     fontSize:'small',
-  }
+  },
+  isLoading:false
 }
 
 export const signUpAsync = createAsyncThunk(
@@ -189,14 +190,22 @@ const loginSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(signUpAsync.pending,(state)=>{
+        state.isLoading = true;
+      })
       .addCase(signUpAsync.fulfilled, (state, action) => {
         state.profile.email = action.payload?.email ??"";
         state.profile.id = action.payload?.id ??"";
         state.profile.name = action.payload?.name ??"";
         state.profile.isLogin = true;
+        state.isLoading = false;
       })
       .addCase(signUpAsync.rejected, (state, action) => {
         window.alert("註冊失敗!");
+        state.isLoading = false;
+      })
+      .addCase(loginAsync.pending,(state)=>{
+        state.isLoading = true;
       })
       .addCase(loginAsync.fulfilled, (state, action) => {
         state.profile.email = action.payload?.email ??"";
@@ -204,9 +213,11 @@ const loginSlice = createSlice({
         state.profile.name = action.payload?.name ??"";
         state.profile.notes = action.payload?.notes ??[];
         state.profile.isLogin = true;
+        state.isLoading = false;
       })
       .addCase(loginAsync.rejected, (state, action) => {
         window.alert("登入失敗!");
+        state.isLoading = false;
       })
       .addCase(loginViaLocalAsync.fulfilled, (state, action) => {
         state.profile.email = action.payload?.email ??"";
@@ -231,5 +242,6 @@ const loginSlice = createSlice({
   },
 })
 export const selectProfile = (state: RootState) => state.login.profile;
+export const selectIsLoading = (state:RootState) => state.login.isLoading;
 export const { addNote, deleteNote, editNote, changeOrderByTime, changeOrderByRecord, changeDisplayFontSize } = loginSlice.actions
 export default loginSlice.reducer;
