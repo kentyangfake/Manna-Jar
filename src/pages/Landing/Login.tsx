@@ -231,10 +231,10 @@ const Login = () => {
               >
                 <source src={backLinks} type="video/mp4" />
               </video>
-              <div className="text-xl text-end mt-3">
-                輸入#
+              <div className="text-xl text-end mt-3 mr-5">
+                簡單輸入#
                 <br />
-                輕易建立筆記連結
+                建立筆記連結,方便查找
               </div>
             </div>
           </div>
@@ -255,7 +255,7 @@ const Login = () => {
         </div>
       </div>
       {/* section 3 */}
-      <div className="min-h-[650px] flex flex-col text-stone-700">
+      <div className="flex flex-col text-stone-700">
         <div className="flex flex-col items-center bg-gradient-to-t from-stone-400 to-stone-300 text-stone-700">
           <div className="mt-6 text-6xl font-serif font-bold mb-10">
             我的信仰,像滿天星星
@@ -276,6 +276,13 @@ const Login = () => {
         </div>
         <div
           className={`flex justify-center items-center mt-auto mb-10 text-center text-xl pb-7 leading-loose text-stone-200 hover:bg-stone-400 h-32 w-60 rounded-[100%/100%] border border-stone-300`}
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: 'smooth',
+            })
+          }
         >
           ↑<br />
           一起來寫筆記吧
