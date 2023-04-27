@@ -141,7 +141,12 @@ const Note = () => {
       >
         <Header text={'連結圖'} />
         <div className="w-full h-96 texture2 border-y border-stone-500">
-          <NetworkGraph filtBy={'all'} />
+          <NetworkGraph
+            filtBy={'all'}
+            id={id}
+            selectFontSize={profile.fontSize}
+            userNotes={profile.notes}
+          />
         </div>
         {(currentNote.category === 'sermon' ||
           currentNote.category === 'devotion') && (

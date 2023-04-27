@@ -1,8 +1,7 @@
 import Graph from 'react-graph-vis';
 import React, { useState, useEffect } from 'react';
-import { useAppSelector } from '../app/hooks';
-import { selectProfile } from '../app/loginSlice';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { NoteType } from '../app/types';
 
 interface GraphType {
   graph: {
@@ -24,6 +23,10 @@ interface Node {
 
 interface Prop {
   filtBy: string;
+  userNotes: NoteType[];
+  selectFontSize?: string;
+  id?: string;
+  noEvent?: boolean;
 }
 
 interface Edge {
@@ -82,8 +85,13 @@ const calcNodeSize = (arr: Edge[]) => {
   return newArray;
 };
 
-const NetworkGraph = ({ filtBy }: Prop) => {
-  const [isNoteGraph, setIsNoteGraph] = useState(false);
+const NetworkGraph = ({
+  filtBy,
+  id,
+  selectFontSize,
+  userNotes,
+  noEvent,
+}: Prop) => {
   const [state, setState] = useState<GraphType>({
     graph: {
       nodes: [],
@@ -91,22 +99,10 @@ const NetworkGraph = ({ filtBy }: Prop) => {
     },
   });
   const navigate = useNavigate();
-  const profile = useAppSelector(selectProfile);
-  const { id } = useParams();
 
   useEffect(() => {
-    if (id) {
-      setIsNoteGraph(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!profile.isLogin) {
-      return;
-    }
-
     let fontSize = 14;
-    switch (profile.fontSize) {
+    switch (selectFontSize) {
       case 'small':
         fontSize = 14;
         break;
@@ -123,7 +119,7 @@ const NetworkGraph = ({ filtBy }: Prop) => {
     let newNodes: Node[] = [];
     let newEdges: Edge[] = [];
 
-    profile.notes.map((note) => {
+    userNotes.map((note) => {
       if (note.category === filtBy || filtBy === 'all') {
         newNodes.push({
           id: note.id,
@@ -158,13 +154,13 @@ const NetworkGraph = ({ filtBy }: Prop) => {
       }
     });
     //filter unrelated nodes while in note page
-    if (isNoteGraph) {
+    if (id) {
       const relatedNode: string[] = [id!];
       //get link to
-      const currentNote = profile.notes.find((note) => note.id === id);
+      const currentNote = userNotes.find((note) => note.id === id);
       currentNote?.link_notes.map((note) => relatedNode.push(note.id));
       //get referenced by
-      profile.notes.map((note) =>
+      userNotes.map((note) =>
         note.link_notes?.map((link) => {
           if (link.id === id) {
             relatedNode.push(note.id);
@@ -174,17 +170,19 @@ const NetworkGraph = ({ filtBy }: Prop) => {
       newNodes = newNodes.filter((node) => relatedNode.indexOf(node.id) > -1);
     }
 
-    const newGraph: GraphType = {
-      graph: { nodes: newNodes, edges: newEdges },
-      events: {
-        selectNode: ({ nodes }: { nodes: string[] }) => {
-          const noteId = nodes[0];
-          navigate(`/note/${noteId}`);
-        },
-      },
-    };
+    const newGraph: GraphType = noEvent
+      ? { graph: { nodes: newNodes, edges: newEdges } }
+      : {
+          graph: { nodes: newNodes, edges: newEdges },
+          events: {
+            selectNode: ({ nodes }: { nodes: string[] }) => {
+              const noteId = nodes[0];
+              navigate(`/note/${noteId}`);
+            },
+          },
+        };
     setState(newGraph);
-  }, [profile.isLogin, id, isNoteGraph, profile.fontSize, filtBy]);
+  }, [id, filtBy, selectFontSize, userNotes]);
 
   const { graph, events } = state;
   return (

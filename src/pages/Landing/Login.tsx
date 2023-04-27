@@ -11,6 +11,45 @@ import * as styles from '../../utils/styles';
 import TypedString from '../../components/TypedString';
 import autoVerse from '../../assets/autoVerse.mp4';
 import backLinks from '../../assets/backLinks.mp4';
+import NetworkGraph from '../../components/NetworkGraph';
+import { NoteType } from '../../app/types';
+
+const demoNotesTitles = [
+  '出人意外的平安',
+  '撒迦利雅書',
+  '傳道談話',
+  '與神同行',
+  '得人如魚',
+  '聽命勝於獻祭',
+  '用基督的口舌',
+  '智慧的開端',
+  '挑戰天性',
+  '風雨中的避難所',
+  '你可情願',
+  '做鹽做光',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+];
+let demoNotesList: NoteType[] = [];
+demoNotesTitles.map((title, index) =>
+  demoNotesList.push({
+    id: index.toString(),
+    title: title,
+    content: '',
+    category: 'sermon',
+    link_notes: [],
+    create_time: 1,
+    edit_time: 1,
+  })
+);
+
+const demoNotes: NoteType[] = demoNotesList;
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -263,7 +302,9 @@ const Login = () => {
           <div className="text-xl">
             讓你一覽無遺你的信仰知識，你可以探索，觀察，從過去的累積獲得靈感和能量。
           </div>
-          <div className="texture mt-20 h-[70vh] w-[70%] rounded-[100%/100%] bg-stone-300 border border-stone-500"></div>
+          <div className="texture mt-20 h-[70vh] w-[70%] rounded-[100%/100%] bg-stone-300 border border-stone-500">
+            <NetworkGraph filtBy={'all'} userNotes={demoNotes} noEvent />
+          </div>
         </div>
       </div>
       {/* section 4 */}
