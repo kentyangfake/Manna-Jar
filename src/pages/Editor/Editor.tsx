@@ -85,12 +85,12 @@ const Editor = () => {
         <div className={`${styles.underline} decoration-orange-300`}>
           {isEdit ? `編輯:` : '新筆記:'}
         </div>
-
         <input
-          className="grow bg-stone-100 h-16 -mb-3 text-sky-500 overflow-hidden italic tracking-[.3em] focus:outline-none"
+          className="grow bg-stone-100 h-16 -mb-3 text-sky-500 overflow-hidden italic tracking-widest focus:outline-none"
           value={note.title}
           type="text"
           placeholder="請輸入標題"
+          maxLength={10}
           onChange={(e) => setNote({ ...note, title: e.target.value })}
         ></input>
       </div>

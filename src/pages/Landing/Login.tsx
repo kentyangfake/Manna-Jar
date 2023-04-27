@@ -157,6 +157,7 @@ const Login = () => {
                     className="h-10 bg-[rgba(0,0,0,0)] grow placeholder:text-stone-400 focus:outline-none pl-2"
                     type="text"
                     placeholder="使用者名稱"
+                    required
                     ref={nameRef}
                   />
                 </div>
@@ -169,6 +170,7 @@ const Login = () => {
                   className="h-10 bg-[rgba(0,0,0,0)] grow placeholder:text-stone-400 focus:outline-none pl-2"
                   type="text"
                   placeholder="電子信箱"
+                  required
                   ref={emailRef}
                 />
               </div>
@@ -180,6 +182,7 @@ const Login = () => {
                   className="h-10 bg-[rgba(0,0,0,0)] grow pl-2 placeholder:text-stone-400 focus:outline-none"
                   type={hidePassword ? 'password' : 'text'}
                   placeholder="密碼"
+                  required
                   ref={passwordRef}
                 />
                 <span

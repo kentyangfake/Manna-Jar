@@ -38,6 +38,10 @@ const GraphView = () => {
       navigate('/');
     }
 
+    if (profile.notes.length < 5) {
+      setSummeries('累積更多筆記後解鎖此功能。');
+    }
+
     const notesArr = [...profile.notes]
       .filter((note) => note.category !== 'shared')
       .sort((a, b) => b.create_time - a.create_time)
@@ -101,9 +105,15 @@ const GraphView = () => {
                 分享收藏
               </div>
             </div>
-            <Star className={`star1 fixed top-[10%] right-[20%] h-14`} />
-            <Star className={`star2 fixed bottom-[6%] right-[16%] h-24`} />
-            <Star className={`star3 fixed bottom-[4%] left-[20%] h-10`} />
+            <Star
+              className={`star1 fixed z-20 top-[10%] right-[20%] h-14 hover:animate-bounce`}
+            />
+            <Star
+              className={`star2 fixed z-20 bottom-[6%] right-[16%] h-24 hover:animate-bounce`}
+            />
+            <Star
+              className={`star3 fixed z-20 bottom-[4%] left-[20%] h-10 hover:animate-bounce`}
+            />
             <NetworkGraph
               filtBy={filtBy}
               selectFontSize={profile.fontSize}
@@ -113,20 +123,21 @@ const GraphView = () => {
         </div>
       </div>
       <div
-        className={`${styles.theme} fixed flex flex-col z-20 top-0 right-0 h-full w-7 border-l border-stone-500`}
+        className={`${styles.theme} fixed flex flex-col z-30 top-0 right-0 h-full w-7 border-l border-stone-500`}
       >
         <div className={`${styles.theme} border-y h-8`}></div>
         <div
-          className={`${styles.themeButton} grow`}
+          className={`${styles.navButtonSmall} bg-blue-100 h-32 border-b-2 hover:border-b-4 hover:border-l hover:bg-blue-50`}
           onClick={() => setToggled((prev) => !prev)}
         >
-          {toggled ? '›' : '‹'}
+          {toggled ? '›' : 'AI'}
         </div>
+        <div className={`${styles.theme} grow`}></div>
       </div>
       <div
         className={`${
           toggled
-            ? 'fixed flex flex-col z-10 top-8 right-0 h-full w-96 border-x pl-3 pr-10 text-stone-500 border-stone-500 bg-[rgba(214,211,208,0.7)] backdrop-blur'
+            ? 'fixed flex flex-col z-20 top-8 right-0 h-full w-96 border-x pl-3 pr-10 text-stone-500 border-stone-500 bg-[rgba(214,211,208,0.7)] backdrop-blur'
             : 'hidden'
         }`}
       >
@@ -136,14 +147,16 @@ const GraphView = () => {
         <div className={`${fontSize} pt-3 tracking-wider leading-relaxed`}>
           {summeries}
         </div>
-        <div
-          className={`${styles.themeButtonNoBg} ${
-            isAiTyping && 'bg-stone-100'
-          } self-center mt-10 w-32 h-10 border`}
-          onClick={handleAiResponse}
-        >
-          {isAiTyping ? '回答中...' : 'AI回顧'}
-        </div>
+        {profile.notes.length > 5 && (
+          <div
+            className={`${styles.themeButtonNoBg} ${
+              isAiTyping && 'bg-stone-100'
+            } self-center mt-10 w-32 h-10 border`}
+            onClick={handleAiResponse}
+          >
+            {isAiTyping ? '回答中...' : 'AI回顧'}
+          </div>
+        )}
       </div>
     </div>
   );

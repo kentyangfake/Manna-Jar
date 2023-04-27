@@ -160,7 +160,7 @@ const Note = () => {
               value={shareLink}
             />
             <label
-              className={`flex justify-center text-2xl border cursor-pointer border-stone-400 pb-2 hover:bg-stone-200 ${
+              className={`flex justify-center items-center h-10 border cursor-pointer border-stone-400 hover:bg-stone-200 ${
                 isCopied ? 'bg-stone-200' : 'bg-stone-300'
               }`}
               onClick={() => {
@@ -169,7 +169,18 @@ const Note = () => {
                 setTimeout(() => setIsCopied(false), 500);
               }}
             >
-              {isCopied ? '✓' : '⟶'}
+              {isCopied ? (
+                <>
+                  <span className="material-symbols-outlined">done</span>
+                </>
+              ) : (
+                <>
+                  <span className="material-symbols-outlined pr-2 text-base">
+                    file_copy
+                  </span>
+                  點我複製
+                </>
+              )}
             </label>
           </div>
         )}
