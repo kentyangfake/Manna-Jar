@@ -13,6 +13,9 @@ import autoVerse from '../../assets/autoVerse.mp4';
 import backLinks from '../../assets/backLinks.mp4';
 import NetworkGraph from '../../components/NetworkGraph';
 import { NoteType } from '../../app/types';
+import { ReactComponent as Sheep } from '../../assets/sheep.svg';
+import { ReactComponent as Dove } from '../../assets/dove.svg';
+import { ReactComponent as Candle } from '../../assets/candle.svg';
 
 const demoNotesTitles = [
   '出人意外的平安',
@@ -27,14 +30,14 @@ const demoNotesTitles = [
   '風雨中的避難所',
   '你可情願',
   '做鹽做光',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
+  '風雨生信心',
+  '約伯記',
+  '也不冷也不熱',
+  '重建會幕',
+  '洗禮的奧秘',
+  '神殿中的青橄欖樹',
+  '當你心懷不平',
+  '愛的真諦',
 ];
 let demoNotesList: NoteType[] = [];
 demoNotesTitles.map((title, index) =>
@@ -111,7 +114,7 @@ const Login = () => {
               '給基督徒の筆記本',
               '自動輸入經文!!',
               '組織知識網路!!',
-              '看見信仰累積!!',
+              '看見信仰成長!!',
               '教徒の筆記本.',
             ]}
           />
@@ -222,13 +225,13 @@ const Login = () => {
                   <br />
                   出埃及記16:4
                   <br />
-                  然後按下空白鍵，經文就會自動出現！
+                  按下空白鍵，經文就會自動出現！
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div className="w-[45vw] flex flex-col justify-center items-center border-l text-stone-700 border-stone-500 bg-gradient-to-b hover:bg-gradient-to-t from-stone-400 to-stone-300">
+        <div className="w-[45vw] flex flex-col justify-center items-center border-l text-stone-700 border-stone-500 bg-gradient-to-b from-stone-400 to-stone-300">
           <video
             className="rounded drop-shadow-lg border border-stone-500"
             playsInline
@@ -248,7 +251,9 @@ const Login = () => {
             <p>
               整合你的思緒，擴展你的視野
               <br />
-              不論是準備講道或小組分享，嗎哪罐子讓你能更容易找到之前的筆記
+              不論是準備講道或小組分享
+              <br />
+              嗎哪罐子讓你更容易找到之前的筆記
             </p>
           </div>
           <div className="w-[45vw] text-6xl font-serif font-bold leading-relaxed border-l border-stone-500 pl-7 pt-52">
@@ -270,26 +275,39 @@ const Login = () => {
               >
                 <source src={backLinks} type="video/mp4" />
               </video>
-              <div className="text-xl text-end mt-3 mr-5">
-                簡單輸入#
+              <div className="text-xl text-end mt-5 mr-5">
+                只要簡單輸入#
                 <br />
-                建立筆記連結,方便查找
+                就能建立筆記連結,方便查找
               </div>
             </div>
           </div>
           <div className="w-[45vw] flex flex-col border-l border-stone-500">
-            <div className="flex justify-center gap-3 bg-gradient-to-l hover:bg-gradient-to-r from-stone-400 to-stone-300 border-b border-stone-500">
-              <div className="h-60 w-48 border drop-shadow-lg border-stone-500">
-                1
+            <div className="flex justify-center gap-3 py-5 bg-gradient-to-l hover:bg-gradient-to-r from-stone-400 to-stone-300 border-b border-stone-500">
+              <div
+                className={`${styles.limeCard} text-xl items-center h-60 w-48 border drop-shadow-lg border-stone-500`}
+              >
+                聚會崇拜
+                <Sheep className="w-32" />
               </div>
-              <div className="h-60 w-48 border drop-shadow-lg border-stone-500">
-                2
+              <div
+                className={`${styles.violetCard} text-xl items-center h-60 w-48 border drop-shadow-lg border-stone-500`}
+              >
+                個人靈修
+                <Dove className="h-28" />
               </div>
-              <div className="h-60 w-48 border drop-shadow-lg border-stone-500">
-                3
+              <div
+                className={`${styles.amberCard} text-xl items-center h-60 w-48 border drop-shadow-lg border-stone-500`}
+              >
+                分享收藏
+                <Candle className="w-20" />
               </div>
             </div>
-            <div className="h-96">分類的解說</div>
+            <div className="flex justify-center h-96 text-xl mt-5">
+              根據信仰生活的情境將筆記分類
+              <br />
+              並與家人朋友分享筆記
+            </div>
           </div>
         </div>
       </div>
@@ -300,7 +318,7 @@ const Login = () => {
             我的信仰,像滿天星星
           </div>
           <div className="text-xl">
-            讓你一覽無遺你的信仰知識，你可以探索，觀察，從過去的累積獲得靈感和能量。
+            一覽無遺你的信仰知識，你可以探索，觀察，從過去的累積獲得靈感和能量。
           </div>
           <div className="texture mt-20 h-[70vh] w-[70%] rounded-[100%/100%] bg-stone-300 border border-stone-500">
             <NetworkGraph filtBy={'all'} userNotes={demoNotes} noEvent />
