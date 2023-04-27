@@ -104,7 +104,11 @@ const GraphView = () => {
             <Star className={`star1 fixed top-[10%] right-[20%] h-14`} />
             <Star className={`star2 fixed bottom-[6%] right-[16%] h-24`} />
             <Star className={`star3 fixed bottom-[4%] left-[20%] h-10`} />
-            <NetworkGraph filtBy={filtBy} />
+            <NetworkGraph
+              filtBy={filtBy}
+              selectFontSize={profile.fontSize}
+              userNotes={profile.notes}
+            />
           </div>
         </div>
       </div>

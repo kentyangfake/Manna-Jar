@@ -81,6 +81,7 @@ const CommentBox = ({
         const book = lastReference[1];
         const chapter = lastReference[2];
         const verse = lastReference[3];
+        document.body.style.cursor = 'wait';
         await getBibleReference(book, chapter, verse).then((text) => {
           onChange(
             beforeCursor.slice(0, referenceStart) +
@@ -88,6 +89,7 @@ const CommentBox = ({
               afterCursor.slice(referenceEnd)
           );
         });
+        document.body.style.cursor = 'default';
         event.preventDefault();
       }
     }
