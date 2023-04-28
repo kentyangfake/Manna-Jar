@@ -66,7 +66,7 @@ const GraphView = () => {
   return (
     <div className="flex h-full w-full">
       <div className="flex flex-col grow justify-between h-full">
-        <SizePicker />
+        <SizePicker fullGraph />
         <div className="flex justify-center items-center w-full h-full pl-5 pr-14 py-5 sky tracking-widest">
           <div
             className={`cursor-crosshair relative grow h-full rounded-[100%/100%] bg-stone-300 texture border border-stone-500`}
@@ -105,15 +105,9 @@ const GraphView = () => {
                 分享收藏
               </div>
             </div>
-            <Star
-              className={`star1 fixed z-20 top-[10%] right-[20%] h-14 hover:animate-bounce`}
-            />
-            <Star
-              className={`star2 fixed z-20 bottom-[6%] right-[16%] h-24 hover:animate-bounce`}
-            />
-            <Star
-              className={`star3 fixed z-20 bottom-[4%] left-[20%] h-10 hover:animate-bounce`}
-            />
+            <Star className={`star1 fixed z-20 top-[10%] right-[20%] h-14`} />
+            <Star className={`star2 fixed z-20 bottom-[6%] right-[16%] h-24`} />
+            <Star className={`star3 fixed z-20 bottom-[4%] left-[20%] h-10`} />
             <NetworkGraph
               filtBy={filtBy}
               selectFontSize={profile.fontSize}
@@ -127,7 +121,11 @@ const GraphView = () => {
       >
         <div className={`${styles.theme} border-y h-8`}></div>
         <div
-          className={`${styles.navButtonSmall} bg-blue-100 h-32 border-b-2 hover:border-b-4 hover:border-l hover:bg-blue-50`}
+          className={`${styles.navButtonSmall} ${
+            toggled
+              ? 'bg-blue-50 border-b'
+              : 'bg-blue-100 border-b-2 hover:bg-blue-50 hover:border-b-4 hover:border-l'
+          }  h-32`}
           onClick={() => setToggled((prev) => !prev)}
         >
           {toggled ? '›' : 'AI'}

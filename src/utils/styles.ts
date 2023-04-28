@@ -6,6 +6,13 @@ export const theme = classnames(
   borders('border-stone-500')
 );
 
+export const themeFlex = classnames(
+  typography('text-stone-500','tracking-widest'),
+  borders('border-stone-500'),
+  layout('flex'),
+  flexBox('justify-center','items-center'),
+)
+
 export const themeActive = classnames(
   typography('text-stone-500','tracking-widest'),
   backgroundColor('bg-stone-200'),

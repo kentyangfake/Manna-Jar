@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import {
   selectProfile,
@@ -12,12 +12,15 @@ interface Props {
   edit?: string;
   deleteInfo?: { id: string; title: string };
   previous?: boolean;
+  fullGraph?: boolean;
 }
 
-const SizePicker = ({ edit, deleteInfo, previous }: Props) => {
+const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
   const dispatch = useAppDispatch();
   const profile = useAppSelector(selectProfile);
   const navigate = useNavigate();
+  const [toggleFontSize, setToggleFontSize] = useState(false);
+  const [toggleHelp, settoggleHelp] = useState(false);
   return (
     <div className="flex h-8 border-y bg-stone-500 border-stone-500">
       {previous && (
@@ -28,38 +31,6 @@ const SizePicker = ({ edit, deleteInfo, previous }: Props) => {
           ←
         </div>
       )}
-      <div
-        className={`w-20 border-r text-sm font-serif font-black ${
-          previous ? 'rounded-full' : 'rounded-e-full'
-        } ${
-          profile.fontSize === 'small'
-            ? styles.themeButtonActive
-            : styles.themeButton
-        }`}
-        onClick={() => dispatch(changeDisplayFontSize('small'))}
-      >
-        Aa
-      </div>
-      <div
-        className={`w-20 border-x text-lg font-serif font-bold rounded-full ${
-          profile.fontSize === 'medium'
-            ? styles.themeButtonActive
-            : styles.themeButton
-        }`}
-        onClick={() => dispatch(changeDisplayFontSize('medium'))}
-      >
-        Aa
-      </div>
-      <div
-        className={`w-20 border-x text-2xl font-serif font-bold rounded-full ${
-          profile.fontSize === 'large'
-            ? styles.themeButtonActive
-            : styles.themeButton
-        }`}
-        onClick={() => dispatch(changeDisplayFontSize('large'))}
-      >
-        Aa
-      </div>
       <div className={`${styles.theme} grow border-l rounded-s-full`}></div>
       {edit && (
         <Link
@@ -83,6 +54,110 @@ const SizePicker = ({ edit, deleteInfo, previous }: Props) => {
         >
           <span className="material-symbols-outlined text-lg">delete</span>
         </div>
+      )}
+      {/* fontsize */}
+      <div
+        className={`relative ${styles.themeFlex} w-20 border-l ${
+          toggleFontSize
+            ? 'borde-b-0 bg-stone-100 hover:border-b-0'
+            : 'border-b-2 hover:border-b-4 hover:border-l-2 bg-stone-300 hover:bg-stone-200'
+        }`}
+      >
+        <span
+          className="cursor-pointer grow text-center text-lg font-serif font-bold"
+          onClick={() => {
+            setToggleFontSize((prev) => !prev);
+            settoggleHelp(false);
+          }}
+        >
+          Aa
+        </span>
+        <div
+          className={`${toggleFontSize ? 'flex' : 'hidden'} ${
+            styles.theme
+          } absolute z-30 -right-[1px] top-[30px] h-16 w-[248px] justify-center items-center rounded-b-3xl rounded-tl-3xl drop-shadow-xl border bg-stone-300`}
+        >
+          <div
+            className={`${styles.themeButtonNoBg} ${
+              profile.fontSize === 'small' && 'bg-stone-200'
+            } grow h-full rounded-l-3xl text-2xl font-serif font-bold`}
+            onClick={() => dispatch(changeDisplayFontSize('small'))}
+          >
+            S
+          </div>
+          <div
+            className={`${styles.themeButtonNoBg} ${
+              profile.fontSize === 'medium' && 'bg-stone-200'
+            } grow border-l h-full text-2xl font-serif font-bold`}
+            onClick={() => dispatch(changeDisplayFontSize('medium'))}
+          >
+            M
+          </div>
+          <div
+            className={`${styles.themeButtonNoBg} ${
+              profile.fontSize === 'large' && 'bg-stone-200'
+            } grow border-l h-full rounded-br-3xl text-2xl font-serif font-bold`}
+            onClick={() => dispatch(changeDisplayFontSize('large'))}
+          >
+            L
+          </div>
+        </div>
+      </div>
+      {/* help */}
+      {!fullGraph && (
+        <div
+          className={`relative ${styles.themeFlex} w-20 border-l ${
+            toggleHelp
+              ? 'borde-b-0 bg-stone-100 hover:border-b-0'
+              : 'border-b-2 hover:border-b-4 hover:border-l-2 bg-stone-300 hover:bg-stone-200'
+          }`}
+        >
+          <span
+            className="cursor-pointer material-symbols-outlined text-lg grow text-center"
+            onClick={() => {
+              settoggleHelp((prev) => !prev);
+              setToggleFontSize(false);
+            }}
+          >
+            help
+          </span>
+          <div
+            className={`${toggleHelp ? 'flex' : 'hidden'} ${
+              styles.theme
+            } border absolute z-30 -right-[1px] top-[30px] p-4 h-80 w-60 rounded-b-3xl rounded-tl-3xl drop-shadow-xl`}
+          >
+            介紹連結圖和筆記連結可點擊/複製分享連結
+          </div>
+        </div>
+      )}
+      {fullGraph && (
+        <>
+          <div
+            className={`relative ${styles.themeFlex} w-20 border-l ${
+              toggleHelp
+                ? 'borde-b-0 bg-stone-100 hover:border-b-0'
+                : 'border-b-2 hover:border-b-4 hover:border-l-2 bg-stone-300 hover:bg-stone-200'
+            }`}
+          >
+            <span
+              className="cursor-pointer material-symbols-outlined text-lg grow text-center"
+              onClick={() => {
+                settoggleHelp((prev) => !prev);
+                setToggleFontSize(false);
+              }}
+            >
+              help
+            </span>
+            <div
+              className={`${toggleHelp ? 'flex' : 'hidden'} ${
+                styles.theme
+              } border absolute z-30 -right-[1px] top-[30px] p-4 h-80 w-60 rounded-b-3xl rounded-tl-3xl drop-shadow-xl`}
+            >
+              介紹graphview跟ai回顧
+            </div>
+          </div>
+          <div className={`${styles.theme} w-7 border-l`}></div>
+        </>
       )}
     </div>
   );

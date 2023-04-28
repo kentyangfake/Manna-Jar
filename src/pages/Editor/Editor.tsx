@@ -34,6 +34,7 @@ const Editor = () => {
   const navigate = useNavigate();
   const profile = useAppSelector(selectProfile);
   const { id } = useParams();
+  const [toggleHelp, settoggleHelp] = useState(false);
 
   useEffect(() => {
     if (!profile.isLogin) {
@@ -101,8 +102,8 @@ const Editor = () => {
             className={`${styles.themeButtonNoBg} grow border-r ${
               note.category === option.value &&
               (option.value === 'sermon'
-                ? 'bg-lime-100 border-b-2'
-                : 'bg-violet-100 border-b-2')
+                ? 'bg-lime-100 border-b'
+                : 'bg-violet-100 border-b')
             }`}
             onClick={() => setNote({ ...note, category: option.value })}
           >
@@ -119,7 +120,7 @@ const Editor = () => {
       <div className="flex h-10">
         <div className={`${styles.theme} grow border-y`}></div>
         <div
-          className={`${styles.themeButton} w-32 border-y border-l hover:border-b-4 hover:border-l-2`}
+          className={`${styles.themeButton} w-32 border-t border-b-2 border-l hover:border-b-4 hover:border-l-2`}
           onClick={() => {
             isEdit ? handleEditNote() : handleAddNote();
           }}
@@ -127,12 +128,36 @@ const Editor = () => {
           {isEdit ? '儲存修改' : '新增筆記'}
         </div>
         <div
-          className={`${styles.themeButton} w-32 border-y border-l hover:border-b-4 hover:border-l-2`}
+          className={`${styles.themeButton} w-32 border-t border-b-2 border-l hover:border-b-4 hover:border-l-2`}
           onClick={() => {
             isEdit ? navigate(`/note/${id}`) : navigate('/');
           }}
         >
           取消
+        </div>
+        {/* helper */}
+        <div
+          className={`relative ${styles.themeFlex} w-20 border-l border-y ${
+            toggleHelp
+              ? 'bg-stone-100'
+              : 'bg-stone-300 border-b-2 hover:bg-stone-200 hover:border-b-4 hover:border-l-2'
+          }`}
+        >
+          <span
+            className="cursor-pointer material-symbols-outlined text-lg grow text-center"
+            onClick={() => {
+              settoggleHelp((prev) => !prev);
+            }}
+          >
+            help
+          </span>
+          <div
+            className={`${toggleHelp ? 'flex' : 'hidden'} ${
+              styles.theme
+            } border absolute z-10 right-0 bottom-[38px] h-80 w-60 p-4 rounded-t-3xl rounded-bl-3xl drop-shadow-xl`}
+          >
+            介紹自動輸入經文/筆記連結功能
+          </div>
         </div>
       </div>
     </div>

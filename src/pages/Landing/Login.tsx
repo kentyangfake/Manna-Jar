@@ -19,7 +19,6 @@ import { ReactComponent as Dove } from '../../assets/dove.svg';
 import { ReactComponent as Candle } from '../../assets/candle.svg';
 import loading from '../../assets/loading.gif';
 import scrollDown from '../../assets/scroll-down.gif';
-import scrollUp from '../../assets/scroll-up.gif';
 
 const demoNotesTitles = [
   '出人意外的平安',
