@@ -97,6 +97,7 @@ const loginSlice = createSlice({
         Swal.fire({
           icon: 'warning',
           text: '您已收藏過此篇筆記',
+          background:'#f5f5f4',
         })
         return
       }
@@ -113,13 +114,24 @@ const loginSlice = createSlice({
         notes: state.profile.notes,
       }
       firestore.updateUser(id, data);
-      action.payload.category === 'shared'? window.alert(`您已收藏${action.payload.sharedBy}的筆記`): window.alert(`新增筆記:${action.payload.title}`)
+      action.payload.category === 'shared'? Swal.fire({
+        icon: 'success',
+        title: '收藏筆記',
+        text: `您已收藏${action.payload.sharedBy}的筆記`,
+        background:'#f5f5f4',
+      }) : Swal.fire({
+        icon: 'success',
+        title: '新增筆記',
+        text: `已新增筆記 ${action.payload.title}`,
+        background:'#f5f5f4',
+      })
     },
     deleteNote:(state,action:PayloadAction<string>) => {
       if(state.profile.notes.length === 1){
         Swal.fire({
           icon: 'warning',
           text: '請保留一篇筆記',
+          background:'#f5f5f4',
         })
         return
       }
@@ -152,6 +164,7 @@ const loginSlice = createSlice({
         icon: 'info',
         title: '筆記已修改',
         text: `已更新 ${editedNote.title} 筆記內容!`,
+        background:'#f5f5f4',
       })
     },
     changeOrderByTime:(state)=>{
@@ -236,6 +249,7 @@ const loginSlice = createSlice({
           icon: 'error',
           title: '註冊失敗',
           text: '請檢查帳號/密碼的完整性',
+          background:'#f5f5f4',
         })
         state.isLoading = false;
       })
@@ -255,6 +269,7 @@ const loginSlice = createSlice({
           icon: 'error',
           title: '登入失敗',
           text: '請檢查帳號/密碼是否正確?',
+          background:'#f5f5f4',
         })
         state.isLoading = false;
       })

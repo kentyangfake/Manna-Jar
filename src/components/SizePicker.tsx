@@ -49,6 +49,7 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
               title: '刪除筆記',
               text: `確定要刪除 ${deleteInfo.title} 嗎?`,
               icon: 'question',
+              background: '#f5f5f4',
               showCancelButton: true,
               confirmButtonColor: '#f87171',
               cancelButtonColor: '#d6d3d1',
@@ -57,7 +58,12 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
             }).then((result) => {
               if (result.isConfirmed) {
                 dispatch(deleteNote(deleteInfo.id!));
-                Swal.fire('已刪除', `刪除筆記: ${deleteInfo.title}`, 'success');
+                Swal.fire({
+                  title: '已刪除',
+                  text: `刪除筆記: ${deleteInfo.title}`,
+                  icon: 'success',
+                  background: '#f5f5f4',
+                });
                 navigate('/');
               }
             });

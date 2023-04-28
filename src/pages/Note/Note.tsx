@@ -70,6 +70,7 @@ const Note = () => {
         icon: 'warning',
         title: '找不到這篇筆記',
         text: '筆記可能被刪除,或向分享者索取該筆記',
+        background: '#f5f5f4',
       });
     }
 
