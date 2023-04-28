@@ -7,6 +7,7 @@ import NetworkGraph from '../../components/NetworkGraph';
 import Header from '../../components/header';
 import SizePicker from '../../components/SizePicker';
 import * as styles from '../../utils/styles';
+import Swal from 'sweetalert2';
 
 interface Referenced {
   linkTitle: string;
@@ -64,6 +65,11 @@ const Note = () => {
         link_notes: [],
         create_time: 1,
         edit_time: 1,
+      });
+      Swal.fire({
+        icon: 'warning',
+        title: '找不到這篇筆記',
+        text: '筆記可能被刪除,或向分享者索取該筆記',
       });
     }
 

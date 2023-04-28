@@ -48,7 +48,7 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
             Swal.fire({
               title: '刪除筆記',
               text: `確定要刪除 ${deleteInfo.title} 嗎?`,
-              icon: 'warning',
+              icon: 'question',
               showCancelButton: true,
               confirmButtonColor: '#f87171',
               cancelButtonColor: '#d6d3d1',
@@ -61,13 +61,6 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
                 navigate('/');
               }
             });
-
-            // const isDelete = window.confirm('確認要刪除嗎?');
-            // if (isDelete) {
-            //   dispatch(deleteNote(deleteInfo.id!));
-            //   window.alert(`已刪除筆記:${deleteInfo.title}`);
-            //   navigate('/');
-            // }
           }}
         >
           <span className="material-symbols-outlined text-lg">delete</span>

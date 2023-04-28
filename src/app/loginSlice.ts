@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { auth, firestore } from '../utils/firebase';
 import { NoteType } from './types';
+import Swal from 'sweetalert2';
 
 interface CustomUser {
   uid: string;
@@ -93,7 +94,10 @@ const loginSlice = createSlice({
       const order = state.profile.orderBy.time
       //handle already had note
       if (state.profile.notes.findIndex(note => note.id === action.payload.id ) >= 0){
-        alert('您已收藏此筆記!');
+        Swal.fire({
+          icon: 'warning',
+          text: '您已收藏過此篇筆記',
+        })
         return
       }
       //handle added note without title
@@ -113,7 +117,10 @@ const loginSlice = createSlice({
     },
     deleteNote:(state,action:PayloadAction<string>) => {
       if(state.profile.notes.length === 1){
-        window.alert('請保留至少一篇筆記!');
+        Swal.fire({
+          icon: 'warning',
+          text: '請保留一篇筆記',
+        })
         return
       }
       state.profile.notes = state.profile.notes.filter(note => note.id !== action.payload);
@@ -141,7 +148,11 @@ const loginSlice = createSlice({
         notes: state.profile.notes,
       }
       firestore.updateUser(id, data);
-      window.alert('修改筆記成功!');
+      Swal.fire({
+        icon: 'info',
+        title: '筆記已修改',
+        text: `已更新 ${editedNote.title} 筆記內容!`,
+      })
     },
     changeOrderByTime:(state)=>{
       state.profile.orderBy.time === 'newest'? state.profile.orderBy.time = 'oldest' : state.profile.orderBy.time = 'newest';
@@ -221,7 +232,11 @@ const loginSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(signUpAsync.rejected, (state, action) => {
-        window.alert("註冊失敗!");
+        Swal.fire({
+          icon: 'error',
+          title: '註冊失敗',
+          text: '請檢查帳號/密碼的完整性',
+        })
         state.isLoading = false;
       })
       .addCase(loginAsync.pending,(state)=>{
@@ -236,7 +251,11 @@ const loginSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(loginAsync.rejected, (state, action) => {
-        window.alert("登入失敗!");
+        Swal.fire({
+          icon: 'error',
+          title: '登入失敗',
+          text: '請檢查帳號/密碼是否正確?',
+        })
         state.isLoading = false;
       })
       .addCase(loginViaLocalAsync.fulfilled, (state, action) => {
