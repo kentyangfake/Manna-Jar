@@ -185,7 +185,7 @@ const Note = () => {
                   <span className="material-symbols-outlined pr-2 text-base">
                     file_copy
                   </span>
-                  點我複製
+                  一鍵複製
                 </>
               )}
             </label>

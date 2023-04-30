@@ -8,6 +8,10 @@ import {
 import { useNavigate, Link } from 'react-router-dom';
 import * as styles from '../utils/styles';
 import Swal from 'sweetalert2';
+import connection from '../assets/connection.png';
+import link from '../assets/link.png';
+import shareButton from '../assets/shareButton.png';
+import referencedBy from '../assets/referencedBy.png';
 
 interface Props {
   edit?: string;
@@ -22,6 +26,21 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
   const navigate = useNavigate();
   const [toggleFontSize, setToggleFontSize] = useState(false);
   const [toggleHelp, settoggleHelp] = useState(false);
+  let fontSize = 'text-base';
+  switch (profile.fontSize) {
+    case 'small':
+      fontSize = 'text-base';
+      break;
+    case 'medium':
+      fontSize = 'text-lg';
+      break;
+    case 'large':
+      fontSize = 'text-xl';
+      break;
+    default:
+      fontSize = 'text-base';
+  }
+
   return (
     <div className="flex h-8 border-y bg-stone-500 border-stone-500">
       {previous && (
@@ -141,9 +160,82 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
           <div
             className={`${toggleHelp ? 'flex' : 'hidden'} ${
               styles.theme
-            } border absolute z-30 -right-[1px] top-[30px] p-4 h-80 w-60 rounded-b-3xl rounded-tl-3xl drop-shadow-xl`}
+            } ${fontSize} flex-col overflow-y-auto border absolute z-30 -right-[1px] top-[30px] p-4 h-80 w-72 rounded-b-3xl rounded-tl-3xl drop-shadow-xl`}
           >
-            介紹連結圖和筆記連結可點擊/複製分享連結
+            <div className="mb-3 font-semibold">筆記關聯</div>
+            <span>
+              若筆記有引用其他筆記,可透過點擊文章內的
+              <span
+                className="cursor-pointer text-violet-400"
+                onClick={() =>
+                  Swal.fire({
+                    imageUrl: link,
+                    imageHeight: 100,
+                    imageAlt: 'linkImg',
+                    showConfirmButton: false,
+                    background: 'rgba(255,255,255,0)',
+                    timer: 1000,
+                  })
+                }
+              >
+                筆記連結
+              </span>
+              前往該筆記頁面,若當前筆記有被其他筆記引用,可透過文末的
+              <span
+                className="cursor-pointer text-violet-400"
+                onClick={() =>
+                  Swal.fire({
+                    imageUrl: referencedBy,
+                    imageHeight: 150,
+                    imageAlt: 'referencedByImg',
+                    showConfirmButton: false,
+                    background: 'rgba(255,255,255,0)',
+                    timer: 1000,
+                  })
+                }
+              >
+                引用列表
+              </span>
+              查看。已建立連結的筆記皆會顯示在右側
+              <span
+                className="cursor-pointer text-violet-400"
+                onClick={() =>
+                  Swal.fire({
+                    imageUrl: connection,
+                    imageHeight: 500,
+                    imageAlt: 'connectionImg',
+                    showConfirmButton: false,
+                    background: 'rgba(255,255,255,0)',
+                    timer: 1000,
+                  })
+                }
+              >
+                連結圖
+              </span>
+              內,可點擊圖示前往該筆記。
+            </span>
+            <div className="mt-5 mb-3 font-semibold">分享和收藏</div>
+            <span>
+              複製連結圖下方的
+              <span
+                className="cursor-pointer text-violet-400"
+                onClick={() =>
+                  Swal.fire({
+                    imageUrl: shareButton,
+                    imageHeight: 100,
+                    imageAlt: 'shareButtonImg',
+                    showConfirmButton: false,
+                    background: 'rgba(255,255,255,0)',
+                    timer: 1000,
+                  })
+                }
+              >
+                分享網址
+              </span>
+              後，透過您常用的通訊軟體，即可將自己撰寫的筆記分享給其他嗎哪罐子使用者。
+              <br />
+              使用者登入嗎哪罐子後，只要點擊分享連結,即可收藏該篇筆記。
+            </span>
           </div>
         </div>
       )}
