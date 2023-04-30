@@ -142,7 +142,9 @@ const GraphView = () => {
         <div className="border-b border-stone-500 py-3 text-2xl italic tracking-widest">
           信仰回顧
         </div>
-        <div className={`${fontSize} pt-3 tracking-wider leading-relaxed`}>
+        <div
+          className={`${fontSize} pt-3 tracking-wider leading-relaxed overflow-y-auto`}
+        >
           {summeries}
         </div>
         {profile.notes.length > 5 && (

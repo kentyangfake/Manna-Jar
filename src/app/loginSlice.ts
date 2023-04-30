@@ -117,12 +117,12 @@ const loginSlice = createSlice({
       action.payload.category === 'shared'? Swal.fire({
         icon: 'success',
         title: '收藏筆記',
-        text: `您已收藏${action.payload.sharedBy}的筆記`,
+        text: `您已收藏${addedNote.sharedBy}的筆記`,
         background:'#f5f5f4',
       }) : Swal.fire({
         icon: 'success',
         title: '新增筆記',
-        text: `已新增筆記 ${action.payload.title}`,
+        text: `已新增 ${addedNote.title} 至 ${addedNote.category==='sermon'?'聚會崇拜':'個人靈修'}`,
         background:'#f5f5f4',
       })
     },
