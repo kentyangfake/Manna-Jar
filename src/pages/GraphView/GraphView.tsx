@@ -147,7 +147,7 @@ const GraphView = () => {
         >
           {summeries}
         </div>
-        {profile.notes.length > 5 && (
+        {profile.notes.length > 10 && (
           <div
             className={`${styles.themeButtonNoBg} ${
               isAiTyping && 'bg-stone-100'

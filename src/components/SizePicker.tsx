@@ -164,7 +164,7 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
           >
             <div className="mb-3 font-semibold">筆記關聯</div>
             <span>
-              若筆記有引用其他筆記,可透過點擊文章內的
+              若筆記有引用其他筆記，可透過點擊文章內的
               <span
                 className="cursor-pointer text-violet-400"
                 onClick={() =>
@@ -180,7 +180,7 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
               >
                 筆記連結
               </span>
-              前往該筆記頁面,若當前筆記有被其他筆記引用,可透過文末的
+              前往該筆記頁面，若當前筆記有被其他筆記引用，可透過文末的
               <span
                 className="cursor-pointer text-violet-400"
                 onClick={() =>
@@ -212,9 +212,9 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
               >
                 連結圖
               </span>
-              內,可點擊圖示前往該筆記。
+              內，可點擊圓點圖示前往該筆記。
             </span>
-            <div className="mt-5 mb-3 font-semibold">分享和收藏</div>
+            <div className="mt-5 mb-3 font-semibold">分享筆記</div>
             <span>
               複製連結圖下方的
               <span
@@ -233,8 +233,9 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
                 分享網址
               </span>
               後，透過您常用的通訊軟體，即可將自己撰寫的筆記分享給其他嗎哪罐子使用者。
-              <br />
-              使用者登入嗎哪罐子後，只要點擊分享連結,即可收藏該篇筆記。
+              <div className="mt-5 mb-3 font-semibold">收藏筆記</div>
+              使用者登入嗎哪罐子後，只要在通訊軟體裡<i>點擊分享連結</i>
+              ，即可收藏該篇筆記。
             </span>
           </div>
         </div>
@@ -242,7 +243,9 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
       {fullGraph && (
         <>
           <div
-            className={`relative ${styles.themeFlex} w-20 border-l ${
+            className={`relative ${
+              styles.themeFlex
+            } ${fontSize} w-20 border-l ${
               toggleHelp
                 ? 'borde-b-0 bg-stone-100 hover:border-b-0'
                 : 'border-b-2 hover:border-b-4 hover:border-l-2 bg-stone-300 hover:bg-stone-200'
@@ -260,9 +263,16 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
             <div
               className={`${toggleHelp ? 'flex' : 'hidden'} ${
                 styles.theme
-              } border absolute z-30 -right-[1px] top-[30px] p-4 h-80 w-60 rounded-b-3xl rounded-tl-3xl drop-shadow-xl`}
+              } overflow-y-auto flex-col border absolute z-30 -right-[1px] top-[30px] p-4 h-80 w-72 rounded-b-3xl rounded-tl-3xl drop-shadow-xl`}
             >
-              介紹graphview跟ai回顧
+              <div className="mb-3 font-semibold">我的罐子</div>
+              <span>
+                在這裡會展示所有的筆記，可以一覽無遺信仰的累積，獲得能量並尋找靈感。可依筆記分類篩選展示結果。點擊圓點圖示可前往對應的筆記頁面。
+              </span>
+              <div className="mt-5 mb-3 font-semibold">AI回顧</div>
+              <span>
+                AI會幫您回顧最近的筆記內容，並推薦可能有關聯的筆記供您複習。如果這些筆記內容彼此呼應，別忘了幫這些筆記建立連結唷！(此功能在您累積一定數量的筆記後解鎖)
+              </span>
             </div>
           </div>
           <div className={`${styles.theme} w-7 border-l`}></div>
