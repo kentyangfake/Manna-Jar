@@ -7,6 +7,7 @@ import NetworkGraph from '../../components/NetworkGraph';
 import Header from '../../components/header';
 import SizePicker from '../../components/SizePicker';
 import * as styles from '../../utils/styles';
+import Swal from 'sweetalert2';
 
 interface Referenced {
   linkTitle: string;
@@ -65,6 +66,12 @@ const Note = () => {
         create_time: 1,
         edit_time: 1,
       });
+      Swal.fire({
+        icon: 'warning',
+        title: '找不到這篇筆記',
+        text: '筆記可能被刪除,或向分享者索取該筆記',
+        background: '#f5f5f4',
+      });
     }
 
     const referencedBy: Referenced[] = [];
@@ -89,13 +96,15 @@ const Note = () => {
           sharedBy={currentNote.sharedBy}
         />
         {currentNote.category === 'admin' ? (
-          <SizePicker />
+          <SizePicker previous />
         ) : currentNote.category === 'shared' ? (
           <SizePicker
+            previous
             deleteInfo={{ id: currentNote.id, title: currentNote.title }}
           />
         ) : (
           <SizePicker
+            previous
             edit={currentNote.id}
             deleteInfo={{ id: currentNote.id, title: currentNote.title }}
           />
@@ -140,7 +149,7 @@ const Note = () => {
         className={`${styles.theme} fixed top-0 right-0 flex flex-col justify-between h-full w-72 border-l`}
       >
         <Header text={'連結圖'} />
-        <div className="w-full h-96 texture2 border-y border-stone-500">
+        <div className="cursor-crosshair w-full h-96 texture2 border-y border-stone-500">
           <NetworkGraph
             filtBy={'all'}
             id={id}
@@ -152,13 +161,13 @@ const Note = () => {
           currentNote.category === 'devotion') && (
           <div className="flex flex-col p-4 mt-1">
             <input
-              className={`grow truncate h-10 border-x border-t border-stone-400 focus:outline-none font-extralight ${
+              className={`grow truncate h-10 border-x border-t border-stone-400 focus:outline-none font-extralight pl-2 ${
                 isCopied ? 'bg-stone-100' : 'bg-stone-200'
               }`}
               value={shareLink}
             />
             <label
-              className={`flex justify-center text-2xl border cursor-pointer border-stone-400 pb-2 hover:bg-stone-200 ${
+              className={`flex justify-center items-center h-10 border cursor-pointer border-stone-400 hover:bg-stone-200 ${
                 isCopied ? 'bg-stone-200' : 'bg-stone-300'
               }`}
               onClick={() => {
@@ -167,7 +176,18 @@ const Note = () => {
                 setTimeout(() => setIsCopied(false), 500);
               }}
             >
-              {isCopied ? '✓' : '⟶'}
+              {isCopied ? (
+                <>
+                  <span className="material-symbols-outlined">done</span>
+                </>
+              ) : (
+                <>
+                  <span className="material-symbols-outlined pr-2 text-base">
+                    file_copy
+                  </span>
+                  一鍵複製
+                </>
+              )}
             </label>
           </div>
         )}

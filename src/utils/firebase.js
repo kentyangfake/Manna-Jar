@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, setDoc, getDoc, doc} from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
-import { v4 as uuidv4 } from 'uuid';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -23,7 +22,7 @@ export const firestore = {
       name,
       email,
       notes:[{
-      id:uuidv4(),
+      id:'admin-tutorial',
       category:'admin',
       link_notes: [],
       create_time: 1,

@@ -50,8 +50,12 @@
   text-decoration-line: none;
 }
 
+.ql-picker-label::before {
+  transform: translate(3px, -3px);
+}
+
 .ql-editor {
-  min-height: 400px;
+  min-height: 70vh;
   flex-grow: 1;
   width: 100%;
   overflow: hidden;
