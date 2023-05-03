@@ -149,7 +149,7 @@ const Note = () => {
         className={`${styles.theme} fixed top-0 right-0 flex flex-col justify-between h-full w-72 border-l`}
       >
         <Header text={'連結圖'} />
-        <div className="w-full h-96 texture2 border-y border-stone-500">
+        <div className="w-full h-96 texture2 border-b border-stone-500">
           <NetworkGraph
             filtBy={'all'}
             id={id}

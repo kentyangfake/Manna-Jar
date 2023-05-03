@@ -11,7 +11,9 @@ interface Props {
 
 const Header = ({ text, underline, createTime, editTime, sharedBy }: Props) => {
   return (
-    <div className={`${styles.theme} flex justify-between items-end h-20 p-5`}>
+    <div
+      className={`${styles.theme} flex justify-between items-end h-20 p-5 border-b`}
+    >
       <p
         className={`${
           underline && styles.underline

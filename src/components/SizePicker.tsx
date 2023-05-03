@@ -42,7 +42,7 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
   }
 
   return (
-    <div className="flex h-8 border-y bg-stone-500 border-stone-500">
+    <div className="flex h-8 border-b bg-stone-500 border-stone-500">
       {previous && (
         <div
           className={`w-32 border-r font-bold rounded-e-full ${styles.themeButton}`}
@@ -51,7 +51,9 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
           ←
         </div>
       )}
-      <div className={`${styles.theme} grow border-l rounded-s-full`}></div>
+      <div
+        className={`${styles.theme} ${previous && 'rounded-s-full'} grow`}
+      ></div>
       {edit && (
         <Link
           to={`/editor/${edit}`}

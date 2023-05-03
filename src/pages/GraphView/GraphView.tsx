@@ -119,7 +119,7 @@ const GraphView = () => {
       <div
         className={`${styles.theme} fixed flex flex-col z-30 top-0 right-0 h-full w-7 border-l border-stone-500`}
       >
-        <div className={`${styles.theme} border-y h-8`}></div>
+        <div className={`${styles.theme} border-b h-8 -mt-[1px]`}></div>
         <div
           className={`${styles.navButtonSmall} ${
             toggled

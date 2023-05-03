@@ -50,7 +50,7 @@ const Navigate = ({ setToggled }: Prop) => {
     <div
       className={`${styles.theme} flex flex-col justify-between h-full w-48 border-r`}
     >
-      <div className="flex w-full border-b border-stone-500">
+      <div className="flex w-full -mt-[1px] border-b border-stone-500">
         <Link
           to="/"
           className={`${styles.themeButton} grow h-20 font-bold tracking-widest text-2xl border-r`}

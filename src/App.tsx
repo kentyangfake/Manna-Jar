@@ -33,7 +33,7 @@ function App() {
           }
         >
           <div
-            className={`${styles.themeButton} border-b w-full h-20 mt-[1px]`}
+            className={`${styles.themeButton} border-b w-full h-20`}
             onClick={() => setToggled(true)}
           >
             ≡
