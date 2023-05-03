@@ -172,13 +172,64 @@ const NetworkGraph = ({
     }
 
     const newGraph: GraphType = noEvent
-      ? { graph: { nodes: newNodes, edges: newEdges } }
+      ? {
+          graph: { nodes: newNodes, edges: newEdges },
+          events: {
+            hoverNode: () => {
+              document.body.style.cursor = 'pointer';
+            },
+            blurNode: () => {
+              document.body.style.cursor = 'default';
+            },
+            dragging: () => {
+              document.body.style.cursor = 'grabbing';
+            },
+            dragEnd: () => {
+              document.body.style.cursor = 'grab';
+              setTimeout(() => {
+                document.body.style.cursor = 'default';
+              }, 500);
+            },
+            zoom: ({ direction }: { direction: string }) => {
+              direction === '+'
+                ? (document.body.style.cursor = 'zoom-in')
+                : (document.body.style.cursor = 'zoom-out');
+              setTimeout(() => {
+                document.body.style.cursor = 'default';
+              }, 500);
+            },
+          },
+        }
       : {
           graph: { nodes: newNodes, edges: newEdges },
           events: {
             selectNode: ({ nodes }: { nodes: string[] }) => {
               const noteId = nodes[0];
+              document.body.style.cursor = 'default';
               navigate(`/note/${noteId}`);
+            },
+            hoverNode: () => {
+              document.body.style.cursor = 'pointer';
+            },
+            blurNode: () => {
+              document.body.style.cursor = 'default';
+            },
+            dragging: () => {
+              document.body.style.cursor = 'grabbing';
+            },
+            dragEnd: () => {
+              document.body.style.cursor = 'grab';
+              setTimeout(() => {
+                document.body.style.cursor = 'default';
+              }, 500);
+            },
+            zoom: ({ direction }: { direction: string }) => {
+              direction === '+'
+                ? (document.body.style.cursor = 'zoom-in')
+                : (document.body.style.cursor = 'zoom-out');
+              setTimeout(() => {
+                document.body.style.cursor = 'default';
+              }, 500);
             },
           },
         };

@@ -173,31 +173,38 @@ const Login = () => {
                   ref={emailRef}
                 />
               </div>
-              <div className="flex items-center border-b border-stone-500 p-2">
-                <span className="text-base material-symbols-outlined py-4">
-                  lock
-                </span>
-                <input
-                  className="h-10 bg-[rgba(0,0,0,0)] grow pl-2 placeholder:text-stone-400 focus:outline-none"
-                  type={hidePassword ? 'password' : 'text'}
-                  placeholder="密碼"
-                  required
-                  ref={passwordRef}
-                />
-                <span
-                  className="pr-4 cursor-pointer"
-                  onClick={() => setHidePassword((prev) => !prev)}
-                >
-                  {hidePassword ? (
-                    <span className="text-sm material-symbols-outlined">
-                      visibility_off
-                    </span>
-                  ) : (
-                    <span className="text-sm material-symbols-outlined">
-                      visibility
-                    </span>
-                  )}
-                </span>
+              <div className="flex flex-col border-b border-stone-500 p-2">
+                <div className="flex items-center">
+                  <span className="text-base material-symbols-outlined py-4">
+                    lock
+                  </span>
+                  <input
+                    className="h-10 bg-[rgba(0,0,0,0)] grow pl-2 placeholder:text-stone-400 focus:outline-none"
+                    type={hidePassword ? 'password' : 'text'}
+                    placeholder="密碼"
+                    required
+                    ref={passwordRef}
+                  />
+                  <span
+                    className="pr-4 cursor-pointer"
+                    onClick={() => setHidePassword((prev) => !prev)}
+                  >
+                    {hidePassword ? (
+                      <span className="text-sm material-symbols-outlined">
+                        visibility_off
+                      </span>
+                    ) : (
+                      <span className="text-sm material-symbols-outlined">
+                        visibility
+                      </span>
+                    )}
+                  </span>
+                </div>
+                {isSignUp && (
+                  <span className="text-xs -mt-2">
+                    ※英文加數字至少6碼,注意大小寫
+                  </span>
+                )}
               </div>
               {isSignUp ? (
                 <div
@@ -332,7 +339,7 @@ const Login = () => {
           <div className="text-xl">
             一覽無遺你的信仰知識，你可以探索，觀察，從過去的累積獲得靈感和能量。
           </div>
-          <div className="cursor-crosshair texture mt-20 h-[70vh] w-[70%] rounded-[100%/100%] bg-stone-300 border border-stone-500">
+          <div className="graph-clip texture mt-20 h-[70vh] w-[70%] bg-stone-300 border border-stone-500">
             <NetworkGraph filtBy={'all'} userNotes={demoNotes} noEvent />
           </div>
         </div>

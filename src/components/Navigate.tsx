@@ -11,7 +11,7 @@ import { ReactComponent as Sheep } from '../assets/sheep.svg';
 import { ReactComponent as Dove } from '../assets/dove.svg';
 import { ReactComponent as Candle } from '../assets/candle.svg';
 import { ReactComponent as Jar } from '../assets/jar.svg';
-import styled from 'styled-components';
+import Swal from 'sweetalert2';
 
 interface Prop {
   setToggled: React.Dispatch<React.SetStateAction<boolean>>;
@@ -117,8 +117,18 @@ const Navigate = ({ setToggled }: Prop) => {
             </NavLink>
           </div>
           <div className="flex justify-end mt-auto h-10 border-t border-stone-500">
-            <div className={`${styles.themeButton} grow border-r`}>
-              歡迎回來,{profile.name}
+            <div
+              className={`${styles.themeButton} grow border-r`}
+              onClick={() =>
+                Swal.fire({
+                  title: profile.name,
+                  text: `共有 ${profile.notes.length} 篇筆記`,
+                  showConfirmButton: false,
+                  background: '#f5f5f4',
+                })
+              }
+            >
+              個人資料
             </div>
             <div
               className={`${styles.themeButton} w-7`}
@@ -131,7 +141,19 @@ const Navigate = ({ setToggled }: Prop) => {
       ) : (
         <>
           <div className="flex justify-center">請先登入</div>
-          <div className={`${styles.themeButton} h-10 border-t`}>關於我們</div>
+          <div
+            className={`${styles.themeButton} h-10 border-t`}
+            onClick={() =>
+              Swal.fire({
+                title: '關於我們',
+                text: '由YuChien開發的個人專案',
+                showConfirmButton: false,
+                background: '#f5f5f4',
+              })
+            }
+          >
+            關於我們
+          </div>
         </>
       )}
     </div>

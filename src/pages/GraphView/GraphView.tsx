@@ -67,47 +67,47 @@ const GraphView = () => {
     <div className="flex h-full w-full">
       <div className="flex flex-col grow justify-between h-full">
         <SizePicker fullGraph />
-        <div className="flex justify-center items-center w-full h-full pl-5 pr-14 py-5 sky tracking-widest">
-          <div
-            className={`cursor-crosshair relative grow h-full rounded-[100%/100%] bg-stone-300 texture border border-stone-500`}
-          >
-            <div className={`absolute z-10 top-5 left-5 flex flex-col gap-2`}>
-              <div
-                className={`py-1 px-2 border rounded-full text-xs ${
-                  styles.themeButtonNoBg
-                } ${filtBy === 'all' ? 'bg-stone-100' : 'bg-stone-300'}`}
-                onClick={() => setFiltBy('all')}
-              >
-                全部筆記
-              </div>
-              <div
-                className={`py-1 px-2 border rounded-full text-xs ${
-                  styles.themeButtonNoBg
-                } ${filtBy === 'sermon' ? 'bg-lime-100' : 'bg-stone-300'}`}
-                onClick={() => setFiltBy('sermon')}
-              >
-                聚會崇拜
-              </div>
-              <div
-                className={`py-1 px-2 border rounded-full text-xs ${
-                  styles.themeButtonNoBg
-                } ${filtBy === 'devotion' ? 'bg-violet-100' : 'bg-stone-300'}`}
-                onClick={() => setFiltBy('devotion')}
-              >
-                個人靈修
-              </div>
-              <div
-                className={`py-1 px-2 border rounded-full text-xs ${
-                  styles.themeButtonNoBg
-                } ${filtBy === 'shared' ? 'bg-amber-100' : 'bg-stone-300'}`}
-                onClick={() => setFiltBy('shared')}
-              >
-                分享收藏
-              </div>
+        <div className="flex relative justify-center items-center w-full h-full pl-5 pr-14 py-5 sky tracking-widest">
+          <div className={`absolute z-10 top-10 left-20 flex flex-col gap-2`}>
+            <div
+              className={`py-1 px-2 border rounded-full text-xs ${
+                styles.themeButtonNoBg
+              } ${filtBy === 'all' ? 'bg-stone-100' : 'bg-stone-300'}`}
+              onClick={() => setFiltBy('all')}
+            >
+              全部筆記
             </div>
-            <Star className={`star1 fixed z-20 top-[10%] right-[20%] h-14`} />
-            <Star className={`star2 fixed z-20 bottom-[6%] right-[16%] h-24`} />
-            <Star className={`star3 fixed z-20 bottom-[4%] left-[20%] h-10`} />
+            <div
+              className={`py-1 px-2 border rounded-full text-xs ${
+                styles.themeButtonNoBg
+              } ${filtBy === 'sermon' ? 'bg-lime-100' : 'bg-stone-300'}`}
+              onClick={() => setFiltBy('sermon')}
+            >
+              聚會崇拜
+            </div>
+            <div
+              className={`py-1 px-2 border rounded-full text-xs ${
+                styles.themeButtonNoBg
+              } ${filtBy === 'devotion' ? 'bg-violet-100' : 'bg-stone-300'}`}
+              onClick={() => setFiltBy('devotion')}
+            >
+              個人靈修
+            </div>
+            <div
+              className={`py-1 px-2 border rounded-full text-xs ${
+                styles.themeButtonNoBg
+              } ${filtBy === 'shared' ? 'bg-amber-100' : 'bg-stone-300'}`}
+              onClick={() => setFiltBy('shared')}
+            >
+              分享收藏
+            </div>
+          </div>
+          <Star className={`star1 fixed z-20 top-[10%] right-[20%] h-14`} />
+          <Star className={`star2 fixed z-20 bottom-[6%] right-[16%] h-24`} />
+          <Star className={`star3 fixed z-20 bottom-[4%] left-[20%] h-10`} />
+          <div
+            className={`graph-clip grow h-full bg-stone-300 texture border border-stone-500`}
+          >
             <NetworkGraph
               filtBy={filtBy}
               selectFontSize={profile.fontSize}

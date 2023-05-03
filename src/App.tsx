@@ -4,7 +4,8 @@ import './App.css';
 import Navigate from './components/Navigate';
 import * as styles from './utils/styles';
 import { useAppDispatch, useAppSelector } from './app/hooks';
-import { logoutAsync, selectProfile } from './app/loginSlice';
+import { selectProfile } from './app/loginSlice';
+import Swal from 'sweetalert2';
 
 const navOptions = [
   { id: 'sermon', label: '聚會崇拜', link: '/?category=sermon' },
@@ -79,15 +80,36 @@ function App() {
               <div className={`border-b border-stone-500 w-full grow`}></div>
               <div
                 className={`${styles.themeButton} border-b w-full h-10`}
-                onClick={() => dispatch(logoutAsync())}
+                onClick={() =>
+                  Swal.fire({
+                    title: profile.name,
+                    text: `共有 ${profile.notes.length} 篇筆記`,
+                    showConfirmButton: false,
+                    background: '#f5f5f4',
+                  })
+                }
               >
-                ⎋
+                <span className="text-base material-symbols-outlined">
+                  person
+                </span>
               </div>
             </>
           ) : (
             <>
               <div className={`w-full grow`}></div>
-              <div className={`${styles.themeButton} h-10 border-t`}>?</div>
+              <div
+                className={`${styles.themeButton} h-10 border-t`}
+                onClick={() =>
+                  Swal.fire({
+                    title: '關於我們',
+                    text: '由YuChien開發的個人專案',
+                    showConfirmButton: false,
+                    background: '#f5f5f4',
+                  })
+                }
+              >
+                ?
+              </div>
             </>
           )}
         </div>

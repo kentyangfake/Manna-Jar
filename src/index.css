@@ -31,6 +31,11 @@ code {
   height: 100vh;
 }
 
+.graph-clip {
+  clip-path: ellipse(50% 50% at 50% 50%);
+  border-radius: 100%/100%;
+}
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
