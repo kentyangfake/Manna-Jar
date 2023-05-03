@@ -111,7 +111,7 @@ function App() {
             </>
           )}
         </div>
-        <div className={`w-full h-full ${toggled ? 'ml-48' : 'ml-7'}`}>
+        <div className={`grow ${toggled ? 'ml-48' : 'ml-7'}`}>
           <Outlet />
         </div>
       </div>

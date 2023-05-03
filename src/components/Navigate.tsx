@@ -99,7 +99,7 @@ const Navigate = ({ setToggled }: Prop) => {
                 </div>
               </Link>
             ))}
-            <NavLink to="/graphview">
+            <NavLink to="/graphview" onClick={() => setToggled(false)}>
               {({ isActive }) =>
                 isActive ? (
                   <div

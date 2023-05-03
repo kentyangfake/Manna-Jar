@@ -38,8 +38,8 @@ const GraphView = () => {
       navigate('/');
     }
 
-    if (profile.notes.length < 5) {
-      setSummeries('累積更多筆記後解鎖此功能。');
+    if (profile.notes.length < 6) {
+      setSummeries('累積5篇筆記後解鎖此功能。');
     }
 
     const notesArr = [...profile.notes]
@@ -67,7 +67,7 @@ const GraphView = () => {
     <div className="flex h-full w-full">
       <div className="flex flex-col grow justify-between h-full">
         <SizePicker fullGraph />
-        <div className="flex relative justify-center items-center w-full h-full pl-5 pr-14 py-5 sky tracking-widest">
+        <div className="flex relative justify-center items-center grow pl-5 pr-14 py-5 sky tracking-widest">
           <div className={`absolute z-10 top-10 left-20 flex flex-col gap-2`}>
             <div
               className={`py-1 px-2 border rounded-full text-xs ${
@@ -147,7 +147,7 @@ const GraphView = () => {
         >
           {summeries}
         </div>
-        {profile.notes.length > 10 && (
+        {profile.notes.length > 5 && (
           <div
             className={`${styles.themeButtonNoBg} ${
               isAiTyping && 'bg-stone-100'
