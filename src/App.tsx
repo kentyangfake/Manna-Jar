@@ -72,9 +72,7 @@ function App() {
                     className={`${styles.navButtonSmall} text-stone-500 ${
                       isActive && 'bg-blue-100'
                     } border-b w-full h-[62px] hover:bg-blue-100`}
-                  >
-                    ✣
-                  </div>
+                  ></div>
                 )}
               </NavLink>
               <div className={`border-b border-stone-500 w-full grow`}></div>

@@ -34,18 +34,33 @@ const Home = () => {
 
   return (
     <div className="flex flex-col w-full h-fit min-h-screen tracking-widest bg-stone-500 text-stone-500">
-      <Header text={'我的筆記'} />
+      <Header
+        text={
+          category === 'devotion'
+            ? '個人靈修'
+            : category === 'shared'
+            ? '分享收藏'
+            : category === 'sermon'
+            ? '聚會崇拜'
+            : '我的筆記'
+        }
+      />
       <OrderPicker />
       <div className="grid grid-cols-auto-fit gap-[1px] auto-rows-[minmax(100px,auto)]">
-        {category === 'shared' ? (
-          ''
-        ) : (
-          <Link to="/editor/newNote">
-            <div className="flex justify-center items-center text-7xl font-thin text-stone-400 bg-stone-200 h-52 rounded-3xl hover:bg-stone-100">
-              +
-            </div>
-          </Link>
-        )}
+        {category !== 'shared' &&
+          (category === 'devotion' ? (
+            <Link to="/editor/newNoteDevotion">
+              <div className="flex justify-center items-center text-7xl font-thin text-stone-400 bg-stone-200 h-52 rounded-3xl hover:bg-stone-100">
+                +
+              </div>
+            </Link>
+          ) : (
+            <Link to="/editor/newNote">
+              <div className="flex justify-center items-center text-7xl font-thin text-stone-400 bg-stone-200 h-52 rounded-3xl hover:bg-stone-100">
+                +
+              </div>
+            </Link>
+          ))}
         {notes.map((note) => (
           <Link key={note.id} to={`/note/${note.id}`}>
             <div

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import CommentBox from './CommentBox';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectProfile, addNote, editNote } from '../../app/loginSlice';
@@ -23,20 +23,20 @@ const category = [
 ];
 
 const Editor = () => {
+  const { id } = useParams();
   const dispatch = useAppDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [note, setNote] = useState<NoteType>({
     id: uuidv4(),
     title: '',
     content: '',
-    category: 'sermon',
+    category: id === 'newNoteDevotion' ? 'devotion' : 'sermon',
     link_notes: [],
     create_time: new Date().getTime(),
     edit_time: new Date().getTime(),
   });
   const navigate = useNavigate();
   const profile = useAppSelector(selectProfile);
-  const { id } = useParams();
   const [toggleHelp, settoggleHelp] = useState(false);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const Editor = () => {
       return;
     }
 
-    if (id !== 'newNote') {
+    if (id !== 'newNote' && id !== 'newNoteDevotion') {
       const currentNote = profile.notes.find((note) => note.id === id);
       setIsEdit(true);
       setNote(currentNote!);
@@ -104,7 +104,7 @@ const Editor = () => {
             key={option.value}
             className={`${styles.themeButtonNoBg} grow border-r ${
               note.category === option.value &&
-              (option.value === 'sermon'
+              (note.category === 'sermon'
                 ? 'bg-lime-100 border-b'
                 : 'bg-violet-100 border-b')
             }`}

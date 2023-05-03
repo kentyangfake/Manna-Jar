@@ -165,6 +165,7 @@ const Note = () => {
                 isCopied ? 'bg-stone-100' : 'bg-stone-200'
               }`}
               value={shareLink}
+              readOnly
             />
             <label
               className={`flex justify-center items-center h-10 border cursor-pointer border-stone-400 hover:bg-stone-200 ${
