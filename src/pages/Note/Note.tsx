@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAppSelector } from '../../app/hooks';
-import { selectProfile } from '../../app/loginSlice';
+import { selectProfile, selectFontSize } from '../../app/loginSlice';
 import { useParams, Link } from 'react-router-dom';
 import { NoteType } from '../../app/types';
 import NetworkGraph from '../../components/NetworkGraph';
@@ -8,6 +8,7 @@ import Header from '../../components/header';
 import SizePicker from '../../components/SizePicker';
 import * as styles from '../../utils/styles';
 import Swal from 'sweetalert2';
+import { parseFontSize } from '../../utils/utils';
 
 interface Referenced {
   linkTitle: string;
@@ -16,6 +17,8 @@ interface Referenced {
 
 const Note = () => {
   const profile = useAppSelector(selectProfile);
+  const fontSizeNum = useAppSelector(selectFontSize);
+  const fontSize = parseFontSize(fontSizeNum);
   const { id } = useParams();
   const [currentNote, setCurrentNote] = useState<NoteType>({
     id: '',
@@ -29,21 +32,6 @@ const Note = () => {
   const [referenced, setReferenced] = useState<Referenced[]>([]);
   const [shareLink, setShareLink] = useState('');
   const [isCopied, setIsCopied] = useState(false);
-
-  let fontSize = 'text-base';
-  switch (profile.fontSize) {
-    case 'small':
-      fontSize = 'text-base';
-      break;
-    case 'medium':
-      fontSize = 'text-lg';
-      break;
-    case 'large':
-      fontSize = 'text-xl';
-      break;
-    default:
-      fontSize = 'text-base';
-  }
 
   useEffect(() => {
     if (profile.notes.length === 0) {
@@ -126,6 +114,7 @@ const Note = () => {
         >
           <div className="w-72 h-72 bg-stone-100 rounded-tl-full"></div>
         </div>
+        {/* 這裡使用字體大小 */}
         <div
           className={`${fontSize} z-10 flex flex-col flex-wrap leading-loose text-stone-600 ml-12 mt-[-250px] pb-6 mb-12 selection:bg-fuchsia-300 selection:text-fuchsia-900`}
           dangerouslySetInnerHTML={{ __html: currentNote.content }}
@@ -153,7 +142,7 @@ const Note = () => {
           <NetworkGraph
             filtBy={'all'}
             id={id}
-            selectFontSize={profile.fontSize}
+            fontSizeNum={fontSizeNum}
             userNotes={profile.notes}
           />
         </div>

@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import NetworkGraph from '../../components/NetworkGraph';
 import { openAI } from '../../utils/openAI';
 import { useAppSelector } from '../../app/hooks';
-import { selectProfile } from '../../app/loginSlice';
+import { selectProfile, selectFontSize } from '../../app/loginSlice';
 import { useNavigate } from 'react-router-dom';
 import SizePicker from '../../components/SizePicker';
 import * as styles from '../../utils/styles';
 import { ReactComponent as Star } from '../../assets/star.svg';
+import { parseFontSize } from '../../utils/utils';
 
 const GraphView = () => {
   const profile = useAppSelector(selectProfile);
+  const fontSizeNum = useAppSelector(selectFontSize);
+  const fontSize = parseFontSize(fontSizeNum);
   const navigate = useNavigate();
   const [titles, setTitles] = useState<string[]>([]);
   const [recentNotes, setRecentNotes] = useState<string[]>([]);
@@ -17,21 +20,6 @@ const GraphView = () => {
   const [isAiTyping, setIsAiTyping] = useState(false);
   const [summeries, setSummeries] = useState('讓AI幫你回顧最近的筆記吧!');
   const [toggled, setToggled] = useState(false);
-
-  let fontSize = 'text-base';
-  switch (profile.fontSize) {
-    case 'small':
-      fontSize = 'text-base';
-      break;
-    case 'medium':
-      fontSize = 'text-lg';
-      break;
-    case 'large':
-      fontSize = 'text-xl';
-      break;
-    default:
-      fontSize = 'text-base';
-  }
 
   useEffect(() => {
     if (!profile.isLogin) {
@@ -110,7 +98,7 @@ const GraphView = () => {
           >
             <NetworkGraph
               filtBy={filtBy}
-              selectFontSize={profile.fontSize}
+              fontSizeNum={fontSizeNum}
               userNotes={profile.notes}
             />
           </div>

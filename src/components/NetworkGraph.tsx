@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { NoteType } from '../app/types';
 import { selectIsToggleMenu } from '../app/loginSlice';
 import { useAppSelector } from '../app/hooks';
+import { parseGraphFontSize } from '../utils/utils';
 
 interface GraphType {
   graph: {
@@ -26,7 +27,7 @@ interface Node {
 interface Prop {
   filtBy: string;
   userNotes: NoteType[];
-  selectFontSize?: string;
+  fontSizeNum?: number;
   id?: string;
   noEvent?: boolean;
 }
@@ -90,7 +91,7 @@ const calcNodeSize = (arr: Edge[]) => {
 const NetworkGraph = ({
   filtBy,
   id,
-  selectFontSize,
+  fontSizeNum,
   userNotes,
   noEvent,
 }: Prop) => {
@@ -104,20 +105,8 @@ const NetworkGraph = ({
   const isToggleMenu = useAppSelector(selectIsToggleMenu);
 
   useEffect(() => {
-    let fontSize = 14;
-    switch (selectFontSize) {
-      case 'small':
-        fontSize = 14;
-        break;
-      case 'medium':
-        fontSize = 17;
-        break;
-      case 'large':
-        fontSize = 20;
-        break;
-      default:
-        fontSize = 14;
-    }
+    let fontSize = parseGraphFontSize(fontSizeNum!);
+    //TODO:切換字體大小
 
     let newNodes: Node[] = [];
     let newEdges: Edge[] = [];
@@ -236,7 +225,7 @@ const NetworkGraph = ({
           },
         };
     setState(newGraph);
-  }, [id, filtBy, selectFontSize, userNotes]);
+  }, [id, filtBy, fontSizeNum, userNotes]);
 
   const { graph, events } = state;
   return (

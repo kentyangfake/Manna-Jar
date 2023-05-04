@@ -18,10 +18,10 @@ const initialState = {
     notes: [] as NoteType[],
     isLogin: false,
     orderBy:{time:'newest',record:'edit'},
-    fontSize:'small',
   },
   isLoading:false,
   toggleMenu:false,
+  fontSize:5,
 }
 
 export const signUpAsync = createAsyncThunk(
@@ -224,8 +224,17 @@ const loginSlice = createSlice({
         }
       }
     },
-    changeDisplayFontSize:(state,action:PayloadAction<string>)=>{
-      state.profile.fontSize = action.payload;
+    incrementFontSize:(state)=>{
+      if (state.fontSize >= 10) {
+        return
+      }
+      state.fontSize += 1;
+    },
+    decrementFontSize:(state)=>{
+      if (state.fontSize === 1) {
+        return
+      }
+      state.fontSize -= 1;
     },
   },
   extraReducers: (builder) => {
@@ -302,6 +311,7 @@ const loginSlice = createSlice({
 })
 export const selectProfile = (state: RootState) => state.login.profile;
 export const selectIsLoading = (state:RootState) => state.login.isLoading;
+export const selectFontSize = (state:RootState) => state.login.fontSize;
 export const selectIsToggleMenu = (state:RootState) => state.login.toggleMenu;
-export const { setToggleMenu, addNote, deleteNote, editNote, changeOrderByTime, changeOrderByRecord, changeDisplayFontSize } = loginSlice.actions
+export const { setToggleMenu, addNote, deleteNote, editNote, changeOrderByTime, changeOrderByRecord, incrementFontSize, decrementFontSize } = loginSlice.actions
 export default loginSlice.reducer;
