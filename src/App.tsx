@@ -10,6 +10,10 @@ import {
   setToggleMenu,
 } from './app/loginSlice';
 import Swal from 'sweetalert2';
+import { ReactComponent as SheepIcon } from './assets/sheepIcon.svg';
+import { ReactComponent as DoveIcon } from './assets/doveIcon.svg';
+import { ReactComponent as CandleIcon } from './assets/candleIcon.svg';
+import { ReactComponent as JarIcon } from './assets/jarIcon.svg';
 
 const navOptions = [
   { id: 'sermon', label: '聚會崇拜', link: '/?category=sermon' },
@@ -68,7 +72,15 @@ function App() {
                           : 'bg-stone-100'
                       }`
                     }`}
-                  ></div>
+                  >
+                    {nav.id === 'sermon' ? (
+                      <SheepIcon />
+                    ) : nav.id === 'devotion' ? (
+                      <DoveIcon />
+                    ) : (
+                      <CandleIcon />
+                    )}
+                  </div>
                 </Link>
               ))}
               <NavLink to="/graphview">
@@ -77,7 +89,9 @@ function App() {
                     className={`${styles.navButtonSmall} text-stone-500 ${
                       isActive && 'bg-blue-100'
                     } border-b w-full h-[62px] hover:bg-blue-100`}
-                  ></div>
+                  >
+                    <JarIcon />
+                  </div>
                 )}
               </NavLink>
               <div className={`border-b border-stone-500 w-full grow`}></div>
