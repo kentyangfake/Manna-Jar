@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from '../app/hooks';
 import {
   logoutAsync,
   selectProfile,
+  setToggleMenu,
   loginViaLocalAsync,
 } from '../app/loginSlice';
 import { Link, NavLink, useNavigate, useSearchParams } from 'react-router-dom';
@@ -13,17 +14,13 @@ import { ReactComponent as Candle } from '../assets/candle.svg';
 import { ReactComponent as Jar } from '../assets/jar.svg';
 import Swal from 'sweetalert2';
 
-interface Prop {
-  setToggled: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 const navOptions = [
   { id: 'sermon', label: '聚會崇拜', link: '/?category=sermon' },
   { id: 'devotion', label: '個人靈修', link: '/?category=devotion' },
   { id: 'shared', label: '分享收藏', link: '/?category=shared' },
 ];
 
-const Navigate = ({ setToggled }: Prop) => {
+const Navigate = () => {
   const dispatch = useAppDispatch();
   const profile = useAppSelector(selectProfile);
   const navigate = useNavigate();
@@ -59,7 +56,7 @@ const Navigate = ({ setToggled }: Prop) => {
         </Link>
         <div
           className={`${styles.themeButton} w-7`}
-          onClick={() => setToggled(false)}
+          onClick={() => dispatch(setToggleMenu(false))}
         >
           ⋮
         </div>
@@ -99,7 +96,7 @@ const Navigate = ({ setToggled }: Prop) => {
                 </div>
               </Link>
             ))}
-            <NavLink to="/graphview" onClick={() => setToggled(false)}>
+            <NavLink to="/graphview">
               {({ isActive }) =>
                 isActive ? (
                   <div

@@ -20,7 +20,8 @@ const initialState = {
     orderBy:{time:'newest',record:'edit'},
     fontSize:'small',
   },
-  isLoading:false
+  isLoading:false,
+  toggleMenu:false,
 }
 
 export const signUpAsync = createAsyncThunk(
@@ -91,6 +92,9 @@ const loginSlice = createSlice({
   name : 'user',
   initialState : initialState,
   reducers:{
+    setToggleMenu: (state, action:PayloadAction<boolean>) => {
+      state.toggleMenu = action.payload;
+    },
     addNote: (state, action: PayloadAction<NoteType>) => {
       const order = state.profile.orderBy.time
       //handle already had note
@@ -298,5 +302,6 @@ const loginSlice = createSlice({
 })
 export const selectProfile = (state: RootState) => state.login.profile;
 export const selectIsLoading = (state:RootState) => state.login.isLoading;
-export const { addNote, deleteNote, editNote, changeOrderByTime, changeOrderByRecord, changeDisplayFontSize } = loginSlice.actions
+export const selectIsToggleMenu = (state:RootState) => state.login.toggleMenu;
+export const { setToggleMenu, addNote, deleteNote, editNote, changeOrderByTime, changeOrderByRecord, changeDisplayFontSize } = loginSlice.actions
 export default loginSlice.reducer;

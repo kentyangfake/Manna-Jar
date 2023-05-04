@@ -4,7 +4,11 @@ import './App.css';
 import Navigate from './components/Navigate';
 import * as styles from './utils/styles';
 import { useAppDispatch, useAppSelector } from './app/hooks';
-import { selectProfile } from './app/loginSlice';
+import {
+  selectProfile,
+  selectIsToggleMenu,
+  setToggleMenu,
+} from './app/loginSlice';
 import Swal from 'sweetalert2';
 
 const navOptions = [
@@ -15,15 +19,16 @@ const navOptions = [
 
 function App() {
   const dispatch = useAppDispatch();
+  const toggled = useAppSelector(selectIsToggleMenu);
   const profile = useAppSelector(selectProfile);
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category') || '';
-  const [toggled, setToggled] = useState(false);
+
   return (
     <div className="App">
       <div className="relative flex w-screen h-full bg-stone-300">
         <div className={toggled ? 'fixed z-10 h-full' : 'hidden'}>
-          <Navigate setToggled={setToggled} />
+          <Navigate />
         </div>
         <div
           className={
@@ -34,7 +39,7 @@ function App() {
         >
           <div
             className={`${styles.themeButton} border-b w-full h-20`}
-            onClick={() => setToggled(true)}
+            onClick={() => dispatch(setToggleMenu(true))}
           >
             ≡
           </div>

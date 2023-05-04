@@ -2,6 +2,8 @@ import Graph from 'react-graph-vis';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NoteType } from '../app/types';
+import { selectIsToggleMenu } from '../app/loginSlice';
+import { useAppSelector } from '../app/hooks';
 
 interface GraphType {
   graph: {
@@ -99,6 +101,7 @@ const NetworkGraph = ({
     },
   });
   const navigate = useNavigate();
+  const isToggleMenu = useAppSelector(selectIsToggleMenu);
 
   useEffect(() => {
     let fontSize = 14;
@@ -238,7 +241,12 @@ const NetworkGraph = ({
   const { graph, events } = state;
   return (
     <>
-      <Graph graph={graph} options={options} events={events} />
+      <Graph
+        key={isToggleMenu ? 'toggled' : 'not-toggled'}
+        graph={graph}
+        options={options}
+        events={events}
+      />
     </>
   );
 };
