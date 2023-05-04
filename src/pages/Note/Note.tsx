@@ -181,6 +181,9 @@ const Note = () => {
                 </>
               )}
             </label>
+            <label className="mt-2 text-xs">
+              ※對方登入後即可透過此連結收藏筆記
+            </label>
           </div>
         )}
         <div className="mt-auto mb-4 flex w-full justify-center text-xs font-thin text-stone-900">
