@@ -119,7 +119,9 @@ const Note = () => {
           className={`${fontSize} z-10 flex flex-col flex-wrap leading-loose text-stone-600 ml-12 mt-[-250px] pb-6 mb-12 selection:bg-fuchsia-300 selection:text-fuchsia-900`}
           dangerouslySetInnerHTML={{ __html: currentNote.content }}
         ></div>
-        <div className=" z-10 flex flex-col ml-12 py-6 border-t border-stone-400">
+        <div
+          className={`${fontSize} z-10 flex flex-col ml-12 py-6 border-t border-stone-400`}
+        >
           {referenced.length > 0 && (
             <div className="text-stone-400">引用列表</div>
           )}
@@ -127,7 +129,7 @@ const Note = () => {
             <Link
               to={`/note/${note.linkId}`}
               key={note.linkId}
-              className={'w-fit leading-8'}
+              className={'w-fit leading-relaxed'}
             >
               {note.linkTitle}
             </Link>
