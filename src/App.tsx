@@ -73,13 +73,13 @@ function App() {
                       }`
                     }`}
                   >
-                    {nav.id === 'sermon' ? (
+                    {/* {nav.id === 'sermon' ? (
                       <SheepIcon className="w-[13px]" />
                     ) : nav.id === 'devotion' ? (
                       <DoveIcon className="w-[14px]" />
                     ) : (
                       <CandleIcon className="w-3" />
-                    )}
+                    )} */}
                   </div>
                 </Link>
               ))}
@@ -90,7 +90,7 @@ function App() {
                       isActive && 'bg-blue-100'
                     } border-b w-full h-[62px] hover:bg-blue-100`}
                   >
-                    <JarIcon className="w-4" />
+                    {/* <JarIcon className="w-4" /> */}
                   </div>
                 )}
               </NavLink>

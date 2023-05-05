@@ -287,15 +287,22 @@ const loginSlice = createSlice({
         })
         state.isLoading = false;
       })
+      .addCase(loginViaLocalAsync.pending,(state)=>{
+        state.isLoading = true;
+      })
       .addCase(loginViaLocalAsync.fulfilled, (state, action) => {
         state.profile.email = action.payload?.email ??"";
         state.profile.id = action.payload?.id ??"";
         state.profile.name = action.payload?.name ??"";
         state.profile.notes = action.payload?.notes ??[];
         state.profile.isLogin = true;
+        state.isLoading = false;
       })
       .addCase(loginViaLocalAsync.rejected, (state, action) => {
         console.log("rejected!");
+      })
+      .addCase(logoutAsync.pending,(state)=>{
+        state.isLoading = true;
       })
       .addCase(logoutAsync.fulfilled, (state, action) => {
         state.profile.email = "";
@@ -303,6 +310,7 @@ const loginSlice = createSlice({
         state.profile.name = "";
         state.profile.notes = [];
         state.profile.isLogin = false;
+        state.isLoading = false;
       })
       .addCase(logoutAsync.rejected, (state, action) => {
         console.log("rejected!");

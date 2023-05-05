@@ -7,7 +7,18 @@ module.exports = {
     fontFamily:{
       'serif': ['Noto Serif TC'],
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        wave: {
+          to: {
+            'margin-left': '-499px',
+          },
+        },
+      },
+    },
+    animation: {
+      wave: 'wave 3s linear infinite',
+    },
   },
   plugins: [],
 }
