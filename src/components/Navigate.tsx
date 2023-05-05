@@ -138,9 +138,11 @@ const Navigate = () => {
                     profile.notes.filter((note) => note.category === 'shared')
                       .length
                   }</span>篇 筆記</p>
-                  <p class="mt-5">本週新增 <span class="font-bold text-violet-400">${
+                  <p class="mt-5">我本週寫了 <span class="font-bold text-violet-400">${
                     profile.notes.filter(
                       (note) =>
+                        (note.category === 'sermon' ||
+                          note.category === 'devotion') &&
                         new Date().getTime() - note.create_time < 604800000
                     ).length
                   }篇</span> 筆記</p>
