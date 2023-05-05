@@ -54,7 +54,9 @@ const GraphView = () => {
   return (
     <div className="flex h-full w-full">
       <div className="flex flex-col grow justify-between h-full">
-        <SizePicker fullGraph />
+        <div className="h-8">
+          <SizePicker fullGraph />
+        </div>
         <div className="flex relative justify-center items-center grow pl-5 pr-14 py-5 sky tracking-widest">
           <div className={`absolute z-10 top-10 left-20 flex flex-col gap-2`}>
             <div
