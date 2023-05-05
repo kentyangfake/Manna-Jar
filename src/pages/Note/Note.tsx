@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { selectProfile, selectFontSize } from '../../app/loginSlice';
 import { useParams, Link } from 'react-router-dom';

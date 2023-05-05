@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import NetworkGraph from '../../components/NetworkGraph';
 import { openAI } from '../../utils/openAI';
 import { useAppSelector } from '../../app/hooks';

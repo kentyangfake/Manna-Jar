@@ -3,7 +3,7 @@ import { RootState } from './store';
 import { auth, firestore } from '../utils/firebase';
 import { NoteType } from './types';
 import Swal from 'sweetalert2';
-import { sampleNote } from '../utils/sampleNote';
+import { sampleNote } from '../utils/sampleText';
 
 interface CustomUser {
   uid: string;

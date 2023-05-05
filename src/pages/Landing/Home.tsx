@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { selectProfile, addNote } from '../../app/loginSlice';
 import { Link, useSearchParams } from 'react-router-dom';
