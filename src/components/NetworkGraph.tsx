@@ -1,5 +1,5 @@
 import Graph from 'react-graph-vis';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NoteType } from '../app/types';
 import { selectIsToggleMenu } from '../app/loginSlice';

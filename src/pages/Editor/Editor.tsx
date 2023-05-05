@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import CommentBox from './CommentBox';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectProfile, addNote, editNote } from '../../app/loginSlice';

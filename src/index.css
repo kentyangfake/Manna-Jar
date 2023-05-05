@@ -113,6 +113,30 @@ code {
   background-size: 10px 10px;
 }
 
+.texture3 {
+  background-color: #d6d3d1;
+  background: radial-gradient(
+      circle,
+      transparent 20%,
+      #d6d3d1 20%,
+      #d6d3d1 80%,
+      transparent 80%,
+      transparent
+    ),
+    radial-gradient(
+        circle,
+        transparent 20%,
+        #d6d3d1 20%,
+        #d6d3d1 80%,
+        transparent 80%,
+        transparent
+      )
+      40px 40px,
+    linear-gradient(#ccc6c1 3.2px, transparent 3.2px) 0 -1.6px,
+    linear-gradient(90deg, #ccc6c1 3.2px, #d6d3d1 3.2px) -1.6px 0;
+  background-size: 80px 80px, 80px 80px, 40px 40px, 40px 40px;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
