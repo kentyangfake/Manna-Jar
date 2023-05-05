@@ -137,10 +137,10 @@ const Note = () => {
         </div>
       </div>
       <div
-        className={`${styles.theme} fixed top-0 right-0 flex flex-col justify-between h-full w-72 border-l`}
+        className={`${styles.theme} fixed overflow-scroll top-0 right-0 flex flex-col justify-between h-full w-72 border-l`}
       >
         <Header text={'連結圖'} />
-        <div className="w-full h-96 texture2 border-b border-stone-500">
+        <div className="w-full h-[50vh] texture2 border-b border-stone-500">
           <NetworkGraph
             filtBy={'all'}
             id={id}
@@ -150,7 +150,7 @@ const Note = () => {
         </div>
         {(currentNote.category === 'sermon' ||
           currentNote.category === 'devotion') && (
-          <div className="flex flex-col p-4 mt-1">
+          <div className="flex flex-col p-4 mt-[5vh]">
             <input
               className={`grow truncate h-10 border-x border-t border-stone-400 focus:outline-none font-extralight pl-2 ${
                 isCopied ? 'bg-stone-100' : 'bg-stone-200'
