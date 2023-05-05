@@ -159,7 +159,6 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
                     imageAlt: 'linkImg',
                     showConfirmButton: false,
                     background: 'rgba(255,255,255,0)',
-                    timer: 1000,
                   })
                 }
               >
@@ -175,7 +174,6 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
                     imageAlt: 'referencedByImg',
                     showConfirmButton: false,
                     background: 'rgba(255,255,255,0)',
-                    timer: 1000,
                   })
                 }
               >
@@ -191,7 +189,6 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
                     imageAlt: 'connectionImg',
                     showConfirmButton: false,
                     background: 'rgba(255,255,255,0)',
-                    timer: 1000,
                   })
                 }
               >
@@ -211,7 +208,6 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
                     imageAlt: 'shareButtonImg',
                     showConfirmButton: false,
                     background: 'rgba(255,255,255,0)',
-                    timer: 1000,
                   })
                 }
               >
