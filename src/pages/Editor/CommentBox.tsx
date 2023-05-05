@@ -57,7 +57,39 @@ const CommentBox = ({
   }, [profile.isLogin]);
 
   const modules = useMemo(
-    () => ({ mention: mentionModuleConfig(hashValues) }),
+    () => ({
+      mention: mentionModuleConfig(hashValues),
+      toolbar: {
+        handlers: {
+          link: function (value: string) {
+            const that: any = this;
+
+            const tooltip = that.quill.theme.tooltip;
+            const input = tooltip.root.querySelector('input[data-link]');
+            input.dataset.link = 'https://';
+            input.placeholder = 'https://';
+            input.dataset.lpignore = true;
+            if (value) {
+              const range = that.quill.getSelection();
+              if (range == null || range.length === 0) {
+                return;
+              }
+              let preview = that.quill.getText(range);
+              if (
+                /^\S+@\S+\.\S+$/.test(preview) &&
+                preview.indexOf('mailto:') !== 0
+              ) {
+                preview = `mailto:${preview}`;
+              }
+              const { tooltip } = that.quill.theme;
+              tooltip.edit('link', '');
+            } else {
+              that.quill.format('link', false);
+            }
+          },
+        },
+      },
+    }),
     [hashValues]
   );
 

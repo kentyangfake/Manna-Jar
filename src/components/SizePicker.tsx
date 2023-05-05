@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import {
-  selectProfile,
-  changeDisplayFontSize,
+  selectFontSize,
+  incrementFontSize,
+  decrementFontSize,
   deleteNote,
 } from '../app/loginSlice';
 import { useNavigate, Link } from 'react-router-dom';
@@ -12,6 +13,7 @@ import connection from '../assets/connection.png';
 import link from '../assets/link.png';
 import shareButton from '../assets/shareButton.png';
 import referencedBy from '../assets/referencedBy.png';
+import { parseDisplayFontSize, parseHelperFontSize } from '../utils/utils';
 
 interface Props {
   edit?: string;
@@ -22,36 +24,26 @@ interface Props {
 
 const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
   const dispatch = useAppDispatch();
-  const profile = useAppSelector(selectProfile);
+  const fontSizeNum = useAppSelector(selectFontSize);
+  const fontSize = parseDisplayFontSize(fontSizeNum);
+  const helperFontSize = parseHelperFontSize(fontSizeNum);
   const navigate = useNavigate();
   const [toggleFontSize, setToggleFontSize] = useState(false);
   const [toggleHelp, settoggleHelp] = useState(false);
-  let fontSize = 'text-base';
-  switch (profile.fontSize) {
-    case 'small':
-      fontSize = 'text-base';
-      break;
-    case 'medium':
-      fontSize = 'text-lg';
-      break;
-    case 'large':
-      fontSize = 'text-xl';
-      break;
-    default:
-      fontSize = 'text-base';
-  }
 
   return (
-    <div className="flex h-8 border-y bg-stone-500 border-stone-500">
+    <div className="flex h-8 border-b bg-stone-500 border-stone-500">
       {previous && (
         <div
-          className={`w-32 border-r font-bold rounded-e-full ${styles.themeButton}`}
+          className={`${styles.themeButton} w-32 border-r rounded-br-full font-bold hover:border-b-2 hover:border-l`}
           onClick={() => navigate(-1)}
         >
           ←
         </div>
       )}
-      <div className={`${styles.theme} grow border-l rounded-s-full`}></div>
+      <div
+        className={`${styles.theme} ${previous && 'rounded-bl-full'} grow`}
+      ></div>
       {edit && (
         <Link
           to={`/editor/${edit}`}
@@ -114,28 +106,21 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
           } absolute z-30 -right-[1px] top-[30px] h-16 w-[248px] justify-center items-center rounded-b-3xl rounded-tl-3xl drop-shadow-xl border bg-stone-300`}
         >
           <div
-            className={`${styles.themeButtonNoBg} ${
-              profile.fontSize === 'small' && 'bg-stone-200'
-            } grow h-full rounded-l-3xl text-2xl font-serif font-bold`}
-            onClick={() => dispatch(changeDisplayFontSize('small'))}
+            className={`${styles.themeButtonNoBg} grow h-full rounded-l-3xl text-2xl font-serif font-bold`}
+            onClick={() => dispatch(decrementFontSize())}
           >
-            S
+            <span className="material-symbols-outlined">text_decrease</span>
           </div>
           <div
-            className={`${styles.themeButtonNoBg} ${
-              profile.fontSize === 'medium' && 'bg-stone-200'
-            } grow border-l h-full text-2xl font-serif font-bold`}
-            onClick={() => dispatch(changeDisplayFontSize('medium'))}
+            className={`${styles.theme} flex justify-center items-center w-[87px] border-l h-full font-serif text-2xl font-bold`}
           >
-            M
+            {fontSize}
           </div>
           <div
-            className={`${styles.themeButtonNoBg} ${
-              profile.fontSize === 'large' && 'bg-stone-200'
-            } grow border-l h-full rounded-br-3xl text-2xl font-serif font-bold`}
-            onClick={() => dispatch(changeDisplayFontSize('large'))}
+            className={`${styles.themeButtonNoBg} grow border-l h-full rounded-br-3xl text-2xl font-serif font-bold`}
+            onClick={() => dispatch(incrementFontSize())}
           >
-            L
+            <span className="material-symbols-outlined">text_increase</span>
           </div>
         </div>
       </div>
@@ -160,7 +145,7 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
           <div
             className={`${toggleHelp ? 'flex' : 'hidden'} ${
               styles.theme
-            } ${fontSize} flex-col overflow-y-auto border absolute z-30 -right-[1px] top-[30px] p-4 h-80 w-72 rounded-b-3xl rounded-tl-3xl drop-shadow-xl`}
+            } ${helperFontSize} flex-col overflow-y-auto border absolute z-30 -right-[1px] top-[30px] p-4 h-80 w-72 rounded-b-3xl rounded-tl-3xl drop-shadow-xl`}
           >
             <div className="mb-3 font-semibold">筆記關聯</div>
             <span>
@@ -245,7 +230,7 @@ const SizePicker = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
           <div
             className={`relative ${
               styles.themeFlex
-            } ${fontSize} w-20 border-l ${
+            } ${helperFontSize} w-20 border-l ${
               toggleHelp
                 ? 'borde-b-0 bg-stone-100 hover:border-b-0'
                 : 'border-b-2 hover:border-b-4 hover:border-l-2 bg-stone-300 hover:bg-stone-200'

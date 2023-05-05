@@ -385,3 +385,200 @@ export const parseWeekday = (timestamp: number) => {
   }
   return `${weekday}`;
 };
+
+export const parseFontSize = (fontSizeNum: number) => {
+  const root = document.documentElement;
+  let fontSize: string = 'text-xl';
+  root.style.setProperty('--h1', `30px`);
+  root.style.setProperty('--h2', `26px`);
+  root.style.setProperty('--h3', `22px`);
+  switch (fontSizeNum) {
+    case 1:
+      fontSize = 'text-xs';
+      root.style.setProperty('--h1', `16px`);
+      root.style.setProperty('--h2', `14px`);
+      root.style.setProperty('--h3', `12px`);
+      break;
+    case 2:
+      fontSize = 'text-sm';
+      root.style.setProperty('--h1', `18px`);
+      root.style.setProperty('--h2', `16px`);
+      root.style.setProperty('--h3', `14px`);
+      break;
+    case 3:
+      fontSize = 'text-base';
+      root.style.setProperty('--h1', `20px`);
+      root.style.setProperty('--h2', `18px`);
+      root.style.setProperty('--h3', `16px`);
+      break;
+    case 4:
+      fontSize = 'text-lg';
+      root.style.setProperty('--h1', `24px`);
+      root.style.setProperty('--h2', `22px`);
+      root.style.setProperty('--h3', `20px`);
+      break;
+    case 5:
+      fontSize = 'text-xl';
+      root.style.setProperty('--h1', `30px`);
+      root.style.setProperty('--h2', `26px`);
+      root.style.setProperty('--h3', `22px`);
+      break;
+    case 6:
+      fontSize = 'text-2xl';
+      root.style.setProperty('--h1', `36px`);
+      root.style.setProperty('--h2', `32px`);
+      root.style.setProperty('--h3', `28px`);
+      break;
+    case 7:
+      fontSize = 'text-3xl';
+      root.style.setProperty('--h1', `42px`);
+      root.style.setProperty('--h2', `37px`);
+      root.style.setProperty('--h3', `32px`);
+      break;
+    case 8:
+      fontSize = 'text-4xl';
+      root.style.setProperty('--h1', `48px`);
+      root.style.setProperty('--h2', `43px`);
+      root.style.setProperty('--h3', `38px`);
+      break;
+    case 9:
+      fontSize = 'text-5xl';
+      root.style.setProperty('--h1', `54px`);
+      root.style.setProperty('--h2', `51px`);
+      root.style.setProperty('--h3', `48px`);
+      break;
+    case 10:
+      fontSize = 'text-6xl';
+      root.style.setProperty('--h1', `64px`);
+      root.style.setProperty('--h2', `62px`);
+      root.style.setProperty('--h3', `60px`);
+      break;
+    default:
+      fontSize = 'text-xl';
+      root.style.setProperty('--h1', `30px`);
+      root.style.setProperty('--h2', `26px`);
+      root.style.setProperty('--h3', `22px`);
+  }
+
+  return fontSize;
+};
+
+export const parseHelperFontSize = (fontSizeNum: number) => {
+  let fontSize: string = 'text-xl';
+  switch (fontSizeNum) {
+    case 1:
+      fontSize = 'text-xs';
+      break;
+    case 2:
+      fontSize = 'text-sm';
+      break;
+    case 3:
+      fontSize = 'text-base';
+      break;
+    case 4:
+      fontSize = 'text-lg';
+      break;
+    case 5:
+      fontSize = 'text-xl';
+      break;
+    case 6:
+      fontSize = 'text-2xl';
+      break;
+    case 7:
+      fontSize = 'text-2xl';
+      break;
+    case 8:
+      fontSize = 'text-3xl';
+      break;
+    case 9:
+      fontSize = 'text-3xl';
+      break;
+    case 10:
+      fontSize = 'text-3xl';
+      break;
+    default:
+      fontSize = 'text-xl';
+  }
+
+  return fontSize;
+};
+
+export const parseDisplayFontSize = (fontSizeNum: number) => {
+  let fontSize: string = '50%';
+  switch (fontSizeNum) {
+    case 1:
+      fontSize = '10%';
+      break;
+    case 2:
+      fontSize = '20%';
+      break;
+    case 3:
+      fontSize = '30%';
+      break;
+    case 4:
+      fontSize = '40%';
+      break;
+    case 5:
+      fontSize = '50%';
+      break;
+    case 6:
+      fontSize = '60%';
+      break;
+    case 7:
+      fontSize = '70%';
+      break;
+    case 8:
+      fontSize = '80%';
+      break;
+    case 9:
+      fontSize = '90%';
+      break;
+    case 10:
+      fontSize = '100%';
+      break;
+    default:
+      fontSize = '50%';
+  }
+
+  return fontSize;
+};
+
+export const parseGraphFontSize = (fontSizeNum: number) => {
+  let fontSize: number = 14;
+  switch (fontSizeNum) {
+    case 1:
+      fontSize = 10;
+      break;
+    case 2:
+      fontSize = 11;
+      break;
+    case 3:
+      fontSize = 12;
+      break;
+    case 4:
+      fontSize = 13;
+      break;
+    case 5:
+      fontSize = 14;
+      break;
+    case 6:
+      fontSize = 17;
+      break;
+    case 7:
+      fontSize = 19;
+      break;
+    case 8:
+      fontSize = 21;
+      break;
+    case 9:
+      fontSize = 23;
+      break;
+    case 10:
+      fontSize = 25;
+      break;
+    default:
+      fontSize = 14;
+  }
+
+  return fontSize;
+};

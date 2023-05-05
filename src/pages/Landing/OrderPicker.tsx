@@ -12,7 +12,7 @@ const OrderPicker = () => {
   const profile = useAppSelector(selectProfile);
 
   return (
-    <div className={`flex bg-stone-500 border text-sm border-stone-500`}>
+    <div className={`flex bg-stone-500 text-sm border-b border-stone-500`}>
       <div
         className={`${styles.themeButton} border-r w-44 ${
           profile.orderBy.record === 'create'

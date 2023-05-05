@@ -1,3 +1,9 @@
+:root {
+  --h1: 30px;
+  --h2: 26px;
+  --h3: 22px;
+}
+
 body {
   margin: 0;
   box-sizing: border-box;
@@ -29,6 +35,11 @@ code {
   background-size: 400% 400%;
   animation: gradient 30s ease infinite;
   height: 100vh;
+}
+
+.graph-clip {
+  clip-path: ellipse(50% 50% at 50% 50%);
+  border-radius: 100%/100%;
 }
 
 @keyframes gradient {
@@ -108,19 +119,19 @@ code {
 
 @layer base {
   h1 {
-    @apply text-3xl;
+    @apply text-[length:var(--h1)];
     @apply leading-loose;
     @apply font-semibold;
     @apply py-2;
   }
   h2 {
-    @apply text-2xl;
+    @apply text-[length:var(--h2)];
     @apply leading-loose;
     @apply font-semibold;
     @apply py-2;
   }
   h3 {
-    @apply text-xl;
+    @apply text-[length:var(--h3)];
     @apply leading-loose;
     @apply font-semibold;
     @apply py-2;

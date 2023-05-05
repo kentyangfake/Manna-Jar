@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import NetworkGraph from '../../components/NetworkGraph';
 import { openAI } from '../../utils/openAI';
 import { useAppSelector } from '../../app/hooks';
-import { selectProfile } from '../../app/loginSlice';
+import { selectProfile, selectFontSize } from '../../app/loginSlice';
 import { useNavigate } from 'react-router-dom';
 import SizePicker from '../../components/SizePicker';
 import * as styles from '../../utils/styles';
 import { ReactComponent as Star } from '../../assets/star.svg';
+import { parseFontSize } from '../../utils/utils';
 
 const GraphView = () => {
   const profile = useAppSelector(selectProfile);
+  const fontSizeNum = useAppSelector(selectFontSize);
+  const fontSize = parseFontSize(fontSizeNum);
   const navigate = useNavigate();
   const [titles, setTitles] = useState<string[]>([]);
   const [recentNotes, setRecentNotes] = useState<string[]>([]);
@@ -18,28 +21,13 @@ const GraphView = () => {
   const [summeries, setSummeries] = useState('讓AI幫你回顧最近的筆記吧!');
   const [toggled, setToggled] = useState(false);
 
-  let fontSize = 'text-base';
-  switch (profile.fontSize) {
-    case 'small':
-      fontSize = 'text-base';
-      break;
-    case 'medium':
-      fontSize = 'text-lg';
-      break;
-    case 'large':
-      fontSize = 'text-xl';
-      break;
-    default:
-      fontSize = 'text-base';
-  }
-
   useEffect(() => {
     if (!profile.isLogin) {
       navigate('/');
     }
 
-    if (profile.notes.length < 5) {
-      setSummeries('累積更多筆記後解鎖此功能。');
+    if (profile.notes.length < 6) {
+      setSummeries('累積5篇筆記後解鎖此功能。');
     }
 
     const notesArr = [...profile.notes]
@@ -67,50 +55,50 @@ const GraphView = () => {
     <div className="flex h-full w-full">
       <div className="flex flex-col grow justify-between h-full">
         <SizePicker fullGraph />
-        <div className="flex justify-center items-center w-full h-full pl-5 pr-14 py-5 sky tracking-widest">
-          <div
-            className={`cursor-crosshair relative grow h-full rounded-[100%/100%] bg-stone-300 texture border border-stone-500`}
-          >
-            <div className={`absolute z-10 top-5 left-5 flex flex-col gap-2`}>
-              <div
-                className={`py-1 px-2 border rounded-full text-xs ${
-                  styles.themeButtonNoBg
-                } ${filtBy === 'all' ? 'bg-stone-100' : 'bg-stone-300'}`}
-                onClick={() => setFiltBy('all')}
-              >
-                全部筆記
-              </div>
-              <div
-                className={`py-1 px-2 border rounded-full text-xs ${
-                  styles.themeButtonNoBg
-                } ${filtBy === 'sermon' ? 'bg-lime-100' : 'bg-stone-300'}`}
-                onClick={() => setFiltBy('sermon')}
-              >
-                聚會崇拜
-              </div>
-              <div
-                className={`py-1 px-2 border rounded-full text-xs ${
-                  styles.themeButtonNoBg
-                } ${filtBy === 'devotion' ? 'bg-violet-100' : 'bg-stone-300'}`}
-                onClick={() => setFiltBy('devotion')}
-              >
-                個人靈修
-              </div>
-              <div
-                className={`py-1 px-2 border rounded-full text-xs ${
-                  styles.themeButtonNoBg
-                } ${filtBy === 'shared' ? 'bg-amber-100' : 'bg-stone-300'}`}
-                onClick={() => setFiltBy('shared')}
-              >
-                分享收藏
-              </div>
+        <div className="flex relative justify-center items-center grow pl-5 pr-14 py-5 sky tracking-widest">
+          <div className={`absolute z-10 top-10 left-20 flex flex-col gap-2`}>
+            <div
+              className={`py-1 px-2 border rounded-full text-xs ${
+                styles.themeButtonNoBg
+              } ${filtBy === 'all' ? 'bg-stone-100' : 'bg-stone-300'}`}
+              onClick={() => setFiltBy('all')}
+            >
+              全部筆記
             </div>
-            <Star className={`star1 fixed z-20 top-[10%] right-[20%] h-14`} />
-            <Star className={`star2 fixed z-20 bottom-[6%] right-[16%] h-24`} />
-            <Star className={`star3 fixed z-20 bottom-[4%] left-[20%] h-10`} />
+            <div
+              className={`py-1 px-2 border rounded-full text-xs ${
+                styles.themeButtonNoBg
+              } ${filtBy === 'sermon' ? 'bg-lime-100' : 'bg-stone-300'}`}
+              onClick={() => setFiltBy('sermon')}
+            >
+              聚會崇拜
+            </div>
+            <div
+              className={`py-1 px-2 border rounded-full text-xs ${
+                styles.themeButtonNoBg
+              } ${filtBy === 'devotion' ? 'bg-violet-100' : 'bg-stone-300'}`}
+              onClick={() => setFiltBy('devotion')}
+            >
+              個人靈修
+            </div>
+            <div
+              className={`py-1 px-2 border rounded-full text-xs ${
+                styles.themeButtonNoBg
+              } ${filtBy === 'shared' ? 'bg-amber-100' : 'bg-stone-300'}`}
+              onClick={() => setFiltBy('shared')}
+            >
+              分享收藏
+            </div>
+          </div>
+          <Star className={`star1 fixed z-20 top-[10%] right-[20%] h-14`} />
+          <Star className={`star2 fixed z-20 bottom-[6%] right-[16%] h-24`} />
+          <Star className={`star3 fixed z-20 bottom-[4%] left-[20%] h-10`} />
+          <div
+            className={`graph-clip grow h-full bg-stone-300 texture border border-stone-500`}
+          >
             <NetworkGraph
               filtBy={filtBy}
-              selectFontSize={profile.fontSize}
+              fontSizeNum={fontSizeNum}
               userNotes={profile.notes}
             />
           </div>
@@ -119,7 +107,7 @@ const GraphView = () => {
       <div
         className={`${styles.theme} fixed flex flex-col z-30 top-0 right-0 h-full w-7 border-l border-stone-500`}
       >
-        <div className={`${styles.theme} border-y h-8`}></div>
+        <div className={`${styles.theme} border-b h-8 -mt-[1px]`}></div>
         <div
           className={`${styles.navButtonSmall} ${
             toggled
@@ -147,7 +135,7 @@ const GraphView = () => {
         >
           {summeries}
         </div>
-        {profile.notes.length > 10 && (
+        {profile.notes.length > 5 && (
           <div
             className={`${styles.themeButtonNoBg} ${
               isAiTyping && 'bg-stone-100'

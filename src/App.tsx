@@ -4,7 +4,16 @@ import './App.css';
 import Navigate from './components/Navigate';
 import * as styles from './utils/styles';
 import { useAppDispatch, useAppSelector } from './app/hooks';
-import { logoutAsync, selectProfile } from './app/loginSlice';
+import {
+  selectProfile,
+  selectIsToggleMenu,
+  setToggleMenu,
+} from './app/loginSlice';
+import Swal from 'sweetalert2';
+import { ReactComponent as SheepIcon } from './assets/sheepIcon.svg';
+import { ReactComponent as DoveIcon } from './assets/doveIcon.svg';
+import { ReactComponent as CandleIcon } from './assets/candleIcon.svg';
+import { ReactComponent as JarIcon } from './assets/jarIcon.svg';
 
 const navOptions = [
   { id: 'sermon', label: '聚會崇拜', link: '/?category=sermon' },
@@ -14,15 +23,16 @@ const navOptions = [
 
 function App() {
   const dispatch = useAppDispatch();
+  const toggled = useAppSelector(selectIsToggleMenu);
   const profile = useAppSelector(selectProfile);
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category') || '';
-  const [toggled, setToggled] = useState(false);
+
   return (
     <div className="App">
       <div className="relative flex w-screen h-full bg-stone-300">
         <div className={toggled ? 'fixed z-10 h-full' : 'hidden'}>
-          <Navigate setToggled={setToggled} />
+          <Navigate />
         </div>
         <div
           className={
@@ -32,8 +42,8 @@ function App() {
           }
         >
           <div
-            className={`${styles.themeButton} border-b w-full h-20 mt-[1px]`}
-            onClick={() => setToggled(true)}
+            className={`${styles.themeButton} border-b w-full h-20`}
+            onClick={() => dispatch(setToggleMenu(true))}
           >
             ≡
           </div>
@@ -62,7 +72,15 @@ function App() {
                           : 'bg-stone-100'
                       }`
                     }`}
-                  ></div>
+                  >
+                    {nav.id === 'sermon' ? (
+                      <SheepIcon className="w-[13px]" />
+                    ) : nav.id === 'devotion' ? (
+                      <DoveIcon className="w-[14px]" />
+                    ) : (
+                      <CandleIcon className="w-3" />
+                    )}
+                  </div>
                 </Link>
               ))}
               <NavLink to="/graphview">
@@ -72,26 +90,47 @@ function App() {
                       isActive && 'bg-blue-100'
                     } border-b w-full h-[62px] hover:bg-blue-100`}
                   >
-                    ✣
+                    <JarIcon className="w-4" />
                   </div>
                 )}
               </NavLink>
               <div className={`border-b border-stone-500 w-full grow`}></div>
               <div
                 className={`${styles.themeButton} border-b w-full h-10`}
-                onClick={() => dispatch(logoutAsync())}
+                onClick={() =>
+                  Swal.fire({
+                    title: profile.name,
+                    text: `共有 ${profile.notes.length} 篇筆記`,
+                    showConfirmButton: false,
+                    background: '#f5f5f4',
+                  })
+                }
               >
-                ⎋
+                <span className="text-base material-symbols-outlined">
+                  person
+                </span>
               </div>
             </>
           ) : (
             <>
               <div className={`w-full grow`}></div>
-              <div className={`${styles.themeButton} h-10 border-t`}>?</div>
+              <div
+                className={`${styles.themeButton} h-10 border-t`}
+                onClick={() =>
+                  Swal.fire({
+                    title: '關於我們',
+                    text: '由YuChien開發的個人專案',
+                    showConfirmButton: false,
+                    background: '#f5f5f4',
+                  })
+                }
+              >
+                ?
+              </div>
             </>
           )}
         </div>
-        <div className={`w-full h-full ${toggled ? 'ml-48' : 'ml-7'}`}>
+        <div className={`grow ${toggled ? 'ml-48' : 'ml-7'}`}>
           <Outlet />
         </div>
       </div>

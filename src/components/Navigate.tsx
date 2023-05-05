@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from '../app/hooks';
 import {
   logoutAsync,
   selectProfile,
+  setToggleMenu,
   loginViaLocalAsync,
 } from '../app/loginSlice';
 import { Link, NavLink, useNavigate, useSearchParams } from 'react-router-dom';
@@ -11,11 +12,7 @@ import { ReactComponent as Sheep } from '../assets/sheep.svg';
 import { ReactComponent as Dove } from '../assets/dove.svg';
 import { ReactComponent as Candle } from '../assets/candle.svg';
 import { ReactComponent as Jar } from '../assets/jar.svg';
-import styled from 'styled-components';
-
-interface Prop {
-  setToggled: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import Swal from 'sweetalert2';
 
 const navOptions = [
   { id: 'sermon', label: '聚會崇拜', link: '/?category=sermon' },
@@ -23,7 +20,7 @@ const navOptions = [
   { id: 'shared', label: '分享收藏', link: '/?category=shared' },
 ];
 
-const Navigate = ({ setToggled }: Prop) => {
+const Navigate = () => {
   const dispatch = useAppDispatch();
   const profile = useAppSelector(selectProfile);
   const navigate = useNavigate();
@@ -50,7 +47,7 @@ const Navigate = ({ setToggled }: Prop) => {
     <div
       className={`${styles.theme} flex flex-col justify-between h-full w-48 border-r`}
     >
-      <div className="flex w-full border-b border-stone-500">
+      <div className="flex w-full -mt-[1px] border-b border-stone-500">
         <Link
           to="/"
           className={`${styles.themeButton} grow h-20 font-bold tracking-widest text-2xl border-r`}
@@ -59,7 +56,7 @@ const Navigate = ({ setToggled }: Prop) => {
         </Link>
         <div
           className={`${styles.themeButton} w-7`}
-          onClick={() => setToggled(false)}
+          onClick={() => dispatch(setToggleMenu(false))}
         >
           ⋮
         </div>
@@ -117,8 +114,18 @@ const Navigate = ({ setToggled }: Prop) => {
             </NavLink>
           </div>
           <div className="flex justify-end mt-auto h-10 border-t border-stone-500">
-            <div className={`${styles.themeButton} grow border-r`}>
-              歡迎回來,{profile.name}
+            <div
+              className={`${styles.themeButton} grow border-r`}
+              onClick={() =>
+                Swal.fire({
+                  title: profile.name,
+                  text: `共有 ${profile.notes.length} 篇筆記`,
+                  showConfirmButton: false,
+                  background: '#f5f5f4',
+                })
+              }
+            >
+              個人資料
             </div>
             <div
               className={`${styles.themeButton} w-7`}
@@ -131,7 +138,19 @@ const Navigate = ({ setToggled }: Prop) => {
       ) : (
         <>
           <div className="flex justify-center">請先登入</div>
-          <div className={`${styles.themeButton} h-10 border-t`}>關於我們</div>
+          <div
+            className={`${styles.themeButton} h-10 border-t`}
+            onClick={() =>
+              Swal.fire({
+                title: '關於我們',
+                text: '由YuChien開發的個人專案',
+                showConfirmButton: false,
+                background: '#f5f5f4',
+              })
+            }
+          >
+            關於我們
+          </div>
         </>
       )}
     </div>

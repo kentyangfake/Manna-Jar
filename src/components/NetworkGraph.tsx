@@ -2,7 +2,9 @@ import Graph from 'react-graph-vis';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NoteType } from '../app/types';
-import { documentId } from 'firebase/firestore';
+import { selectIsToggleMenu } from '../app/loginSlice';
+import { useAppSelector } from '../app/hooks';
+import { parseGraphFontSize } from '../utils/utils';
 
 interface GraphType {
   graph: {
@@ -25,7 +27,7 @@ interface Node {
 interface Prop {
   filtBy: string;
   userNotes: NoteType[];
-  selectFontSize?: string;
+  fontSizeNum?: number;
   id?: string;
   noEvent?: boolean;
 }
@@ -89,7 +91,7 @@ const calcNodeSize = (arr: Edge[]) => {
 const NetworkGraph = ({
   filtBy,
   id,
-  selectFontSize,
+  fontSizeNum,
   userNotes,
   noEvent,
 }: Prop) => {
@@ -100,22 +102,11 @@ const NetworkGraph = ({
     },
   });
   const navigate = useNavigate();
+  const isToggleMenu = useAppSelector(selectIsToggleMenu);
 
   useEffect(() => {
-    let fontSize = 14;
-    switch (selectFontSize) {
-      case 'small':
-        fontSize = 14;
-        break;
-      case 'medium':
-        fontSize = 17;
-        break;
-      case 'large':
-        fontSize = 20;
-        break;
-      default:
-        fontSize = 14;
-    }
+    let fontSize = parseGraphFontSize(fontSizeNum!);
+    //TODO:切換字體大小
 
     let newNodes: Node[] = [];
     let newEdges: Edge[] = [];
@@ -172,23 +163,79 @@ const NetworkGraph = ({
     }
 
     const newGraph: GraphType = noEvent
-      ? { graph: { nodes: newNodes, edges: newEdges } }
+      ? {
+          graph: { nodes: newNodes, edges: newEdges },
+          events: {
+            hoverNode: () => {
+              document.body.style.cursor = 'pointer';
+            },
+            blurNode: () => {
+              document.body.style.cursor = 'default';
+            },
+            dragging: () => {
+              document.body.style.cursor = 'grabbing';
+            },
+            dragEnd: () => {
+              document.body.style.cursor = 'grab';
+              setTimeout(() => {
+                document.body.style.cursor = 'default';
+              }, 500);
+            },
+            zoom: ({ direction }: { direction: string }) => {
+              direction === '+'
+                ? (document.body.style.cursor = 'zoom-in')
+                : (document.body.style.cursor = 'zoom-out');
+              setTimeout(() => {
+                document.body.style.cursor = 'default';
+              }, 500);
+            },
+          },
+        }
       : {
           graph: { nodes: newNodes, edges: newEdges },
           events: {
             selectNode: ({ nodes }: { nodes: string[] }) => {
               const noteId = nodes[0];
+              document.body.style.cursor = 'default';
               navigate(`/note/${noteId}`);
+            },
+            hoverNode: () => {
+              document.body.style.cursor = 'pointer';
+            },
+            blurNode: () => {
+              document.body.style.cursor = 'default';
+            },
+            dragging: () => {
+              document.body.style.cursor = 'grabbing';
+            },
+            dragEnd: () => {
+              document.body.style.cursor = 'grab';
+              setTimeout(() => {
+                document.body.style.cursor = 'default';
+              }, 500);
+            },
+            zoom: ({ direction }: { direction: string }) => {
+              direction === '+'
+                ? (document.body.style.cursor = 'zoom-in')
+                : (document.body.style.cursor = 'zoom-out');
+              setTimeout(() => {
+                document.body.style.cursor = 'default';
+              }, 500);
             },
           },
         };
     setState(newGraph);
-  }, [id, filtBy, selectFontSize, userNotes]);
+  }, [id, filtBy, fontSizeNum, userNotes]);
 
   const { graph, events } = state;
   return (
     <>
-      <Graph graph={graph} options={options} events={events} />
+      <Graph
+        key={isToggleMenu ? 'toggled' : 'not-toggled'}
+        graph={graph}
+        options={options}
+        events={events}
+      />
     </>
   );
 };
