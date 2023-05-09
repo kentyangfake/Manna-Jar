@@ -106,7 +106,6 @@ const NetworkGraph = ({
 
   useEffect(() => {
     let fontSize = parseGraphFontSize(fontSizeNum!);
-    //TODO:切換字體大小
 
     let newNodes: Node[] = [];
     let newEdges: Edge[] = [];
