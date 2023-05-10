@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Header from '../../components/header';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addNote, selectProfile } from '../../redux/loginSlice';
@@ -23,7 +24,11 @@ const Home = () => {
     const getShareNoteViaLink = async () => {
       const shareNote = await firestore.getShareNote(shareBy, shareNoteId);
       if (!shareNote.id) {
-        //TODO可以跳個彈窗
+        Swal.fire({
+          icon: 'warning',
+          text: '此分享連結已失效',
+          background: '#f5f5f4',
+        });
         return;
       }
       dispatch(addNote(shareNote));

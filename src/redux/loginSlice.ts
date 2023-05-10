@@ -111,7 +111,6 @@ const loginSlice = createSlice({
       if(action.payload.title === ''){
         addedNote.title='未命名標題';
       }
-      //BUG新增的筆記沒有吃到判斷
       order === 'newest'? state.profile.notes.unshift(addedNote): state.profile.notes.push(addedNote);
       const id = state.profile.id
       const data = {
