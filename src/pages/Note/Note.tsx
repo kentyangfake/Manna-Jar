@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import NetworkGraph from '../../components/NetworkGraph';
-import SizePicker from '../../components/SizePicker';
+import ToolBar from '../../components/ToolBar';
 import Header from '../../components/header';
 import { useAppSelector } from '../../redux/hooks';
 import { selectFontSize, selectProfile } from '../../redux/loginSlice';
@@ -84,14 +84,14 @@ const Note = () => {
           sharedBy={currentNote.sharedBy}
         />
         {currentNote.category === 'admin' ? (
-          <SizePicker previous />
+          <ToolBar previous />
         ) : currentNote.category === 'shared' ? (
-          <SizePicker
+          <ToolBar
             previous
             deleteInfo={{ id: currentNote.id, title: currentNote.title }}
           />
         ) : (
-          <SizePicker
+          <ToolBar
             previous
             edit={currentNote.id}
             deleteInfo={{ id: currentNote.id, title: currentNote.title }}

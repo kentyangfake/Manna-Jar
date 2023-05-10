@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Star } from '../../assets/star.svg';
 import NetworkGraph from '../../components/NetworkGraph';
-import SizePicker from '../../components/SizePicker';
+import ToolBar from '../../components/ToolBar';
 import { useAppSelector } from '../../redux/hooks';
 import { selectFontSize, selectProfile } from '../../redux/loginSlice';
 import { openAI } from '../../utils/openAI';
@@ -55,7 +55,7 @@ const GraphView = () => {
     <div className="flex h-full w-full">
       <div className="flex flex-col grow justify-between h-full">
         <div className="h-8">
-          <SizePicker fullGraph />
+          <ToolBar fullGraph />
         </div>
         <div className="flex relative justify-center items-center grow pl-5 pr-14 py-5 sky tracking-widest">
           <div className={`absolute z-10 top-10 left-20 flex flex-col gap-2`}>

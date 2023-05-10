@@ -299,7 +299,11 @@ const loginSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(loginViaLocalAsync.rejected, () => {
-        console.log("rejected!");
+        Swal.fire({
+          icon: 'error',
+          text: '網路發生錯誤',
+          background:'#f5f5f4',
+        })
       })
       .addCase(logoutAsync.pending,(state)=>{
         state.isLoading = true;
@@ -313,7 +317,11 @@ const loginSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(logoutAsync.rejected, () => {
-        console.log("rejected!");
+        Swal.fire({
+          icon: 'error',
+          text: '網路發生錯誤',
+          background:'#f5f5f4',
+        })
       })
   },
 })
