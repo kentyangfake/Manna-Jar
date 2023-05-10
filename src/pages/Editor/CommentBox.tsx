@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useAppSelector } from '../../redux/hooks';
-import { selectProfile } from '../../redux/loginSlice';
+import { selectProfile } from '../../redux/userSlice';
 import { getBibleReference } from '../../utils/utils';
 
 interface hashValue {
@@ -114,14 +114,12 @@ const CommentBox = ({
         const chapter = lastReference[2];
         const verse = lastReference[3];
         document.body.style.cursor = 'wait';
-        //TODO改成async/await
-        await getBibleReference(book, chapter, verse).then((text) => {
-          onChange(
-            beforeCursor.slice(0, referenceStart) +
-              text +
-              afterCursor.slice(referenceEnd)
-          );
-        });
+        const bibleText = await getBibleReference(book, chapter, verse);
+        onChange(
+          beforeCursor.slice(0, referenceStart) +
+            bibleText +
+            afterCursor.slice(referenceEnd)
+        );
         document.body.style.cursor = 'default';
         event.preventDefault();
       }

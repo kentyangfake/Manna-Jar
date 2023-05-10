@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import Graph from 'react-graph-vis';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../redux/hooks';
-import { selectIsToggleMenu } from '../redux/loginSlice';
 import { NoteType } from '../redux/types';
+import { selectIsToggleMenu } from '../redux/userSlice';
 import { parseGraphFontSize } from '../utils/utils';
 
 interface GraphType {
@@ -134,7 +134,6 @@ const NetworkGraph = ({
       });
     });
 
-    //calc node size base on referenced count
     const sizeCollection = calcNodeSize(newEdges);
     newNodes.forEach((itemA) => {
       const matchedItemB = sizeCollection.find(
@@ -144,13 +143,11 @@ const NetworkGraph = ({
         itemA.size = matchedItemB.size;
       }
     });
-    //filter unrelated nodes while in note page
+
     if (id) {
       const relatedNode: string[] = [id!];
-      //get link to
       const currentNote = userNotes.find((note) => note.id === id);
       currentNote?.link_notes.map((note) => relatedNode.push(note.id));
-      //get referenced by
       userNotes.map((note) =>
         note.link_notes?.map((link) => {
           if (link.id === id) {
