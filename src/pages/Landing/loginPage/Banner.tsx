@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import loading from '../../../assets/loading.gif';
 import scrollDown from '../../../assets/scroll-down.gif';
 import TypedString from '../../../components/TypedString';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
@@ -146,14 +145,14 @@ const Banner = () => {
                 className={`${styles.themeButton} text-xs self-center mt-4 border w-16 h-8`}
                 onClick={handleSingUp}
               >
-                {isLoading ? <img src={loading} alt="loading..." /> : '註冊'}
+                註冊
               </div>
             ) : (
               <div
                 className={`${styles.themeButton} text-xs self-center mt-4 border w-16 h-8`}
                 onClick={handleLogin}
               >
-                {isLoading ? <img src={loading} alt="loading..." /> : '登入'}
+                登入
               </div>
             )}
           </div>

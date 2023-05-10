@@ -13,7 +13,7 @@ import Section1 from './loginPage/Section1';
 import Section2 from './loginPage/Section2';
 import Section3 from './loginPage/Section3';
 
-const Login = () => {
+const LoginPage = () => {
   const dispatch = useAppDispatch();
   const profile = useAppSelector(selectProfile);
   const isLoading = useAppSelector(selectIsLoading);
@@ -45,4 +45,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;
