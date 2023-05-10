@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, setDoc, getDoc, doc} from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import { sampleNote } from "./sampleText";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional

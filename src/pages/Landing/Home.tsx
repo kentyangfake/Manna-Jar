@@ -22,9 +22,8 @@ const Home = () => {
     }
     const getShareNoteViaLink = async () => {
       const shareNote = await firestore.getShareNote(shareBy, shareNoteId);
-      console.log(shareNote);
       if (!shareNote.id) {
-        //可以跳個彈窗
+        //TODO可以跳個彈窗
         return;
       }
       dispatch(addNote(shareNote));

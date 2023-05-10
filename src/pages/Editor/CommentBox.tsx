@@ -114,7 +114,7 @@ const CommentBox = ({
         const chapter = lastReference[2];
         const verse = lastReference[3];
         document.body.style.cursor = 'wait';
-        //改成async/await
+        //TODO改成async/await
         await getBibleReference(book, chapter, verse).then((text) => {
           onChange(
             beforeCursor.slice(0, referenceStart) +

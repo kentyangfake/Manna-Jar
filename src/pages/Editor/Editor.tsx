@@ -24,8 +24,11 @@ const category = [
 
 const Editor = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const profile = useAppSelector(selectProfile);
   const [isEdit, setIsEdit] = useState(false);
+  const [toggleHelp, settoggleHelp] = useState(false);
   const [note, setNote] = useState<NoteType>({
     id: uuidv4(),
     title: '',
@@ -35,9 +38,6 @@ const Editor = () => {
     create_time: new Date().getTime(),
     edit_time: new Date().getTime(),
   });
-  const navigate = useNavigate();
-  const profile = useAppSelector(selectProfile);
-  const [toggleHelp, settoggleHelp] = useState(false);
 
   useEffect(() => {
     if (!profile.isLogin) {
