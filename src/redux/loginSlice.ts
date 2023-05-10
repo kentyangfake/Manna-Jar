@@ -24,6 +24,21 @@ const initialState = {
   fontSize:5,
 }
 
+const sortNotes = (notes: NoteType[], orderBy:{time:string,record:string}) => {
+  switch (orderBy.time) {
+    case 'newest':
+      return orderBy.record === 'create'
+        ? notes.sort((a, b) => b.create_time - a.create_time)
+        : notes.sort((a, b) => b.edit_time - a.edit_time);
+    case 'oldest':
+      return orderBy.record === 'create'
+        ? notes.sort((a, b) => a.create_time - b.create_time)
+        : notes.sort((a, b) => a.edit_time - b.edit_time);
+    default:
+      return notes;
+  }
+};
+
 export const signUpAsync = createAsyncThunk(
   'user/signUp',
   async ({ email, password, name }:{email:string;password:string;name:string}) => {
@@ -97,7 +112,6 @@ const loginSlice = createSlice({
     },
     addNote: (state, action: PayloadAction<NoteType>) => {
       const order = state.profile.orderBy.time
-      //handle already had note
       if (state.profile.notes.findIndex(note => note.id === action.payload.id ) >= 0){
         Swal.fire({
           icon: 'warning',
@@ -106,7 +120,6 @@ const loginSlice = createSlice({
         })
         return
       }
-      //handle added note without title
       let addedNote = {...action.payload}
       if(action.payload.title === ''){
         addedNote.title='未命名標題';
@@ -150,7 +163,6 @@ const loginSlice = createSlice({
       firestore.updateUser(id, data);
     },
     editNote:(state, action: PayloadAction<NoteType>)=>{
-      //handle added note without title
       let editedNote = {...action.payload}
       if(action.payload.title === ''){
         editedNote.title='未命名標題';
@@ -174,55 +186,11 @@ const loginSlice = createSlice({
     },
     changeOrderByTime:(state)=>{
       state.profile.orderBy.time =( state.profile.orderBy.time === 'newest') ? 'oldest' : 'newest';
-      if(state.profile.orderBy.record === 'create'){
-        switch(state.profile.orderBy.time){
-          case 'newest':
-            state.profile.notes.sort((a,b)=>b.create_time - a.create_time);
-            break;
-          case 'oldest':
-            state.profile.notes.sort((a,b)=>a.create_time - b.create_time);
-            break;
-          default:
-            state.profile.notes.sort((a,b)=>b.create_time - a.create_time);
-        }
-      } else {
-        switch(state.profile.orderBy.time){
-          case 'newest':
-            state.profile.notes.sort((a,b)=>b.edit_time - a.edit_time);
-            break;
-          case 'oldest':
-            state.profile.notes.sort((a,b)=>a.edit_time - b.edit_time);
-            break;
-          default:
-            state.profile.notes.sort((a,b)=>b.edit_time - a.edit_time);
-        }
-      }
+      sortNotes(state.profile.notes,state.profile.orderBy);
     },
     changeOrderByRecord:(state)=>{
       state.profile.orderBy.record = (state.profile.orderBy.record === 'create') ? 'edit' : 'create';
-      if(state.profile.orderBy.record === 'create'){
-        switch(state.profile.orderBy.time){
-          case 'newest':
-            state.profile.notes.sort((a,b)=>b.create_time - a.create_time);
-            break;
-          case 'oldest':
-            state.profile.notes.sort((a,b)=>a.create_time - b.create_time);
-            break;
-          default:
-            state.profile.notes.sort((a,b)=>b.create_time - a.create_time);
-        }
-      } else {
-        switch(state.profile.orderBy.time){
-          case 'newest':
-            state.profile.notes.sort((a,b)=>b.edit_time - a.edit_time);
-            break;
-          case 'oldest':
-            state.profile.notes.sort((a,b)=>a.edit_time - b.edit_time);
-            break;
-          default:
-            state.profile.notes.sort((a,b)=>b.edit_time - a.edit_time);
-        }
-      }
+      sortNotes(state.profile.notes,state.profile.orderBy);
     },
     incrementFontSize:(state)=>{
       if (state.fontSize >= 10) {
