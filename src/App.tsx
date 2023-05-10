@@ -1,15 +1,15 @@
-import { Outlet, useSearchParams, Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, Outlet, useSearchParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import './App.css';
 import Navigate from './components/Navigate';
-import * as styles from './utils/styles';
-import { useAppDispatch, useAppSelector } from './app/hooks';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
 import {
-  selectProfile,
   selectIsToggleMenu,
+  selectProfile,
   setToggleMenu,
-} from './app/loginSlice';
-import Swal from 'sweetalert2';
+} from './redux/loginSlice';
 import { aboutContent } from './utils/sampleText';
+import * as styles from './utils/styles';
 
 const navOptions = [
   { id: 'sermon', label: '聚會崇拜', link: '/?category=sermon' },

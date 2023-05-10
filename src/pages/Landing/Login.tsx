@@ -1,24 +1,24 @@
-import { useRef, useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  loginAsync,
-  signUpAsync,
-  loginViaLocalAsync,
-  selectProfile,
-  selectIsLoading,
-} from '../../app/loginSlice';
-import * as styles from '../../utils/styles';
-import TypedString from '../../components/TypedString';
 import autoVerse from '../../assets/autoVerse.mp4';
 import backLinks from '../../assets/backLinks.mp4';
-import NetworkGraph from '../../components/NetworkGraph';
-import { NoteType } from '../../app/types';
-import { ReactComponent as Sheep } from '../../assets/sheep.svg';
-import { ReactComponent as Dove } from '../../assets/dove.svg';
 import { ReactComponent as Candle } from '../../assets/candle.svg';
+import { ReactComponent as Dove } from '../../assets/dove.svg';
 import loading from '../../assets/loading.gif';
 import scrollDown from '../../assets/scroll-down.gif';
+import { ReactComponent as Sheep } from '../../assets/sheep.svg';
+import NetworkGraph from '../../components/NetworkGraph';
+import TypedString from '../../components/TypedString';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import {
+  loginAsync,
+  loginViaLocalAsync,
+  selectIsLoading,
+  selectProfile,
+  signUpAsync,
+} from '../../redux/loginSlice';
+import { NoteType } from '../../redux/types';
+import * as styles from '../../utils/styles';
 
 const demoNotesTitles = [
   '出人意外的平安',

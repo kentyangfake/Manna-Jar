@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from './store';
-import { auth, firestore } from '../utils/firebase';
-import { NoteType } from './types';
 import Swal from 'sweetalert2';
+import { auth, firestore } from '../utils/firebase';
 import { sampleNote } from '../utils/sampleText';
+import { RootState } from './store';
+import { NoteType } from './types';
 
 interface CustomUser {
   uid: string;
@@ -111,6 +111,7 @@ const loginSlice = createSlice({
       if(action.payload.title === ''){
         addedNote.title='未命名標題';
       }
+      //BUG新增的筆記沒有吃到判斷
       order === 'newest'? state.profile.notes.unshift(addedNote): state.profile.notes.push(addedNote);
       const id = state.profile.id
       const data = {
@@ -173,7 +174,7 @@ const loginSlice = createSlice({
       })
     },
     changeOrderByTime:(state)=>{
-      state.profile.orderBy.time === 'newest'? state.profile.orderBy.time = 'oldest' : state.profile.orderBy.time = 'newest';
+      state.profile.orderBy.time =( state.profile.orderBy.time === 'newest') ? 'oldest' : 'newest';
       if(state.profile.orderBy.record === 'create'){
         switch(state.profile.orderBy.time){
           case 'newest':
@@ -199,7 +200,7 @@ const loginSlice = createSlice({
       }
     },
     changeOrderByRecord:(state)=>{
-      state.profile.orderBy.record === 'create'? state.profile.orderBy.record = 'edit' : state.profile.orderBy.record = 'create';
+      state.profile.orderBy.record = (state.profile.orderBy.record === 'create') ? 'edit' : 'create';
       if(state.profile.orderBy.record === 'create'){
         switch(state.profile.orderBy.time){
           case 'newest':
@@ -258,7 +259,7 @@ const loginSlice = createSlice({
         state.profile.isLogin = true;
         state.isLoading = false;
       })
-      .addCase(signUpAsync.rejected, (state, action) => {
+      .addCase(signUpAsync.rejected, (state) => {
         Swal.fire({
           icon: 'error',
           title: '註冊失敗',
@@ -278,7 +279,7 @@ const loginSlice = createSlice({
         state.profile.isLogin = true;
         state.isLoading = false;
       })
-      .addCase(loginAsync.rejected, (state, action) => {
+      .addCase(loginAsync.rejected, (state) => {
         Swal.fire({
           icon: 'error',
           title: '登入失敗',
@@ -298,13 +299,13 @@ const loginSlice = createSlice({
         state.profile.isLogin = true;
         state.isLoading = false;
       })
-      .addCase(loginViaLocalAsync.rejected, (state, action) => {
+      .addCase(loginViaLocalAsync.rejected, () => {
         console.log("rejected!");
       })
       .addCase(logoutAsync.pending,(state)=>{
         state.isLoading = true;
       })
-      .addCase(logoutAsync.fulfilled, (state, action) => {
+      .addCase(logoutAsync.fulfilled, (state) => {
         state.profile.email = "";
         state.profile.id = "";
         state.profile.name = "";
@@ -312,7 +313,7 @@ const loginSlice = createSlice({
         state.profile.isLogin = false;
         state.isLoading = false;
       })
-      .addCase(logoutAsync.rejected, (state, action) => {
+      .addCase(logoutAsync.rejected, () => {
         console.log("rejected!");
       })
   },

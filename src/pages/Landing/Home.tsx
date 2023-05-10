@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { selectProfile, addNote } from '../../app/loginSlice';
 import { Link, useSearchParams } from 'react-router-dom';
-import { parseDate, parseWeekday } from '../../utils/utils';
-import { firestore } from '../../utils/firebase';
-import OrderPicker from './OrderPicker';
 import Header from '../../components/header';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { addNote, selectProfile } from '../../redux/loginSlice';
+import { firestore } from '../../utils/firebase';
 import * as styles from '../../utils/styles';
+import { parseDate, parseWeekday } from '../../utils/utils';
+import OrderPicker from './OrderPicker';
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +22,11 @@ const Home = () => {
     }
     const getShareNoteViaLink = async () => {
       const shareNote = await firestore.getShareNote(shareBy, shareNoteId);
+      console.log(shareNote);
+      if (!shareNote.id) {
+        //可以跳個彈窗
+        return;
+      }
       dispatch(addNote(shareNote));
     };
 

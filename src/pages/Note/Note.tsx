@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
-import { useAppSelector } from '../../app/hooks';
-import { selectProfile, selectFontSize } from '../../app/loginSlice';
-import { useParams, Link } from 'react-router-dom';
-import { NoteType } from '../../app/types';
-import NetworkGraph from '../../components/NetworkGraph';
-import Header from '../../components/header';
-import SizePicker from '../../components/SizePicker';
-import * as styles from '../../utils/styles';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import NetworkGraph from '../../components/NetworkGraph';
+import SizePicker from '../../components/SizePicker';
+import Header from '../../components/header';
+import { useAppSelector } from '../../redux/hooks';
+import { selectFontSize, selectProfile } from '../../redux/loginSlice';
+import { NoteType } from '../../redux/types';
+import * as styles from '../../utils/styles';
 import { parseFontSize } from '../../utils/utils';
 
 interface Referenced {

@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
-import CommentBox from './CommentBox';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectProfile, addNote, editNote } from '../../app/loginSlice';
-import './styles.css';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
-import { NoteType } from '../../app/types';
-import * as styles from '../../utils/styles';
 import Swal from 'sweetalert2';
+import { v4 as uuidv4 } from 'uuid';
 import autoVerse from '../../assets/autoVerse.gif';
 import backLinks from '../../assets/backLinks.gif';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { addNote, editNote, selectProfile } from '../../redux/loginSlice';
+import { NoteType } from '../../redux/types';
+import * as styles from '../../utils/styles';
+import CommentBox from './CommentBox';
+import './styles.css';
 
 const category = [
   {

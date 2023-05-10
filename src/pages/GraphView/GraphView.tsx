@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import NetworkGraph from '../../components/NetworkGraph';
-import { openAI } from '../../utils/openAI';
-import { useAppSelector } from '../../app/hooks';
-import { selectProfile, selectFontSize } from '../../app/loginSlice';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SizePicker from '../../components/SizePicker';
-import * as styles from '../../utils/styles';
 import { ReactComponent as Star } from '../../assets/star.svg';
+import NetworkGraph from '../../components/NetworkGraph';
+import SizePicker from '../../components/SizePicker';
+import { useAppSelector } from '../../redux/hooks';
+import { selectFontSize, selectProfile } from '../../redux/loginSlice';
+import { openAI } from '../../utils/openAI';
+import * as styles from '../../utils/styles';
 import { parseFontSize } from '../../utils/utils';
 
 const GraphView = () => {

@@ -1,13 +1,13 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import App from './App';
 import './index.css';
-import Landing from './pages/Landing/Landing';
-import GraphView from './pages/GraphView/GraphView';
 import Editor from './pages/Editor/Editor';
+import GraphView from './pages/GraphView/GraphView';
+import Landing from './pages/Landing/Landing';
 import Note from './pages/Note/Note';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
+import { store } from './redux/store';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
