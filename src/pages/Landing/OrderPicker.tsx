@@ -1,9 +1,9 @@
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import {
-  selectProfile,
   changeOrderByRecord,
   changeOrderByTime,
-} from '../../app/loginSlice';
+  selectProfile,
+} from '../../redux/loginSlice';
 import * as styles from '../../utils/styles';
 
 const OrderPicker = () => {

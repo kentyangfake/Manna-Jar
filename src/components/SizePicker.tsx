@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../app/hooks';
-import {
-  selectFontSize,
-  incrementFontSize,
-  decrementFontSize,
-  deleteNote,
-} from '../app/loginSlice';
-import { useNavigate, Link } from 'react-router-dom';
-import * as styles from '../utils/styles';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import connection from '../assets/connection.png';
 import link from '../assets/link.png';
-import shareButton from '../assets/shareButton.png';
 import referencedBy from '../assets/referencedBy.png';
+import shareButton from '../assets/shareButton.png';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import {
+  decrementFontSize,
+  deleteNote,
+  incrementFontSize,
+  selectFontSize,
+} from '../redux/loginSlice';
+import * as styles from '../utils/styles';
 import { parseDisplayFontSize, parseHelperFontSize } from '../utils/utils';
 
 interface Props {

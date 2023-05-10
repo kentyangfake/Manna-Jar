@@ -11,6 +11,7 @@
 # production
 /build
 /.firebase
+firestore.rules
 
 # misc
 .DS_Store

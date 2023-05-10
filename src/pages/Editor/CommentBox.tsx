@@ -1,9 +1,9 @@
-import { useState, useEffect, useMemo } from 'react';
-import ReactQuill from 'react-quill';
 import 'quill-mention';
+import { useEffect, useMemo, useState } from 'react';
+import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useAppSelector } from '../../app/hooks';
-import { selectProfile } from '../../app/loginSlice';
+import { useAppSelector } from '../../redux/hooks';
+import { selectProfile } from '../../redux/loginSlice';
 import { getBibleReference } from '../../utils/utils';
 
 interface hashValue {
@@ -114,6 +114,7 @@ const CommentBox = ({
         const chapter = lastReference[2];
         const verse = lastReference[3];
         document.body.style.cursor = 'wait';
+        //TODO改成async/await
         await getBibleReference(book, chapter, verse).then((text) => {
           onChange(
             beforeCursor.slice(0, referenceStart) +

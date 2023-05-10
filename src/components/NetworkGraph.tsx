@@ -1,9 +1,9 @@
+import { useEffect, useState } from 'react';
 import Graph from 'react-graph-vis';
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { NoteType } from '../app/types';
-import { selectIsToggleMenu } from '../app/loginSlice';
-import { useAppSelector } from '../app/hooks';
+import { useAppSelector } from '../redux/hooks';
+import { selectIsToggleMenu } from '../redux/loginSlice';
+import { NoteType } from '../redux/types';
 import { parseGraphFontSize } from '../utils/utils';
 
 interface GraphType {
@@ -106,7 +106,6 @@ const NetworkGraph = ({
 
   useEffect(() => {
     let fontSize = parseGraphFontSize(fontSizeNum!);
-    //TODO:切換字體大小
 
     let newNodes: Node[] = [];
     let newEdges: Edge[] = [];
@@ -229,14 +228,12 @@ const NetworkGraph = ({
 
   const { graph, events } = state;
   return (
-    <>
-      <Graph
-        key={isToggleMenu ? 'toggled' : 'not-toggled'}
-        graph={graph}
-        options={options}
-        events={events}
-      />
-    </>
+    <Graph
+      key={isToggleMenu ? 'toggled' : 'not-toggled'}
+      graph={graph}
+      options={options}
+      events={events}
+    />
   );
 };
 

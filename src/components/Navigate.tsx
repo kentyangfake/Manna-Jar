@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '../app/hooks';
+import { Link, NavLink, useNavigate, useSearchParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { ReactComponent as Candle } from '../assets/candle.svg';
+import { ReactComponent as Dove } from '../assets/dove.svg';
+import { ReactComponent as Jar } from '../assets/jar.svg';
+import { ReactComponent as Sheep } from '../assets/sheep.svg';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import {
+  loginViaLocalAsync,
   logoutAsync,
   selectProfile,
   setToggleMenu,
-  loginViaLocalAsync,
-} from '../app/loginSlice';
-import { Link, NavLink, useNavigate, useSearchParams } from 'react-router-dom';
-import * as styles from '../utils/styles';
-import { ReactComponent as Sheep } from '../assets/sheep.svg';
-import { ReactComponent as Dove } from '../assets/dove.svg';
-import { ReactComponent as Candle } from '../assets/candle.svg';
-import { ReactComponent as Jar } from '../assets/jar.svg';
-import Swal from 'sweetalert2';
+} from '../redux/loginSlice';
 import { aboutContent } from '../utils/sampleText';
+import * as styles from '../utils/styles';
 
 const navOptions = [
   { id: 'sermon', label: '聚會崇拜', link: '/?category=sermon' },
@@ -138,9 +138,11 @@ const Navigate = () => {
                     profile.notes.filter((note) => note.category === 'shared')
                       .length
                   }</span>篇 筆記</p>
-                  <p class="mt-5">本週新增 <span class="font-bold text-violet-400">${
+                  <p class="mt-5">我本週寫了 <span class="font-bold text-violet-400">${
                     profile.notes.filter(
                       (note) =>
+                        (note.category === 'sermon' ||
+                          note.category === 'devotion') &&
                         new Date().getTime() - note.create_time < 604800000
                     ).length
                   }篇</span> 筆記</p>

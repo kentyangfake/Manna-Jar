@@ -6,19 +6,6 @@ export const theme = classnames(
   borders('border-stone-500')
 );
 
-export const themeFlex = classnames(
-  typography('text-stone-500','tracking-widest'),
-  borders('border-stone-500'),
-  layout('flex'),
-  flexBox('justify-center','items-center'),
-)
-
-export const themeActive = classnames(
-  typography('text-stone-500','tracking-widest'),
-  backgroundColor('bg-stone-200'),
-  borders('border-stone-500')
-);
-
 export const themeButtonNoBg = classnames(
   typography('text-stone-500','tracking-widest'),
   borders('border-stone-500'),
@@ -32,6 +19,19 @@ export const themeButton = classnames(
   themeButtonNoBg,
   backgroundColor('bg-stone-300'),
 )
+
+export const themeFlex = classnames(
+  typography('text-stone-500','tracking-widest'),
+  borders('border-stone-500'),
+  layout('flex'),
+  flexBox('justify-center','items-center'),
+)
+
+export const themeActive = classnames(
+  typography('text-stone-500','tracking-widest'),
+  backgroundColor('bg-stone-200'),
+  borders('border-stone-500')
+);
 
 export const themeButtonActive = classnames(
   themeActive,
