@@ -302,47 +302,22 @@ export const parseDate = (timestamp: number) => {
   const date = new Date(timestamp);
   const year = date.getFullYear();
   const day = date.getDate();
-  let month: string;
-  switch (date.getMonth()) {
-    case 0:
-      month = '一月';
-      break;
-    case 1:
-      month = '二月';
-      break;
-    case 2:
-      month = '三月';
-      break;
-    case 3:
-      month = '四月';
-      break;
-    case 4:
-      month = '五月';
-      break;
-    case 5:
-      month = '六月';
-      break;
-    case 6:
-      month = '七月';
-      break;
-    case 7:
-      month = '八月';
-      break;
-    case 8:
-      month = '九月';
-      break;
-    case 9:
-      month = '十月';
-      break;
-    case 10:
-      month = '十一';
-      break;
-    case 11:
-      month = '十二';
-      break;
-    default:
-      month = '';
-  }
+  const months: Record<number, string> = {
+    0: '一月',
+    1: '二月',
+    2: '三月',
+    3: '四月',
+    4: '五月',
+    5: '六月',
+    6: '七月',
+    7: '八月',
+    8: '九月',
+    9: '十月',
+    10: '十一',
+    11: '十二',
+  };
+
+  const month = months[date.getMonth()];
 
   return `${day} ${month} ${year}`;
 };
@@ -357,33 +332,20 @@ export const parseTime = (timestamp: number) => {
 
 export const parseWeekday = (timestamp: number) => {
   const date = new Date(timestamp);
-  let weekday: string;
-  switch (date.getDay()) {
-    case 0:
-      weekday = '日';
-      break;
-    case 1:
-      weekday = '一';
-      break;
-    case 2:
-      weekday = '二';
-      break;
-    case 3:
-      weekday = '三';
-      break;
-    case 4:
-      weekday = '四';
-      break;
-    case 5:
-      weekday = '五';
-      break;
-    case 6:
-      weekday = '六';
-      break;
-    default:
-      weekday = '';
-  }
-  return `${weekday}`;
+
+  const weekdays: Record<number, string> = {
+    0: '日',
+    1: '一',
+    2: '二',
+    3: '三',
+    4: '四',
+    5: '五',
+    6: '六',
+  };
+
+  const weekday = weekdays[date.getDay()] || '';
+
+  return weekday;
 };
 
 export const parseFontSize = (fontSizeNum: number) => {
@@ -464,121 +426,58 @@ export const parseFontSize = (fontSizeNum: number) => {
 };
 
 export const parseHelperFontSize = (fontSizeNum: number) => {
-  let fontSize: string = 'text-xl';
-  switch (fontSizeNum) {
-    case 1:
-      fontSize = 'text-xs';
-      break;
-    case 2:
-      fontSize = 'text-sm';
-      break;
-    case 3:
-      fontSize = 'text-base';
-      break;
-    case 4:
-      fontSize = 'text-lg';
-      break;
-    case 5:
-      fontSize = 'text-xl';
-      break;
-    case 6:
-      fontSize = 'text-2xl';
-      break;
-    case 7:
-      fontSize = 'text-2xl';
-      break;
-    case 8:
-      fontSize = 'text-3xl';
-      break;
-    case 9:
-      fontSize = 'text-3xl';
-      break;
-    case 10:
-      fontSize = 'text-3xl';
-      break;
-    default:
-      fontSize = 'text-xl';
-  }
+  const fontSizes: Record<number, string> = {
+    1: 'text-xs',
+    2: 'text-sm',
+    3: 'text-base',
+    4: 'text-lg',
+    5: 'text-xl',
+    6: 'text-2xl',
+    7: 'text-2xl',
+    8: 'text-3xl',
+    9: 'text-3xl',
+    10: 'text-3xl',
+  };
+
+  const fontSize = fontSizes[fontSizeNum] || 'text-xl';
 
   return fontSize;
 };
 
 export const parseDisplayFontSize = (fontSizeNum: number) => {
-  let fontSize: string = '50%';
-  switch (fontSizeNum) {
-    case 1:
-      fontSize = '10%';
-      break;
-    case 2:
-      fontSize = '20%';
-      break;
-    case 3:
-      fontSize = '30%';
-      break;
-    case 4:
-      fontSize = '40%';
-      break;
-    case 5:
-      fontSize = '50%';
-      break;
-    case 6:
-      fontSize = '60%';
-      break;
-    case 7:
-      fontSize = '70%';
-      break;
-    case 8:
-      fontSize = '80%';
-      break;
-    case 9:
-      fontSize = '90%';
-      break;
-    case 10:
-      fontSize = '100%';
-      break;
-    default:
-      fontSize = '50%';
-  }
+  const fontSizes: Record<number, string> = {
+    1: '10%',
+    2: '20%',
+    3: '30%',
+    4: '40%',
+    5: '50%',
+    6: '60%',
+    7: '70%',
+    8: '80%',
+    9: '90%',
+    10: '100%',
+  };
+
+  const fontSize = fontSizes[fontSizeNum] || '50%';
 
   return fontSize;
 };
 
 export const parseGraphFontSize = (fontSizeNum: number) => {
-  let fontSize: number = 14;
-  switch (fontSizeNum) {
-    case 1:
-      fontSize = 10;
-      break;
-    case 2:
-      fontSize = 11;
-      break;
-    case 3:
-      fontSize = 12;
-      break;
-    case 4:
-      fontSize = 13;
-      break;
-    case 5:
-      fontSize = 14;
-      break;
-    case 6:
-      fontSize = 17;
-      break;
-    case 7:
-      fontSize = 19;
-      break;
-    case 8:
-      fontSize = 21;
-      break;
-    case 9:
-      fontSize = 23;
-      break;
-    case 10:
-      fontSize = 25;
-      break;
-    default:
-      fontSize = 14;
-  }
+  const fontSizes: Record<number, number> = {
+    1: 10,
+    2: 11,
+    3: 12,
+    4: 13,
+    5: 14,
+    6: 17,
+    7: 19,
+    8: 21,
+    9: 23,
+    10: 25,
+  };
+
+  const fontSize = fontSizes[fontSizeNum] || 14;
 
   return fontSize;
 };
