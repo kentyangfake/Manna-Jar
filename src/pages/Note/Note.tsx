@@ -4,8 +4,8 @@ import Swal from 'sweetalert2';
 import ToolBar from '../../components/ToolBar';
 import Header from '../../components/header';
 import { useAppSelector } from '../../redux/hooks';
-import { selectFontSize, selectProfile } from '../../redux/loginSlice';
 import { NoteType } from '../../redux/types';
+import { selectFontSize, selectProfile } from '../../redux/userSlice';
 import { parseFontSize } from '../../utils/utils';
 import ConnectGraph from './ConnectGraph';
 

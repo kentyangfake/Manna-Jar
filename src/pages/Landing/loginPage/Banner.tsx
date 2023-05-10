@@ -1,17 +1,12 @@
 import { useRef, useState } from 'react';
 import scrollDown from '../../../assets/scroll-down.gif';
 import TypedString from '../../../components/TypedString';
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import {
-  loginAsync,
-  selectIsLoading,
-  signUpAsync,
-} from '../../../redux/loginSlice';
+import { useAppDispatch } from '../../../redux/hooks';
+import { loginAsync, signUpAsync } from '../../../redux/userSlice';
 import * as styles from '../../../utils/styles';
 
 const Banner = () => {
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(selectIsLoading);
   const [isSignUp, setIsSignUp] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
   const nameRef = useRef<HTMLInputElement>(null);

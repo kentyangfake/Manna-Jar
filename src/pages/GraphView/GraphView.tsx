@@ -4,7 +4,7 @@ import { ReactComponent as Star } from '../../assets/star.svg';
 import NetworkGraph from '../../components/NetworkGraph';
 import ToolBar from '../../components/ToolBar';
 import { useAppSelector } from '../../redux/hooks';
-import { selectFontSize, selectProfile } from '../../redux/loginSlice';
+import { selectFontSize, selectProfile } from '../../redux/userSlice';
 import * as styles from '../../utils/styles';
 import AiAssistant from './AiAssistant';
 

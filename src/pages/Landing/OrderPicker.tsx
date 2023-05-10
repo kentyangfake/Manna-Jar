@@ -3,7 +3,7 @@ import {
   changeOrderByRecord,
   changeOrderByTime,
   selectProfile,
-} from '../../redux/loginSlice';
+} from '../../redux/userSlice';
 import * as styles from '../../utils/styles';
 
 const OrderPicker = () => {

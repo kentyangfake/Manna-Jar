@@ -12,7 +12,7 @@ import {
   selectIsToggleMenu,
   selectProfile,
   setToggleMenu,
-} from '../redux/loginSlice';
+} from '../redux/userSlice';
 import { aboutContent } from '../utils/sampleText';
 import * as styles from '../utils/styles';
 

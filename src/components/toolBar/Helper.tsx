@@ -4,7 +4,7 @@ import link from '../../assets/link.png';
 import referencedBy from '../../assets/referencedBy.png';
 import shareButton from '../../assets/shareButton.png';
 import { useAppSelector } from '../../redux/hooks';
-import { selectFontSize } from '../../redux/loginSlice';
+import { selectFontSize } from '../../redux/userSlice';
 import * as styles from '../../utils/styles';
 import { parseHelperFontSize } from '../../utils/utils';
 

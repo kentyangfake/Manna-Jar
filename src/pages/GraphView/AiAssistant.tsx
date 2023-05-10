@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppSelector } from '../../redux/hooks';
-import { selectFontSize, selectProfile } from '../../redux/loginSlice';
+import { selectFontSize, selectProfile } from '../../redux/userSlice';
 import { openAI } from '../../utils/openAI';
 import * as styles from '../../utils/styles';
 import { parseFontSize } from '../../utils/utils';

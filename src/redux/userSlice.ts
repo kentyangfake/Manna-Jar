@@ -103,7 +103,7 @@ export const logoutAsync = createAsyncThunk(
   }
 );
 
-const loginSlice = createSlice({
+const userSlice = createSlice({
   name : 'user',
   initialState : initialState,
   reducers:{
@@ -293,9 +293,9 @@ const loginSlice = createSlice({
       })
   },
 })
-export const selectProfile = (state: RootState) => state.login.profile;
-export const selectIsLoading = (state:RootState) => state.login.isLoading;
-export const selectFontSize = (state:RootState) => state.login.fontSize;
-export const selectIsToggleMenu = (state:RootState) => state.login.toggleMenu;
-export const { setToggleMenu, addNote, deleteNote, editNote, changeOrderByTime, changeOrderByRecord, incrementFontSize, decrementFontSize } = loginSlice.actions
-export default loginSlice.reducer;
+export const selectProfile = (state: RootState) => state.user.profile;
+export const selectIsLoading = (state:RootState) => state.user.isLoading;
+export const selectFontSize = (state:RootState) => state.user.fontSize;
+export const selectIsToggleMenu = (state:RootState) => state.user.toggleMenu;
+export const { setToggleMenu, addNote, deleteNote, editNote, changeOrderByTime, changeOrderByRecord, incrementFontSize, decrementFontSize } = userSlice.actions
+export default userSlice.reducer;

@@ -5,7 +5,7 @@ import {
   loginViaLocalAsync,
   selectIsLoading,
   selectProfile,
-} from '../../redux/loginSlice';
+} from '../../redux/userSlice';
 import * as styles from '../../utils/styles';
 import Banner from './loginPage/Banner';
 import Preloader from './loginPage/Preloader';

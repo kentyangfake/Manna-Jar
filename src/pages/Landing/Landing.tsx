@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../redux/hooks';
-import { selectProfile } from '../../redux/loginSlice';
+import { selectProfile } from '../../redux/userSlice';
 import Home from './Home';
 import LoginPage from './LoginPage';
 

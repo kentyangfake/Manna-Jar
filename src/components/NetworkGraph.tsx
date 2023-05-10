@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import Graph from 'react-graph-vis';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../redux/hooks';
-import { selectIsToggleMenu } from '../redux/loginSlice';
 import { NoteType } from '../redux/types';
+import { selectIsToggleMenu } from '../redux/userSlice';
 import { parseGraphFontSize } from '../utils/utils';
 
 interface GraphType {

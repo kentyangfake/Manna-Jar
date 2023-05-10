@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useAppDispatch } from '../redux/hooks';
-import { deleteNote } from '../redux/loginSlice';
+import { deleteNote } from '../redux/userSlice';
 import * as styles from '../utils/styles';
 import Helper from './toolBar/Helper';
 import SizePicker from './toolBar/SizePicker';

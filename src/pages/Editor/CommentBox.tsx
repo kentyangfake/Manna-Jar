@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useAppSelector } from '../../redux/hooks';
-import { selectProfile } from '../../redux/loginSlice';
+import { selectProfile } from '../../redux/userSlice';
 import { getBibleReference } from '../../utils/utils';
 
 interface hashValue {

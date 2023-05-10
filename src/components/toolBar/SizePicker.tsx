@@ -1,8 +1,11 @@
-import { decrementFontSize, incrementFontSize } from '../../redux/loginSlice';
-import { parseDisplayFontSize } from '../../utils/utils';
-import { selectFontSize } from '../../redux/loginSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import {
+  decrementFontSize,
+  incrementFontSize,
+  selectFontSize,
+} from '../../redux/userSlice';
 import * as styles from '../../utils/styles';
+import { parseDisplayFontSize } from '../../utils/utils';
 
 interface Props {
   toggleFontSize: boolean;

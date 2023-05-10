@@ -1,11 +1,11 @@
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import NetworkGraph from '../../components/NetworkGraph';
 import Header from '../../components/header';
-import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
-import { selectFontSize, selectProfile } from '../../redux/loginSlice';
-import * as styles from '../../utils/styles';
 import { NoteType } from '../../redux/types';
-import { useState } from 'react';
+import { selectFontSize, selectProfile } from '../../redux/userSlice';
+import * as styles from '../../utils/styles';
 
 interface Props {
   shareLink: string;
