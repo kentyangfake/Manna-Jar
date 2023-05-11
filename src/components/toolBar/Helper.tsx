@@ -26,7 +26,7 @@ const Helper = ({
   return fullGraph ? (
     <>
       <div
-        className={`lg:grow lg:w-0 relative ${
+        className={`lg:w-16 relative ${
           styles.themeFlex
         } ${helperFontSize} w-20 border-l ${
           toggleHelp
@@ -58,7 +58,7 @@ const Helper = ({
           </span>
         </div>
       </div>
-      <div className={`${styles.theme} w-7 border-l`}></div>
+      <div className={`lg:hidden ${styles.theme} w-7 border-l`}></div>
     </>
   ) : (
     <div
