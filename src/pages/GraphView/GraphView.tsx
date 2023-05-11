@@ -16,6 +16,7 @@ const GraphView = () => {
   const [recentNotes, setRecentNotes] = useState<string[]>([]);
   const [filtBy, setFiltBy] = useState('all');
   const [summeries, setSummeries] = useState('讓AI幫你回顧最近的筆記吧!');
+  const [toggled, setToggled] = useState(false);
 
   useEffect(() => {
     if (!profile.isLogin) {
@@ -69,8 +70,10 @@ const GraphView = () => {
         <div className="h-8">
           <ToolBar fullGraph />
         </div>
-        <div className="flex relative justify-center items-center grow pl-5 pr-14 py-5 sky tracking-widest">
-          <div className={`absolute z-10 top-10 left-20 flex flex-col gap-2`}>
+        <div className="lg:pr-5 flex relative justify-center items-center grow pl-5 pr-14 py-5 sky tracking-widest">
+          <div
+            className={`lg:left-5 lg:top-5 absolute z-10 top-10 left-20 flex flex-col gap-2`}
+          >
             {filterOptions.map((filter) => (
               <div
                 className={`${filter.style} ${styles.themeButtonNoBg} py-1 px-2 border rounded-full text-xs`}
@@ -80,7 +83,15 @@ const GraphView = () => {
               </div>
             ))}
           </div>
-          <Star className={`star1 fixed z-20 top-[10%] right-[20%] h-14`} />
+          <div
+            className={`lg:right-5 lg:top-5 lg:flex hidden absolute z-10 py-1 px-2 border rounded-full text-xs ${styles.themeButton}`}
+            onClick={() => setToggled((prev) => !prev)}
+          >
+            AI回顧
+          </div>
+          <Star
+            className={`lg:top-[20%] star1 fixed z-20 top-[10%] right-[20%] h-14`}
+          />
           <Star className={`star2 fixed z-20 bottom-[6%] right-[16%] h-24`} />
           <Star className={`star3 fixed z-20 bottom-[4%] left-[20%] h-10`} />
           <div
@@ -99,6 +110,8 @@ const GraphView = () => {
         recentNotes={recentNotes}
         summeries={summeries}
         setSummeries={setSummeries}
+        toggled={toggled}
+        setToggled={setToggled}
       />
     </div>
   );

@@ -24,7 +24,7 @@ const SizePicker = ({
 
   return (
     <div
-      className={`relative ${styles.themeFlex} w-20 border-l ${
+      className={`lg:w-16 relative ${styles.themeFlex} w-20 border-l ${
         toggleFontSize
           ? 'borde-b-0 bg-stone-100 hover:border-b-0'
           : 'border-b-2 hover:border-b-4 hover:border-l-2 bg-stone-300 hover:bg-stone-200'
@@ -40,7 +40,7 @@ const SizePicker = ({
         Aa
       </span>
       <div
-        className={`${toggleFontSize ? 'flex' : 'hidden'} ${
+        className={`lg:-right-[1px] ${toggleFontSize ? 'flex' : 'hidden'} ${
           styles.theme
         } absolute z-30 -right-[1px] top-[30px] h-16 w-[248px] justify-center items-center rounded-b-3xl rounded-tl-3xl drop-shadow-xl border bg-stone-300`}
       >

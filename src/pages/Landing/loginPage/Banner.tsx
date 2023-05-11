@@ -39,9 +39,9 @@ const Banner = () => {
 
   return (
     <div
-      className={`relative ${styles.theme} border-b banner h-[90vh] flex justify-between items-center`}
+      className={`sm:h-[72vh] relative ${styles.theme} border-b banner h-[90vh] flex justify-between items-center`}
     >
-      <div className="bg-[rgba(214,211,208,0.6)] backdrop-blur-sm font-serif font-semibold text-4xl text-stone-700 ml-[10%] pl-5 py-3 border h-fit border-stone-500">
+      <div className="sm:hidden bg-[rgba(214,211,208,0.6)] backdrop-blur-sm font-serif font-semibold text-4xl text-stone-700 ml-[10%] pl-5 py-3 border h-fit border-stone-500">
         <TypedString
           context={[
             '給基督徒の筆記本',
@@ -52,12 +52,12 @@ const Banner = () => {
           ]}
         />
       </div>
-      <div className="h-full border-l border-stone-500 flex flex-col">
-        <div className="bg-gradient-to-t from-stone-100 to-[rgba(214,211,208,0.6)] text-6xl text-stone-700 font-semibold tracking-widest h-[20%] border-b border-stone-500 flex justify-center items-center">
+      <div className="sm:w-full lg:border-l-0 h-full border-l border-stone-500 flex flex-col">
+        <div className="lg:hidden bg-gradient-to-t from-stone-100 to-[rgba(214,211,208,0.6)] text-6xl text-stone-700 font-semibold tracking-widest h-[20%] border-b border-stone-500 flex justify-center items-center">
           嗎哪罐子
         </div>
         <div className="flex grow">
-          <div className="flex flex-col pt-[20vh] px-8 bg-gradient-to-b hover:bg-gradient-to-t from-stone-100 to-[rgba(214,211,208,0.8)]">
+          <div className="sm:w-full sm:pt-[16vh] flex flex-col pt-[20vh] px-8 bg-gradient-to-b hover:bg-gradient-to-t from-stone-100 to-[rgba(214,211,208,0.8)]">
             <div className="flex justify-center">
               <div
                 className={`${
@@ -154,7 +154,7 @@ const Banner = () => {
         </div>
       </div>
       <img
-        className="absolute bottom-0 left-[48%] w-28"
+        className="xs:hidden sm:left-[41%] absolute bottom-0 left-[48%] w-28"
         src={scrollDown}
         alt="scrallDown"
       />

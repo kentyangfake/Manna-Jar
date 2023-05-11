@@ -10,9 +10,16 @@ import * as styles from '../../utils/styles';
 interface Props {
   shareLink: string;
   currentNote: NoteType;
+  toggled: boolean;
+  setToggled: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ConnectGraph = ({ shareLink, currentNote }: Props) => {
+const ConnectGraph = ({
+  shareLink,
+  currentNote,
+  toggled,
+  setToggled,
+}: Props) => {
   const { id } = useParams();
   const profile = useAppSelector(selectProfile);
   const fontSizeNum = useAppSelector(selectFontSize);
@@ -20,10 +27,21 @@ const ConnectGraph = ({ shareLink, currentNote }: Props) => {
 
   return (
     <div
-      className={`${styles.theme} fixed overflow-scroll top-0 right-0 flex flex-col justify-between h-full w-72 border-l`}
+      className={`lg:top-12 ${toggled ? 'lg:fixed' : 'lg:hidden'} ${
+        styles.theme
+      } fixed overflow-scroll top-0 right-0 flex flex-col justify-between h-full w-72 border-l`}
     >
       <Header text={'連結圖'} />
-      <div className="w-full h-[50vh] texture2 border-b border-stone-500">
+      <div
+        key={toggled ? 'toggled' : 'not-toggled'}
+        className="relative w-full h-[50vh] texture2 border-b border-stone-500"
+      >
+        <div
+          className={`${styles.themeButton} lg:flex absolute right-0 -top-[53px] hidden z-20 w-[41px] h-[53px] border-l border-b`}
+          onClick={() => setToggled(false)}
+        >
+          <span className="text-center material-symbols-outlined">close</span>
+        </div>
         <NetworkGraph
           filtBy={'all'}
           id={id}

@@ -81,13 +81,13 @@ const Editor = () => {
   return (
     <div>
       <div
-        className={`mt-[1px] flex items-end p-5 h-20 text-4xl tracking-[.3em] italic text-stone-500 bg-stone-100 border-b border-stone-500`}
+        className={`lg:tracking-widest lg:min-h-12 lg:p-2 lg:pl-4 lg:text-2xl mt-[1px] flex items-center p-5 min-h-20 text-4xl tracking-[.3em] italic text-stone-500 bg-stone-100 border-b border-stone-500`}
       >
-        <div className={`${styles.underline} decoration-orange-300`}>
+        <div className={`lg:text-xl ${styles.underline} decoration-orange-300`}>
           {isEdit ? `編輯:` : '新筆記:'}
         </div>
         <input
-          className="grow bg-stone-100 h-16 -mb-3 text-sky-500 overflow-hidden italic tracking-widest focus:outline-none"
+          className="lg:min-h-12 lg:mb-0 grow bg-stone-100 min-h-16 text-sky-500 overflow-hidden italic tracking-widest focus:outline-none"
           value={note.title}
           type="text"
           placeholder="請輸入標題"
@@ -118,9 +118,9 @@ const Editor = () => {
         }}
       />
       <div className="flex h-10">
-        <div className={`${styles.theme} grow border-y`}></div>
+        <div className={`xs:hidden ${styles.theme} grow border-y`}></div>
         <div
-          className={`${styles.themeButton} w-32 border-t border-b-2 border-l hover:border-b-4 hover:border-l-2`}
+          className={`xs:grow ${styles.themeButton} w-32 border-t border-b-2 border-l hover:border-b-4 hover:border-l-2`}
           onClick={() => {
             isEdit ? handleEditNote() : handleAddNote();
           }}
@@ -128,7 +128,7 @@ const Editor = () => {
           {isEdit ? '儲存修改' : '新增筆記'}
         </div>
         <div
-          className={`${styles.themeButton} w-32 border-t border-b-2 border-l hover:border-b-4 hover:border-l-2`}
+          className={`xs:grow ${styles.themeButton} w-32 border-t border-b-2 border-l hover:border-b-4 hover:border-l-2`}
           onClick={() => {
             isEdit ? navigate(`/note/${id}`) : navigate('/');
           }}

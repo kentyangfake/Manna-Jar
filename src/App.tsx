@@ -11,7 +11,11 @@ function App() {
     <div className="App">
       <div className="relative flex w-screen h-full bg-stone-300">
         <NavBar />
-        <div className={`grow ${toggled ? 'ml-48' : 'ml-7'} transition-all`}>
+        <div
+          className={`grow ${
+            toggled ? 'ml-48' : 'ml-7'
+          } transition-all lg:ml-0 lg:mt-12`}
+        >
           <Outlet />
         </div>
       </div>
