@@ -141,7 +141,7 @@ const NavBar = () => {
             className={`${styles.themeButton} w-10`}
             onClick={() => dispatch(setToggleMenu(false))}
           >
-            ⋮
+            <span className="material-symbols-outlined">expand_less</span>
           </div>
         ) : (
           <div
