@@ -1,5 +1,4 @@
 import { Link, NavLink } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { ReactComponent as Candle } from '../../assets/candle.svg';
 import { ReactComponent as Dove } from '../../assets/dove.svg';
 import { ReactComponent as Jar } from '../../assets/jar.svg';
@@ -11,7 +10,7 @@ import {
   selectProfile,
   setToggleMenu,
 } from '../../redux/userSlice';
-import { Toast } from '../../utils/CustomSwal';
+import { ThemeSwal, Toast } from '../../utils/CustomSwal';
 import * as styles from '../../utils/styles';
 
 interface Props {
@@ -105,10 +104,9 @@ const DesktopNavBar = ({
                 <div
                   className={`${styles.themeButton} grow border-r`}
                   onClick={() =>
-                    Swal.fire({
+                    ThemeSwal.fire({
                       html: SWAL_PROFILE_HTML,
                       showConfirmButton: false,
-                      background: '#e7e5e4',
                     })
                   }
                 >
@@ -134,11 +132,10 @@ const DesktopNavBar = ({
               <div
                 className={`${styles.themeButton} h-10 border-t`}
                 onClick={() =>
-                  Swal.fire({
+                  ThemeSwal.fire({
                     html: SWAL_ABOUT_HTML,
                     showConfirmButton: false,
                     showCloseButton: true,
-                    background: '#e7e5e4',
                   })
                 }
               >
@@ -198,10 +195,9 @@ const DesktopNavBar = ({
               <div
                 className={`${styles.themeButton} border-b w-full h-10`}
                 onClick={() =>
-                  Swal.fire({
+                  ThemeSwal.fire({
                     html: SWAL_PROFILE_HTML,
                     showConfirmButton: false,
-                    background: '#e7e5e4',
                   })
                 }
               >
@@ -216,11 +212,10 @@ const DesktopNavBar = ({
               <div
                 className={`${styles.themeButton} h-10 border-t`}
                 onClick={() =>
-                  Swal.fire({
+                  ThemeSwal.fire({
                     html: SWAL_ABOUT_HTML,
                     showConfirmButton: false,
                     showCloseButton: true,
-                    background: '#e7e5e4',
                   })
                 }
               >

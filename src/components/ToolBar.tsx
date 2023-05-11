@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { useAppDispatch } from '../redux/hooks';
 import { deleteNote } from '../redux/userSlice';
+import { SuccessSwal, WarningSwal } from '../utils/CustomSwal';
 import * as styles from '../utils/styles';
 import Helper from './toolBar/Helper';
 import SizePicker from './toolBar/SizePicker';
@@ -47,24 +47,17 @@ const ToolBar = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
         <div
           className={`lg:w-16 ${styles.themeButton} w-20 border-l border-b-2 hover:border-b-4 hover:border-l-2`}
           onClick={() => {
-            Swal.fire({
+            WarningSwal.fire({
               title: '刪除筆記',
               text: `確定要刪除 ${deleteInfo.title} 嗎?`,
-              icon: 'question',
-              background: '#f5f5f4',
-              showCancelButton: true,
-              confirmButtonColor: '#f87171',
-              cancelButtonColor: '#d6d3d1',
               confirmButtonText: '刪了吧!',
               cancelButtonText: '取消',
             }).then((result) => {
               if (result.isConfirmed) {
                 dispatch(deleteNote(deleteInfo.id!));
-                Swal.fire({
+                SuccessSwal.fire({
                   title: '已刪除',
                   text: `刪除筆記: ${deleteInfo.title}`,
-                  icon: 'success',
-                  background: '#f5f5f4',
                 });
                 navigate('/');
               }

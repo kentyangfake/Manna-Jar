@@ -1,10 +1,10 @@
-import Swal from 'sweetalert2';
 import connection from '../../assets/connection.png';
 import link from '../../assets/link.png';
 import referencedBy from '../../assets/referencedBy.png';
 import shareButton from '../../assets/shareButton.png';
 import { useAppSelector } from '../../redux/hooks';
 import { selectFontSize } from '../../redux/userSlice';
+import { HelperSwal } from '../../utils/CustomSwal';
 import * as styles from '../../utils/styles';
 import { parseHelperFontSize } from '../../utils/utils';
 
@@ -88,12 +88,10 @@ const Helper = ({
           <span
             className="cursor-pointer text-violet-400"
             onClick={() =>
-              Swal.fire({
+              HelperSwal.fire({
                 imageUrl: link,
                 imageHeight: 100,
                 imageAlt: 'linkImg',
-                showConfirmButton: false,
-                background: 'rgba(255,255,255,0)',
               })
             }
           >
@@ -103,12 +101,10 @@ const Helper = ({
           <span
             className="cursor-pointer text-violet-400"
             onClick={() =>
-              Swal.fire({
+              HelperSwal.fire({
                 imageUrl: referencedBy,
                 imageHeight: 150,
                 imageAlt: 'referencedByImg',
-                showConfirmButton: false,
-                background: 'rgba(255,255,255,0)',
               })
             }
           >
@@ -118,12 +114,10 @@ const Helper = ({
           <span
             className="cursor-pointer text-violet-400"
             onClick={() =>
-              Swal.fire({
+              HelperSwal.fire({
                 imageUrl: connection,
                 imageHeight: 500,
                 imageAlt: 'connectionImg',
-                showConfirmButton: false,
-                background: 'rgba(255,255,255,0)',
               })
             }
           >
@@ -137,12 +131,10 @@ const Helper = ({
           <span
             className="cursor-pointer text-violet-400"
             onClick={() =>
-              Swal.fire({
+              HelperSwal.fire({
                 imageUrl: shareButton,
                 imageHeight: 100,
                 imageAlt: 'shareButtonImg',
-                showConfirmButton: false,
-                background: 'rgba(255,255,255,0)',
               })
             }
           >

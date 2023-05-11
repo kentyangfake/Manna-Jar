@@ -1,3 +1,4 @@
+import { Link, NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import {
   logoutAsync,
@@ -5,10 +6,8 @@ import {
   selectProfile,
   setToggleMenu,
 } from '../../redux/userSlice';
+import { ThemeSwal, Toast } from '../../utils/CustomSwal';
 import * as styles from '../../utils/styles';
-import { Toast } from '../../utils/CustomSwal';
-import Swal from 'sweetalert2';
-import { Link, NavLink } from 'react-router-dom';
 
 interface Props {
   SWAL_PROFILE_HTML: string;
@@ -38,11 +37,9 @@ const MobileNavBar = ({
         <div
           className={`${styles.themeButton} w-10`}
           onClick={() =>
-            Swal.fire({
+            ThemeSwal.fire({
               html: SWAL_PROFILE_HTML,
               confirmButtonText: '登出',
-              confirmButtonColor: '#d6d3d1',
-              background: '#e7e5e4',
             }).then((result) => {
               if (result.isConfirmed) {
                 Toast.fire({
@@ -60,11 +57,10 @@ const MobileNavBar = ({
         <div
           className={`${styles.themeButton} w-10`}
           onClick={() =>
-            Swal.fire({
+            ThemeSwal.fire({
               html: SWAL_ABOUT_HTML,
               showConfirmButton: false,
               showCloseButton: true,
-              background: '#e7e5e4',
             })
           }
         >

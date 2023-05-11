@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Swal from 'sweetalert2';
 import autoVerse from '../../assets/autoVerse.gif';
 import backLinks from '../../assets/backLinks.gif';
+import { HelperSwal } from '../../utils/CustomSwal';
 import * as styles from '../../utils/styles';
 
 const EditorHelper = () => {
@@ -33,12 +33,10 @@ const EditorHelper = () => {
           <span
             className="cursor-pointer text-violet-400"
             onClick={() =>
-              Swal.fire({
+              HelperSwal.fire({
                 imageUrl: autoVerse,
                 imageWidth: 1000,
                 imageAlt: 'autoVerseImg',
-                showConfirmButton: false,
-                background: 'rgba(255,255,255,0)',
               })
             }
           >
@@ -57,12 +55,10 @@ const EditorHelper = () => {
           <span
             className="cursor-pointer text-violet-400"
             onClick={() =>
-              Swal.fire({
+              HelperSwal.fire({
                 imageUrl: backLinks,
                 imageWidth: 1000,
                 imageAlt: 'backLinksImg',
-                showConfirmButton: false,
-                background: 'rgba(255,255,255,0)',
               })
             }
           >
