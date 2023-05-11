@@ -12,7 +12,7 @@ interface Props {
 const Header = ({ text, underline, createTime, editTime, sharedBy }: Props) => {
   return (
     <div
-      className={`lg:flex-col lg:items-start lg:justify-center lg:min-h-12 lg:p-2 lg:pl-5 ${styles.theme} flex justify-between items-end min-h-20 p-5 border-b`}
+      className={`sm:flex-col sm:items-start sm:justify-center lg:min-h-12 lg:p-2 lg:pl-5 ${styles.theme} flex justify-between items-end min-h-20 p-5 border-b`}
     >
       <p
         className={`lg:text-2xl ${
@@ -22,9 +22,9 @@ const Header = ({ text, underline, createTime, editTime, sharedBy }: Props) => {
         {text}
       </p>
       {sharedBy && (
-        <div className="lg:text-xs lg:mt-2 lg:ml-0 ml-4 mr-auto text-sm font-extralight text-stone-800">{`作者-${sharedBy}`}</div>
+        <div className="lg:text-xs sm:mt-1 sm:ml-0 ml-4 mr-auto text-sm font-extralight text-stone-800">{`作者-${sharedBy}`}</div>
       )}
-      <div className="lg:text-xs lg:mt-2 flex flex-col text-sm font-extralight text-stone-800">
+      <div className="lg:text-xs sm:mt-1 flex flex-col text-sm font-extralight text-stone-800">
         {createTime && createTime > 1 && (
           <p>
             建立於/

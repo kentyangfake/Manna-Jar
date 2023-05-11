@@ -55,7 +55,7 @@ const AiAssistant = ({
       <div
         className={`${
           toggled
-            ? 'lg:top-12 lg:w-full lg:pl-5 lg:pr-5 fixed flex flex-col z-20 top-8 right-0 h-full w-96 border-x pl-3 pr-10 text-stone-500 border-stone-500 bg-[rgba(214,211,208,0.7)] backdrop-blur'
+            ? 'lg:top-12 xs:w-full lg:pl-5 lg:pr-5 fixed flex flex-col z-20 top-8 right-0 h-full w-96 border-x pl-3 pr-10 text-stone-500 border-stone-500 bg-[rgba(214,211,208,0.7)] backdrop-blur'
             : 'hidden'
         }`}
       >

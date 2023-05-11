@@ -125,7 +125,7 @@ const Note = () => {
           dangerouslySetInnerHTML={{ __html: currentNote.content }}
         ></div>
         <div
-          className={`${fontSize} z-10 flex flex-col ml-12 py-6 border-t border-stone-400`}
+          className={`lg:ml-5 ${fontSize} z-10 flex flex-col ml-12 py-6 border-t border-stone-400`}
         >
           {referenced.length > 0 && (
             <div className="text-stone-400">引用列表</div>

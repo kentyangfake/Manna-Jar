@@ -37,10 +37,10 @@ const ConnectGraph = ({
         className="relative w-full h-[50vh] texture2 border-b border-stone-500"
       >
         <div
-          className={`${styles.themeButton} lg:flex absolute right-0 -top-16 hidden z-20 w-[41px] h-16 border-l border-b`}
+          className={`${styles.themeButton} lg:flex absolute right-0 -top-[53px] hidden z-20 w-[41px] h-[53px] border-l border-b`}
           onClick={() => setToggled(false)}
         >
-          <span className="material-symbols-outlined">close</span>
+          <span className="text-center material-symbols-outlined">close</span>
         </div>
         <NetworkGraph
           filtBy={'all'}

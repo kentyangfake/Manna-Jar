@@ -17,7 +17,7 @@ const Section2 = () => {
             嗎哪罐子讓你更容易找到之前的筆記
           </p>
         </div>
-        <div className="xs:w-full xs:pt-10 sm:pl-3 sm:text-3xl w-[45vw] text-6xl font-serif font-bold leading-relaxed border-l border-stone-500 pl-7 pt-52">
+        <div className="xs:border-l-0 xs:w-full xs:pt-10 sm:pl-3 sm:text-3xl w-[45vw] text-6xl font-serif font-bold leading-relaxed border-l border-stone-500 pl-7 pt-52">
           以前的筆記,
           <br />
           找不到？
@@ -43,21 +43,21 @@ const Section2 = () => {
           </div>
         </div>
         <div className="w-[45vw] lg:w-full flex flex-col border-l border-stone-500">
-          <div className="flex justify-center gap-3 py-5 lg:py-16 bg-gradient-to-l hover:bg-gradient-to-r from-stone-400 to-stone-300 border-b border-stone-500">
+          <div className="flex justify-center gap-3 py-12 lg:py-16 bg-gradient-to-l hover:bg-gradient-to-r from-stone-400 to-stone-300 border-b border-stone-500">
             <div
-              className={`${styles.limeCard} xs:h-40 xs:text-sm text-xl items-center h-60 w-[26%] border drop-shadow-lg border-stone-500`}
+              className={`${styles.limeCard} xs:text-sm text-xl items-center h-40 w-[26%] border drop-shadow-lg border-stone-500`}
             >
               聚會崇拜
               <Sheep className="w-[60%]" />
             </div>
             <div
-              className={`${styles.violetCard} xs:h-40 xs:text-sm text-xl items-center h-60 w-[26%] border drop-shadow-lg border-stone-500`}
+              className={`${styles.violetCard} xs:text-sm text-xl items-center h-40 w-[26%] border drop-shadow-lg border-stone-500`}
             >
               個人靈修
               <Dove className="w-[60%]" />
             </div>
             <div
-              className={`${styles.amberCard} xs:h-40 xs:text-sm text-xl items-center h-60 w-[26%] border drop-shadow-lg border-stone-500`}
+              className={`${styles.amberCard} xs:text-sm text-xl items-center h-40 w-[26%] border drop-shadow-lg border-stone-500`}
             >
               分享收藏
               <Candle className="w-[40%]" />
