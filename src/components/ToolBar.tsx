@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../redux/hooks';
 import { deleteNote } from '../redux/userSlice';
-import { SuccessSwal, WarningSwal } from '../utils/CustomSwal';
+import { CheckSwal, SuccessSwal } from '../utils/CustomSwal';
 import * as styles from '../utils/styles';
 import Helper from './toolBar/Helper';
 import SizePicker from './toolBar/SizePicker';
@@ -47,7 +47,7 @@ const ToolBar = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
         <div
           className={`lg:w-16 ${styles.themeButton} w-20 border-l border-b-2 hover:border-b-4 hover:border-l-2`}
           onClick={() => {
-            WarningSwal.fire({
+            CheckSwal.fire({
               title: '刪除筆記',
               text: `確定要刪除 ${deleteInfo.title} 嗎?`,
               confirmButtonText: '刪了吧!',

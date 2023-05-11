@@ -35,8 +35,14 @@ export const SuccessSwal = Swal.mixin({
 export const WarningSwal = Swal.mixin({
   icon: 'warning',
   background: '#f5f5f4',
-  showCancelButton: true,
   confirmButtonColor: '#d6d3d1',
+});
+
+export const CheckSwal = Swal.mixin({
+  icon: 'warning',
+  background: '#f5f5f4',
+  showCancelButton: true,
+  confirmButtonColor: '#f87171',
   cancelButtonColor: '#d6d3d1',
 });
 
