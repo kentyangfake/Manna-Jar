@@ -13,7 +13,7 @@ const OrderPicker = () => {
   return (
     <div className={`flex bg-stone-500 text-sm border-b border-stone-500`}>
       <div
-        className={`${styles.themeButton} border-r w-44 ${
+        className={`lg:grow ${styles.themeButton} p-2 border-r w-44 ${
           profile.orderBy.record === 'create'
             ? 'rounded-tl-full'
             : 'rounded-bl-full'
@@ -23,7 +23,7 @@ const OrderPicker = () => {
         {profile.orderBy.record === 'create' ? '建 立 時 間' : '更 新 時 間'}
       </div>
       <div
-        className={`${styles.themeButton} border-r w-44 ${
+        className={`lg:grow ${styles.themeButton} p-2 border-r w-44 ${
           profile.orderBy.time === 'newest'
             ? 'rounded-br-full'
             : 'rounded-tr-full'
@@ -32,7 +32,7 @@ const OrderPicker = () => {
       >
         {profile.orderBy.time === 'newest' ? '新 到 舊' : '舊 到 新'}
       </div>
-      <div className="grow rounded-bl-full bg-stone-300 p-4"></div>
+      <div className="lg:hidden grow rounded-bl-full bg-stone-300"></div>
     </div>
   );
 };

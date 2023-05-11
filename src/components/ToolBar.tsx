@@ -24,26 +24,28 @@ const ToolBar = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
     <div className="flex h-8 border-b bg-stone-500 border-stone-500">
       {previous && (
         <div
-          className={`${styles.themeButton} w-32 border-r rounded-br-full font-bold hover:border-b-2 hover:border-l`}
+          className={`lg:w-[104px] lg:rounded-none ${styles.themeButton} w-32 border-r rounded-br-full font-bold hover:border-b-2 hover:border-l`}
           onClick={() => navigate(-1)}
         >
           ←
         </div>
       )}
       <div
-        className={`${styles.theme} ${previous && 'rounded-bl-full'} grow`}
+        className={`lg:rounded-none ${styles.theme} ${
+          previous && 'rounded-bl-full'
+        } grow`}
       ></div>
       {edit && (
         <Link
           to={`/editor/${edit}`}
-          className={`${styles.themeButton} w-20 border-l border-b-2 hover:border-b-4 hover:border-l-2`}
+          className={`lg:w-16 ${styles.themeButton} w-20 border-l border-b-2 hover:border-b-4 hover:border-l-2`}
         >
           <span className="material-symbols-outlined text-lg">edit</span>
         </Link>
       )}
       {deleteInfo && (
         <div
-          className={`${styles.themeButton} w-20 border-l border-b-2 hover:border-b-4 hover:border-l-2`}
+          className={`lg:w-16 ${styles.themeButton} w-20 border-l border-b-2 hover:border-b-4 hover:border-l-2`}
           onClick={() => {
             Swal.fire({
               title: '刪除筆記',

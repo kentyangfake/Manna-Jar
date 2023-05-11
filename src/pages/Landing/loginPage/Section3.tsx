@@ -43,22 +43,22 @@ const Section3 = () => {
     <>
       <div className="flex flex-col text-stone-700">
         <div className="flex flex-col items-center bg-gradient-to-t from-stone-400 to-stone-300 text-stone-700">
-          <div className="mt-6 text-6xl font-serif font-bold mb-10">
+          <div className="sm:mb-5 sm:text-3xl mt-6 text-6xl font-serif font-bold mb-10">
             我的信仰,像滿天星星
           </div>
-          <div className="text-xl">
+          <div className="sm:text-sm sm:text-center sm:px-8 text-xl">
             一覽無遺你的信仰知識，你可以探索，觀察，從過去的累積獲得靈感和能量。
           </div>
-          <div className="graph-clip texture mt-20 h-[70vh] w-[70%] bg-stone-300 border border-stone-500">
+          <div className="sm:mt-10 graph-clip texture mt-20 h-[70vh] w-[70%] bg-stone-300 border border-stone-500">
             <NetworkGraph filtBy={'all'} userNotes={demoNotes} noEvent />
           </div>
         </div>
       </div>
       <div className="min-h-[750px] flex flex-col items-center text-stone-700 bg-gradient-to-b from-stone-400 to-stone-500">
-        <div className="mt-[35vh] text-stone-100 text-4xl font-serif font-bold tracking-widest text-center">
+        <div className="sm:text-lg mt-[35vh] text-stone-100 text-4xl xl:text-3xl md:text-2xl font-serif font-bold tracking-widest text-center">
           我要將糧食從天降給你們。百姓可以出去，每天收每天的分。
         </div>
-        <div className="mt-10 text-stone-200 text-xl text-center">
+        <div className="sm:text-sm mt-10 text-stone-200 text-xl text-center">
           出埃及記 16:4
         </div>
         <div

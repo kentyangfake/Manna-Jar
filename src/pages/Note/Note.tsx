@@ -6,6 +6,7 @@ import Header from '../../components/header';
 import { useAppSelector } from '../../redux/hooks';
 import { NoteType } from '../../redux/types';
 import { selectFontSize, selectProfile } from '../../redux/userSlice';
+import * as styles from '../../utils/styles';
 import { parseFontSize } from '../../utils/utils';
 import ConnectGraph from './ConnectGraph';
 
@@ -30,6 +31,7 @@ const Note = () => {
   });
   const [referenced, setReferenced] = useState<Referenced[]>([]);
   const [shareLink, setShareLink] = useState('');
+  const [toggled, setToggled] = useState(false);
 
   useEffect(() => {
     if (profile.notes.length === 0) {
@@ -73,7 +75,7 @@ const Note = () => {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex flex-col w-full pr-72 tracking-widest bg-stone-300 text-stone-500">
+      <div className="lg:pr-0 flex flex-col w-full pr-72 tracking-widest bg-stone-300 text-stone-500">
         <Header
           text={currentNote.title}
           underline
@@ -97,8 +99,14 @@ const Note = () => {
         )}
       </div>
       <div
-        className={`relative z-0 flex flex-col w-full grow pr-96 tracking-wider bg-stone-100`}
+        className={`lg:pt-5 lg:pr-5 relative z-0 flex flex-col w-full grow pr-96 tracking-wider bg-stone-100`}
       >
+        <div
+          className={`lg:flex sticky top-16 hidden cursor-pointer z-20 drop-shadow-lg w-12 h-7 self-end border ${styles.themeButton}`}
+          onClick={() => setToggled(true)}
+        >
+          <span className="material-symbols-outlined">insights</span>
+        </div>
         <div
           className={`${
             currentNote.category === 'sermon'
@@ -108,12 +116,12 @@ const Note = () => {
               : currentNote.category === 'shared'
               ? 'bg-amber-100'
               : 'bg-stone-100'
-          } sticky top-0 w-72 h-72`}
+          } lg:-mt-12 sticky top-0 w-72 h-72`}
         >
           <div className="w-72 h-72 bg-stone-100 rounded-tl-full"></div>
         </div>
         <div
-          className={`${fontSize} z-10 flex flex-col flex-wrap leading-loose text-stone-600 ml-12 mt-[-250px] pb-6 mb-12 selection:bg-fuchsia-300 selection:text-fuchsia-900`}
+          className={`lg:ml-5 lg:mt-[-270px] lg:leading-relaxed ${fontSize} z-10 flex flex-col flex-wrap leading-loose text-stone-600 ml-12 mt-[-250px] pb-6 mb-12 selection:bg-fuchsia-300 selection:text-fuchsia-900`}
           dangerouslySetInnerHTML={{ __html: currentNote.content }}
         ></div>
         <div
@@ -133,7 +141,12 @@ const Note = () => {
           ))}
         </div>
       </div>
-      <ConnectGraph shareLink={shareLink} currentNote={currentNote} />
+      <ConnectGraph
+        toggled={toggled}
+        setToggled={setToggled}
+        shareLink={shareLink}
+        currentNote={currentNote}
+      />
     </div>
   );
 };

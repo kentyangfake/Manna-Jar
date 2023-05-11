@@ -1,4 +1,4 @@
-import {backgroundColor, borders, classnames, cursor, flexBox, layout, padding, sizing, spacing, textDecoration, textDecorationStyle, textDecorationThickness, textUnderlineOffset, typography} from 'tailwindcss-classnames';
+import { backgroundColor, borders, classnames, cursor, flexBox, layout, padding, sizing, spacing, textDecoration, textDecorationStyle, textDecorationThickness, textUnderlineOffset, typography } from 'tailwindcss-classnames';
 
 export const theme = classnames(
   typography('text-stone-500','tracking-widest'),
@@ -87,7 +87,7 @@ export const whiteCard = classnames(
 
 export const underline = classnames(
   textDecoration('underline'),
-  textUnderlineOffset('underline-offset-4'),
+  textUnderlineOffset('underline-offset-4','lg:underline-offset-2'),
   textDecorationStyle('decoration-wavy'),
-  textDecorationThickness('decoration-4')
+  textDecorationThickness('decoration-4','lg:decoration-2')
 );
