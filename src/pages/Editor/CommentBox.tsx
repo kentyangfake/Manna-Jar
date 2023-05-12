@@ -127,18 +127,16 @@ const CommentBox = ({
   };
 
   return (
-    <div>
-      <ReactQuill
-        theme="snow"
-        value={value}
-        className={`flex flex-col flex-wrap leading-loose text-stone-600 selection:bg-orange-100 selection:text-orange-500`}
-        onChange={(content: string) => {
-          onChange(content);
-        }}
-        onKeyDown={handleKeyDown}
-        modules={modules}
-      />
-    </div>
+    <ReactQuill
+      theme="snow"
+      value={value}
+      className={`leading-loose text-stone-600 selection:bg-orange-100 selection:text-orange-500`}
+      onChange={(content: string) => {
+        onChange(content);
+      }}
+      onKeyDown={handleKeyDown}
+      modules={modules}
+    />
   );
 };
 

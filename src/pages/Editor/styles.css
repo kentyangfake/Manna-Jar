@@ -1,5 +1,6 @@
 .ql-container.ql-snow {
   border: none;
+  display: flex;
 }
 .ql-toolbar.ql-snow {
   border: none;
@@ -55,11 +56,12 @@
 }
 
 .ql-editor {
-  min-height: 70vh;
+  height: 60vh;
   flex-grow: 1;
   word-break: break-word;
   width: 100%;
   font-size: 20px;
+  overflow: scroll;
   background-color: #f5f5f4;
   letter-spacing: 0.1em;
   line-height: 2;

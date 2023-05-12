@@ -79,7 +79,7 @@ const Editor = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <div
         className={`lg:tracking-widest lg:min-h-12 lg:p-2 lg:pl-4 lg:text-2xl mt-[1px] flex items-center p-5 min-h-20 text-4xl tracking-[.3em] italic text-stone-500 bg-stone-100 border-b border-stone-500`}
       >
@@ -87,7 +87,7 @@ const Editor = () => {
           {isEdit ? `編輯:` : '新筆記:'}
         </div>
         <input
-          className="lg:min-h-12 lg:mb-0 grow bg-stone-100 min-h-16 text-sky-500 overflow-hidden italic tracking-widest focus:outline-none"
+          className="grow max-w-[72vw] bg-stone-100 text-sky-500 overflow-hidden italic tracking-widest focus:outline-none"
           value={note.title}
           type="text"
           placeholder="請輸入標題"
