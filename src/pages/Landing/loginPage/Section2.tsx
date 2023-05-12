@@ -68,7 +68,7 @@ const Section2 = () => {
             {categorys.map((category) => (
               <div
                 key={category.id}
-                className={`${category.styles} xs:text-sm text-xl items-center h-40 w-[26%] border drop-shadow-lg border-stone-500`}
+                className={`${category.styles} xs:h-32 xs:text-sm text-xl items-center h-40 w-[26%] border drop-shadow-lg border-stone-500`}
               >
                 {category.label}
                 {category.jsx}

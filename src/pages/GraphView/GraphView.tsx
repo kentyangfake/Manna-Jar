@@ -95,7 +95,7 @@ const GraphView = () => {
           <Star className={`star2 fixed z-20 bottom-[6%] right-[16%] h-24`} />
           <Star className={`star3 fixed z-20 bottom-[4%] left-[20%] h-10`} />
           <div
-            className={`graph-clip grow h-full bg-stone-300 texture border border-stone-500`}
+            className={`graph-clip grow h-[calc(100dvh-7rem)] bg-stone-300 texture border border-stone-500`}
           >
             <NetworkGraph
               filtBy={filtBy}

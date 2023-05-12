@@ -1,6 +1,7 @@
 .ql-container.ql-snow {
   border: none;
   display: flex;
+  height: fit-content;
 }
 .ql-toolbar.ql-snow {
   border: none;
@@ -56,7 +57,7 @@
 }
 
 .ql-editor {
-  height: 60vh;
+  height: 60dvh;
   flex-grow: 1;
   word-break: break-word;
   width: 100%;
