@@ -119,7 +119,7 @@ const DesktopNavBar = ({
                       icon: 'info',
                       title: '登出中...',
                     });
-                    setTimeout(() => dispatch(logoutAsync()), 800);
+                    setTimeout(() => dispatch(logoutAsync()), 300);
                   }}
                 >
                   ⎋
