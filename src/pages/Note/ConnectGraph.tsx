@@ -70,9 +70,7 @@ const ConnectGraph = ({
             }}
           >
             {isCopied ? (
-              <>
-                <span className="material-symbols-outlined">done</span>
-              </>
+              <span className="material-symbols-outlined">done</span>
             ) : (
               <>
                 <span className="material-symbols-outlined pr-2 text-base">
