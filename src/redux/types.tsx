@@ -1,3 +1,12 @@
+export interface ProfileType {
+  email: string;
+  name: string;
+  id: string;
+  notes: NoteType[];
+  isLogin: boolean;
+  orderBy: { time: string; record: string };
+}
+
 export interface NoteType {
   id: string;
   title: string;

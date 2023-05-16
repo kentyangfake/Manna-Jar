@@ -19,7 +19,7 @@ export const getBibleReference = async (
   } catch (error) {}
 };
 
-const getBookRef = (book: string) => {
+export const getBookRef = (book: string) => {
   let bookRef = book;
   switch (book) {
     case '創世紀':

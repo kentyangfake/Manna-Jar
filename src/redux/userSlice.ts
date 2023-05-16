@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import Swal from 'sweetalert2';
+import { ErrorSwal, InfoSwal, SuccessSwal, WarningSwal } from '../utils/CustomSwal';
 import { auth, firestore } from '../utils/firebase';
 import { sampleNote } from '../utils/sampleText';
 import { RootState } from './store';
@@ -113,10 +113,8 @@ const userSlice = createSlice({
     addNote: (state, action: PayloadAction<NoteType>) => {
       const order = state.profile.orderBy.time
       if (state.profile.notes.findIndex(note => note.id === action.payload.id ) >= 0){
-        Swal.fire({
-          icon: 'warning',
+        WarningSwal.fire({
           text: '您已收藏過此篇筆記',
-          background:'#f5f5f4',
         })
         return
       }
@@ -132,24 +130,18 @@ const userSlice = createSlice({
         notes: state.profile.notes,
       }
       firestore.updateUser(id, data);
-      action.payload.category === 'shared'? Swal.fire({
-        icon: 'success',
+      action.payload.category === 'shared'? SuccessSwal.fire({
         title: '收藏筆記',
         text: `您已收藏${addedNote.sharedBy}的筆記`,
-        background:'#f5f5f4',
-      }) : Swal.fire({
-        icon: 'success',
+      }) : SuccessSwal.fire({
         title: '新增筆記',
         text: `已新增 ${addedNote.title} 至 ${addedNote.category==='sermon'?'聚會崇拜':'個人靈修'}`,
-        background:'#f5f5f4',
       })
     },
     deleteNote:(state,action:PayloadAction<string>) => {
       if(state.profile.notes.length === 1){
-        Swal.fire({
-          icon: 'warning',
+        WarningSwal.fire({
           text: '請保留一篇筆記',
-          background:'#f5f5f4',
         })
         return
       }
@@ -177,11 +169,9 @@ const userSlice = createSlice({
         notes: state.profile.notes,
       }
       firestore.updateUser(id, data);
-      Swal.fire({
-        icon: 'info',
+      InfoSwal.fire({
         title: '筆記已修改',
         text: `已更新 ${editedNote.title} 筆記內容!`,
-        background:'#f5f5f4',
       })
     },
     changeOrderByTime:(state)=>{
@@ -227,11 +217,9 @@ const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(signUpAsync.rejected, (state) => {
-        Swal.fire({
-          icon: 'error',
+        ErrorSwal.fire({
           title: '註冊失敗',
           text: '請檢查帳號/密碼的完整性',
-          background:'#f5f5f4',
         })
         state.isLoading = false;
       })
@@ -247,11 +235,9 @@ const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(loginAsync.rejected, (state) => {
-        Swal.fire({
-          icon: 'error',
+        ErrorSwal.fire({
           title: '登入失敗',
           text: '請檢查帳號/密碼是否正確?',
-          background:'#f5f5f4',
         })
         state.isLoading = false;
       })
@@ -267,10 +253,8 @@ const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(loginViaLocalAsync.rejected, () => {
-        Swal.fire({
-          icon: 'error',
+        ErrorSwal.fire({
           text: '網路發生錯誤',
-          background:'#f5f5f4',
         })
       })
       .addCase(logoutAsync.pending,(state)=>{
@@ -285,10 +269,8 @@ const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(logoutAsync.rejected, () => {
-        Swal.fire({
-          icon: 'error',
+        ErrorSwal.fire({
           text: '網路發生錯誤',
-          background:'#f5f5f4',
         })
       })
   },

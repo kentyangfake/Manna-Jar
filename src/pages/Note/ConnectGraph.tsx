@@ -53,14 +53,14 @@ const ConnectGraph = ({
         currentNote.category === 'devotion') && (
         <div className="flex flex-col p-4 mt-[5vh]">
           <input
-            className={`grow truncate h-10 border-x border-t border-stone-400 focus:outline-none font-extralight pl-2 ${
+            className={`grow truncate h-10 border-x border-t border-stone-400 transition-all focus:outline-none font-extralight pl-2 ${
               isCopied ? 'bg-stone-100' : 'bg-stone-200'
             }`}
             value={shareLink}
             readOnly
           />
           <label
-            className={`flex justify-center items-center h-10 border cursor-pointer border-stone-400 hover:bg-stone-200 ${
+            className={`flex justify-center items-center h-10 border cursor-pointer border-stone-400 transition-all hover:bg-stone-200 ${
               isCopied ? 'bg-stone-200' : 'bg-stone-300'
             }`}
             onClick={() => {
@@ -70,9 +70,7 @@ const ConnectGraph = ({
             }}
           >
             {isCopied ? (
-              <>
-                <span className="material-symbols-outlined">done</span>
-              </>
+              <span className="material-symbols-outlined">done</span>
             ) : (
               <>
                 <span className="material-symbols-outlined pr-2 text-base">

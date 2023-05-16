@@ -1,5 +1,5 @@
-import * as React from "react";
 import * as Quill from "quill";
+import * as React from "react";
 
 declare namespace ReactQuill {
 	export interface UnprivilegedEditor {
@@ -51,25 +51,8 @@ declare namespace ReactQuill {
 		children?: React.ReactElement<any>;
 		modules?: Quill.StringMap;
 		preserveWhitespace?: boolean;
-
-		/** @deprecated
-		 * The `toolbar` prop has been deprecated. Use `modules.toolbar` instead.
-		 * See: https://github.com/zenoamaro/react-quill#upgrading-to-react-quill-v100.
-		 * */
-
 		toolbar?: never;
-		/** @deprecated
-		 * The `styles` prop has been deprecated. Use custom stylesheets instead.
-		 * See: https://github.com/zenoamaro/react-quill#upgrading-to-react-quill-v100
-		 */
-
 		styles?: never;
-		/**
-		 * @deprecated
-		 * The `pollInterval` property does not have any effect anymore.
-		 * You can safely remove it from your props.
-		 * See: https://github.com/zenoamaro/react-quill#upgrading-to-react-quill-v100.
-		 */
 		pollInterval?: never;
 	}
 

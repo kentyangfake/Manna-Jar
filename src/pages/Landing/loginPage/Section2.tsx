@@ -4,6 +4,27 @@ import { ReactComponent as Dove } from '../../../assets/dove.svg';
 import { ReactComponent as Sheep } from '../../../assets/sheep.svg';
 import * as styles from '../../../utils/styles';
 
+const categorys = [
+  {
+    id: 'sermon',
+    label: '聚會崇拜',
+    jsx: <Sheep className="w-[60%]" />,
+    styles: styles.limeCard,
+  },
+  {
+    id: 'devotion',
+    label: '個人靈修',
+    jsx: <Dove className="w-[60%]" />,
+    styles: styles.violetCard,
+  },
+  {
+    id: 'shared',
+    label: '分享收藏',
+    jsx: <Candle className="w-[40%]" />,
+    styles: styles.amberCard,
+  },
+];
+
 const Section2 = () => {
   return (
     <div className="flex flex-col text-stone-700">
@@ -44,24 +65,15 @@ const Section2 = () => {
         </div>
         <div className="w-[45vw] lg:w-full flex flex-col border-l border-stone-500">
           <div className="flex justify-center gap-3 py-12 lg:py-16 bg-gradient-to-l hover:bg-gradient-to-r from-stone-400 to-stone-300 border-b border-stone-500">
-            <div
-              className={`${styles.limeCard} xs:text-sm text-xl items-center h-40 w-[26%] border drop-shadow-lg border-stone-500`}
-            >
-              聚會崇拜
-              <Sheep className="w-[60%]" />
-            </div>
-            <div
-              className={`${styles.violetCard} xs:text-sm text-xl items-center h-40 w-[26%] border drop-shadow-lg border-stone-500`}
-            >
-              個人靈修
-              <Dove className="w-[60%]" />
-            </div>
-            <div
-              className={`${styles.amberCard} xs:text-sm text-xl items-center h-40 w-[26%] border drop-shadow-lg border-stone-500`}
-            >
-              分享收藏
-              <Candle className="w-[40%]" />
-            </div>
+            {categorys.map((category) => (
+              <div
+                key={category.id}
+                className={`${category.styles} xs:h-32 xs:text-sm text-xl items-center h-40 w-[26%] border drop-shadow-lg border-stone-500`}
+              >
+                {category.label}
+                {category.jsx}
+              </div>
+            ))}
           </div>
           <div className="sm:h-48 sm:text-sm lg:h-72 flex justify-center h-96 text-xl mt-5">
             根據信仰生活的情境將筆記分類

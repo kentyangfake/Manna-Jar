@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { NoteType } from '../../redux/types';
 import { addNote, editNote, selectProfile } from '../../redux/userSlice';
 import * as styles from '../../utils/styles';
 import CommentBox from './CommentBox';
 import EditorHelper from './EditorHelper';
+import { useEditNote } from './hooks';
 import './styles.css';
 
 const category = [
@@ -21,32 +20,11 @@ const category = [
 ];
 
 const Editor = () => {
-  const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { id } = useParams();
   const profile = useAppSelector(selectProfile);
-  const [isEdit, setIsEdit] = useState(false);
-  const [note, setNote] = useState<NoteType>({
-    id: uuidv4(),
-    title: '',
-    content: '',
-    category: id === 'newNoteDevotion' ? 'devotion' : 'sermon',
-    link_notes: [],
-    create_time: new Date().getTime(),
-    edit_time: new Date().getTime(),
-  });
-
-  useEffect(() => {
-    if (!profile.isLogin) {
-      return;
-    }
-
-    if (id !== 'newNote' && id !== 'newNoteDevotion') {
-      const currentNote = profile.notes.find((note) => note.id === id);
-      setIsEdit(true);
-      setNote(currentNote!);
-    }
-  }, [profile.isLogin, isEdit]);
+  const { note, isEdit, setNote } = useEditNote(profile, id);
 
   const createLink = () => {
     const linkArray = [];
@@ -79,7 +57,7 @@ const Editor = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <div
         className={`lg:tracking-widest lg:min-h-12 lg:p-2 lg:pl-4 lg:text-2xl mt-[1px] flex items-center p-5 min-h-20 text-4xl tracking-[.3em] italic text-stone-500 bg-stone-100 border-b border-stone-500`}
       >
@@ -87,7 +65,7 @@ const Editor = () => {
           {isEdit ? `編輯:` : '新筆記:'}
         </div>
         <input
-          className="lg:min-h-12 lg:mb-0 grow bg-stone-100 min-h-16 text-sky-500 overflow-hidden italic tracking-widest focus:outline-none"
+          className="grow max-w-[72vw] bg-stone-100 text-sky-500 overflow-hidden italic tracking-widest focus:outline-none"
           value={note.title}
           type="text"
           placeholder="請輸入標題"

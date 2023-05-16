@@ -1,4 +1,4 @@
-import { backgroundColor, borders, classnames, cursor, flexBox, layout, padding, sizing, spacing, textDecoration, textDecorationStyle, textDecorationThickness, textUnderlineOffset, typography } from 'tailwindcss-classnames';
+import { backgroundColor, borders, classnames, cursor, flexBox, layout, padding, sizing, spacing, textDecoration, textDecorationStyle, textDecorationThickness, textUnderlineOffset, transitionProperty, typography } from 'tailwindcss-classnames';
 
 export const theme = classnames(
   typography('text-stone-500','tracking-widest'),
@@ -13,11 +13,13 @@ export const themeButtonNoBg = classnames(
   flexBox('justify-center','items-center'),
   cursor('cursor-pointer'),
   backgroundColor('hover:bg-stone-200'),
+  transitionProperty('transition-all'),
 )
 
 export const themeButton = classnames(
   themeButtonNoBg,
   backgroundColor('bg-stone-300'),
+  transitionProperty('transition-all'),
 )
 
 export const themeFlex = classnames(
@@ -30,7 +32,8 @@ export const themeFlex = classnames(
 export const themeActive = classnames(
   typography('text-stone-500','tracking-widest'),
   backgroundColor('bg-stone-200'),
-  borders('border-stone-500')
+  borders('border-stone-500'),
+  transitionProperty('transition-all'),
 );
 
 export const themeButtonActive = classnames(
@@ -39,6 +42,7 @@ export const themeButtonActive = classnames(
   flexBox('justify-center','items-center'),
   cursor('cursor-pointer'),
   backgroundColor('hover:bg-stone-200'),
+  transitionProperty('transition-all'),
 )
 
 
@@ -57,6 +61,7 @@ export const navButtonSmall = classnames(
   layout('flex'),
   flexBox('justify-center','items-center'),
   cursor('cursor-pointer'),
+  transitionProperty('transition-all'),
 )
 
 export const noteCard = classnames(
@@ -67,6 +72,7 @@ export const noteCard = classnames(
   typography('text-stone-500','tracking-widest'),
   backgroundColor('bg-stone-200'),
   borders('rounded-3xl'),
+  transitionProperty('transition-all'),
 ); 
 
 export const limeCard = classnames(

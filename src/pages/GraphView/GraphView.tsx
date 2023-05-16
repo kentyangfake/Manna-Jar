@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { ReactComponent as Star } from '../../assets/star.svg';
 import NetworkGraph from '../../components/NetworkGraph';
 import ToolBar from '../../components/ToolBar';
@@ -7,39 +6,15 @@ import { useAppSelector } from '../../redux/hooks';
 import { selectFontSize, selectProfile } from '../../redux/userSlice';
 import * as styles from '../../utils/styles';
 import AiAssistant from './AiAssistant';
+import { useRecentNote } from './hooks';
 
 const GraphView = () => {
   const profile = useAppSelector(selectProfile);
   const fontSizeNum = useAppSelector(selectFontSize);
-  const navigate = useNavigate();
-  const [titles, setTitles] = useState<string[]>([]);
-  const [recentNotes, setRecentNotes] = useState<string[]>([]);
   const [filtBy, setFiltBy] = useState('all');
-  const [summeries, setSummeries] = useState('讓AI幫你回顧最近的筆記吧!');
   const [toggled, setToggled] = useState(false);
-
-  useEffect(() => {
-    if (!profile.isLogin) {
-      navigate('/');
-    }
-
-    if (profile.notes.length < 6) {
-      setSummeries('累積5篇筆記後解鎖此功能。');
-    }
-
-    const notesArr = [...profile.notes]
-      .filter((note) => note.category !== 'shared')
-      .sort((a, b) => b.create_time - a.create_time)
-      .reduce((notes: string[], note) => [...notes, note.content], [])
-      .slice(0, 3);
-    const titlesArr = [...profile.notes].reduce(
-      (titles: string[], note) => [...titles, note.title],
-      []
-    );
-
-    setRecentNotes(notesArr);
-    setTitles(titlesArr);
-  }, [profile.isLogin]);
+  const { recentNotes, titles, summeries, setSummeries } =
+    useRecentNote(profile);
 
   const filterOptions = [
     {
@@ -95,7 +70,7 @@ const GraphView = () => {
           <Star className={`star2 fixed z-20 bottom-[6%] right-[16%] h-24`} />
           <Star className={`star3 fixed z-20 bottom-[4%] left-[20%] h-10`} />
           <div
-            className={`graph-clip grow h-full bg-stone-300 texture border border-stone-500`}
+            className={`graph-clip grow h-[calc(100dvh-7rem)] bg-stone-300 texture border border-stone-500`}
           >
             <NetworkGraph
               filtBy={filtBy}

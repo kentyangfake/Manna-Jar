@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import Header from '../../components/header';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { NoteType } from '../../redux/types';
 import { addNote, selectProfile } from '../../redux/userSlice';
+import { WarningSwal } from '../../utils/CustomSwal';
 import { firestore } from '../../utils/firebase';
 import * as styles from '../../utils/styles';
 import { parseDate, parseWeekday } from '../../utils/utils';
@@ -33,10 +33,8 @@ const Home = () => {
     const getShareNoteViaLink = async () => {
       const shareNote = await firestore.getShareNote(shareBy, shareNoteId);
       if (!shareNote.id) {
-        Swal.fire({
-          icon: 'warning',
+        WarningSwal.fire({
           text: '此分享連結已失效',
-          background: '#f5f5f4',
         });
         return;
       }

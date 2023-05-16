@@ -1,77 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import ToolBar from '../../components/ToolBar';
 import Header from '../../components/header';
 import { useAppSelector } from '../../redux/hooks';
-import { NoteType } from '../../redux/types';
 import { selectFontSize, selectProfile } from '../../redux/userSlice';
 import * as styles from '../../utils/styles';
 import { parseFontSize } from '../../utils/utils';
 import ConnectGraph from './ConnectGraph';
-
-interface Referenced {
-  linkTitle: string;
-  linkId: string;
-}
+import { useCurrentNote } from './hooks';
 
 const Note = () => {
   const profile = useAppSelector(selectProfile);
   const fontSizeNum = useAppSelector(selectFontSize);
   const fontSize = parseFontSize(fontSizeNum);
   const { id } = useParams();
-  const [currentNote, setCurrentNote] = useState<NoteType>({
-    id: '',
-    title: '',
-    content: '',
-    category: '',
-    link_notes: [],
-    create_time: 1,
-    edit_time: 1,
-  });
-  const [referenced, setReferenced] = useState<Referenced[]>([]);
-  const [shareLink, setShareLink] = useState('');
   const [toggled, setToggled] = useState(false);
-
-  useEffect(() => {
-    if (profile.notes.length === 0) {
-      return;
-    }
-
-    const matchNote = profile.notes.find((note) => note.id === id);
-    if (matchNote) {
-      setCurrentNote(matchNote);
-      setShareLink(
-        `https://manna-jar.web.app/?category=shared&shareBy=${profile.id}&shareNote=${matchNote.id}`
-      );
-    } else {
-      setCurrentNote({
-        id: '',
-        title: '找不到這篇筆記',
-        content: '筆記可能被刪除,或向分享者索取該筆記',
-        category: 'admin',
-        link_notes: [],
-        create_time: 1,
-        edit_time: 1,
-      });
-      Swal.fire({
-        icon: 'warning',
-        title: '找不到這篇筆記',
-        text: '筆記可能被刪除,或向分享者索取該筆記',
-        background: '#f5f5f4',
-      });
-    }
-
-    const referencedBy: Referenced[] = [];
-    profile.notes.map((note) =>
-      note.link_notes?.map((link) => {
-        if (link.id === id) {
-          referencedBy.push({ linkTitle: note.title, linkId: note.id });
-        }
-      })
-    );
-    setReferenced(referencedBy);
-  }, [profile, id]);
+  const { currentNote, referenced, shareLink } = useCurrentNote(profile, id);
 
   return (
     <div className="flex flex-col h-full">

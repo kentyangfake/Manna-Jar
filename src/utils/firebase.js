@@ -3,7 +3,6 @@ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, si
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import { sampleNote } from "./sampleText";
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "manna-jar.firebaseapp.com",
