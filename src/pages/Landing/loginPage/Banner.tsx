@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import scrollDown from '../../../assets/scroll-down.gif';
 import TypedString from '../../../components/TypedString';
 import { useAppDispatch } from '../../../redux/hooks';
@@ -9,30 +9,25 @@ const Banner = () => {
   const dispatch = useAppDispatch();
   const [isSignUp, setIsSignUp] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('john@gmail.com');
+  const [password, setPassword] = useState('john12345');
 
   const handleLogin = () => {
-    const emailValue = emailRef.current ? emailRef.current.value : '';
-    const passwordValue = passwordRef.current ? passwordRef.current.value : '';
     dispatch(
       loginAsync({
-        email: emailValue,
-        password: passwordValue,
+        email: email,
+        password: password,
       })
     );
   };
 
   const handleSingUp = () => {
-    const emailValue = emailRef.current ? emailRef.current.value : '';
-    const nameValue = nameRef.current ? nameRef.current.value : '';
-    const passwordValue = passwordRef.current ? passwordRef.current.value : '';
     dispatch(
       signUpAsync({
-        email: emailValue,
-        password: passwordValue,
-        name: nameValue,
+        email: email,
+        password: password,
+        name: name,
       })
     );
   };
@@ -86,7 +81,8 @@ const Banner = () => {
                   type="text"
                   placeholder="使用者名稱"
                   required
-                  ref={nameRef}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
             )}
@@ -96,10 +92,11 @@ const Banner = () => {
               </span>
               <input
                 className="h-10 bg-[rgba(0,0,0,0)] grow placeholder:text-stone-400 focus:outline-none pl-2"
-                type="text"
+                type="email"
                 placeholder="電子信箱"
                 required
-                ref={emailRef}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="flex flex-col border-b border-stone-500 p-2">
@@ -112,7 +109,8 @@ const Banner = () => {
                   type={hidePassword ? 'password' : 'text'}
                   placeholder="密碼"
                   required
-                  ref={passwordRef}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <span
                   className="pr-4 cursor-pointer"
