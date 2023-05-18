@@ -1,0 +1,119 @@
+.ql-container.ql-snow {
+  border: none;
+  display: flex;
+  height: fit-content;
+}
+.ql-toolbar.ql-snow {
+  border: none;
+  border-bottom: 1px solid #78716c;
+  border-top: 1px solid #78716c;
+  background-color: #e7e5e4;
+  padding: 0px;
+}
+
+.ql-mention-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.ql-mention-list-container {
+  width: 270px;
+  height: 200px;
+  overflow-y: auto;
+  border: 1px solid #f0f0f0;
+  background-color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(30, 30, 30, 0.08);
+  z-index: 9001;
+}
+
+.ql-mention-list-item {
+  cursor: pointer;
+  height: 44px;
+  line-height: 44px;
+  font-size: 16px;
+  padding: 0 20px;
+  vertical-align: middle;
+}
+
+.ql-mention-list-item.selected {
+  background-color: #ede9fe;
+  text-decoration: none;
+}
+
+.mention {
+  padding-left: 4px;
+  color: lightgray;
+}
+
+.ql-snow .ql-editor a {
+  color: #a78bfa;
+  text-decoration-line: none;
+}
+
+.ql-picker-label::before {
+  transform: translate(3px, -3px);
+}
+
+.ql-editor {
+  height: 64dvh;
+  flex-grow: 1;
+  word-break: break-word;
+  width: 100%;
+  font-size: 20px;
+  overflow: scroll;
+  background-color: #f5f5f4;
+  letter-spacing: 0.1em;
+  line-height: 2;
+  padding: 40px 50px 200px 50px;
+  background-size: 20px 20px;
+  background-image: repeating-linear-gradient(
+    0deg,
+    #e7e5e4,
+    #e7e5e4 1px,
+    #f5f5f4 1px,
+    #f5f5f4
+  );
+}
+
+.ql-snow .ql-tooltip[data-mode='link']::before {
+  display: none;
+}
+
+.ql-snow .ql-tooltip::before {
+  display: none;
+}
+
+.ql-tooltip.ql-editing {
+  transform: translate(80px, 10px);
+}
+
+.ql-snow .ql-tooltip {
+  transform: translate(100px, 10px);
+}
+
+.ql-snow .ql-tooltip.ql-editing a.ql-action::after {
+  border-right: 0px;
+  content: '儲存';
+  padding-right: 0px;
+}
+
+.ql-snow .ql-tooltip a.ql-action::after {
+  border-right: 1px solid #ccc;
+  content: '編輯';
+  margin-left: 8px;
+  padding-right: 4px;
+}
+
+.ql-snow .ql-tooltip a.ql-remove::before {
+  content: '移除';
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 1023px) {
+  .ql-editor {
+    line-height: 1.5;
+    padding: 5px 20px 180px 20px;
+  }
+}
