@@ -47,7 +47,4 @@ C --> I[Shared notes] --> K
 ![autoVerse](https://github.com/kentyangfake/Manna-Jar/assets/41883118/ae85e14c-50ab-4650-96e8-cb46cde0de13)
 ![backLinks](https://github.com/kentyangfake/Manna-Jar/assets/41883118/a4c22a9f-9a52-4202-b10a-850b5d92c140)
 ## Contact
-[](www.linkedin.com/in/yu-chien-yang-fe)
-[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](www.linkedin.com/in/yu-chien-yang-fe)
-
-
+[LinkedIn](www.linkedin.com/in/yu-chien-yang-fe)
