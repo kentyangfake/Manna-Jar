@@ -73,6 +73,12 @@ C --> I[Shared notes] --> K
 ```
 ## Demo
 1. **AutoVerse**:Insert Bible Verse's easily into your notes just by typing them out. supporting various biblical abbreviation formats.
-![autoVerse](./src/assets/autoVerse.gif)<br>
+![autoVerse](./ReadmeGif/AutoVerse.gif)<br>
 2. **BackLinks**: A bidirectional note referencing, allowing users to easily create references by typing "#" and selecting note titles from a dropdown. The feature also supports searching for specific notes.
-![backLinks](./src/assets/backLinks.gif)
+![backLinks](./ReadmeGif/BackLinks.gif)
+3. **GraphView**: The graph is your knowledge at a glance, lets you visualize the relationships between the notes in your vault and enabling navigate corresponding notes by clicking nodes.
+![GraphView](./ReadmeGif/GraphView.gif)
+4. **Fontsize Switch**: Switch display fontsize of note for better reading experience.
+![Fontsize](./ReadmeGif/Fontsize.gif)
+5. **Share Via Links**: Enabled sharing articles with a link, with safeguards against duplicate collections and self-sharing.
+![Share](./ReadmeGif/ShareViaLink.gif)
