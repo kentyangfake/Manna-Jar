@@ -18,7 +18,7 @@
 A note-taking website/application for Chinese Christians.
 Support size: 360px-1920px
 - **AutoVerse**: An automatic biblical scripture input feature with an [open API](https://bible.fhl.net/json/), supporting various biblical abbreviation formats.
-- **BackLinks**: A bidirectional note references using [Quill-mention](https://github.com/quill-mention/quill-mention).
+- **BackLinks**: Broaden your view to see this note in other contexts. Link relevant pages with one click.
 - **GraphView**: The graph is your knowledge at a glance, lets you visualize the relationships between the notes in your vault and enabling navigate corresponding notes by clicking nodes.
 - **AI summary**: Generates belief summaries based on recent notes and recommends review-worthy notes.
 - **Share Via Links**: Enabled sharing articles with a link, with safeguards against duplicate collections and self-sharing.
