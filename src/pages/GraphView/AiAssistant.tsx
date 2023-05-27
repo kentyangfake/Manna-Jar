@@ -78,7 +78,10 @@ const AiAssistant = ({
             className={`${styles.themeButtonNoBg} ${
               isAiTyping && 'bg-stone-100'
             } self-center mt-10 w-32 h-10 border`}
-            onClick={handleAiResponse}
+            onClick={() => {
+              if (isAiTyping) return;
+              handleAiResponse();
+            }}
           >
             {isAiTyping ? '回答中...' : 'AI回顧'}
           </div>
