@@ -27,20 +27,20 @@ const Note = () => {
           editTime={currentNote.edit_time}
           sharedBy={currentNote.sharedBy}
         />
-        {currentNote.category === 'admin' ? (
-          <ToolBar previous />
-        ) : currentNote.category === 'shared' ? (
-          <ToolBar
-            previous
-            deleteInfo={{ id: currentNote.id, title: currentNote.title }}
-          />
-        ) : (
-          <ToolBar
-            previous
-            edit={currentNote.id}
-            deleteInfo={{ id: currentNote.id, title: currentNote.title }}
-          />
-        )}
+        <ToolBar
+          previous
+          edit={
+            currentNote.category !== 'admin' &&
+            currentNote.category !== 'shared'
+              ? currentNote.id
+              : undefined
+          }
+          deleteInfo={
+            currentNote.category !== 'admin'
+              ? { id: currentNote.id, title: currentNote.title }
+              : undefined
+          }
+        />
       </div>
       <div
         className={`lg:pt-5 lg:pr-5 relative z-0 flex flex-col w-full grow pr-96 tracking-wider bg-stone-100`}

@@ -17,11 +17,11 @@ export const useRecentNote = (profile: ProfileType) => {
         setSummaries('累積5篇筆記後解鎖此功能。');
       }
   
-      const notesArr = [...profile.notes]
+      const notesArr = profile.notes
         .filter((note) => note.category !== 'shared')
         .sort((a, b) => b.create_time - a.create_time)
-        .reduce((notes: string[], note) => [...notes, note.content], [])
-        .slice(0, 3);
+        .slice(0, 3)
+        .reduce((notes: string[], note) => [...notes, note.content], []);
       const titlesArr = [...profile.notes].reduce(
         (titles: string[], note) => [...titles, note.title],
         []
