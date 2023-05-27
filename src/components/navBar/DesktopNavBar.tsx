@@ -179,7 +179,7 @@ const DesktopNavBar = ({
                           : 'bg-stone-100'
                       }`
                     }`}
-                  ></div>
+                  />
                 </Link>
               ))}
               <NavLink to="/graphview">
@@ -188,10 +188,10 @@ const DesktopNavBar = ({
                     className={`${styles.navButtonSmall} text-stone-500 ${
                       isActive && 'bg-blue-100'
                     } border-b w-full h-[62px] hover:bg-blue-100`}
-                  ></div>
+                  />
                 )}
               </NavLink>
-              <div className={`border-b border-stone-500 w-full grow`}></div>
+              <div className={`border-b border-stone-500 w-full grow`} />
               <div
                 className={`${styles.themeButton} border-b w-full h-10`}
                 onClick={() =>
@@ -208,7 +208,7 @@ const DesktopNavBar = ({
             </>
           ) : (
             <>
-              <div className={`w-full grow`}></div>
+              <div className={`w-full grow`} />
               <div
                 className={`${styles.themeButton} h-10 border-t`}
                 onClick={() =>

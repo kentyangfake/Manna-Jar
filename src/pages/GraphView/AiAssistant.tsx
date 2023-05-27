@@ -39,7 +39,7 @@ const AiAssistant = ({
       <div
         className={`lg:hidden ${styles.theme} fixed flex flex-col z-30 top-0 right-0 h-full w-7 border-l border-stone-500`}
       >
-        <div className={`${styles.theme} border-b h-8 -mt-[1px]`}></div>
+        <div className={`${styles.theme} border-b h-8 -mt-[1px]`} />
         <div
           className={`${styles.navButtonSmall} ${
             toggled
@@ -50,7 +50,7 @@ const AiAssistant = ({
         >
           {toggled ? '›' : 'AI'}
         </div>
-        <div className={`${styles.theme} grow`}></div>
+        <div className={`${styles.theme} grow`} />
       </div>
       <div
         className={`${

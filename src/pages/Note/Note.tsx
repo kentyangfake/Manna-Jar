@@ -62,7 +62,7 @@ const Note = () => {
               : 'bg-stone-100'
           } lg:-mt-12 sticky top-0 w-72 h-72`}
         >
-          <div className="w-72 h-72 bg-stone-100 rounded-tl-full"></div>
+          <div className="w-72 h-72 bg-stone-100 rounded-tl-full" />
         </div>
         <div
           className={`lg:ml-5 lg:mt-[-270px] lg:leading-relaxed ${fontSize} z-10 flex flex-col flex-wrap leading-loose text-stone-600 ml-12 mt-[-250px] pb-6 mb-12 selection:bg-fuchsia-300 selection:text-fuchsia-900`}
