@@ -8,8 +8,8 @@ import { parseFontSize } from '../../utils/utils';
 interface Props {
   titles: string[];
   recentNotes: string[];
-  summeries: string;
-  setSummeries: React.Dispatch<React.SetStateAction<string>>;
+  summaries: string;
+  setSummaries: React.Dispatch<React.SetStateAction<string>>;
   toggled: boolean;
   setToggled: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -17,8 +17,8 @@ interface Props {
 const AiAssistant = ({
   titles,
   recentNotes,
-  summeries,
-  setSummeries,
+  summaries,
+  setSummaries,
   toggled,
   setToggled,
 }: Props) => {
@@ -31,7 +31,7 @@ const AiAssistant = ({
     setIsAiTyping(true);
     const res = await openAI.summarize(titles, recentNotes);
     setIsAiTyping(false);
-    setSummeries(res);
+    setSummaries(res);
   };
 
   return (
@@ -39,7 +39,7 @@ const AiAssistant = ({
       <div
         className={`lg:hidden ${styles.theme} fixed flex flex-col z-30 top-0 right-0 h-full w-7 border-l border-stone-500`}
       >
-        <div className={`${styles.theme} border-b h-8 -mt-[1px]`}></div>
+        <div className={`${styles.theme} border-b h-8 -mt-[1px]`} />
         <div
           className={`${styles.navButtonSmall} ${
             toggled
@@ -50,7 +50,7 @@ const AiAssistant = ({
         >
           {toggled ? '›' : 'AI'}
         </div>
-        <div className={`${styles.theme} grow`}></div>
+        <div className={`${styles.theme} grow`} />
       </div>
       <div
         className={`${
@@ -71,14 +71,17 @@ const AiAssistant = ({
         <div
           className={`${fontSize} pt-3 tracking-wider leading-relaxed overflow-y-auto`}
         >
-          {summeries}
+          {summaries}
         </div>
         {profile.notes.length > 5 && (
           <div
             className={`${styles.themeButtonNoBg} ${
               isAiTyping && 'bg-stone-100'
             } self-center mt-10 w-32 h-10 border`}
-            onClick={handleAiResponse}
+            onClick={() => {
+              if (isAiTyping) return;
+              handleAiResponse();
+            }}
           >
             {isAiTyping ? '回答中...' : 'AI回顧'}
           </div>

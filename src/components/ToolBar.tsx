@@ -18,7 +18,7 @@ const ToolBar = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [toggleFontSize, setToggleFontSize] = useState(false);
-  const [toggleHelp, settoggleHelp] = useState(false);
+  const [toggleHelp, setToggleHelp] = useState(false);
 
   return (
     <div className="flex h-8 border-b bg-stone-500 border-stone-500">
@@ -70,13 +70,13 @@ const ToolBar = ({ edit, deleteInfo, previous, fullGraph }: Props) => {
       <SizePicker
         toggleFontSize={toggleFontSize}
         setToggleFontSize={setToggleFontSize}
-        settoggleHelp={settoggleHelp}
+        setToggleHelp={setToggleHelp}
       />
       <Helper
         fullGraph={fullGraph}
         toggleHelp={toggleHelp}
         setToggleFontSize={setToggleFontSize}
-        settoggleHelp={settoggleHelp}
+        setToggleHelp={setToggleHelp}
       />
     </div>
   );

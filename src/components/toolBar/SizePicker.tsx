@@ -10,13 +10,13 @@ import { parseDisplayFontSize } from '../../utils/utils';
 interface Props {
   toggleFontSize: boolean;
   setToggleFontSize: React.Dispatch<React.SetStateAction<boolean>>;
-  settoggleHelp: React.Dispatch<React.SetStateAction<boolean>>;
+  setToggleHelp: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SizePicker = ({
   toggleFontSize,
   setToggleFontSize,
-  settoggleHelp,
+  setToggleHelp,
 }: Props) => {
   const dispatch = useAppDispatch();
   const fontSizeNum = useAppSelector(selectFontSize);
@@ -36,7 +36,7 @@ const SizePicker = ({
         className="cursor-pointer grow text-center text-lg font-serif font-bold"
         onClick={() => {
           setToggleFontSize((prev) => !prev);
-          settoggleHelp(false);
+          setToggleHelp(false);
         }}
       >
         Aa

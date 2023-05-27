@@ -27,20 +27,20 @@ const Note = () => {
           editTime={currentNote.edit_time}
           sharedBy={currentNote.sharedBy}
         />
-        {currentNote.category === 'admin' ? (
-          <ToolBar previous />
-        ) : currentNote.category === 'shared' ? (
-          <ToolBar
-            previous
-            deleteInfo={{ id: currentNote.id, title: currentNote.title }}
-          />
-        ) : (
-          <ToolBar
-            previous
-            edit={currentNote.id}
-            deleteInfo={{ id: currentNote.id, title: currentNote.title }}
-          />
-        )}
+        <ToolBar
+          previous
+          edit={
+            currentNote.category !== 'admin' &&
+            currentNote.category !== 'shared'
+              ? currentNote.id
+              : undefined
+          }
+          deleteInfo={
+            currentNote.category !== 'admin'
+              ? { id: currentNote.id, title: currentNote.title }
+              : undefined
+          }
+        />
       </div>
       <div
         className={`lg:pt-5 lg:pr-5 relative z-0 flex flex-col w-full grow pr-96 tracking-wider bg-stone-100`}
@@ -62,7 +62,7 @@ const Note = () => {
               : 'bg-stone-100'
           } lg:-mt-12 sticky top-0 w-72 h-72`}
         >
-          <div className="w-72 h-72 bg-stone-100 rounded-tl-full"></div>
+          <div className="w-72 h-72 bg-stone-100 rounded-tl-full" />
         </div>
         <div
           className={`lg:ml-5 lg:mt-[-270px] lg:leading-relaxed ${fontSize} z-10 flex flex-col flex-wrap leading-loose text-stone-600 ml-12 mt-[-250px] pb-6 mb-12 selection:bg-fuchsia-300 selection:text-fuchsia-900`}
