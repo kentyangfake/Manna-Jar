@@ -12,14 +12,14 @@ interface Props {
   fullGraph?: boolean;
   toggleHelp: boolean;
   setToggleFontSize: React.Dispatch<React.SetStateAction<boolean>>;
-  settoggleHelp: React.Dispatch<React.SetStateAction<boolean>>;
+  setToggleHelp: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Helper = ({
   fullGraph,
   toggleHelp,
   setToggleFontSize,
-  settoggleHelp,
+  setToggleHelp,
 }: Props) => {
   const fontSizeNum = useAppSelector(selectFontSize);
   const helperFontSize = parseHelperFontSize(fontSizeNum);
@@ -37,7 +37,7 @@ const Helper = ({
         <span
           className="cursor-pointer material-symbols-outlined text-lg grow text-center"
           onClick={() => {
-            settoggleHelp((prev) => !prev);
+            setToggleHelp((prev) => !prev);
             setToggleFontSize(false);
           }}
         >
@@ -71,7 +71,7 @@ const Helper = ({
       <span
         className="cursor-pointer material-symbols-outlined text-lg grow text-center"
         onClick={() => {
-          settoggleHelp((prev) => !prev);
+          setToggleHelp((prev) => !prev);
           setToggleFontSize(false);
         }}
       >
