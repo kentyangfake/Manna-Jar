@@ -13,7 +13,7 @@ const GraphView = () => {
   const fontSizeNum = useAppSelector(selectFontSize);
   const [filtBy, setFiltBy] = useState('all');
   const [toggled, setToggled] = useState(false);
-  const { recentNotes, titles, summeries, setSummeries } =
+  const { recentNotes, titles, summaries, setSummaries } =
     useRecentNote(profile);
 
   const filterOptions = [
@@ -83,8 +83,8 @@ const GraphView = () => {
       <AiAssistant
         titles={titles}
         recentNotes={recentNotes}
-        summeries={summeries}
-        setSummeries={setSummeries}
+        summaries={summaries}
+        setSummaries={setSummaries}
         toggled={toggled}
         setToggled={setToggled}
       />

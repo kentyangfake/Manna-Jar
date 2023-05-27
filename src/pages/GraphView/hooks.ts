@@ -6,7 +6,7 @@ export const useRecentNote = (profile: ProfileType) => {
     const navigate = useNavigate();
     const [titles, setTitles] = useState<string[]>([]);
     const [recentNotes, setRecentNotes] = useState<string[]>([]);
-    const [summeries, setSummeries] = useState('讓AI幫你回顧最近的筆記吧!');
+    const [summaries, setSummaries] = useState('讓AI幫你回顧最近的筆記吧!');
   
     useEffect(() => {
       if (!profile.isLogin) {
@@ -14,7 +14,7 @@ export const useRecentNote = (profile: ProfileType) => {
       }
   
       if (profile.notes.length < 6) {
-        setSummeries('累積5篇筆記後解鎖此功能。');
+        setSummaries('累積5篇筆記後解鎖此功能。');
       }
   
       const notesArr = [...profile.notes]
@@ -31,5 +31,5 @@ export const useRecentNote = (profile: ProfileType) => {
       setTitles(titlesArr);
     }, [profile.isLogin]);
   
-    return { recentNotes, titles, summeries, setSummeries };
+    return { recentNotes, titles, summaries, setSummaries };
   };

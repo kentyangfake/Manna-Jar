@@ -8,8 +8,8 @@ import { parseFontSize } from '../../utils/utils';
 interface Props {
   titles: string[];
   recentNotes: string[];
-  summeries: string;
-  setSummeries: React.Dispatch<React.SetStateAction<string>>;
+  summaries: string;
+  setSummaries: React.Dispatch<React.SetStateAction<string>>;
   toggled: boolean;
   setToggled: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -17,8 +17,8 @@ interface Props {
 const AiAssistant = ({
   titles,
   recentNotes,
-  summeries,
-  setSummeries,
+  summaries,
+  setSummaries,
   toggled,
   setToggled,
 }: Props) => {
@@ -31,7 +31,7 @@ const AiAssistant = ({
     setIsAiTyping(true);
     const res = await openAI.summarize(titles, recentNotes);
     setIsAiTyping(false);
-    setSummeries(res);
+    setSummaries(res);
   };
 
   return (
@@ -71,7 +71,7 @@ const AiAssistant = ({
         <div
           className={`${fontSize} pt-3 tracking-wider leading-relaxed overflow-y-auto`}
         >
-          {summeries}
+          {summaries}
         </div>
         {profile.notes.length > 5 && (
           <div
