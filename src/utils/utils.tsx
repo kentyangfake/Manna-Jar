@@ -4,7 +4,6 @@ export const getBibleReference = async (
   verse: string
 ) => {
   try {
-    console.log(book);
     const bookRef = getBookRef(book);
     const response = await fetch(
       `https://bible.fhl.net/json/qb.php?chineses=${bookRef}&chap=${chapter}&sec=${verse}`
