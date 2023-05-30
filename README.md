@@ -3,7 +3,7 @@
     <h1>嗎 哪 罐 子</h1>
   </a>
 
-  ![License](https://img.shields.io/badge/License-MIT-blue)
+ ![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/eslint-config-prettier/peer/eslint) ![License](https://img.shields.io/badge/License-MIT-blue)
 
   <p align="center">
     <a href="https://www.linkedin.com/in/yu-chien-yang-fe">About Me</a>
