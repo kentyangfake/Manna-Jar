@@ -33,7 +33,7 @@ const Editor = () => {
     let match;
     while ((match = regex.exec(note.content)) !== null) {
       const id = match[1];
-      const title = match[2]?.match(/^(.*?)\s/)?.[1].replace(/\"$/, '') || '';
+      const title = match[2]?.match(/^(.*?)\s/)?.[1].replace(/"$/, '') || '';
       linkArray.push({ id, title });
     }
     setNote({
